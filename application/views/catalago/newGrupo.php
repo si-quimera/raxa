@@ -10,7 +10,7 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">map</i> AGREGAR ZONA
+				                <i class="material-icons">supervisor_account</i> AGREGAR GRUPO
 				            </h1>
 				        </div>
 				    </div>
@@ -21,13 +21,9 @@
                 <!-- Body -->
                 <!-- #### -->
 				<section id="apps_crud">
-					<div class="crud-app">
-
-						
-						
-						
+					<div class="crud-app">																		
                         <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Catalagos/zona' ?>">
+                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Catalagos/grupo' ?>">
                                 <i class="large material-icons">undo</i>
                             </a>
                             <button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -35,7 +31,7 @@
                             </button>
                         </div>			
                         <?php
-                        echo form_open('Catalagos/newZona/'); 
+                        echo form_open('Catalagos/newGrupo/'); 
                         ?> 
                             <div class="row">
                                 <div class="col s12 m8">
@@ -54,6 +50,18 @@
 													<?php echo form_error('nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
+                                                    <select name="ciudad_id" id="ciudad_id">
+                                                        <option value="" disabled selected>Elija su opción</option>
+                                                    <?php
+                                                        foreach ($ciudad as $key => $row) {    
+													?>
+														<option value="<?= $key ?>"><?= $row ?></option>
+													<?php	
+                                                        }                                               
+                                                    ?>
+                                                    </select>
+                                                    <label for="ciudad_id">Ciudad</label>
+                                                    <?php echo form_error('ciudad_id'); ?>
                                                 </div>
                                             </div>                                                                                                                                                                                                                          
                                         </div>
@@ -74,9 +82,6 @@
                                 </div>
                             </div>
                         <?= form_close() ?>						
-						
-						
-						
 					</div>
 				</section>
             </div>

@@ -10,7 +10,7 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">map</i> AGREGAR ZONA
+				                <i class="material-icons">map</i> EDITAR ZONA
 				            </h1>
 				        </div>
 				    </div>
@@ -22,10 +22,6 @@
                 <!-- #### -->
 				<section id="apps_crud">
 					<div class="crud-app">
-
-						
-						
-						
                         <div class="fixed-action-btn">
                             <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Catalagos/zona' ?>">
                                 <i class="large material-icons">undo</i>
@@ -35,8 +31,9 @@
                             </button>
                         </div>			
                         <?php
-                        echo form_open('Catalagos/newZona/'); 
-                        ?> 
+                        $hidden = array('zona_id' => $edicion->zona_id);
+                        echo form_open('catalagos/editZona/'.$edicion->zona_id, '', $hidden); 
+                        ?>
                             <div class="row">
                                 <div class="col s12 m8">
                                     <?php
@@ -49,7 +46,7 @@
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="nombre" id="nombre" type="text" value="">
+                                                    <input name="nombre" id="nombre" type="text" value="<?= $edicion->nombre ?>">
                                                     <label for="nombre">Nombre</label>
 													<?php echo form_error('nombre'); ?>
                                                 </div>

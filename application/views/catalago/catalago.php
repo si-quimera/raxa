@@ -2,7 +2,7 @@
         <!-- Content -->
         <!-- ####### -->
         <main>
-            <div class="main-content">
+            <div class="main-content hg1">
                 <!-- ###### -->
                 <!-- Header -->
                 <!-- ###### -->
@@ -13,7 +13,7 @@
 				                <i class="material-icons">chrome_reader_mode</i> CATALAGOS
 				            </h1>
 
-				            <p>A simple and practical CRUD application.</p>
+				            <p></p>
 				        </div>
 				    </div>
 				</div>

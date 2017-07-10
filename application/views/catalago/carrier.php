@@ -10,10 +10,10 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">map</i> CATALAGO ZONA
+				                <i class="material-icons">settings_input_antenna</i> CATALAGO CARRIER
 				            </h1>
 
-				            <p>Control de Zona</p>
+				            <p></p>
 				        </div>
 				    </div>
 				</div>
@@ -25,7 +25,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped" data-tooltip="Nueva Zona" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newZona">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Nuevo Carrier" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newCarrier">
 								<i class="large material-icons">add</i>
 							</a>
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -60,15 +60,15 @@
 									?>
 									<tbody>
 										<tr>
-											<td><?= $row->zona_id ?></td>
+											<td><?= $row->carrier_id ?></td>
 											<td><?= $row->nombre ?></td>
 											<td class="center-align">
 												<div class="btn-group">
-													<a href="<?= base_url() ?>catalagos/editZona/<?= $row->zona_id ?>" class="btn-flat btn-small waves-effect">
+													<a href="<?= base_url() ?>catalagos/editCarrier/<?= $row->carrier_id ?>" class="btn-flat btn-small waves-effect">
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->zona_id ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delZona/" . $row->zona_id ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->carrier_id ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delCarrier/" . $row->carrier_id ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>
