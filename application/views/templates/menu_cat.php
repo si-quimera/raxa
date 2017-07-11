@@ -1,4 +1,3 @@
-								<div class="right-align">    
 									<!-- Dropdown Trigger -->
 									<a class='dropdown-button btn' href='#' data-activates='dropdown1'><i class="material-icons">playlist_add_check</i> Seleccionar Catalago</a>
 
@@ -10,9 +9,7 @@
 										<li><a href="#!">Colaboradores</a></li>
 										<li><a href="<?= base_url() ?>catalagos/estado/">Estado</a></li>
 										<li><a href="<?= base_url() ?>catalagos/grupo/">Grupo</a></li>
-										<li><a href="#!">Maestro</a></li>
+										<li><a href="<?= base_url() ?>catalagos/maestro/search/">Maestro</a></li>
 										<li><a href="<?= base_url() ?>catalagos/sucursal/">Sucursal</a></li>
 										<li><a href="<?= base_url() ?>catalagos/zona/">Zona</a></li>
-									</ul>	
-									<br><br>
-								</div>
+									</ul>

@@ -1,12 +1,13 @@
        <!-- ###### -->
         <!-- Footer -->
         <!-- ###### -->
-        <footer class="page-footer">
+        <footer class="page-footer">		
             <div class="container">
                 <div class="row">
-
-                </div>
-            </div>
+					<div><br><br></div>
+					<div><br><br></div>
+				</div>					
+			</div>
 
             <div class="footer-copyright">
                 <div class="container">

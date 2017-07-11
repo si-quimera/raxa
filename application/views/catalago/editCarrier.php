@@ -31,8 +31,8 @@
                             </button>
                         </div>			
                         <?php
-                        $hidden = array('carrier_id' => $edicion->carrier_id);
-                        echo form_open('catalagos/editCarrier/'.$edicion->carrier_id, '', $hidden); 
+                        $hidden = array('Id_Carrier' => $edicion->Id_Carrier);
+                        echo form_open('catalagos/editCarrier/'.$edicion->Id_Carrier, '', $hidden); 
                         ?>
                             <div class="row">
                                 <div class="col s12 m8">
@@ -46,9 +46,9 @@
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="nombre" id="nombre" type="text" value="<?= $edicion->nombre ?>">
-                                                    <label for="nombre">Nombre</label>
-													<?php echo form_error('nombre'); ?>
+                                                    <input name="Nombre" id="Nombre" type="text" value="<?= $edicion->Nombre ?>">
+                                                    <label for="Nombre">Nombre</label>
+													<?php echo form_error('Nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
                                                 </div>

@@ -27,9 +27,16 @@
 			
 						<div class="row">
 							<div class="col s12">
-								<?php
-								$this->load->view('templates/menu_cat.php');
-								?>
+								<div class="row no-gutter">
+									<div class="right-left col s6">    
+									
+									</div>								
+									<div class="right-align col s6">    
+									<?php
+									$this->load->view('templates/menu_cat.php');
+									?>										
+									</div>
+								</div>	
 								
 								
 								

@@ -23,7 +23,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
                         <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Catalagos/estado' ?>">
+                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Catalagos/ciudad' ?>">
                                 <i class="large material-icons">undo</i>
                             </a>
                             <button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -31,8 +31,8 @@
                             </button>
                         </div>			
                         <?php
-                        $hidden = array('ciudad_id' => $edicion->ciudad_id);
-                        echo form_open('catalagos/editCiudad/'.$edicion->ciudad_id, '', $hidden); 
+                        $hidden = array('Id_Ciudad' => $edicion->Id_Ciudad);
+                        echo form_open('catalagos/editCiudad/'.$edicion->Id_Ciudad, '', $hidden); 
                         ?>
                             <div class="row">
                                 <div class="col s12 m8">
@@ -46,16 +46,16 @@
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="nombre" id="nombre" type="text" value="<?= $edicion->nombre ?>">
-                                                    <label for="nombre">Nombre</label>
-													<?php echo form_error('nombre'); ?>
+                                                    <input name="Nombre" id="Nombre" type="text" value="<?= $edicion->Nombre ?>">
+                                                    <label for="Nombre">Nombre</label>
+													<?php echo form_error('Nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <select name="estado_id" id="estado_id">
+                                                    <select name="Id_Estado" id="Id_Estado">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($estados as $key => $row) {    
-															if($key == $edicion->estado_id){
+															if($key == $edicion->Id_Estado){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php																
@@ -67,8 +67,8 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="estado_id">Estado</label>
-                                                    <?php echo form_error('estado_id'); ?>
+                                                    <label for="Id_Estado">Estado</label>
+                                                    <?php echo form_error('Id_Estado'); ?>
                                                 </div>
                                             </div>                                                                                                                                                                                                                          
                                         </div>

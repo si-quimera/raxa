@@ -4,230 +4,285 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class CatalagoModel extends CI_Model{
 	
     public function countZona(){
-        $number = $this->db->count_all('cat_zona');
+        $number = $this->db->count_all('Cat_Zona');
         return intval($number);
     }    
     
     public function getAllZona($number_per_page){
-		$this->db->order_by('zona_id', 'DESC');  
-        return $this->db->get('cat_zona', $number_per_page, $this->uri->segment(3));
+		$this->db->order_by('Id_Zona', 'DESC');  
+        return $this->db->get('Cat_Zona', $number_per_page, $this->uri->segment(3));
     }  	
 	
     public function deleteZona($id){
-        $this->db->where('zona_id', $id);
-        $this->db->delete('cat_zona');
+        $this->db->where('Id_Zona', $id);
+        $this->db->delete('Cat_Zona');
     }   
 	
     public function addZona($data){
-        $this->db->insert('cat_zona', $data);        
+        $this->db->insert('Cat_Zona', $data);        
         return $error = $this->db->error();
     } 	
 	
 	public function getByIdZona($id){
-        $this->db->where('zona_id', $id);
-        $query = $this->db->get('cat_zona');
+        $this->db->where('Id_Zona', $id);
+        $query = $this->db->get('Cat_Zona');
         return $query->row();						
 	}
 	
     public function updateZona($id, $data){                
-        $this->db->where('zona_id', $id);
-        $this->db->update('cat_zona', $data);
+        $this->db->where('Id_Zona', $id);
+        $this->db->update('Cat_Zona', $data);
         return $error = $this->db->error();                          
     }  	
 	
 	/* -- */
 	
     public function countEdos(){
-        $number = $this->db->count_all('cat_estado');
+        $number = $this->db->count_all('Cat_Estado');
         return intval($number);
     }    
     
     public function getAllEdos($number_per_page){
-		$this->db->order_by('estado_id', 'DESC');  
-        return $this->db->get('cat_estado', $number_per_page, $this->uri->segment(3));
+		$this->db->order_by('Id_Estado', 'DESC');  
+        return $this->db->get('Cat_Estado', $number_per_page, $this->uri->segment(3));
     }  
 
     public function getZona(){	
-        $query = $this->db->get('cat_zona');            
+        $query = $this->db->get('Cat_Zona');            
         foreach ($query->result() as $row){
-            $zona[$row->zona_id] = $row->nombre;    
+            $zona[$row->Id_Zona] = $row->Nombre;    
         }      
         return @$zona;        
     }  	
 	
     public function deleteEdos($id){
-        $this->db->where('estado_id', $id);
-        $this->db->delete('cat_estado');
+        $this->db->where('Id_Estado', $id);
+        $this->db->delete('Cat_Estado');
     }   	
 	
 	public function addEdos($data){
-		$this->db->insert('cat_estado', $data);        
+		$this->db->insert('Cat_Estado', $data);        
 		return $error = $this->db->error();
     } 
 	
 	public function getByIdEdos($id){
-        $this->db->where('estado_id', $id);
-        $query = $this->db->get('cat_estado');
+        $this->db->where('Id_Estado', $id);
+        $query = $this->db->get('Cat_Estado');
         return $query->row();						
 	}
 	
     public function updateEdos($id, $data){                
-        $this->db->where('estado_id', $id);
-        $this->db->update('cat_estado', $data);
+        $this->db->where('Id_Estado', $id);
+        $this->db->update('Cat_Estado', $data);
         return $error = $this->db->error();                          
     } 	
 	
 	/* -- */
 	
     public function countCiudad(){
-        $number = $this->db->count_all('cat_ciudad');
+        $number = $this->db->count_all('Cat_Ciudad');
         return intval($number);
     }    
     
     public function getAllCiudad($number_per_page){
-		$this->db->order_by('ciudad_id', 'DESC');  
-        return $this->db->get('cat_ciudad', $number_per_page, $this->uri->segment(3));
+		$this->db->order_by('Id_Ciudad', 'DESC');  
+        return $this->db->get('Cat_Ciudad', $number_per_page, $this->uri->segment(3));
     }  
 
     public function getEdos(){	
-        $query = $this->db->get('cat_estado');            
+        $query = $this->db->get('Cat_Estado');            
         foreach ($query->result() as $row){
-            $edos[$row->estado_id] = $row->nombre;    
+            $edos[$row->Id_Estado] = $row->Nombre;    
         }      
         return @$edos;        
     }  		
 	
     public function deleteCiudad($id){
-        $this->db->where('ciudad_id', $id);
-        $this->db->delete('cat_ciudad');
+        $this->db->where('Id_Ciudad', $id);
+        $this->db->delete('Cat_Ciudad');
     }   	
 	
 	public function addCiudad($data){
-		$this->db->insert('cat_ciudad', $data);        
+		$this->db->insert('Cat_Ciudad', $data);        
 		return $error = $this->db->error();
     } 	
 	
 	public function getByIdCiudad($id){
-        $this->db->where('ciudad_id', $id);
-        $query = $this->db->get('cat_ciudad');
+        $this->db->where('Id_Ciudad', $id);
+        $query = $this->db->get('Cat_Ciudad');
         return $query->row();						
 	}
 	
     public function updateCiudad($id, $data){                
-        $this->db->where('ciudad_id', $id);
-        $this->db->update('cat_ciudad', $data);
+        $this->db->where('Id_Ciudad', $id);
+        $this->db->update('Cat_Ciudad', $data);
         return $error = $this->db->error();                          
     } 	
 	
 	/* --- */
 	
     public function countSuc(){
-        $number = $this->db->count_all('cat_ciudad');
+        $number = $this->db->count_all('Cat_Ciudad');
         return intval($number);
     }    
     
     public function getAllSuc($number_per_page){
-		$this->db->order_by('sucursal_id', 'DESC');  
-        return $this->db->get('cat_sucursal', $number_per_page, $this->uri->segment(3));
+		$this->db->order_by('Id_Sucursal', 'DESC');  
+        return $this->db->get('Cat_Sucursal', $number_per_page, $this->uri->segment(3));
     }  
 
     public function getCiudad(){	
-        $query = $this->db->get('cat_ciudad');            
+        $query = $this->db->get('Cat_Ciudad');            
         foreach ($query->result() as $row){
-            $ciudad[$row->ciudad_id] = $row->nombre;    
+            $ciudad[$row->Id_Ciudad] = $row->Nombre;    
         }      
         return @$ciudad;        
     }  	
 	
     public function deleteSuc($id){
-        $this->db->where('sucursal_id', $id);
-        $this->db->delete('cat_sucursal');
+        $this->db->where('Id_Sucursal', $id);
+        $this->db->delete('Cat_Sucursal');
     }   	
 	
 	public function addSuc($data){
-		$this->db->insert('cat_sucursal', $data);        
+		$this->db->insert('Cat_Sucursal', $data);        
 		return $error = $this->db->error();
     } 	
 	
 	public function getByIdSuc($id){
-        $this->db->where('sucursal_id', $id);
-        $query = $this->db->get('cat_sucursal');
+        $this->db->where('Id_Sucursal', $id);
+        $query = $this->db->get('Cat_Sucursal');
         return $query->row();						
 	}
 	
     public function updateSuc($id, $data){                
-        $this->db->where('sucursal_id', $id);
-        $this->db->update('cat_sucursal', $data);
+        $this->db->where('Id_Sucursal', $id);
+        $this->db->update('Cat_Sucursal', $data);
         return $error = $this->db->error();                          
     } 	
 	
 	/* --- */
 	
     public function countCarrier(){
-        $number = $this->db->count_all('cat_carrier');
+        $number = $this->db->count_all('Cat_Carrier');
         return intval($number);
     }    
     
     public function getAllCarrier($number_per_page){
-		$this->db->order_by('carrier_id', 'DESC');  
-        return $this->db->get('cat_carrier', $number_per_page, $this->uri->segment(3));
+		$this->db->order_by('Id_Carrier', 'DESC');  
+        return $this->db->get('Cat_Carrier', $number_per_page, $this->uri->segment(3));
     }  	
 	
 	public function deleteCarrier($id){
-        $this->db->where('carrier_id', $id);
-        $this->db->delete('cat_carrier');
+        $this->db->where('Id_Carrier', $id);
+        $this->db->delete('Cat_Carrier');
     }   
 	
     public function addCarrier($data){
-        $this->db->insert('cat_carrier', $data);        
+        $this->db->insert('Cat_Carrier', $data);        
         return $error = $this->db->error();
     } 	
 	
 	public function getByIdCarrier($id){
-        $this->db->where('carrier_id', $id);
-        $query = $this->db->get('cat_carrier');
+        $this->db->where('Id_Carrier', $id);
+        $query = $this->db->get('Cat_Carrier');
         return $query->row();						
 	}
 	
     public function updateCarrier($id, $data){                
-        $this->db->where('carrier_id', $id);
-        $this->db->update('cat_carrier', $data);
+        $this->db->where('Id_Carrier', $id);
+        $this->db->update('Cat_Carrier', $data);
         return $error = $this->db->error();                          
     }  		
 	
 	/* --- */
 	
     public function countGrupo(){
-        $number = $this->db->count_all('cat_grupo');
+        $number = $this->db->count_all('Cat_Grupo');
         return intval($number);
     }    
     
     public function getAllGrupo($number_per_page){
-		$this->db->order_by('grupo_id', 'DESC');  
-        return $this->db->get('cat_grupo', $number_per_page, $this->uri->segment(3));
+		$this->db->order_by('Id_Grupo', 'DESC');  
+        return $this->db->get('Cat_Grupo', $number_per_page, $this->uri->segment(4));
     } 	
 	
 	public function deleteGrupo($id){
-        $this->db->where('grupo_id', $id);
-        $this->db->delete('cat_grupo');
+        $this->db->where('Id_Grupo', $id);
+        $this->db->delete('Cat_Grupo');
     }   	
 	
 	public function addGrupo($data){
-		$this->db->insert('cat_grupo', $data);        
+		$this->db->insert('Cat_Grupo', $data);        
 		return $error = $this->db->error();
     } 	
 	
 	public function getByIdGrupo($id){
-        $this->db->where('grupo_id', $id);
-        $query = $this->db->get('cat_grupo');
+        $this->db->where('Id_Grupo', $id);
+        $query = $this->db->get('Cat_Grupo');
         return $query->row();						
 	}
 	
     public function updateGrupo($id, $data){                
-        $this->db->where('grupo_id', $id);
-        $this->db->update('cat_grupo', $data);
+        $this->db->where('Id_Grupo', $id);
+        $this->db->update('Cat_Grupo', $data);
         return $error = $this->db->error();                          
     }			
+	
+	/* --- */	
+	
+    public function countMaestro($search){
+		if($search !== ""){
+			$this->db->like('Id_Cat_Sec', $search, 'both');
+		}		
+		
+        $number = $this->db->count_all_results('Cat_Maestro');
+        return intval($number);
+    }    
+    
+    public function getAllMaestro($search,$number_per_page){
+		if($search !== ""){
+			$this->db->like('Id_Cat_Sec', $search, 'both');
+		}
+				
+		$this->db->order_by('Id_Cat_Prim', 'DESC');  
+        return $this->db->get('Cat_Maestro', $number_per_page, $this->uri->segment(4));
+    }  	
+	
+    public function getMaestro(){	
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+            $master[$row->Id_Cat_Prim] = $row->Id_Cat_Prim . " - " . $row->Id_Cat_Sec . " / " . $row->Nombre;    
+        }      
+        return @$master;        
+    } 	
+	
+	public function addMaestro($data){
+		$this->db->insert('Cat_Maestro', $data);        
+		return $error = $this->db->error();
+    } 	
+	
+	public function getByIdMaestro($id){
+        $this->db->where('Id_Cat_Prim', $id);
+        $query = $this->db->get('Cat_Maestro');
+        return $query->row();						
+	}	
+		
+	public function deleteMaestro($id){
+        $this->db->where('Id_Cat_Prim', $id);
+        $this->db->delete('Cat_Maestro');
+    }  	
+	
+    public function updateMaestro($id, $data){                
+        $this->db->where('Id_Cat_Prim', $id);
+        $this->db->update('Cat_Maestro', $data);
+        return $error = $this->db->error();                          
+    }	
+	
+	
+	
+	
+	
 	
 	
 	

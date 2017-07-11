@@ -31,8 +31,8 @@
                             </button>
                         </div>			
                         <?php
-                        $hidden = array('zona_id' => $edicion->estado_id);
-                        echo form_open('catalagos/editEstado/'.$edicion->estado_id, '', $hidden); 
+                        $hidden = array('Id_Estado' => $edicion->Id_Estado);
+                        echo form_open('catalagos/editEstado/'.$edicion->Id_Estado, '', $hidden); 
                         ?>
                             <div class="row">
                                 <div class="col s12 m8">
@@ -46,16 +46,16 @@
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="nombre" id="nombre" type="text" value="<?= $edicion->nombre ?>">
-                                                    <label for="nombre">Nombre</label>
-													<?php echo form_error('nombre'); ?>
+                                                    <input name="Nombre" id="nombre" type="text" value="<?= $edicion->Nombre ?>">
+                                                    <label for="Nombre">Nombre</label>
+													<?php echo form_error('Nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <select name="zona_id" id="zona_id">
+                                                    <select name="Id_Zona" id="Id_Zona">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($zona as $key => $row) {    
-															if($key == $edicion->zona_id){
+															if($key == $edicion->Id_Zona){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -67,8 +67,8 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="zona_id">Zona</label>
-                                                    <?php echo form_error('zona_id'); ?>
+                                                    <label for="Id_Zona">Zona</label>
+                                                    <?php echo form_error('Id_Zona'); ?>
                                                 </div>
                                             </div>                                                                                                                                                                                                                          
                                         </div>

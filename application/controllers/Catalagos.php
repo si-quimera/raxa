@@ -44,7 +44,7 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -53,7 +53,7 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre')
+                    'Nombre'	=>  $this->input->post('Nombre')
                 );            
                 $error = $this->CatalagoModel->addZona($data);
                 if ($error['code'] === 0){
@@ -74,7 +74,7 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 						
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -83,7 +83,7 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre')
+                    'Nombre'	=>  $this->input->post('Nombre')
                 );            
                 $error = $this->CatalagoModel->updateZona($id, $data);
                 if ($error['code'] === 0){
@@ -147,12 +147,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('zona_id', 'Zona', 'required',
+        $this->form_validation->set_rules('Id_Zona', 'Zona', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -161,8 +161,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'zona_id'	=>  $this->input->post('zona_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Zona'	=>  $this->input->post('Id_Zona')
                 );            
                 $error = $this->CatalagoModel->addEdos($data);
                 if ($error['code'] === 0){
@@ -183,12 +183,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('zona_id', 'Zona', 'required',
+        $this->form_validation->set_rules('Id_Zona', 'Zona', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -197,8 +197,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'zona_id'	=>  $this->input->post('zona_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Zona'	=>  $this->input->post('Id_Zona')
                 );            
                 $error = $this->CatalagoModel->updateEdos($id, $data);
                 if ($error['code'] === 0){
@@ -260,12 +260,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('estado_id', 'Estado', 'required',
+        $this->form_validation->set_rules('Id_Estado', 'Estado', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -274,8 +274,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'estado_id'	=>  $this->input->post('estado_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Estado'	=>  $this->input->post('Id_Estado')
                 );            
                 $error = $this->CatalagoModel->addCiudad($data);
                 if ($error['code'] === 0){
@@ -296,12 +296,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('estado_id', 'Estado', 'required',
+        $this->form_validation->set_rules('Id_Estado', 'Estado', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -310,8 +310,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'estado_id'	=>  $this->input->post('estado_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Estado'	=>  $this->input->post('Id_Estado')
                 );            
                 $error = $this->CatalagoModel->updateCiudad($id, $data);
                 if ($error['code'] === 0){
@@ -373,12 +373,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('ciudad_id', 'Ciudad', 'required',
+        $this->form_validation->set_rules('Id_Ciudad', 'Ciudad', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -387,8 +387,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'ciudad_id'	=>  $this->input->post('ciudad_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Ciudad'	=>  $this->input->post('Id_Ciudad')
                 );            
                 $error = $this->CatalagoModel->addSuc($data);
                 if ($error['code'] === 0){
@@ -410,12 +410,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('ciudad_id', 'Ciudad', 'required',
+        $this->form_validation->set_rules('Id_Ciudad', 'Ciudad', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -424,8 +424,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'ciudad_id'	=>  $this->input->post('ciudad_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Ciudad'	=>  $this->input->post('Id_Ciudad')
                 );            
                 $error = $this->CatalagoModel->updateSuc($id, $data);
                 if ($error['code'] === 0){
@@ -486,7 +486,7 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -495,7 +495,7 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre')
+                    'Nombre'	=>  $this->input->post('Nombre')
                 );            
                 $error = $this->CatalagoModel->addCarrier($data);
                 if ($error['code'] === 0){
@@ -516,7 +516,7 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 						
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -525,7 +525,7 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre')
+                    'Nombre'	=>  $this->input->post('Nombre')
                 );            
                 $error = $this->CatalagoModel->updateCarrier($id, $data);
                 if ($error['code'] === 0){
@@ -588,12 +588,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('ciudad_id', 'Ciudad', 'required',
+        $this->form_validation->set_rules('Id_Ciudad', 'Ciudad', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -602,8 +602,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'ciudad_id'	=>  $this->input->post('ciudad_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Ciudad'	=>  $this->input->post('Id_Ciudad')
                 );            
                 $error = $this->CatalagoModel->addGrupo($data);
                 if ($error['code'] === 0){
@@ -625,12 +625,12 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('ciudad_id', 'Ciudad', 'required',
+        $this->form_validation->set_rules('Id_Ciudad', 'Ciudad', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -639,8 +639,8 @@ class Catalagos extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'nombre'	=>  $this->input->post('nombre'),
-					'ciudad_id'	=>  $this->input->post('ciudad_id')
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Ciudad'	=>  $this->input->post('Id_Ciudad')
                 );            
                 $error = $this->CatalagoModel->updateGrupo($id, $data);
                 if ($error['code'] === 0){
@@ -664,7 +664,143 @@ class Catalagos extends CI_Controller {
         redirect(base_url(). 'Catalagos/grupo/');  
     }	
 	
-	
+	public function maestro(){
+		
+		if ($this->input->method() == 'post'){
+			$search = $this->input->post('search');
+		}else if ($this->uri->segment(4) != ''){
+			$search = $this->uri->segment(4);
+		}else{
+			$search = "";
+		}
+        
+        $config['base_url'] = base_url() . 'catalagos/maestro/search/'.$search.'/';
+        $config['total_rows'] = $this->CatalagoModel->countMaestro($search);
+        $config['per_page'] = 10;   
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 5;        
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';          
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';   
+        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
+        $config['cur_tag_close'] = '</a></li>';
+        
+        $this->pagination->initialize($config);		
+        $result = $this->CatalagoModel->getAllMaestro($search, $config['per_page']); 
+        
+		$data['search'] = $search;
+        $data['consulta'] = $result;
+        $data['pagination'] = $this->pagination->create_links();
+		
+        $this->load->view('templates/header.php');  
+        $this->load->view('catalago/maestro.php', $data);
+        $this->load->view('templates/footer.php');		
+	}	
+
+	public function newMaestro(){				
+        $this->load->view('templates/header.php');  
+				      
+		if ($this->input->method() == 'post'){			
+			if ($this->input->post('Id_Cat_Sec') === '') {
+				$data = array(
+					'Nombre'	=>  $this->input->post('Nombre'),
+					'String1'	=>  $this->input->post('String1'),
+					'String2'	=>  $this->input->post('String2'),
+					'String3'	=>  $this->input->post('String3'),
+					'String4'	=>  $this->input->post('String4'),
+					'String5'	=>  $this->input->post('String5')
+				);					
+			}else{
+				$data = array(
+					'Id_Cat_Sec'	=> $this->input->post('Id_Cat_Sec'),
+					'Nombre'	=>  $this->input->post('Nombre'),
+					'String1'	=>  $this->input->post('String1'),
+					'String2'	=>  $this->input->post('String2'),
+					'String3'	=>  $this->input->post('String3'),
+					'String4'	=>  $this->input->post('String4'),
+					'String5'	=>  $this->input->post('String5')
+				); 				
+			}			
+			          
+			$error = $this->CatalagoModel->addMaestro($data);
+			if ($error['code'] === 0){
+				$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Item Maestro registrado correctamente!</div>');
+				redirect(base_url(). 'Catalagos/maestro/');
+			}else{
+				$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Item Maestro!</div>');
+			}				
+
+		}
+		
+		$data['master'] = $this->CatalagoModel->getMaestro();
+        $this->load->view('catalago/newMaestro.php', $data);
+        $this->load->view('templates/footer.php');			
+	}	
+
+	public function editMaestro($id = NULL){				
+        $this->load->view('templates/header.php');  
+				      
+		if ($this->input->method() == 'post'){			
+			if ($this->input->post('Id_Cat_Sec') === '') {
+				$data = array(
+					'Nombre'	=>  $this->input->post('Nombre'),
+					'String1'	=>  $this->input->post('String1'),
+					'String2'	=>  $this->input->post('String2'),
+					'String3'	=>  $this->input->post('String3'),
+					'String4'	=>  $this->input->post('String4'),
+					'String5'	=>  $this->input->post('String5')
+				);					
+			}else{
+				$data = array(
+					'Id_Cat_Sec'	=> $this->input->post('Id_Cat_Sec'),
+					'Nombre'	=>  $this->input->post('Nombre'),
+					'String1'	=>  $this->input->post('String1'),
+					'String2'	=>  $this->input->post('String2'),
+					'String3'	=>  $this->input->post('String3'),
+					'String4'	=>  $this->input->post('String4'),
+					'String5'	=>  $this->input->post('String5')
+				); 				
+			}			
+			          
+			$error = $this->CatalagoModel->updateMaestro($id, $data);
+			if ($error['code'] === 0){
+				$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Item Maestro editado correctamente!</div>');
+				redirect(base_url(). 'Catalagos/maestro/');
+			}else{
+				$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Item Maestro!</div>');
+			}				
+
+		}
+		
+		$data['edicion'] = $this->CatalagoModel->getByIdMaestro($id);
+		$data['master'] = $this->CatalagoModel->getMaestro();
+        $this->load->view('catalago/editMaestro.php', $data);
+        $this->load->view('templates/footer.php');			
+	}
+
+	public function delMaestro($id = NULL){        
+        $this->CatalagoModel->deleteMaestro($id);
+        $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Item Maestro borrado correctamente!</div>');
+        redirect(base_url(). 'Catalagos/maestro/');  
+    }	
+
+
+
+
+
+
+
+
+
+
+
 	
 	
 	

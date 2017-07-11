@@ -22,8 +22,8 @@
         <!-- Theme stylesheets -->
         <!-- ################# -->
         <link href="<?= base_url(); ?>webroot/css/themes/light.css" id="ssThemeColor" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url(); ?>webroot/css/themes/main/materialize-red.css" id="ssMainColor" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url(); ?>webroot/css/themes/alternative/red.css" id="ssAlternativeColor" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>webroot/css/themes/main/blue.css" id="ssMainColor" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>webroot/css/themes/alternative/blue.css" id="ssAlternativeColor" rel="stylesheet" type="text/css" />
         <!-- ################ -->
         <!-- Util stylesheets -->
         <!-- ################ -->

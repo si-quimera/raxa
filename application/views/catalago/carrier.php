@@ -34,9 +34,16 @@
 						</div>			
 						<div class="row">
 							<div class="col s12">
-								<?php
-								$this->load->view('templates/menu_cat.php');
-								?>
+								<div class="row no-gutter">
+									<div class="right-left col s6">    
+									
+									</div>								
+									<div class="right-align col s6">    
+									<?php
+									$this->load->view('templates/menu_cat.php');
+									?>										
+									</div>
+								</div>	
                                 <?php
                                 $msg = $this->session->flashdata('msg');
                                 if ($msg){
@@ -60,15 +67,15 @@
 									?>
 									<tbody>
 										<tr>
-											<td><?= $row->carrier_id ?></td>
-											<td><?= $row->nombre ?></td>
+											<td><?= $row->Id_Carrier ?></td>
+											<td><?= $row->Nombre ?></td>
 											<td class="center-align">
 												<div class="btn-group">
-													<a href="<?= base_url() ?>catalagos/editCarrier/<?= $row->carrier_id ?>" class="btn-flat btn-small waves-effect">
+													<a href="<?= base_url() ?>catalagos/editCarrier/<?= $row->Id_Carrier ?>" class="btn-flat btn-small waves-effect">
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->carrier_id ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delCarrier/" . $row->carrier_id ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Carrier ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delCarrier/" . $row->Id_Carrier ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>

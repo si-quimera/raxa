@@ -10,9 +10,9 @@
                         <!-- ############ -->
                         <div class="nav-wrapper">
                             <a href="index.html" class="brand-logo">
-                                <img src="img/logo.png"/>
+                                <img src="<?= base_url(); ?>webroot/img/logo.png"/>
                                 <span class="valign">
-                                    <b class="main-text">Raxa</b> 
+                                    <b class="main-text"></b> 
                                 </span>
                             </a>
 

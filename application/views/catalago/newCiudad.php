@@ -45,12 +45,12 @@
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="nombre" id="nombre" type="text" value="">
-                                                    <label for="nombre">Nombre</label>
-													<?php echo form_error('nombre'); ?>
+                                                    <input name="Nombre" id="Nombre" type="text" value="">
+                                                    <label for="Nombre">Nombre</label>
+													<?php echo form_error('Nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <select name="estado_id" id="estado_id">
+                                                    <select name="Id_Estado" id="Id_Estado">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($estado as $key => $row) {    
@@ -60,8 +60,8 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="estado_id">Estado</label>
-                                                    <?php echo form_error('estado_id'); ?>
+                                                    <label for="Id_Estado">Estado</label>
+                                                    <?php echo form_error('Id_Estado'); ?>
                                                 </div>
                                             </div>                                                                                                                                                                                                                          
                                         </div>
