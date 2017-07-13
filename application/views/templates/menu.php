@@ -9,7 +9,7 @@
                         <!-- Desktop Menu -->
                         <!-- ############ -->
                         <div class="nav-wrapper">
-                            <a href="index.html" class="brand-logo">
+                            <a href="/" class="brand-logo">
                                 <img src="<?= base_url(); ?>webroot/img/logo.png"/>
                                 <span class="valign">
                                     <b class="main-text"></b> 
@@ -19,25 +19,25 @@
                             <!-- Desktop -->
                             <ul class="right hide-on-med-and-down">
                                 <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-pro" data-constrainwidth="false" data-beloworigin="true">
+                                    <a class="dropdown-button" href="#!" data-activates="dropdown-pro" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
                                         Producto<i class="material-icons dropdown-icon right">arrow_drop_down</i>
                                     </a>
                                 </li>
 
                                 <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-seg" data-constrainwidth="false" data-beloworigin="true">
+                                    <a class="dropdown-button" href="#!" data-activates="dropdown-seg" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
                                         Seguimiento<i class="material-icons dropdown-icon right">arrow_drop_down</i>
                                     </a>
                                 </li>
 
                                 <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-con" data-constrainwidth="false" data-beloworigin="true">
+                                    <a class="dropdown-button" href="#!" data-activates="dropdown-con" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
                                         Consultas<i class="material-icons dropdown-icon right">arrow_drop_down</i>
                                     </a>
                                 </li>
 
                                 <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-adm" data-constrainwidth="false" data-beloworigin="true">
+                                    <a class="dropdown-button" href="#!" data-activates="dropdown-adm" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
                                         Administración<i class="material-icons dropdown-icon right">arrow_drop_down</i>
                                     </a>
                                 </li>
@@ -70,16 +70,33 @@
                                 <li ><a href="js_dialogs.html">Asignacion de SIM's</a></li>
                             </ul>
                             <ul id="dropdown-adm" class="dropdown-content">
-                                <li ><a href="<?= base_url() ?>catalagos/">Catalogos</a></li>
+                                <li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="estaticos">Catalogos Estaticos</a></li>
+								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dropdown2">Catalogos Dinamicos</a></li>
                                 <li ><a href="apps_pricing_table.html">Carga de SIMs</a></li>
                                 <li ><a href="apps_datatables.html">Cambio de Password</a></li>
                                 <li ><a href="apps_maps.html">Asignacion de Roles</a></li>
                             </ul>
 
                             <ul id="dropdown-profile" class="dropdown-content">
-                                <li><a href="login.html">Logout</a></li>
+                                <li><a href="<?= base_url() ?>Login/logout/">Cerrar la sesión </a></li>
                             </ul>
 
+							
+	
+							<ul id='estaticos' class='dropdown-content'>
+								<li><a href="<?= base_url() ?>Catalagos/almacen/">Almacen</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/carrier/">Carrier</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/ciudad/">Ciudad</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/colaborador/">Colaboradores</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/estado/">Estado</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/grupo/">Grupo</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/maestro/search/">Maestro</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/sucursal/">Sucursal</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/zona/">Zona</a></li>
+							</ul>							
+							
+							
+							
                             <!-- Mobile -->
                             <a href="#" data-activates="mobile-demo" class="button-collapse">
                                 <i class="material-icons">menu</i>

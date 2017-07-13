@@ -233,7 +233,7 @@ class CatalagoModel extends CI_Model{
 	
     public function countMaestro($search){
 		if($search !== ""){
-			$this->db->like('Id_Cat_Sec', $search, 'both');
+			$this->db->like('Nombre', $search, 'both');
 		}		
 		
         $number = $this->db->count_all_results('Cat_Maestro');
@@ -242,17 +242,32 @@ class CatalagoModel extends CI_Model{
     
     public function getAllMaestro($search,$number_per_page){
 		if($search !== ""){
-			$this->db->like('Id_Cat_Sec', $search, 'both');
+			$this->db->like('Nombre', $search, 'both');
 		}
 				
-		$this->db->order_by('Id_Cat_Prim', 'DESC');  
+		$this->db->order_by('Nombre', 'ASC');  
         return $this->db->get('Cat_Maestro', $number_per_page, $this->uri->segment(4));
     }  	
 	
-    public function getMaestro(){	
+    public function getPathMaestro(){	
+		$path = array();
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
-            $master[$row->Id_Cat_Prim] = $row->Id_Cat_Prim . " - " . $row->Id_Cat_Sec . " / " . $row->Nombre;    
+            $path[$row->Id_Cat_Prim] = $row->Nombre;    
+        }      
+        return $path;        
+    } 	
+	
+    public function getMaestro(){	
+		$nombres = $this->getPathMaestro();
+						
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+			if (is_null($row->Id_Cat_Sec)){
+				$master[$row->Id_Cat_Prim] = " / " . $nombres[$row->Id_Cat_Prim]; 
+			}else{				   
+				$master[$row->Id_Cat_Prim] = " / " . $nombres[$row->Id_Cat_Sec] . " / " . $nombres[$row->Id_Cat_Prim];    
+			}	
         }      
         return @$master;        
     } 	
@@ -279,15 +294,89 @@ class CatalagoModel extends CI_Model{
         return $error = $this->db->error();                          
     }	
 	
+	/* --- */
 	
+    public function countAlmacen(){
+        $number = $this->db->count_all('Cat_Almacen');
+        return intval($number);
+    }    
+    
+    public function getAllAlmacen($number_per_page){
+		$this->db->order_by('Id_Almacen', 'DESC');  
+        return $this->db->get('Cat_Almacen', $number_per_page, $this->uri->segment(3));
+    }  	
 	
+    public function getSucursal(){	
+        $query = $this->db->get('Cat_Sucursal');            
+        foreach ($query->result() as $row){
+            $sucursal[$row->Id_Sucursal] = $row->Nombre;    
+        }      
+        return @$sucursal;        
+    }  	
 	
+	public function addAlmacen($data){
+		$this->db->insert('Cat_Almacen', $data);        
+		return $error = $this->db->error();
+    } 	
 	
+	public function getByIdAlmacen($id){
+        $this->db->where('Id_Almacen', $id);
+        $query = $this->db->get('Cat_Almacen');
+        return $query->row();						
+	}	
+		
+	public function deleteAlmacen($id){
+        $this->db->where('Id_Almacen', $id);
+        $this->db->delete('Cat_Almacen');
+    }  	
 	
+    public function updateAlmacen($id, $data){                
+        $this->db->where('Id_Almacen', $id);
+        $this->db->update('Cat_Almacen', $data);
+        return $error = $this->db->error();                          
+    }	
 	
+	/* --- */
 	
+    public function countColaborador(){
+        $number = $this->db->count_all('Cat_Colaboradores');
+        return intval($number);
+    }    
+    
+    public function getAllColaborador($number_per_page){
+		$this->db->order_by('Id_Colaborador', 'DESC');  
+        return $this->db->get('Cat_Colaboradores', $number_per_page, $this->uri->segment(3));
+    }  	
 	
+    public function getGrupo(){	
+        $query = $this->db->get('Cat_Grupo');            
+        foreach ($query->result() as $row){
+            $grupo[$row->Id_Grupo] = $row->Nombre;    
+        }      
+        return @$grupo;        
+    }	
 	
+	public function addColaborador($data){
+		$this->db->insert('Cat_Colaboradores', $data);        
+		return $error = $this->db->error();
+    } 	
+	
+	public function getByIdColaborador($id){
+        $this->db->where('Id_Colaborador', $id);
+        $query = $this->db->get('Cat_Colaboradores');
+        return $query->row();						
+	}	
+		
+	public function deleteColaborador($id){
+        $this->db->where('Id_Colaborador', $id);
+        $this->db->delete('Cat_Colaboradores');
+    }  	
+	
+    public function updateColaborador($id, $data){                
+        $this->db->where('Id_Colaborador', $id);
+        $this->db->update('Cat_Colaboradores', $data);
+        return $error = $this->db->error();                          
+    }	
 	
 	
 	

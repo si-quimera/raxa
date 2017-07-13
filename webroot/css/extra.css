@@ -8,6 +8,6 @@ and open the template in the editor.
     Author     : Meraz
 */
 
-.hg1{
-
+.dropdown-content{
+    overflow: visible !important;
 }

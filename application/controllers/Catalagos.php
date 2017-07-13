@@ -2,8 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Catalagos extends CI_Controller {
-	public function index()
-	{	
+	public function index(){	
         $this->load->view('templates/header.php');  
         $this->load->view('catalago/catalago.php');
         $this->load->view('templates/footer.php');
@@ -698,6 +697,7 @@ class Catalagos extends CI_Controller {
 		$data['search'] = $search;
         $data['consulta'] = $result;
         $data['pagination'] = $this->pagination->create_links();
+		$data['nombres'] = $this->CatalagoModel->getPathMaestro();
 		
         $this->load->view('templates/header.php');  
         $this->load->view('catalago/maestro.php', $data);
@@ -791,6 +791,288 @@ class Catalagos extends CI_Controller {
         redirect(base_url(). 'Catalagos/maestro/');  
     }	
 
+	public function almacen(){        
+        $config['base_url'] = base_url() . 'catalagos/almacen/';
+        $config['total_rows'] = $this->CatalagoModel->countAlmacen();
+        $config['per_page'] = 10;   
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 5;        
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';          
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';   
+        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
+        $config['cur_tag_close'] = '</a></li>';
+        
+        $this->pagination->initialize($config);		
+        $result = $this->CatalagoModel->getAllAlmacen($config['per_page']); 
+        
+        $data['consulta'] = $result;
+        $data['pagination'] = $this->pagination->create_links();
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+		
+        $this->load->view('templates/header.php');  
+        $this->load->view('catalago/almacen.php', $data);
+        $this->load->view('templates/footer.php');		
+	}	
+
+	public function newAlmacen(){				
+        $this->load->view('templates/header.php');  
+		
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Id_Sucursal', 'Sucursal', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+		
+        if ($this->form_validation->run() == TRUE) {         
+            if ($this->input->method() == 'post'){
+                $data = array(
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Sucursal'	=>  $this->input->post('Id_Sucursal'),
+					'Direccion'	=>  $this->input->post('Direccion'),
+					'Colonia'	=>  $this->input->post('Colonia'),
+					'CP'	=>  $this->input->post('CP')
+                );            
+                $error = $this->CatalagoModel->addAlmacen($data);
+                if ($error['code'] === 0){
+                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Almacen registrada correctamente!</div>');
+                    redirect(base_url(). 'Catalagos/almacen/');
+                }else{
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Almacen!</div>');
+                }				
+
+			}
+		}		
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+        $this->load->view('catalago/newAlmacen.php', $data);
+        $this->load->view('templates/footer.php');			
+	}
+
+	public function editAlmacen($id = NULL){				
+        $this->load->view('templates/header.php');  
+		
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Id_Sucursal', 'Sucursal', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+		
+        if ($this->form_validation->run() == TRUE) {         
+            if ($this->input->method() == 'post'){
+                $data = array(
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Id_Sucursal'	=>  $this->input->post('Id_Sucursal'),
+					'Direccion'	=>  $this->input->post('Direccion'),
+					'Colonia'	=>  $this->input->post('Colonia'),
+					'CP'	=>  $this->input->post('CP')
+                );            
+                $error = $this->CatalagoModel->updateAlmacen($id, $data);
+                if ($error['code'] === 0){
+                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Almacen editado correctamente!</div>');
+                    redirect(base_url(). 'Catalagos/almacen/');
+                }else{
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al editar el Almacen!</div>');
+                }				
+
+			}
+		}		
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+		$data['edicion'] = $this->CatalagoModel->getByIdAlmacen($id);
+        $this->load->view('catalago/editAlmacen.php', $data);
+        $this->load->view('templates/footer.php');			
+	}	
+	
+	public function delAlmacen($id = NULL){        
+        $this->CatalagoModel->deleteAlmacen($id);
+        $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Alamacen borrado correctamente!</div>');
+        redirect(base_url(). 'Catalagos/almacen/');  
+    }	
+
+	public function colaborador(){        
+        $config['base_url'] = base_url() . 'catalagos/colaborador/';
+        $config['total_rows'] = $this->CatalagoModel->countColaborador();
+        $config['per_page'] = 10;   
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 5;        
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';          
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';   
+        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
+        $config['cur_tag_close'] = '</a></li>';
+        
+        $this->pagination->initialize($config);		
+        $result = $this->CatalagoModel->getAllColaborador($config['per_page']); 
+        
+        $data['consulta'] = $result;
+        $data['pagination'] = $this->pagination->create_links();
+		$data['grupo'] = $this->CatalagoModel->getGrupo();
+		
+        $this->load->view('templates/header.php');  
+        $this->load->view('catalago/colaborador.php', $data);
+        $this->load->view('templates/footer.php');		
+	}
+
+	public function newColaborador(){				
+        $this->load->view('templates/header.php');  
+		
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Password', 'Password', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('User', 'Usuario', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);		
+		
+        if ($this->form_validation->run() == TRUE) {         
+            if ($this->input->method() == 'post'){
+				
+				$Password = $this->encryption->encrypt($this->input->post('Password'));	
+				
+                $data = array(
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Ap_Pat'	=>  $this->input->post('Ap_Pat'),
+					'Ap_Mat'	=>  $this->input->post('Ap_Mat'),
+					'Fec_Nac'	=>  $this->input->post('Fec_Nac'),
+					'Calle'	=>  $this->input->post('Calle'),
+					'Colonia'	=>  $this->input->post('Colonia'),
+					'Municipio'	=>  $this->input->post('Municipio'),
+					'CP'	=>  $this->input->post('CP'),
+					'Estado'	=>  $this->input->post('Estado'),
+					'Pais'	=>  $this->input->post('Pais'),
+					'Tel'	=>  $this->input->post('Tel'),
+					'Cel'	=>  $this->input->post('Cel'),
+					'email'	=>  $this->input->post('email'),
+					'Id_Grupo'	=>  $this->input->post('Id_Grupo'),
+					'Password'	=>  $Password,
+					'User'	=>  $this->input->post('User'),
+					
+					
+					
+                );            
+                $error = $this->CatalagoModel->addColaborador($data);
+                if ($error['code'] === 0){
+                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Colaborador registrada correctamente!</div>');
+                    redirect(base_url(). 'Catalagos/colaborador/');
+                }else{
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Colaborador!</div>');
+                }				
+
+			}
+		}		
+		$data['grupo'] = $this->CatalagoModel->getGrupo();
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+        $this->load->view('catalago/newColaborador.php', $data);
+        $this->load->view('templates/footer.php');			
+	}
+
+	public function editColaborador($id = NULL){				
+        $this->load->view('templates/header.php');  
+		
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
+        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Password', 'Password', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('User', 'Usuario', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);		
+		
+        if ($this->form_validation->run() == TRUE) {         
+            if ($this->input->method() == 'post'){
+				
+				$Password = $this->encryption->encrypt($this->input->post('Password'));	
+				
+                $data = array(
+                    'Nombre'	=>  $this->input->post('Nombre'),
+					'Ap_Pat'	=>  $this->input->post('Ap_Pat'),
+					'Ap_Mat'	=>  $this->input->post('Ap_Mat'),
+					'Fec_Nac'	=>  $this->input->post('Fec_Nac'),
+					'Calle'	=>  $this->input->post('Calle'),
+					'Colonia'	=>  $this->input->post('Colonia'),
+					'Municipio'	=>  $this->input->post('Municipio'),
+					'CP'	=>  $this->input->post('CP'),
+					'Estado'	=>  $this->input->post('Estado'),
+					'Pais'	=>  $this->input->post('Pais'),
+					'Tel'	=>  $this->input->post('Tel'),
+					'Cel'	=>  $this->input->post('Cel'),
+					'email'	=>  $this->input->post('email'),
+					'Id_Grupo'	=>  $this->input->post('Id_Grupo'),
+					'Password'	=>  $Password,
+					'User'	=>  $this->input->post('User'),															
+                );            
+                $error = $this->CatalagoModel->updateColaborador($id, $data);
+                if ($error['code'] === 0){
+                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Colaborador editado correctamente!</div>');
+                    redirect(base_url(). 'Catalagos/colaborador/');
+                }else{
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al editar el Colaborador!</div>');
+                }				
+
+			}
+		}		
+		$data['grupo'] = $this->CatalagoModel->getGrupo();
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+		$data['edicion'] = $this->CatalagoModel->getByIdColaborador($id);
+        $this->load->view('catalago/editColaborador.php', $data);
+        $this->load->view('templates/footer.php');			
+	}
+
+	public function delColaborador($id = NULL){        
+        $this->CatalagoModel->deleteColaborador($id);
+        $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Colaborador borrado correctamente!</div>');
+        redirect(base_url(). 'Catalagos/colaborador/');  
+    }	
+
+
+
+	public function Cadenas(){	
+        $this->load->view('templates/header.php');  
+        $this->load->view('catalago/cadenas.php');
+        $this->load->view('templates/footer.php');
+	}
 
 
 
@@ -798,6 +1080,26 @@ class Catalagos extends CI_Controller {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+	
+	
 
 
 

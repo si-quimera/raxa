@@ -34,7 +34,7 @@
                         echo form_open('Catalagos/newMaestro/'); 
                         ?> 
                             <div class="row">
-                                <div class="col s12 m8">
+                                <div class="col s12 m12">
                                     <?php
                                     $msg = $this->session->flashdata('msg');
                                     if ($msg){
@@ -44,8 +44,9 @@
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <select name="Id_Cat_Sec" id="Id_Cat_Sec">
+                                                <div class="col s12">
+													<label for="Id_Cat_Sec">Id Cat Sec</label>
+                                                    <select name="Id_Cat_Sec" id="Id_Cat_Sec" class="browser-default">
                                                         <option value="" disabled selected>Elija su opción</option>
 														<option value=""></option>
                                                     <?php
@@ -55,41 +56,40 @@
 													<?php	
                                                         }                                               
                                                     ?>
-                                                    </select>
-                                                    <label for="Id_Cat_Sec">Id Cat Sec</label>
+                                                    </select>                                                    
                                                     <?php echo form_error('Id_Cat_Sec'); ?>
-                                                </div>
+                                                </div>											
+                                            </div>  
+                                            <div class="row no-gutter">
                                                 <div class="input-field col s6">
                                                     <input name="Nombre" id="Nombre" type="text" value="">
                                                     <label for="Nombre">Nombre</label>
 													<?php echo form_error('Nombre'); ?>
-                                                </div>												
-                                            </div>  
-                                            <div class="row no-gutter">
+                                                </div>													
                                                 <div class="input-field col s6">
                                                     <input name="String1" id="String1" type="text" value="">
                                                     <label for="String1">String 1</label>
 													<?php echo form_error('String1'); ?>
-                                                </div>	
+                                                </div>											
+                                            </div>  
+                                            <div class="row no-gutter">
                                                 <div class="input-field col s6">
                                                     <input name="String2" id="String2" type="text" value="">
                                                     <label for="String2">String 2</label>
 													<?php echo form_error('String2'); ?>
-                                                </div>												
-                                            </div>  
-                                            <div class="row no-gutter">
+                                                </div>														
                                                 <div class="input-field col s6">
                                                     <input name="String3" id="String3" type="text" value="">
                                                     <label for="String3">String 3</label>
 													<?php echo form_error('String3'); ?>
-                                                </div>	
+                                                </div>												
+                                            </div>
+                                            <div class="row no-gutter">
                                                 <div class="input-field col s6">
                                                     <input name="String4" id="String4" type="text" value="">
                                                     <label for="String4">String 4</label>
 													<?php echo form_error('String4'); ?>
-                                                </div>												
-                                            </div>
-                                            <div class="row no-gutter">
+                                                </div>													
                                                 <div class="input-field col s6">
                                                     <input name="String5" id="String5" type="text" value="">
                                                     <label for="String5">String 5</label>

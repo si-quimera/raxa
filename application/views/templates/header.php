@@ -1,3 +1,9 @@
+<?php
+if(!$this->session->userdata('usuario') ){
+    $pagina_login = base_url() . 'Login/';
+    redirect($pagina_login);
+} 
+?>
 <!DOCTYPE html>
 <html>
     <head>
@@ -36,7 +42,7 @@
         <!-- ##### -->
         <!-- Icons -->
         <!-- ##### -->
-        <link rel="shortcut icon" href="<?= base_url(); ?>webroot/img/favicon.ico" type="image/x-icon">
+        <link rel="shortcut icon" href="<?= base_url(); ?>webroot/img/favicon.ico" type="image/x-icon">		
     </head>
 
     <body>
