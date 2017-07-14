@@ -407,9 +407,14 @@ class CatalagoModel extends CI_Model{
 	
     public function deleteString($id){
         $this->db->where('Id_Cat_Prim', $id);
-        $this->db->delete('Cat_Maestro');
+		$this->db->delete('Cat_Maestro');
     } 	
 	
+    public function updateString($id, $data){                
+        $this->db->where('Id_Cat_Prim', $id);
+        $this->db->update('Cat_Maestro', $data);
+        return $error = $this->db->error();                          
+    }		
 	
 	
 }

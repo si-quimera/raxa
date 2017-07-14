@@ -55,13 +55,13 @@
 										
 									</div>	
 									<div class="right-left col s3">    
-										<label>Browser Select</label>
+										<label>Nivel 2</label>
 										<select id="sub2" name="sub2" class="browser-default">
 										</select>	
 										
 									</div>	
 									<div class="right-left col s3">    
-										<label>Browser Select</label>
+										<label>Nivel 3</label>
 										<select id="sub3" name="sub3" class="browser-default">
 										</select>	
 										
@@ -72,6 +72,7 @@
 										<table class="highlight">
 											<thead>
 												<tr>
+													<th>Nombre</th>
 													<th>String 1</th>
 													<th>String 2</th>
 													<th>String 3</th>
@@ -84,6 +85,7 @@
 											</thead>
 											<tbody>
 												<tr>
+													<td></td>
 													<td></td>
 													<td></td>
 													<td></td>
@@ -103,7 +105,7 @@
 								<!-- Modal Structure Add-->
 								<div id="modal1" class="modal">
 									<div class="modal-content">
-										<h5>Agregar Item</h5>										
+										<h5></h5>										
 										<div class="crud-app">																				
 											<?php
 											$attributes = array('id' => 'myform');
@@ -118,14 +120,15 @@
 														}
 														?>                             		
 														<div class="panel-body">                                           
-															<div class="row no-gutter">													
+															<div class="row no-gutter">		
+																<div class="input-field col s6">
+																	<input name="Nombre" id="Nombre" type="text" value="">
+																	<label for="Nombre">Nombre</label>
+																	<input type="hidden" name="update_id" id="update_id" value="" />
+																</div>																	
 																<div class="input-field col s6">
 																	<input name="String1" id="String1" type="text" value="">
 																	<label for="String1">String 1</label>
-																</div>	
-																<div class="input-field col s6">
-																	<!--<input name="Nombre" id="Nombre" type="text" value="">
-																	<label for="Nombre">Nombre</label>-->
 																</div>																
 															</div>  
 															<div class="row no-gutter">
@@ -146,8 +149,7 @@
 																<div class="input-field col s6">
 																	<input name="String5" id="String5" type="text" value="">
 																	<label for="String5">String 5</label>
-																</div>	
-																<div class="input-field col s6"></div>												
+																</div>												
 															</div>  											
 														</div>
 														<div class="panel-footer">
@@ -161,6 +163,9 @@
 																<button type="button" id="botton-new" class="btn-flat waves-effect">
 																	GUARDAR
 																</button>
+																<button type="button" id="botton-edit" class="btn-flat waves-effect">
+																	ACTUALIZAR
+																</button>																
 															</div>
 														</div>
 													</div>

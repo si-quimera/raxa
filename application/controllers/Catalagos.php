@@ -886,7 +886,6 @@ class Catalagos extends CI_Controller {
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al editar el Almacen!</div>');
                 }				
-
 			}
 		}		
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
@@ -1086,9 +1085,10 @@ class Catalagos extends CI_Controller {
 		$id = $this->input->post('id');
 		$query = $this->CatalagoModel->getDataByIdMaestro($id);
 		
-		$table = '<table class="highlight">';
+		$table = '<table class="highlight" id="tabla_cadenas">';
 		$table .=	'<thead>';
 		$table .=	'	<tr>';
+		$table .=	'		<th>Nombre</th>';		
 		$table .=	'		<th>String 1</th>';
 		$table .=	'		<th>String 2</th>';
 		$table .=	'		<th>String 3</th>';
@@ -1100,14 +1100,15 @@ class Catalagos extends CI_Controller {
 		$table .=	'<tbody>';
 		foreach ($query->result() as $row){			
 		$table .=	'	<tr>';	
-		$table .=	'		<td>'.$row->String1.'</td>';
-		$table .=	'		<td>'.$row->String2.'</td>';
-		$table .=	'		<td>'.$row->String3.'</td>';
-		$table .=	'		<td>'.$row->String4.'</td>';
-		$table .=	'		<td>'.$row->String5.'</td>';
+		$table .=	'		<td id="row0'.$row->Id_Cat_Prim.'">'.$row->Nombre.'</td>';		
+		$table .=	'		<td id="row1'.$row->Id_Cat_Prim.'">'.$row->String1.'</td>';
+		$table .=	'		<td id="row2'.$row->Id_Cat_Prim.'">'.$row->String2.'</td>';
+		$table .=	'		<td id="row3'.$row->Id_Cat_Prim.'">'.$row->String3.'</td>';
+		$table .=	'		<td id="row4'.$row->Id_Cat_Prim.'">'.$row->String4.'</td>';
+		$table .=	'		<td id="row5'.$row->Id_Cat_Prim.'">'.$row->String5.'</td>';
 		$table .=	'		<td class="center-align">';
 		$table .=	'			<div class="btn-group">';
-		$table .=	'				<a href="#!" class="btn-flat btn-small waves-effect">';
+		$table .=	'				<a href="#!" class="edit_class btn-flat btn-small waves-effect" id="'.$row->Id_Cat_Prim.'">';
 		$table .=	'					<i class="material-icons">create</i>';
 		$table .=	'				</a>';													
 		$table .=	'				<a href="#!" class="delete_class btn-flat btn-small waves-effect" id="'.$row->Id_Cat_Prim.'">';
@@ -1126,29 +1127,53 @@ class Catalagos extends CI_Controller {
 	}
 	
 	public function newString(){
-		$data = array(
-			'Id_Cat_Sec'	=>  $this->input->post('Id_Cat_Sec'),
-			'String1'	=>  $this->input->post('String1'),
-			'String2'	=>  $this->input->post('String2'),
-			'String3'	=>  $this->input->post('String3'),
-			'String4'	=>  $this->input->post('String4'),
-			'String5'	=>  $this->input->post('String5')
-		);            
-		$error = $this->CatalagoModel->addString($data);
-		if ($error['code'] === 0){
-			echo "ok";
-		}else{
-			echo "fail";
-		}    								          				
+		if ($this->input->method() == 'post'){
+			$data = array(
+				'Id_Cat_Sec'	=>  $this->input->post('Id_Cat_Sec'),
+				'Nombre'	=>  $this->input->post('Nombre'),
+				'String1'	=>  $this->input->post('String1'),
+				'String2'	=>  $this->input->post('String2'),
+				'String3'	=>  $this->input->post('String3'),
+				'String4'	=>  $this->input->post('String4'),
+				'String5'	=>  $this->input->post('String5')
+			);            
+			$error = $this->CatalagoModel->addString($data);
+			if ($error['code'] === 0){
+				echo "ok";
+			}else{
+				echo "fail";
+			}    		
+		}
 	}
 
 	
 	public function delString(){
-		$id = $this->input->post('id');
-		$this->CatalagoModel->deleteString($id);
+		if ($this->input->method() == 'post'){
+			$id = $this->input->post('id');
+			$this->CatalagoModel->deleteString($id);
+		}	
 	}
 
-
+	public function updateString(){
+		if ($this->input->method() == 'post'){
+			
+			$id = $this->input->post('update_id');
+			$data = array(
+				'Nombre'	=>  $this->input->post('Nombre'),
+				'String1'	=>  $this->input->post('String1'),
+				'String2'	=>  $this->input->post('String2'),
+				'String3'	=>  $this->input->post('String3'),
+				'String4'	=>  $this->input->post('String4'),
+				'String5'	=>  $this->input->post('String5')
+			);            
+			$error = $this->CatalagoModel->updateString($id, $data);
+			if ($error['code'] === 0){
+				echo "ok";
+			}else{
+				echo "fail";
+			}				
+		}		
+	}
 
 
 

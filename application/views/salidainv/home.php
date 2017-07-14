@@ -10,10 +10,8 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">folder_special</i> CATALAGO MAESTRO
+				                <i class="material-icons">assignment_return</i> SALIDA INVENTARIO CENTRAL
 				            </h1>
-
-
 				        </div>
 				    </div>
 				</div>
@@ -25,9 +23,6 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nueva Zona" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newMaestro">
-								<i class="large material-icons">add</i>
-							</a>
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
 								<i class="large material-icons">keyboard_arrow_up</i>
 							</button>
@@ -42,35 +37,38 @@
                                 ?>								
 								<div class="row no-gutter">
 									<?php
-									echo form_open('catalagos/maestro/search/'); 
+									echo form_open_multipart('SalidaInv'); 
 									?> 									
 									<div class="input-field right-left col s4">    
-										<input id="search" name="search" type="text" value="<?= $search ?>" >
-										<label for="search">Buscar x Nombre</label>																															
+
+										<div class="file-field input-field">
+											<div class="btn">
+												<span>CSV</span>
+												<input type="file" name="userfile[]">
+											</div>
+											<div class="file-path-wrapper">
+												<input class="file-path validate" type="text" required>
+											</div>
+										</div>																														
 									</div>	
 									<div class="input-field right-left col s2">
+										<br>
 										<button class="btn waves-effect waves-light" type="submit" name="action">
-											Buscar
-											<i class="material-icons right">search</i>
+											Cargar <i class="material-icons right">send</i>
 										</button>										
 									</div>	
-									<div class="input-field right-align col s6">    
-									<?php
-									$this->load->view('templates/menu_cat.php');
-									?>										
+									<div class="input-field right-align col s6">    									
 									</div>
 									<?= form_close() ?>
 								</div>								
-							
+								
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Nombre</th>
-											<th>String 1</th>
-											<th>String 2</th>
-											<th>String 3</th>
-											<th>String 4</th>
-											<th>String 5</th>
+											<th>ICCDID</th>
+											<th>Fecha Salida Inv Central</th>
+											<th>Fecha Entrada RAXA Ctrl</th>
+											<th>Fecha Salida RAXA Ctrl</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
@@ -81,34 +79,12 @@
 									?>
 									<tbody>
 										<tr>
-											<td>
-<?php
-
-			//echo $row->Nombre;
-
-			if (is_null($row->Id_Cat_Sec)){
-				echo " / " . $nombres[$row->Id_Cat_Prim]; 
-			}else{				   
-				echo  " / " . $nombres[$row->Id_Cat_Sec] . " / " . $nombres[$row->Id_Cat_Prim];    
-			}
-?>
-											
-											</td>
-											<td><?= $row->String1 ?></td>
-											<td><?= $row->String2 ?></td>
-											<td><?= $row->String3 ?></td>
-											<td><?= $row->String4 ?></td>
-											<td><?= $row->String5 ?></td>
+											<td><?= $row->ICCDID ?></td>
+											<td><?= $row->Fecha_Salida_Inv_Central ?></td>
+											<td><?= $row->Fecha_Entrada_RAXA_Ctrl ?></td>
+											<td><?= $row->Fecha_Salida_RAXA_Ctrl ?></td>
 											<td class="center-align">
-												<div class="btn-group">
-													<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
-														<i class="material-icons">create</i>
-													</a>
-													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
-														<i class="material-icons">delete</i>
-													</a>
-												</div>
+
 											</td>
 										</tr>										
 									</tbody>
