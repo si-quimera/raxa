@@ -71,7 +71,7 @@
                             </ul>
                             <ul id="dropdown-adm" class="dropdown-content">
                                 <li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="estaticos">Catalogos Estaticos</a></li>
-								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dropdown2">Catalogos Dinamicos</a></li>
+								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dinamicos">Catalogos Dinamicos</a></li>
                                 <li ><a href="apps_pricing_table.html">Carga de SIMs</a></li>
                                 <li ><a href="apps_datatables.html">Cambio de Password</a></li>
                                 <li ><a href="apps_maps.html">Asignacion de Roles</a></li>
@@ -93,6 +93,10 @@
 								<li><a href="<?= base_url() ?>Catalagos/maestro/search/">Maestro</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/sucursal/">Sucursal</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/zona/">Zona</a></li>
+							</ul>
+
+							<ul id='dinamicos' class='dropdown-content'>
+								<li><a href="<?= base_url() ?>Catalagos/cadenas/">Cadenas / Maestro</a></li>
 							</ul>							
 							
 							

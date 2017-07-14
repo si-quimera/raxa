@@ -2,12 +2,6 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Catalagos extends CI_Controller {
-	public function index(){	
-        $this->load->view('templates/header.php');  
-        $this->load->view('catalago/catalago.php');
-        $this->load->view('templates/footer.php');
-	}
-	
 	public function zona(){
         
         $config['base_url'] = base_url() . 'catalagos/zona/';
@@ -1069,13 +1063,90 @@ class Catalagos extends CI_Controller {
 
 
 	public function Cadenas(){	
+		$data['raiz'] = $this->CatalagoModel->getByRaizMaestro();
+
         $this->load->view('templates/header.php');  
-        $this->load->view('catalago/cadenas.php');
+        $this->load->view('catalago/cadenas.php', $data);
         $this->load->view('templates/footer.php');
 	}
 
 
+	public function selectSubs(){
+		$id = $this->input->post('id');
+    
+		$query = $this->CatalagoModel->getSubMenu($id);
+				
+		echo "<option value=\"\" disabled selected>Elija su opción</option>";
+        foreach ($query->result() as $row){
+            echo "<option value='".$row->Id_Cat_Prim."'>".$row->Nombre."</option>";    
+        }          				
+	}	
+	
+	public function drawTabla(){
+		$id = $this->input->post('id');
+		$query = $this->CatalagoModel->getDataByIdMaestro($id);
+		
+		$table = '<table class="highlight">';
+		$table .=	'<thead>';
+		$table .=	'	<tr>';
+		$table .=	'		<th>String 1</th>';
+		$table .=	'		<th>String 2</th>';
+		$table .=	'		<th>String 3</th>';
+		$table .=	'		<th>String 4</th>';
+		$table .=	'		<th>String 5</th>';
+		$table .=	'		<th class="center-align" data-searchable="false" data-orderable="false">Actions</th>';
+		$table .=	'	</tr>';
+		$table .=	'</thead>';
+		$table .=	'<tbody>';
+		foreach ($query->result() as $row){			
+		$table .=	'	<tr>';	
+		$table .=	'		<td>'.$row->String1.'</td>';
+		$table .=	'		<td>'.$row->String2.'</td>';
+		$table .=	'		<td>'.$row->String3.'</td>';
+		$table .=	'		<td>'.$row->String4.'</td>';
+		$table .=	'		<td>'.$row->String5.'</td>';
+		$table .=	'		<td class="center-align">';
+		$table .=	'			<div class="btn-group">';
+		$table .=	'				<a href="#!" class="btn-flat btn-small waves-effect">';
+		$table .=	'					<i class="material-icons">create</i>';
+		$table .=	'				</a>';													
+		$table .=	'				<a href="#!" class="delete_class btn-flat btn-small waves-effect" id="'.$row->Id_Cat_Prim.'">';
+		$table .=	'					<i class="material-icons">delete</i>';
+		$table .=	'				</a>';		
+		$table .=	'			</div>';
+		$table .=	'		</td>';
+		$table .=	'	</tr>';		
+				}
+		$table .=	'</tbody>';
+		$table .=	'</table>';			
+		$table .=	'<input type="hidden" name="id_prim" id="id_prim" value="'.$id.'" />';
+		$table .=	'<br><br><br><br><br>';
+		echo $table;
+		
+	}
+	
+	public function newString(){
+		$data = array(
+			'Id_Cat_Sec'	=>  $this->input->post('Id_Cat_Sec'),
+			'String1'	=>  $this->input->post('String1'),
+			'String2'	=>  $this->input->post('String2'),
+			'String3'	=>  $this->input->post('String3'),
+			'String4'	=>  $this->input->post('String4'),
+			'String5'	=>  $this->input->post('String5')
+		);            
+		$error = $this->CatalagoModel->addString($data);
+		if ($error['code'] === 0){
+			echo "ok";
+		}else{
+			echo "fail";
+		}    								          				
+	}
 
+	
+	public function delString(){
+		$id = $this->input->post('id');
+		$this->CatalagoModel->deleteString($id);
+	}
 
 
 

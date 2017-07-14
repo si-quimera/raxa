@@ -378,13 +378,37 @@ class CatalagoModel extends CI_Model{
         return $error = $this->db->error();                          
     }	
 	
+	/* --- */
 	
+    public function getByRaizMaestro(){
+		$raiz = array();
+		$this->db->where('Id_Cat_Sec', NULL);
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+            $raiz[$row->Id_Cat_Prim] = $row->Nombre;    
+        }      
+        return $raiz;        
+    }	
 	
+    public function getSubMenu($id){
+		$this->db->where('Id_Cat_Sec', $id);	
+        return $this->db->get('Cat_Maestro');                   
+    }	
 	
+	public function getDataByIdMaestro($id){
+		$this->db->where('Id_Cat_Sec', $id);	
+        return $this->db->get('Cat_Maestro');						
+	}
 	
+	public function addString($data){
+		$this->db->insert('Cat_Maestro', $data);        
+		return $error = $this->db->error();
+    }	
 	
-	
-	
+    public function deleteString($id){
+        $this->db->where('Id_Cat_Prim', $id);
+        $this->db->delete('Cat_Maestro');
+    } 	
 	
 	
 	

@@ -13,7 +13,7 @@ class Login extends CI_Controller {
             } else {
                 #Datos Usuario
                 $this->session->set_userdata($data);                    
-                redirect(base_url() . 'Catalagos/'); 
+                redirect(base_url()); 
             }									
 		}
 	}

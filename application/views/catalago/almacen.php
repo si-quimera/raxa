@@ -25,7 +25,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped" data-tooltip="Nuevo Almacen" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newAlmacen">
+							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Almacen" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newAlmacen">
 								<i class="large material-icons">add</i>
 							</a>
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">

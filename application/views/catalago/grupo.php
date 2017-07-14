@@ -23,7 +23,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped" data-tooltip="Nuevo Grupo" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newGrupo">
+							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Grupo" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newGrupo">
 								<i class="large material-icons">add</i>
 							</a>
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
