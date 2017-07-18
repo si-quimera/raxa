@@ -53,36 +53,103 @@
 											</th>
 										</tr>
 									</thead>
+									<tbody>									
 									<?php      
-									foreach ($consulta->result() as $row) {                                         
-									?>
-									<tbody>
-										<tr>
-											<td>
-												<?php
-												if (is_null($row->Id_Cat_Sec)){
-													echo $master[$row->Id_Cat_Prim] = ' <i class="material-icons tiny">arrow_forward</i> <span class="orange-text text-darken-4"><strong>' . $nombres[$row->Id_Cat_Prim] .'</strong></span>'; 
-												}else{				   
-													echo $master[$row->Id_Cat_Prim] = ' <i class="material-icons tiny">arrow_forward</i> ' . $nombres[$row->Id_Cat_Sec] . ' <i class="material-icons tiny">arrow_forward</i> <span class="orange-text text-darken-4"><strong>' . $nombres[$row->Id_Cat_Prim] . '</strong></span>';    
-												}
-												?>																								
-											</td>											
-											<td class="center-align">
-												<div class="btn-group">
-													<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
-														<i class="material-icons">create</i>
-													</a>
-													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
-														<i class="material-icons">delete</i>
-													</a>
-												</div>
-											</td>
-										</tr>										
-									</tbody>
-									<?php
+									foreach ($consulta->result() as $row) {     																					
+										if (is_null($row->Id_Cat_Sec)){
+											$raiz_nombre = $row->Nombre;
+											?>
+												<tr>
+													<td>
+														<?= $raiz_nombre ?>
+													</td>											
+													<td class="center-align">
+														<div class="btn-group">
+															<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
+																<i class="material-icons">create</i>
+															</a>
+
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+																<i class="material-icons">delete</i>
+															</a>
+														</div>
+													</td>
+												</tr>										
+											<?php											
+											$nivel1 = $this->CatalagoModel->getMaestros($row->Id_Cat_Prim);
+											foreach ($nivel1->result() as $row1) {
+												$row1_nombre = $row1->Nombre;
+											?>
+												<tr>
+													<td>
+														<?= $raiz_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row1_nombre ?>
+													</td>											
+													<td class="center-align">
+														<div class="btn-group">
+															<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row1->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
+																<i class="material-icons">create</i>
+															</a>
+
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row1->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row1->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+																<i class="material-icons">delete</i>
+															</a>
+														</div>
+													</td>
+												</tr>										
+												<?php		
+												$nivel2 = $this->CatalagoModel->getMaestros($row1->Id_Cat_Prim);
+												foreach ($nivel2->result() as $row2) {
+													$row2_nombre = $row2->Nombre;
+												?>
+												<tr>
+													<td>
+														<?= $raiz_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row1_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row2_nombre ?>
+													</td>											
+													<td class="center-align">
+														<div class="btn-group">
+															<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row2->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
+																<i class="material-icons">create</i>
+															</a>
+
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row2->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row2->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+																<i class="material-icons">delete</i>
+															</a>
+														</div>
+													</td>
+												</tr>										
+												<?php	
+													$nivel3 = $this->CatalagoModel->getMaestros($row2->Id_Cat_Prim);
+													foreach ($nivel3->result() as $row3) {
+														$row3_nombre = $row3->Nombre;
+												?>
+												<tr>
+													<td>
+														<?= $raiz_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row1_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row2_nombre ?><i class="material-icons tiny red-text">fast_forward</i> <?= $row3_nombre ?>
+													</td>											
+													<td class="center-align">
+														<div class="btn-group">
+															<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row3->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
+																<i class="material-icons">create</i>
+															</a>
+
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row3->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row3->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+																<i class="material-icons">delete</i>
+															</a>
+														</div>
+													</td>
+												</tr>										
+												<?php													
+													}
+												
+												
+												
+												
+												}																																												
+											}																																	
+										}																								
 									}
 									?>
+									</tbody>										
 								</table>								
                                 <?= $pagination ?> 								
 							</div>

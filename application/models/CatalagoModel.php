@@ -232,15 +232,20 @@ class CatalagoModel extends CI_Model{
 	/* --- */	
 	
     public function countMaestro(){
-
-        $number = $this->db->count_all('Cat_Maestro');
+		$this->db->where('Id_Cat_Sec', NULL);
+        $number = $this->db->count_all_results('Cat_Maestro');
         return intval($number);
     }    
     
     public function getAllMaestro($number_per_page){
-	
+		$this->db->where('Id_Cat_Sec', NULL);
 		$this->db->order_by('Id_Cat_Prim, Id_Cat_Sec', 'ASC');  
         return $this->db->get('Cat_Maestro', $number_per_page, $this->uri->segment(3));
+    }  
+
+    public function getMaestros($id){
+		$this->db->where('Id_Cat_Sec', $id);
+        return $this->db->get('Cat_Maestro');
     }  	
 	
     public function getPathMaestro(){	

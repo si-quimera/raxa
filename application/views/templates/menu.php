@@ -55,7 +55,7 @@
 
                             <!-- Dropdowns -->
                             <ul id="dropdown-pro" class="dropdown-content">
-                                <li ><a href="css_color.html">Registro Portabilidad</a></li>
+                                <li ><a href="<?= base_url() ?>RegPortabilidad/">Registro Portabilidad</a></li>
                                 <li ><a href="css_grid.html">Re-Asignacion de SIMs</a></li>
                             </ul>
                             <ul id="dropdown-seg" class="dropdown-content">

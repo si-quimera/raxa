@@ -73,35 +73,7 @@
                                                     <label for="Nombre">Nombre</label>
 													<?php echo form_error('Nombre'); ?>
                                                 </div>													
-                                                <div class="input-field col s6">
-                                                    <input name="String1" id="String1" type="text" value="<?= $edicion->String1 ?>">
-                                                    <label for="String1">String 1</label>
-													<?php echo form_error('String1'); ?>
-                                                </div>												
-                                            </div>  
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <input name="String2" id="String2" type="text" value="<?= $edicion->String2 ?>">
-                                                    <label for="String2">String 2</label>
-													<?php echo form_error('String2'); ?>
-                                                </div>													
-                                                <div class="input-field col s6">
-                                                    <input name="String3" id="String3" type="text" value="<?= $edicion->String3 ?>">
-                                                    <label for="String3">String 3</label>
-													<?php echo form_error('String3'); ?>
-                                                </div>												
-                                            </div>
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <input name="String4" id="String4" type="text" value="<?= $edicion->String4 ?>">
-                                                    <label for="String4">String 4</label>
-													<?php echo form_error('String4'); ?>
-                                                </div>													
-                                                <div class="input-field col s6">
-                                                    <input name="String5" id="String5" type="text" value="<?= $edicion->String5 ?>">
-                                                    <label for="String5">String 5</label>
-													<?php echo form_error('String5'); ?>
-                                                </div>												
+                                                <div class="input-field col s6"></div>												                                           												
                                             </div>  											
                                         </div>
                                         <div class="panel-footer">

@@ -697,21 +697,11 @@ class Catalagos extends CI_Controller {
 			if ($this->input->post('Id_Cat_Sec') === '') {
 				$data = array(
 					'Nombre'	=>  $this->input->post('Nombre'),
-					'String1'	=>  $this->input->post('String1'),
-					'String2'	=>  $this->input->post('String2'),
-					'String3'	=>  $this->input->post('String3'),
-					'String4'	=>  $this->input->post('String4'),
-					'String5'	=>  $this->input->post('String5')
 				);					
 			}else{
 				$data = array(
 					'Id_Cat_Sec'	=> $this->input->post('Id_Cat_Sec'),
-					'Nombre'	=>  $this->input->post('Nombre'),
-					'String1'	=>  $this->input->post('String1'),
-					'String2'	=>  $this->input->post('String2'),
-					'String3'	=>  $this->input->post('String3'),
-					'String4'	=>  $this->input->post('String4'),
-					'String5'	=>  $this->input->post('String5')
+					'Nombre'	=>  $this->input->post('Nombre')
 				); 				
 			}			
 			          
@@ -736,22 +726,12 @@ class Catalagos extends CI_Controller {
 		if ($this->input->method() == 'post'){			
 			if ($this->input->post('Id_Cat_Sec') === '') {
 				$data = array(
-					'Nombre'	=>  $this->input->post('Nombre'),
-					'String1'	=>  $this->input->post('String1'),
-					'String2'	=>  $this->input->post('String2'),
-					'String3'	=>  $this->input->post('String3'),
-					'String4'	=>  $this->input->post('String4'),
-					'String5'	=>  $this->input->post('String5')
+					'Nombre'	=>  $this->input->post('Nombre')
 				);					
 			}else{
 				$data = array(
 					'Id_Cat_Sec'	=> $this->input->post('Id_Cat_Sec'),
-					'Nombre'	=>  $this->input->post('Nombre'),
-					'String1'	=>  $this->input->post('String1'),
-					'String2'	=>  $this->input->post('String2'),
-					'String3'	=>  $this->input->post('String3'),
-					'String4'	=>  $this->input->post('String4'),
-					'String5'	=>  $this->input->post('String5')
+					'Nombre'	=>  $this->input->post('Nombre')
 				); 				
 			}			
 			          
