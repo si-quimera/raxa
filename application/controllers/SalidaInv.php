@@ -18,13 +18,15 @@ class SalidaInv extends CI_Controller {
 					while (($datos = fgetcsv($gestor, 1000, ",")) !== FALSE) {
 						$data = array(
 							'ICCDID'	=>  $datos[0],
-							'Fecha_Salida_Inv_Central'	=>  $datos[1],
-							'Fecha_Entrada_RAXA_Ctrl'	=>  $datos[2],
+							'Fecha_Salida_Inv_Central'	=>  date('Y-m-d'),
+							'Fecha_Entrada_RAXA_Ctrl'	=>  date('Y-m-d'),
 							'Fecha_Salida_RAXA_Ctrl'	=>  $datos[3]	
 						);
 						$error = $this->SalidaInvModel->addSalidaInv($data);
 						if ($error['code'] !== 0){
 							$count = $count + 1;
+							$msg_error = $error['code'] . ' / ' . $error['message'];
+							break;
 						}else{
 							$ok = $ok + 1;
 						}												
@@ -32,7 +34,8 @@ class SalidaInv extends CI_Controller {
 					fclose($gestor);
 				}
 				if($count > 0){
-					$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Se produjo un error al importar alguno de los elementos</div>');
+					$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Se produjo un error al importar el archivo ['.$msg_error.']</div>');
+
 				}else{
 					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se importo '.$ok.' elementos del archivo!</div>');
 				}				

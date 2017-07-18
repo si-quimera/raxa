@@ -36,7 +36,7 @@
 									<div class=" right-left col s3">    
 										<label>Nivel 0</label>
 										<select id="raiz" name="raiz" class="browser-default">
-											<option value="" disabled selected>Choose your option</option>
+											<option value="" selected>Elija su opción</option>
 											<?php
 												foreach ($raiz as $key => $row) {    
 													if($row !== ''){
@@ -121,33 +121,33 @@
 														?>                             		
 														<div class="panel-body">                                           
 															<div class="row no-gutter">		
-																<div class="input-field col s6">
-																	<input name="Nombre" id="Nombre" type="text" value="">
+																<div class="input-field col s6 active">
+																	<input name="Nombre" id="Nombre" type="text" value="" placeholder=" ">
 																	<label for="Nombre">Nombre</label>
 																	<input type="hidden" name="update_id" id="update_id" value="" />
 																</div>																	
 																<div class="input-field col s6">
-																	<input name="String1" id="String1" type="text" value="">
+																	<input name="String1" id="String1" type="text" value="" placeholder=" ">
 																	<label for="String1">String 1</label>
 																</div>																
 															</div>  
 															<div class="row no-gutter">
 																<div class="input-field col s6">
-																	<input name="String2" id="String2" type="text" value="">
+																	<input name="String2" id="String2" type="text" value=""  placeholder=" ">
 																	<label for="String2">String 2</label>
 																</div>														
 																<div class="input-field col s6">
-																	<input name="String3" id="String3" type="text" value="">
+																	<input name="String3" id="String3" type="text" value="" placeholder=" ">
 																	<label for="String3">String 3</label>
 																</div>												
 															</div>
 															<div class="row no-gutter">
 																<div class="input-field col s6">
-																	<input name="String4" id="String4" type="text" value="">
+																	<input name="String4" id="String4" type="text" value="" placeholder=" ">
 																	<label for="String4">String 4</label>
 																</div>													
 																<div class="input-field col s6">
-																	<input name="String5" id="String5" type="text" value="">
+																	<input name="String5" id="String5" type="text" value="" placeholder=" ">
 																	<label for="String5">String 5</label>
 																</div>												
 															</div>  											

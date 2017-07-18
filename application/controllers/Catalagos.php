@@ -659,16 +659,9 @@ class Catalagos extends CI_Controller {
 	
 	public function maestro(){
 		
-		if ($this->input->method() == 'post'){
-			$search = $this->input->post('search');
-		}else if ($this->uri->segment(4) != ''){
-			$search = $this->uri->segment(4);
-		}else{
-			$search = "";
-		}
         
-        $config['base_url'] = base_url() . 'catalagos/maestro/search/'.$search.'/';
-        $config['total_rows'] = $this->CatalagoModel->countMaestro($search);
+        $config['base_url'] = base_url() . 'catalagos/maestro/';
+        $config['total_rows'] = $this->CatalagoModel->countMaestro();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
         $config['num_links'] = 5;        
@@ -686,9 +679,8 @@ class Catalagos extends CI_Controller {
         $config['cur_tag_close'] = '</a></li>';
         
         $this->pagination->initialize($config);		
-        $result = $this->CatalagoModel->getAllMaestro($search, $config['per_page']); 
+        $result = $this->CatalagoModel->getAllMaestro($config['per_page']); 
         
-		$data['search'] = $search;
         $data['consulta'] = $result;
         $data['pagination'] = $this->pagination->create_links();
 		$data['nombres'] = $this->CatalagoModel->getPathMaestro();

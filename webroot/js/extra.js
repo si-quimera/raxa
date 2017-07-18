@@ -1,6 +1,7 @@
 (function ($) {
 	
 	var origen = 'raxa/';
+	//var origen = '';
 	
 	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/selectSubs/';	
 	var path_table = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/drawTabla/';
@@ -59,7 +60,9 @@
 			},
 			success:  function (response) {                     
 			  $("#sub1").html(response);
-			  //reDrawTable(identifica);
+			  reDrawTable(identifica);
+			  $("#sub2").html("");
+			  $("#sub3").html("");
 			}
 		}); 
 	});	

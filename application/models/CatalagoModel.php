@@ -231,22 +231,16 @@ class CatalagoModel extends CI_Model{
 	
 	/* --- */	
 	
-    public function countMaestro($search){
-		if($search !== ""){
-			$this->db->like('Nombre', $search, 'both');
-		}		
-		
-        $number = $this->db->count_all_results('Cat_Maestro');
+    public function countMaestro(){
+
+        $number = $this->db->count_all('Cat_Maestro');
         return intval($number);
     }    
     
-    public function getAllMaestro($search,$number_per_page){
-		if($search !== ""){
-			$this->db->like('Nombre', $search, 'both');
-		}
-				
-		$this->db->order_by('Nombre', 'ASC');  
-        return $this->db->get('Cat_Maestro', $number_per_page, $this->uri->segment(4));
+    public function getAllMaestro($number_per_page){
+	
+		$this->db->order_by('Id_Cat_Prim, Id_Cat_Sec', 'ASC');  
+        return $this->db->get('Cat_Maestro', $number_per_page, $this->uri->segment(3));
     }  	
 	
     public function getPathMaestro(){	
@@ -393,11 +387,30 @@ class CatalagoModel extends CI_Model{
     public function getSubMenu($id){
 		$this->db->where('Id_Cat_Sec', $id);	
         return $this->db->get('Cat_Maestro');                   
-    }	
+	}
+	
+	public function getSubMenuPrim($id){
+		$this->db->where('Id_Cat_Prim', $id);	
+        return $this->db->get('Cat_Maestro');                   
+	}	
+	
+	public function getSubMenuSec($id){
+		$this->db->where('Id_Cat_Sec', $id);	
+        return $this->db->get('Cat_Maestro');                   
+	}	
+	
 	
 	public function getDataByIdMaestro($id){
 		$this->db->where('Id_Cat_Sec', $id);	
-        return $this->db->get('Cat_Maestro');						
+		$number = $this->db->count_all_results('Cat_Maestro');
+		if($number == 0){
+			return $this->getSubMenuPrim($id);
+			//return $this->db->get('Cat_Maestro');	
+		}else{
+			return $this->getSubMenuSec($id);
+		}
+       
+	
 	}
 	
 	public function addString($data){

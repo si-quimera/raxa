@@ -67,12 +67,12 @@
                             </ul>
                             <ul id="dropdown-con" class="dropdown-content">
                                 <li ><a href="js_collapsible.html">Portabilidad</a></li>
-                                <li ><a href="js_dialogs.html">Asignacion de SIM's</a></li>
+                                <li ><a href="">Asignacion de SIM's</a></li>
                             </ul>
                             <ul id="dropdown-adm" class="dropdown-content">
                                 <li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="estaticos">Catalogos Estaticos</a></li>
 								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dinamicos">Catalogos Dinamicos</a></li>
-                                <li ><a href="apps_pricing_table.html">Carga de SIMs</a></li>
+                                <li ><a href="<?= base_url() ?>SalidaInv/">Salida del Inv. Central</a></li>
                                 <li ><a href="apps_datatables.html">Cambio de Password</a></li>
                                 <li ><a href="apps_maps.html">Asignacion de Roles</a></li>
                             </ul>
@@ -90,7 +90,7 @@
 								<li><a href="<?= base_url() ?>Catalagos/colaborador/">Colaboradores</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/estado/">Estado</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/grupo/">Grupo</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/maestro/search/">Maestro</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/maestro/">Maestro</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/sucursal/">Sucursal</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/zona/">Zona</a></li>
 							</ul>

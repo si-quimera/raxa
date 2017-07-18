@@ -41,36 +41,13 @@
                                 }    
                                 ?>								
 								<div class="row no-gutter">
-									<?php
-									echo form_open('catalagos/maestro/search/'); 
-									?> 									
-									<div class="input-field right-left col s4">    
-										<input id="search" name="search" type="text" value="<?= $search ?>" >
-										<label for="search">Buscar x Nombre</label>																															
-									</div>	
-									<div class="input-field right-left col s2">
-										<button class="btn waves-effect waves-light" type="submit" name="action">
-											Buscar
-											<i class="material-icons right">search</i>
-										</button>										
-									</div>	
-									<div class="input-field right-align col s6">    
-									<?php
-									$this->load->view('templates/menu_cat.php');
-									?>										
-									</div>
-									<?= form_close() ?>
+
 								</div>								
 							
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Nombre</th>
-											<th>String 1</th>
-											<th>String 2</th>
-											<th>String 3</th>
-											<th>String 4</th>
-											<th>String 5</th>
+											<th>Ruta</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
@@ -82,23 +59,14 @@
 									<tbody>
 										<tr>
 											<td>
-<?php
-
-			//echo $row->Nombre;
-
-			if (is_null($row->Id_Cat_Sec)){
-				echo " / " . $nombres[$row->Id_Cat_Prim]; 
-			}else{				   
-				echo  " / " . $nombres[$row->Id_Cat_Sec] . " / " . $nombres[$row->Id_Cat_Prim];    
-			}
-?>
-											
-											</td>
-											<td><?= $row->String1 ?></td>
-											<td><?= $row->String2 ?></td>
-											<td><?= $row->String3 ?></td>
-											<td><?= $row->String4 ?></td>
-											<td><?= $row->String5 ?></td>
+												<?php
+												if (is_null($row->Id_Cat_Sec)){
+													echo $master[$row->Id_Cat_Prim] = ' <i class="material-icons tiny">arrow_forward</i> <span class="orange-text text-darken-4"><strong>' . $nombres[$row->Id_Cat_Prim] .'</strong></span>'; 
+												}else{				   
+													echo $master[$row->Id_Cat_Prim] = ' <i class="material-icons tiny">arrow_forward</i> ' . $nombres[$row->Id_Cat_Sec] . ' <i class="material-icons tiny">arrow_forward</i> <span class="orange-text text-darken-4"><strong>' . $nombres[$row->Id_Cat_Prim] . '</strong></span>';    
+												}
+												?>																								
+											</td>											
 											<td class="center-align">
 												<div class="btn-group">
 													<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
