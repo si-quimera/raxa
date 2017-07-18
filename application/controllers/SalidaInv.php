@@ -20,7 +20,7 @@ class SalidaInv extends CI_Controller {
 							'ICCDID'	=>  $datos[0],
 							'Fecha_Salida_Inv_Central'	=>  date('Y-m-d'),
 							'Fecha_Entrada_RAXA_Ctrl'	=>  date('Y-m-d'),
-							'Fecha_Salida_RAXA_Ctrl'	=>  $datos[3]	
+							'Fecha_Salida_RAXA_Ctrl'	=>  NULL	
 						);
 						$error = $this->SalidaInvModel->addSalidaInv($data);
 						if ($error['code'] !== 0){
@@ -35,7 +35,6 @@ class SalidaInv extends CI_Controller {
 				}
 				if($count > 0){
 					$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Se produjo un error al importar el archivo ['.$msg_error.']</div>');
-
 				}else{
 					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se importo '.$ok.' elementos del archivo!</div>');
 				}				
