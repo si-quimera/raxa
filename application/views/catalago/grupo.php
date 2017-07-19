@@ -61,10 +61,10 @@
 											</th>
 										</tr>
 									</thead>
+									<tbody>
 									<?php      
 									foreach ($consulta->result() as $row) {                                         
-									?>
-									<tbody>
+									?>									
 										<tr>
 											<td><?= $row->Id_Grupo ?></td>
 											<td><?= $row->Nombre ?></td>
@@ -81,10 +81,11 @@
 												</div>
 											</td>
 										</tr>										
-									</tbody>
+									
 									<?php
 									}
 									?>
+									</tbody>	
 								</table>								
                                 <?= $pagination ?> 								
 							</div>

@@ -29,7 +29,7 @@
         <!-- ################ -->
         <script src="<?= base_url(); ?>webroot/js/utils.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/js/colors.js" type="text/javascript"></script>
-		<script src="<?= base_url(); ?>webroot/js/extra.js" type="text/javascript"></script>			
+		<script src="<?= base_url(); ?>webroot/js/extra.js" type="text/javascript"></script>
         <!--<script src="<?= base_url(); ?>webroot/js/theme-switcher.js" type="text/javascript"></script> -->
         <!-- ################ -->
         <!-- Page javascripts -->
@@ -39,6 +39,9 @@
         <script src="<?= base_url(); ?>webroot/bower_components/amcharts3/amcharts/gauge.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/bower_components/amcharts3/amcharts/themes/light.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/bower_components/slimscroll/jquery.slimscroll.js" type="text/javascript"></script>
-        <script src="<?= base_url(); ?>webroot/js/pages/dashboard.js" type="text/javascript"></script>		
+		
+        <script src="<?= base_url(); ?>webroot/js/pages/dashboard.js" type="text/javascript"></script>			
+		
+		
     </body>
 </html>

@@ -38,7 +38,8 @@ if(!$this->session->userdata('usuario') ){
         <!-- Page stylesheets -->
         <!-- ################ -->
         <link href="<?= base_url(); ?>webroot/css/pages/dashboard.css" rel="stylesheet" type="text/css" />
-		<link href="<?= base_url(); ?>webroot/css/extra.css" rel="stylesheet" type="text/css" />
+		<link href="<?= base_url(); ?>webroot/css/extra.css" rel="stylesheet" type="text/css" />		
+		
         <!-- ##### -->
         <!-- Icons -->
         <!-- ##### -->

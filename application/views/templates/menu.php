@@ -46,7 +46,10 @@
                                     <a class="dropdown-button" href="#!" data-activates="dropdown-profile" data-constrainwidth="false" data-beloworigin="true" data-alignment="right">
                                         <div class="valign-wrapper">
                                             <img src="<?= base_url() ?>/webroot/img/profile.jpg" class="circle responsive-img margin-right-10">
-                                            John Doe
+											<?php
+											$user = $this->session->userdata('usuario');
+											echo $user['Nombre'];
+											?>											                                           
                                             <i class="material-icons dropdown-icon right">arrow_drop_down</i>
                                         </div>
                                     </a>
@@ -74,7 +77,7 @@
 								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dinamicos">Catalogos Dinamicos</a></li>
                                 <li ><a href="<?= base_url() ?>SalidaInv/">Salida del Inv. Central</a></li>
                                 <li ><a href="apps_datatables.html">Cambio de Password</a></li>
-                                <li ><a href="apps_maps.html">Asignacion de Roles</a></li>
+                                <li ><a href="<?= base_url() ?>Roles/">Asignacion de Roles</a></li>
                             </ul>
 
                             <ul id="dropdown-profile" class="dropdown-content">
