@@ -49,11 +49,33 @@
                                                     <select name="Id_Cat_Sec" id="Id_Cat_Sec" class="browser-default">
                                                         <option value="" disabled selected>Elija su opción</option>
 														<option value=""></option>
-                                                    <?php
+                                                    <?php													
                                                         foreach ($master as $key => $row) {    
+															$raiz_nombre = $row;
 													?>
 														<option value="<?= $key ?>"><?= $row ?></option>
 													<?php	
+															$nivel1 = $this->CatalagoModel->getMaestros($key);
+															foreach ($nivel1->result() as $row1) {
+																$row1_nombre = $row1->Nombre;	
+													?>
+															<option value="<?= $row1->Id_Cat_Prim ?>"><?= $raiz_nombre ?> &raquo;&raquo; <?= $row1_nombre ?></option>																																
+													<?php			
+																$nivel2 = $this->CatalagoModel->getMaestros($row1->Id_Cat_Prim);
+																foreach ($nivel2->result() as $row2) {
+																	$row2_nombre = $row2->Nombre;	
+													?>			
+																<option value="<?= $row2->Id_Cat_Prim ?>"><?= $raiz_nombre ?> &raquo;&raquo; <?= $row1_nombre ?> &raquo;&raquo; <?= $row2_nombre ?></option>
+													<?php
+																	$nivel3 = $this->CatalagoModel->getMaestros($row2->Id_Cat_Prim);
+																	foreach ($nivel3->result() as $row3) {
+																		$row3_nombre = $row3->Nombre;													
+													?>
+																		<option value="<?= $row3->Id_Cat_Prim ?>"><?= $raiz_nombre ?> &raquo;&raquo; <?= $row1_nombre ?> &raquo;&raquo; <?= $row2_nombre ?> &raquo;&raquo; <?= $row3_nombre ?></option>
+													<?php
+																	}														
+																}
+															}													
                                                         }                                               
                                                     ?>
                                                     </select>                                                    

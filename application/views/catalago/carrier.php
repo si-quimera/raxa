@@ -53,9 +53,6 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th data-searchable="false" data-orderable="false">
-												ID
-											</th>
 											<th>Nombre</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
@@ -67,7 +64,6 @@
 									foreach ($consulta->result() as $row) {                                         
 									?>
 										<tr>
-											<td><?= $row->Id_Carrier ?></td>
 											<td><?= $row->Nombre ?></td>
 											<td class="center-align">
 												<div class="btn-group">
@@ -75,7 +71,7 @@
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Carrier ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delCarrier/" . $row->Id_Carrier ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo <?= $row->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delCarrier/" . $row->Id_Carrier ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>

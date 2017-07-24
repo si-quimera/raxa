@@ -921,7 +921,75 @@ class Catalagos extends CI_Controller {
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
+		);
+        $this->form_validation->set_rules('Ap_Pat', 'Apellido Paterno', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Ap_Mat', 'Apellido Materno', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Fec_Nac', 'Fecha de Nacimiento', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Calle', 'Calle', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
 		);		
+        $this->form_validation->set_rules('Colonia', 'Colonia', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Municipio', 'Municipio', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('CP', 'CP', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Estado', 'Estado', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Pais', 'Pais', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('Tel', 'Tel', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Cel', 'Cel', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'
+			)
+		);			
+		
+		
+		
+		
+		
+		
+		
 		
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
@@ -982,6 +1050,67 @@ class Catalagos extends CI_Controller {
         $this->form_validation->set_rules('User', 'Usuario', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Ap_Pat', 'Apellido Paterno', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Ap_Mat', 'Apellido Materno', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Fec_Nac', 'Fecha de Nacimiento', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Calle', 'Calle', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);		
+        $this->form_validation->set_rules('Colonia', 'Colonia', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Municipio', 'Municipio', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('CP', 'CP', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Estado', 'Estado', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Pais', 'Pais', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('Tel', 'Tel', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Cel', 'Cel', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'
 			)
 		);		
 		

@@ -122,7 +122,7 @@
 														<div class="panel-body">                                           
 															<div class="row no-gutter">		
 																<div class="input-field col s6 active">
-																	<input name="Nombre" id="Nombre" type="text" value="" placeholder=" ">
+																	<input name="Nombre" id="Nombre" type="text" value="" placeholder=" " disabled>
 																	<label for="Nombre">Nombre</label>
 																	<input type="hidden" name="update_id" id="update_id" value="" />
 																</div>																	

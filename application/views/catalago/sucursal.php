@@ -53,9 +53,6 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th data-searchable="false" data-orderable="false">
-												ID
-											</th>
 											<th>Sucursal</th>
 											<th>Ciudad</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
@@ -68,7 +65,6 @@
 									foreach ($consulta->result() as $row) {                                         
 									?>
 										<tr>
-											<td><?= $row->Id_Sucursal ?></td>
 											<td><?= $row->Nombre ?></td>
 											<td><?= $ciudad[$row->Id_Ciudad] ?></td>
 											<td class="center-align">
@@ -77,7 +73,7 @@
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Sucursal ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delSucursal/" . $row->Id_Sucursal ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo  <?= $row->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delSucursal/" . $row->Id_Sucursal ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>

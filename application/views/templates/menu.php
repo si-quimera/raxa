@@ -70,7 +70,7 @@
                             </ul>
                             <ul id="dropdown-con" class="dropdown-content">
                                 <li ><a href="js_collapsible.html">Portabilidad</a></li>
-                                <li ><a href="">Asignacion de SIM's</a></li>
+                                <li ><a href="#">Asignacion de SIM's</a></li>
                             </ul>
                             <ul id="dropdown-adm" class="dropdown-content">
                                 <li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="estaticos">Catalogos Estaticos</a></li>
@@ -87,15 +87,15 @@
 							
 	
 							<ul id='estaticos' class='dropdown-content'>
-								<li><a href="<?= base_url() ?>Catalagos/almacen/">Almacen</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/carrier/">Carrier</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/ciudad/">Ciudad</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/colaborador/">Colaboradores</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/estado/">Estado</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/grupo/">Grupo</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/maestro/">Maestro</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/sucursal/">Sucursal</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/zona/">Zona</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/estado/">Estado</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/ciudad/">Ciudad / Mun / Del</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/sucursal/">Sucursal</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/almacen/">Almacen</a></li>																
+								<li><a href="<?= base_url() ?>Catalagos/grupo/">Grupo</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/colaborador/">Colaboradores</a></li>								
+								<li><a href="<?= base_url() ?>Catalagos/carrier/">Carrier</a></li>																																
+								<li><a href="<?= base_url() ?>Catalagos/maestro/">Maestro</a></li>																
 							</ul>
 
 							<ul id='dinamicos' class='dropdown-content'>

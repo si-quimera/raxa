@@ -12,8 +12,6 @@
 				            <h1>
 				                <i class="material-icons">account_box</i> CATALAGO COLABORADORES
 				            </h1>
-
-
 				        </div>
 				    </div>
 				</div>
@@ -52,9 +50,6 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th data-searchable="false" data-orderable="false">
-												ID
-											</th>
 											<th>Nombre</th>
 											<th>Ap Paterno</th>
 											<th>Ap Materno</th>
@@ -69,7 +64,6 @@
 									foreach ($consulta->result() as $row) {                                         
 									?>
 										<tr>																						
-											<td><?= $row->Id_Colaborador ?></td>
 											<td><?= $row->Nombre ?></td>
 											<td><?= $row->Ap_Pat ?></td>
 											<td><?= $row->Ap_Mat ?></td>
@@ -87,7 +81,7 @@
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Colaborador ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delColaborador/" . $row->Id_Colaborador ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo <?= $row->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delColaborador/" . $row->Id_Colaborador ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>

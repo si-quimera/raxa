@@ -263,9 +263,7 @@ class CatalagoModel extends CI_Model{
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
 			if (is_null($row->Id_Cat_Sec)){
-				$master[$row->Id_Cat_Prim] = " / " . $nombres[$row->Id_Cat_Prim]; 
-			}else{				   
-				$master[$row->Id_Cat_Prim] = " / " . $nombres[$row->Id_Cat_Sec] . " / " . $nombres[$row->Id_Cat_Prim];    
+				$master[$row->Id_Cat_Prim] = $row->Nombre;   
 			}	
         }      
         return @$master;        
@@ -424,8 +422,17 @@ class CatalagoModel extends CI_Model{
     }	
 	
     public function deleteString($id){
+		$data = array(
+			'String1'	=>  "",
+			'String2'	=>  "",
+			'String3'	=>  "",
+			'String4'	=>  "",
+			'String5'	=>  ""
+		); 		
+				
         $this->db->where('Id_Cat_Prim', $id);
-		$this->db->delete('Cat_Maestro');
+        $this->db->update('Cat_Maestro', $data);
+        return $error = $this->db->error(); 
     } 	
 	
     public function updateString($id, $data){                

@@ -9,9 +9,11 @@
 	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/delString/';
 	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/updateString/';
 	
+	Materialize.updateTextFields();
+	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
-		selectYears: 15, // Creates a dropdown of 15 years to control year
+		selectYears: 100, // Creates a dropdown of 15 years to control year
 		format: 'yyyy-mm-dd' 
 	});
 

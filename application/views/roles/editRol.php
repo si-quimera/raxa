@@ -198,7 +198,10 @@
                                     <div class="helper">&nbsp;</div>
                                 </div>
                             </div>
-                        <?= form_close() ?>																								
+                        <?= form_close() ?>						
+						
+						
+						
 					</div>
 				</section>
             </div>

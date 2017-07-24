@@ -10,7 +10,7 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">group_add</i> AGREGAR ROL
+				                <i class="material-icons">sd_storage</i> ASIGNACION DE CHIP
 				            </h1>
 				        </div>
 				    </div>
@@ -44,46 +44,20 @@
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
-                                                <div class=" col s6">
-													<label for="Id_Colaborador">Colaborador</label>
-                                                    <select name="Id_Colaborador" id="Id_Colaborador" class="browser-default">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                       foreach ($colaborador as $key => $row) {    
-														   if($key == $this->input->post('Id_Colaborador')){
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-													<?php
-														   }else{
-													?>
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php	
-														   }
-                                                       }                                               
-                                                    ?>
-                                                    </select>                                                    
-                                                    <?php echo form_error('Id_Colaborador'); ?>																																							
+                                                <div class="input-field col s6">
+													<i class="material-icons prefix">sd_storage</i>
+													<input type="text" id="ICCDID-del" class="autocomplete">
+													<label for="ICCDID-del">ICCDID Del</label>													
+                                                  
+                                                    <?php echo form_error('ICCDID-del'); ?>																																							
                                                 </div>
-                                                <div class="col s6">
-													<label for="Id_Jefe_Inmediato">Jefe Inmediato</label>
-                                                    <select name="Id_Jefe_Inmediato" id="Id_Jefe_Inmediato" class="browser-default">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                       foreach ($jefe as $key => $row) {    
-														   if($key == $this->input->post('Id_Jefe_Inmediato')){														   
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-													<?php
-														   }else{
-													?>
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php	
-														   }
-                                                       }                                               
-                                                    ?>
-                                                    </select>                                                    
-                                                    <?php echo form_error('Id_Jefe_Inmediato'); ?>	
-                                                </div>												
+                                                <div class="input-field col s6">
+													<i class="material-icons prefix">sd_storage</i>
+													<input type="text" id="ICCDID-al" class="autocomplete">
+													<label for="ICCDID-al">ICCDID Al</label>													
+                                                  
+                                                    <?php echo form_error('ICCDID-al'); ?>																																							
+                                                </div>										
                                             </div>  
                                             <div class="row no-gutter">
                                                 <div class=" col s6">
@@ -203,4 +177,3 @@
 				</section>
             </div>
         </main>
-		
