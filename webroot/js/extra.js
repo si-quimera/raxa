@@ -8,8 +8,8 @@
 	var path_add = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/newString/';
 	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/delString/';
 	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/updateString/';
+	var path_ICCDID = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/validar/';
 	
-	Materialize.updateTextFields();
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -184,7 +184,6 @@
 			success:  function (response) {                     
 				var $toastContent = $('<span><i class="material-icons">delete</i> Item eliminado con exito</span>');
 				Materialize.toast($toastContent, 5000, 'red');	
-
 				reDrawTable(identifica);
 			}
 		});    
@@ -218,8 +217,7 @@
 	});
 	// Editar String
 	$('#botton-edit').on('click', function() {
-		
-		
+				
 		var identifica = $("#id_prim").val();
 		var id = $("#update_id").val();
 		
@@ -255,6 +253,58 @@
 			}
 		}); 
 	});
+
+
+	$('#button-validar').on('click', function() {
+		
+		var ICCDID_del = $("#ICCDID-del").val();
+		var ICCDID_al = $("#ICCDID-al").val();
+		
+		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){
+			
+			var $toastContent = $('<span><i class="material-icons">warning</i> ICCDID incompleto para hacer la validación. </span>');
+			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
+		}else{			
+			var parametros = {       
+				'ICCDID_al' : ICCDID_al,
+				'ICCDID_del' : ICCDID_del
+			};							
+			$.ajax({
+				data:  parametros,
+				url:   path_ICCDID,
+				type:  'post',
+				beforeSend: function () {
+				},
+				success:  function (response) { 
+					
+					var items_ICCDID = JSON.parse(response);
+					var list_ICCDID = "";
+					
+					$("#msg-validar").html('<div class="card-panel teal lighten-2">Total de ICCDID encontrados en este rango son de: '+items_ICCDID.length+'</div>');					
+														
+					$.each(items_ICCDID, function(key, value){
+						list_ICCDID = list_ICCDID + value.ICCDID + '<br>';
+					});					
+					
+					$("#list-ICCDID").html(list_ICCDID);
+				}
+			}); 						
+		}
+		
+		
+	});
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -239,7 +239,7 @@ class CatalagoModel extends CI_Model{
     
     public function getAllMaestro($number_per_page){
 		$this->db->where('Id_Cat_Sec', NULL);
-		$this->db->order_by('Id_Cat_Prim, Id_Cat_Sec', 'ASC');  
+		$this->db->order_by('Nombre', 'ASC');  
         return $this->db->get('Cat_Maestro', $number_per_page, $this->uri->segment(3));
     }  
 

@@ -55,6 +55,25 @@ class RolesModel extends CI_Model{
             $zona[$row->Id_Zona] = $row->Nombre;    
         }      
         return $zona; 
+    } 
+
+    public function SelectAlmacen(){
+		$almacen = array();
+        $query = $this->db->get('Cat_Almacen');            
+        foreach ($query->result() as $row){
+            $almacen[$row->Id_Almacen] = $row->Nombre;    
+        }      
+        return $almacen; 
+    } 
+
+    public function SelectMaestro($id){
+		$maestro = array();
+		$this->db->where('Id_Cat_Sec', $id);
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+            $maestro[$row->Id_Cat_Prim] = $row->Nombre;				
+        }      
+        return $maestro; 
     } 	
 
     public function addRol($data){
