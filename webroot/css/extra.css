@@ -19,7 +19,8 @@ and open the template in the editor.
   left:7%;
 }
 
-
-
-
-
+#list-ICCDID {
+    width: 99%;
+    height: 420px;
+    overflow: auto;
+}

@@ -65,10 +65,10 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>ICCDID</th>
-											<th>Fecha Salida Inv Central</th>
-											<th>Fecha Entrada RAXA Ctrl</th>
-											<th>Fecha Salida RAXA Ctrl</th>
+											<th><a href="<?= base_url() ?>SalidaInv/index/?order=ICCDID"><i class="material-icons tiny">get_app</i> ICCDID</a></th>
+											<th><a href="<?= base_url() ?>SalidaInv/index/?order=Fecha_Salida_Inv_Central"><i class="material-icons tiny">get_app</i> Fecha Salida Inv Central</a></th>
+											<th><a href="<?= base_url() ?>SalidaInv/index/?order=Fecha_Entrada_RAXA_Ctrl"><i class="material-icons tiny">get_app</i>  Fecha Entrada RAXA Ctrl</a></th>
+											<th><a href="<?= base_url() ?>SalidaInv/index/?order=Fecha_Salida_RAXA_Ctrl"><i class="material-icons tiny">get_app</i> Fecha Salida RAXA Ctrl</a></th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>

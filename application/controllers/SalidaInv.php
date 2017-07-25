@@ -39,13 +39,16 @@ class SalidaInv extends CI_Controller {
 					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se importo '.$ok.' elementos del archivo!</div>');
 				}				
 			}							
-		}		
+		}				
 		
         $config['base_url'] = base_url() . 'SalidaInv/index/';
         $config['total_rows'] = $this->SalidaInvModel->countSalidaInv();
-        $config['per_page'] = 10;   
-        $config['uri_segment'] = 3;
+        $config['per_page'] = 20;   
+        $config['uri_segment'] = 3;		
         $config['num_links'] = 5;        
+		$config['reuse_query_string'] = TRUE;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';
         $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
         $config['prev_tag_open'] = '<li class="waves-effect">';
         $config['prev_tag_close'] = '</li>';

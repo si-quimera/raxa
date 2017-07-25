@@ -59,6 +59,7 @@
                             <!-- Dropdowns -->
                             <ul id="dropdown-pro" class="dropdown-content">
                                 <li ><a href="<?= base_url() ?>RegPortabilidad/">Registro Portabilidad</a></li>
+								<li ><a href="<?= base_url() ?>AsignacionChip/">Asignacion de SIMs</a></li>
                                 <li ><a href="css_grid.html">Re-Asignacion de SIMs</a></li>
                             </ul>
                             <ul id="dropdown-seg" class="dropdown-content">
@@ -75,7 +76,7 @@
                             <ul id="dropdown-adm" class="dropdown-content">
                                 <li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="estaticos">Catalogos Estaticos</a></li>
 								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dinamicos">Catalogos Dinamicos</a></li>
-                                <li ><a href="<?= base_url() ?>SalidaInv/">Salida del Inv. Central</a></li>
+                                <li ><a href="<?= base_url() ?>SalidaInv/index/?order=ICCDID">Salida del Inv. Central</a></li>
                                 <li ><a href="apps_datatables.html">Cambio de Password</a></li>
                                 <li ><a href="<?= base_url() ?>Roles/">Asignacion de Roles</a></li>
                             </ul>

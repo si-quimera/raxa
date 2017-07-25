@@ -255,44 +255,79 @@
 	});
 
 
-	$('#button-validar').on('click', function() {
+	$('#button-validar').on('click', function() {		
+		var ICCDID_del = $("#ICCDID_del").val();
+		var ICCDID_al = $("#ICCDID_al").val();
 		
-		var ICCDID_del = $("#ICCDID-del").val();
-		var ICCDID_al = $("#ICCDID-al").val();
+		$("#msg-validar").html('');
+		$("#list-ICCDID").html('');
 		
-		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){
-			
+		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){			
 			var $toastContent = $('<span><i class="material-icons">warning</i> ICCDID incompleto para hacer la validación. </span>');
 			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
-		}else{			
-			var parametros = {       
-				'ICCDID_al' : ICCDID_al,
-				'ICCDID_del' : ICCDID_del
-			};							
-			$.ajax({
-				data:  parametros,
-				url:   path_ICCDID,
-				type:  'post',
-				beforeSend: function () {
-				},
-				success:  function (response) { 
-					
-					var items_ICCDID = JSON.parse(response);
-					var list_ICCDID = "";
-					
-					$("#msg-validar").html('<div class="card-panel teal lighten-2">Total de ICCDID encontrados en este rango son de: '+items_ICCDID.length+'</div>');					
-														
-					$.each(items_ICCDID, function(key, value){
-						list_ICCDID = list_ICCDID + value.ICCDID + '<br>';
-					});					
-					
-					$("#list-ICCDID").html(list_ICCDID);
-				}
-			}); 						
-		}
-		
-		
+		}else{						
+			var number_del = ICCDID_del.substring(0, 18);
+			var number_al = ICCDID_al.substring(0, 18);
+			
+			if(number_del <= number_al){
+				var parametros = {       
+					'ICCDID_al' : ICCDID_al,
+					'ICCDID_del' : ICCDID_del
+				};							
+				$.ajax({
+					data:  parametros,
+					url:   path_ICCDID,
+					type:  'post',
+					beforeSend: function() {
+					},
+					success:  function (response) { 					
+						var items_ICCDID = JSON.parse(response);
+						var list_ICCDID = "";
+						var count = 1;
+
+						$("#msg-validar").html('<div class="card-panel teal lighten-2">Total de ICCDID encontrados en este rango son de: '+items_ICCDID.length+'</div>');					
+
+						$.each(items_ICCDID, function(key, value){
+							list_ICCDID = list_ICCDID + count + '. ' + value.ICCDID + '<br>';
+							count++;
+						});										
+						$("#list-ICCDID").html(list_ICCDID);
+					}
+				}); 		
+			}else{
+				var $toastContent = $('<span><i class="material-icons tiny">warning</i> ICCDID Del debe ser menor que ICCDID Al . </span>');
+				Materialize.toast($toastContent, 5000, 'yellow darken-3');					
+			}	
+		}				
 	});
+
+	$('#Id_Colaborador').on('change', function() {
+		$("#Id_Almacen").val('');
+		if ($('#Id_Colaborador').val() !== ""){
+			$('#Id_Almacen').prop('disabled', 'disabled');			
+			$('#Id_Colaborador').prop('disabled', false);
+			$('#Id_Almacen').css('background-color', 'gray');
+		}else{
+			$('#Id_Colaborador').prop('disabled', false);
+			$('#Id_Almacen').prop('disabled', false);
+			$('#Id_Almacen').css('background-color', 'transparent');
+		}				
+	});	
+
+	$('#Id_Almacen').on('change', function() {
+		$("#Id_Colaborador").val('');
+		if ($('#Id_Almacen').val() !== ""){
+			$('#Id_Almacen').prop('disabled', false);
+			$('#Id_Colaborador').prop('disabled', 'disabled');
+			$('#Id_Colaborador').css('background-color', 'gray');
+		}else{
+			$('#Id_Colaborador').prop('disabled', false);
+			$('#Id_Almacen').prop('disabled', false);	
+			$('#Id_Colaborador').css('background-color', 'transparent');
+		}				
+	});	
+
+
 
 
 

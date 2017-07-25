@@ -9,8 +9,19 @@ class SalidaInvModel extends CI_Model{
     }    
     
     public function getAllSalidaInv($number_per_page){
-		$this->db->order_by('ICCDID', 'DESC');  
-        return $this->db->get('Salida_Inv_Central', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+			$pageNo = $_GET['page'];
+		}
+        if (empty($_GET['order'])) {
+            $order = 'ICCDID';
+        }else{
+			$order = $_GET['order'];
+		}		
+		
+		$this->db->order_by($order, 'DESC');  	
+        return $this->db->get('Salida_Inv_Central', $number_per_page, $pageNo);
     } 
 	
     public function addSalidaInv($data){

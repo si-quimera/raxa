@@ -46,15 +46,15 @@
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
-													<input type="text" name="ICCDID-del" id="ICCDID-del" value="<?= $this->input->post('ICCDID-del') ?>" data-length="20">
-													<label for="ICCDID-del">ICCDID Del</label>													                                                  
-                                                    <?php echo form_error('ICCDID-del'); ?>																																							
+													<input type="text" name="ICCDID_del" id="ICCDID_del" value="<?= $this->input->post('ICCDID_del') ?>" data-length="20">
+													<label for="ICCDID_del">ICCDID Del</label>													                                                  
+                                                    <?php echo form_error('ICCDID_del'); ?>																																							
                                                 </div>
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
-													<input type="text" name="ICCDID-al" id="ICCDID-al" value="<?= $this->input->post('ICCDID-al') ?>" data-length="20">
-													<label for="ICCDID-al">ICCDID Al</label>													                                                  
-                                                    <?php echo form_error('ICCDID-al'); ?>																																							
+													<input type="text" name="ICCDID_al" id="ICCDID_al" value="<?= $this->input->post('ICCDID_al') ?>" data-length="20">
+													<label for="ICCDID_al">ICCDID Al</label>													                                                  
+                                                    <?php echo form_error('ICCDID_al'); ?>																																							
                                                 </div>	
 												<div class="input-field col s2">
 													<button class="btn waves-effect waves-light" id="button-validar" type="button" name="button-validar">
@@ -63,15 +63,13 @@
 												</div>
                                             </div>  	
 											<div class="row no-gutter">
-												<div class="col s12" id="msg-validar">
-													
-												</div>
+												<div class="col s12" id="msg-validar"></div>
 											</div>																						
                                             <div class="row no-gutter">
                                                 <div class=" col s6">
 													<label for="Id_Colaborador">Colaborador</label>
                                                     <select name="Id_Colaborador" id="Id_Colaborador" class="browser-default">
-                                                        <option value="" disabled selected>Elija su opción</option>
+                                                        <option value="" selected>Elija su opción</option>
                                                     <?php
                                                        foreach ($colaborador as $key => $row) {    
 														   if($key == $this->input->post('Id_Colaborador')){														   
@@ -91,7 +89,7 @@
                                                 <div class=" col s6">
 													<label for="Id_Almacen">Almacen</label>
                                                     <select name="Id_Almacen" id="Id_Almacen" class="browser-default">
-                                                        <option value="" disabled selected>Elija su opción</option>
+                                                        <option value="" selected>Elija su opción</option>
                                                     <?php
                                                        foreach ($almacen as $key => $row) {    
 														   if($key == $this->input->post('Id_Almacen')){														   
@@ -155,7 +153,7 @@
                                         <div class="panel-footer">
                                             <div class="right-align">
                                                 <button type="reset" class="btn-flat waves-effect">
-                                                    BORRAR
+                                                    LIMPIAR CAMPOS
                                                 </button>
                                                 <button type="submit" class="btn-flat waves-effect">
                                                     ASIGNAR
@@ -166,14 +164,14 @@
                                 </div>
 								<div class="col s12 m4">
                                     <div class="panel panel-bordered">				
-                                        <div class="panel-body">                                           
+                                        <div class="panel-body" id="body-list-ICCDID">                                           
                                             <div class="row no-gutter">
 												<h6><strong>ICCDID Seleccionados:</strong></h6>
 												<div id="list-ICCDID">
 													
 												</div>
 											</div>
-										</div>
+										</div>										
 									</div>	
 								</div>
 								
