@@ -4,8 +4,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AsignacionChipModel extends CI_Model{
 	public function getNumRangoICCDID($del, $al){		
 		$query = $this->db->query("SELECT ICCDID FROM `Salida_Inv_Central` WHERE SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."';");
-		$data = $query->result_array();		
-		echo  json_encode($data);				
+		return $query->result();		
+		//return json_encode($data);				
 	}	
 
 	public function getDataRangoICCDID($del, $al){		

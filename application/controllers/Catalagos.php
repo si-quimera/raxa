@@ -983,20 +983,12 @@ class Catalagos extends CI_Controller {
 					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'
 			)
 		);			
-		
-		
-		
-		
-		
-		
-		
-		
+
         if ($this->form_validation->run() == TRUE) {         
-            if ($this->input->method() == 'post'){
-				
-				$Password = $this->encryption->encrypt($this->input->post('Password'));	
-				
+            if ($this->input->method() == 'post'){				
+				$Password = $this->encryption->encrypt($this->input->post('Password'));					
                 $data = array(
+					'Jefe_Inmediato'	=>  $this->input->post('Jefe_Inmediato'),
                     'Nombre'	=>  $this->input->post('Nombre'),
 					'Ap_Pat'	=>  $this->input->post('Ap_Pat'),
 					'Ap_Mat'	=>  $this->input->post('Ap_Mat'),
@@ -1013,9 +1005,6 @@ class Catalagos extends CI_Controller {
 					'Id_Grupo'	=>  $this->input->post('Id_Grupo'),
 					'Password'	=>  $Password,
 					'User'	=>  $this->input->post('User'),
-					
-					
-					
                 );            
                 $error = $this->CatalagoModel->addColaborador($data);
                 if ($error['code'] === 0){
@@ -1027,6 +1016,7 @@ class Catalagos extends CI_Controller {
 
 			}
 		}		
+		$data['jefes'] = $this->CatalagoModel->getJefes();
 		$data['grupo'] = $this->CatalagoModel->getGrupo();
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
         $this->load->view('catalago/newColaborador.php', $data);
@@ -1120,6 +1110,7 @@ class Catalagos extends CI_Controller {
 				$Password = $this->encryption->encrypt($this->input->post('Password'));	
 				
                 $data = array(
+					'Jefe_Inmediato'	=>  $this->input->post('Jefe_Inmediato'),
                     'Nombre'	=>  $this->input->post('Nombre'),
 					'Ap_Pat'	=>  $this->input->post('Ap_Pat'),
 					'Ap_Mat'	=>  $this->input->post('Ap_Mat'),
@@ -1148,6 +1139,7 @@ class Catalagos extends CI_Controller {
 			}
 		}		
 		$data['grupo'] = $this->CatalagoModel->getGrupo();
+		$data['jefes'] = $this->CatalagoModel->getJefes();
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
 		$data['edicion'] = $this->CatalagoModel->getByIdColaborador($id);
         $this->load->view('catalago/editColaborador.php', $data);

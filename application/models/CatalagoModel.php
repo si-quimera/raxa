@@ -260,13 +260,14 @@ class CatalagoModel extends CI_Model{
     public function getMaestro(){	
 		$nombres = $this->getPathMaestro();
 						
+		$master = array();
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
 			if (is_null($row->Id_Cat_Sec)){
 				$master[$row->Id_Cat_Prim] = $row->Nombre;   
 			}	
         }      
-        return @$master;        
+        return $master;        
     } 	
 	
 	public function addMaestro($data){
@@ -304,11 +305,12 @@ class CatalagoModel extends CI_Model{
     }  	
 	
     public function getSucursal(){	
+		$sucursal = array();
         $query = $this->db->get('Cat_Sucursal');            
         foreach ($query->result() as $row){
             $sucursal[$row->Id_Sucursal] = $row->Nombre;    
         }      
-        return @$sucursal;        
+        return $sucursal;        
     }  	
 	
 	public function addAlmacen($data){
@@ -346,12 +348,26 @@ class CatalagoModel extends CI_Model{
     }  	
 	
     public function getGrupo(){	
+		$grupo = array();
         $query = $this->db->get('Cat_Grupo');            
         foreach ($query->result() as $row){
             $grupo[$row->Id_Grupo] = $row->Nombre;    
         }      
-        return @$grupo;        
+        return $grupo;        
     }	
+	
+    public function getJefes(){	
+		$jefe= array();
+		//Datos de cliente loggeado
+		$user = $this->session->userdata('usuario');
+
+		$this->db->where('Id_Colaborador !=',$user['Id_Colaborador']);
+        $query = $this->db->get('Cat_Colaboradores');            
+        foreach ($query->result() as $row){
+            $jefe[$row->Id_Colaborador] = $row->Ap_Pat .' '.$row->Ap_Mat.' '.$row->Nombre;    
+        }      
+        return $jefe;        
+    }		
 	
 	public function addColaborador($data){
 		$this->db->insert('Cat_Colaboradores', $data);        
@@ -379,7 +395,7 @@ class CatalagoModel extends CI_Model{
 	
     public function getByRaizMaestro(){
 		$raiz = array();
-		$this->db->where('Id_Cat_Sec', NULL);
+		$this->db->where('Id_Cat_Sec', 1);
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
             $raiz[$row->Id_Cat_Prim] = $row->Nombre;    

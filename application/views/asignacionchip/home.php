@@ -42,7 +42,10 @@
                                     }
                                     ?>                             
                                     <div class="panel panel-bordered">				
-                                        <div class="panel-body">                                           
+                                        <div class="panel-body">    
+											<div class="row no-gutter" style="height: 90px;">
+												<div class="col s12" id="msg-validar"></div>
+											</div>												
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
@@ -61,10 +64,7 @@
 														Validar
 													</button>													
 												</div>
-                                            </div>  	
-											<div class="row no-gutter">
-												<div class="col s12" id="msg-validar"></div>
-											</div>																						
+                                            </div>  																						
                                             <div class="row no-gutter">
                                                 <div class=" col s6">
 													<label for="Id_Colaborador">Colaborador</label>
@@ -152,7 +152,7 @@
                                         </div>
                                         <div class="panel-footer">
                                             <div class="right-align">
-                                                <button type="reset" class="btn-flat waves-effect">
+                                                <button type="reset" id="button-reset" class="btn-flat waves-effect">
                                                     LIMPIAR CAMPOS
                                                 </button>
                                                 <button type="submit" class="btn-flat waves-effect">

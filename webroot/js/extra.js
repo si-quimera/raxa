@@ -327,6 +327,25 @@
 		}				
 	});	
 
+	$('#button-reset').on('click', function() {	
+		$("#msg-validar").html('');
+		$("#list-ICCDID").html('');
+	});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

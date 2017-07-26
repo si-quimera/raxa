@@ -14,9 +14,7 @@
 				            </h1>
 				        </div>
 				    </div>
-				</div>
-                
-                
+				</div>                                
                 <!-- #### -->
                 <!-- Body -->
                 <!-- #### -->
@@ -41,9 +39,6 @@
                                         echo $msg;
                                     }									
                                     ?>                        
-									
-									
-									
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
@@ -139,6 +134,30 @@
                                                     <?php echo form_error('Id_Grupo'); ?>
                                                 </div>											
                                             </div> 
+                                            <div class="row no-gutter">
+                                                <div class="input-field col s6">
+                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato">
+                                                        <option value="" disabled selected>Elija su opción</option>
+                                                    <?php
+                                                        foreach ($jefes as $key => $row) {    
+															if($key == $edicion->Jefe_Inmediato){
+													?>
+														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+													<?php	
+															}else{
+													?>
+														<option value="<?= $key ?>"><?= $row ?></option>
+													<?php																
+															}
+                                                        }                                               
+                                                    ?>
+                                                    </select>
+                                                    <label for="Jefe_Inmediato">Jege Inmediato</label>
+                                                    <?php echo form_error('Jefe_Inmediato'); ?>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                </div>	          												
+                                            </div> 												
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
                                                     <input name="User" id="User" type="text" value="">

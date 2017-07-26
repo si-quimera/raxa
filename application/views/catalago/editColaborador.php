@@ -148,6 +148,30 @@
                                             </div> 
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
+                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato">
+                                                        <option value="" disabled selected>Elija su opción</option>
+                                                    <?php
+                                                        foreach ($jefes as $key => $row) {    
+															if($key == $edicion->Jefe_Inmediato){
+													?>
+														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+													<?php	
+															}else{
+													?>
+														<option value="<?= $key ?>"><?= $row ?></option>
+													<?php																
+															}
+                                                        }                                               
+                                                    ?>
+                                                    </select>
+                                                    <label for="Jefe_Inmediato">Jege Inmediato</label>
+                                                    <?php echo form_error('Jefe_Inmediato'); ?>
+                                                </div>
+                                                <div class="input-field col s6">
+                                                </div>	          												
+                                            </div> 												
+                                            <div class="row no-gutter">
+                                                <div class="input-field col s6">
                                                     <input name="User" id="User" type="text" value="<?= $edicion->User ?>">
                                                     <label for="User">Usuario</label>
 													<?php echo form_error('User'); ?>

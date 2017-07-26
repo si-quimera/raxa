@@ -110,15 +110,10 @@ class AsignacionChip extends CI_Controller {
 		$data['almacen'] = $this->RolesModel->SelectAlmacen();
 		$data['estatus'] = $this->RolesModel->SelectMaestro(2);
 		$data['producto'] = $this->RolesModel->SelectMaestro(345);
-		
-		
+				
         $this->load->view('templates/header.php');  
         $this->load->view('asignacionchip/home.php', $data);
-        $this->load->view('templates/footer.php');			
-		
-		
-		
-		
+        $this->load->view('templates/footer.php');											
 	}
 	
 	public function selects_check(){
@@ -146,7 +141,14 @@ class AsignacionChip extends CI_Controller {
 			$del = substr($ICCDID_del, 0,19);
 			$al = substr($ICCDID_al, 0,19);
 			
-			echo $this->AsignacionChipModel->getNumRangoICCDID($del, $al);			
+			$resutl = $this->AsignacionChipModel->getNumRangoICCDID($del, $al);			
+			
+			
+			foreach ($resutl as $key => $row) { 
+				echo $row->ICCDID;
+				
+			}
+	
 		}		
 	}	
 		
