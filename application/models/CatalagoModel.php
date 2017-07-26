@@ -132,11 +132,12 @@ class CatalagoModel extends CI_Model{
     }  
 
     public function getCiudad(){	
+		$ciudad = array();
         $query = $this->db->get('Cat_Ciudad');            
         foreach ($query->result() as $row){
             $ciudad[$row->Id_Ciudad] = $row->Nombre;    
         }      
-        return @$ciudad;        
+        return $ciudad;        
     }  	
 	
     public function deleteSuc($id){
@@ -258,7 +259,7 @@ class CatalagoModel extends CI_Model{
     } 	
 	
     public function getMaestro(){	
-		$nombres = $this->getPathMaestro();
+		//$nombres = $this->getPathMaestro();
 						
 		$master = array();
         $query = $this->db->get('Cat_Maestro');            

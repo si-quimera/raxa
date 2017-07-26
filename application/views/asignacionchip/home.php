@@ -34,7 +34,7 @@
                         echo form_open('AsignacionChip/'); 
                         ?> 
                             <div class="row">
-                                <div class="col s12 m8">
+                                <div class="col s12 m12">
                                     <?php
                                     $msg = $this->session->flashdata('msg');
                                     if ($msg){
@@ -42,10 +42,7 @@
                                     }
                                     ?>                             
                                     <div class="panel panel-bordered">				
-                                        <div class="panel-body">    
-											<div class="row no-gutter" style="height: 90px;">
-												<div class="col s12" id="msg-validar"></div>
-											</div>												
+                                        <div class="panel-body">    											
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
@@ -161,19 +158,15 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-								<div class="col s12 m4">
-                                    <div class="panel panel-bordered">				
-                                        <div class="panel-body" id="body-list-ICCDID">                                           
-                                            <div class="row no-gutter">
-												<h6><strong>ICCDID Seleccionados:</strong></h6>
-												<div id="list-ICCDID">
-													
-												</div>
-											</div>
+									
+									<div class="row no-gutter">
+										<div class="col s12" id="table">   
+
 										</div>										
-									</div>	
-								</div>
+									</div>									
+									
+                                </div>
+
 								
 								
                                 <div class="col s12 m4">

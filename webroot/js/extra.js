@@ -281,17 +281,7 @@
 					beforeSend: function() {
 					},
 					success:  function (response) { 					
-						var items_ICCDID = JSON.parse(response);
-						var list_ICCDID = "";
-						var count = 1;
-
-						$("#msg-validar").html('<div class="card-panel teal lighten-2">Total de ICCDID encontrados en este rango son de: '+items_ICCDID.length+'</div>');					
-
-						$.each(items_ICCDID, function(key, value){
-							list_ICCDID = list_ICCDID + count + '. ' + value.ICCDID + '<br>';
-							count++;
-						});										
-						$("#list-ICCDID").html(list_ICCDID);
+						$("#table").html(response);
 					}
 				}); 		
 			}else{
@@ -328,8 +318,7 @@
 	});	
 
 	$('#button-reset').on('click', function() {	
-		$("#msg-validar").html('');
-		$("#list-ICCDID").html('');
+		$("#table").html('');
 	});
 
 

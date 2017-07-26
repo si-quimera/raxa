@@ -143,12 +143,41 @@ class AsignacionChip extends CI_Controller {
 			
 			$resutl = $this->AsignacionChipModel->getNumRangoICCDID($del, $al);			
 			
-			
+			$table = '<br><br>';
+			$table .= '<table class="highlight" id="tabla_ICCDID">';
+			$table .=	'<thead>';
+			$table .=	'	<tr>';
+			$table .=	'		<th class="teal lighten-2 white-text"></th>';			
+			$table .=	'		<th class="teal lighten-2 white-text">ICCDID</th>';		
+			$table .=	'		<th class="teal lighten-2 white-text">Asignado a:</th>';
+			$table .=	'	</tr>';
+			$table .=	'</thead>';
+			$table .=	'<tbody>';
+			$count = 1;
 			foreach ($resutl as $key => $row) { 
-				echo $row->ICCDID;
-				
+				//echo $row->Fecha_Salida_RAXA_Ctrl;
+				if(!is_null($row->Fecha_Salida_RAXA_Ctrl)){
+					$data = $this->AsignacionChipModel->getDataAsignadoChip($row->ICCDID);				
+					if(!is_null($data->Id_Colaborador)){
+						$nombre = $this->AsignacionChipModel->getNameColaboradorChip($data->Id_Colaborador);
+					}else if(!is_null($data->Id_Almacen)){
+						$nombre = $this->AsignacionChipModel->getNameAlmacenChip($data->Id_Almacen);
+					}		
+				}else{
+					$nombre = "-";
+				}
+			$table .=	'	<tr>';	
+			$table .=	'		<td>'.$count.'</td>';			
+			$table .=	'		<td>'.$row->ICCDID.'</td>';		
+			$table .=	'		<td class="orange-text text-darken-4">'.$nombre.'</td>';
+			$table .=	'	</tr>';		
+				$nombre = "";
+				$count ++;
 			}
-	
+			$table .=	'</tbody>';
+			$table .=	'</table>';			
+			$table .=	'<br><br><br><br><br>';
+			echo $table;									
 		}		
 	}	
 		
