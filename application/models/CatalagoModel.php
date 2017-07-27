@@ -359,16 +359,23 @@ class CatalagoModel extends CI_Model{
 	
     public function getJefes(){	
 		$jefe= array();
-		//Datos de cliente loggeado
-		$user = $this->session->userdata('usuario');
-
-		$this->db->where('Id_Colaborador !=',$user['Id_Colaborador']);
         $query = $this->db->get('Cat_Colaboradores');            
         foreach ($query->result() as $row){
             $jefe[$row->Id_Colaborador] = $row->Ap_Pat .' '.$row->Ap_Mat.' '.$row->Nombre;    
         }      
         return $jefe;        
     }		
+	
+    public function getPuestos(){	
+		$puesto= array();
+		$this->db->where('Id_Cat_Sec', 339);
+		$this->db->order_by('String2', 'DESC'); 
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+            $puesto[$row->Id_Cat_Prim] = $row->Nombre .' / '.$row->String1;    
+        }      
+        return $puesto;        
+    }	
 	
 	public function addColaborador($data){
 		$this->db->insert('Cat_Colaboradores', $data);        
@@ -418,8 +425,7 @@ class CatalagoModel extends CI_Model{
 		$this->db->where('Id_Cat_Sec', $id);	
         return $this->db->get('Cat_Maestro');                   
 	}	
-	
-	
+		
 	public function getDataByIdMaestro($id){
 		$this->db->where('Id_Cat_Sec', $id);	
 		$number = $this->db->count_all_results('Cat_Maestro');
@@ -428,9 +434,7 @@ class CatalagoModel extends CI_Model{
 			//return $this->db->get('Cat_Maestro');	
 		}else{
 			return $this->getSubMenuSec($id);
-		}
-       
-	
+		}       	
 	}
 	
 	public function addString($data){

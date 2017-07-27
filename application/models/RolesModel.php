@@ -12,8 +12,9 @@ class RolesModel extends CI_Model{
         return $this->db->get('Roles_Sistema', $number_per_page, $this->uri->segment(3));
     }  		
 	
-    public function SelectColaborador(){
+    public function SelectColaborador($id){
 		$colaborador = array();
+		$this->db->where('Jefe_Inmediato', $id);
         $query = $this->db->get('Cat_Colaboradores');            
         foreach ($query->result() as $row){
             $colaborador[$row->Id_Colaborador] = $row->Nombre . ' ' . $row->Ap_Pat . ' ' . $row->Ap_Mat;    
@@ -55,27 +56,8 @@ class RolesModel extends CI_Model{
             $zona[$row->Id_Zona] = $row->Nombre;    
         }      
         return $zona; 
-    } 
-
-    public function SelectAlmacen(){
-		$almacen = array();
-        $query = $this->db->get('Cat_Almacen');            
-        foreach ($query->result() as $row){
-            $almacen[$row->Id_Almacen] = $row->Nombre;    
-        }      
-        return $almacen; 
-    } 
-
-    public function SelectMaestro($id){
-		$maestro = array();
-		$this->db->where('Id_Cat_Sec', $id);
-        $query = $this->db->get('Cat_Maestro');            
-        foreach ($query->result() as $row){
-            $maestro[$row->Id_Cat_Prim] = $row->Nombre;				
-        }      
-        return $maestro; 
     } 	
-
+	
     public function addRol($data){
         $this->db->insert('Roles_Sistema', $data);        
         return $error = $this->db->error();

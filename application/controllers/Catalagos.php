@@ -989,6 +989,7 @@ class Catalagos extends CI_Controller {
 				$Password = $this->encryption->encrypt($this->input->post('Password'));					
                 $data = array(
 					'Jefe_Inmediato'	=>  $this->input->post('Jefe_Inmediato'),
+					'Id_Cat_Puesto'	=>  $this->input->post('Id_Cat_Puesto'),
                     'Nombre'	=>  $this->input->post('Nombre'),
 					'Ap_Pat'	=>  $this->input->post('Ap_Pat'),
 					'Ap_Mat'	=>  $this->input->post('Ap_Mat'),
@@ -1018,6 +1019,7 @@ class Catalagos extends CI_Controller {
 		}		
 		$data['jefes'] = $this->CatalagoModel->getJefes();
 		$data['grupo'] = $this->CatalagoModel->getGrupo();
+		$data['puesto'] = $this->CatalagoModel->getPuestos();		
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
         $this->load->view('catalago/newColaborador.php', $data);
         $this->load->view('templates/footer.php');			
@@ -1111,6 +1113,7 @@ class Catalagos extends CI_Controller {
 				
                 $data = array(
 					'Jefe_Inmediato'	=>  $this->input->post('Jefe_Inmediato'),
+					'Id_Cat_Puesto'	=>  $this->input->post('Id_Cat_Puesto'),
                     'Nombre'	=>  $this->input->post('Nombre'),
 					'Ap_Pat'	=>  $this->input->post('Ap_Pat'),
 					'Ap_Mat'	=>  $this->input->post('Ap_Mat'),
@@ -1140,6 +1143,7 @@ class Catalagos extends CI_Controller {
 		}		
 		$data['grupo'] = $this->CatalagoModel->getGrupo();
 		$data['jefes'] = $this->CatalagoModel->getJefes();
+		$data['puesto'] = $this->CatalagoModel->getPuestos();
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
 		$data['edicion'] = $this->CatalagoModel->getByIdColaborador($id);
         $this->load->view('catalago/editColaborador.php', $data);

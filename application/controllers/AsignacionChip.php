@@ -2,8 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class AsignacionChip extends CI_Controller {
-	public function index(){
-		
+	public function index(){				
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
         $this->form_validation->set_rules('ICCDID_del', 'ICCDID Del', 'required|max_length[20]|min_length[20]',
 			array(
@@ -105,12 +104,16 @@ class AsignacionChip extends CI_Controller {
 				
 			}
 		}		
+		#Datos Usuario			
+		$user = $this->session->userdata('usuario');
 				
-		$data['colaborador'] = $this->RolesModel->SelectColaborador();
-		$data['almacen'] = $this->RolesModel->SelectAlmacen();
-		$data['estatus'] = $this->RolesModel->SelectMaestro(2);
-		$data['producto'] = $this->RolesModel->SelectMaestro(345);
-				
+		$data['almacen'] = $this->AsignacionChipModel->SelectAlmacen();
+		$data['estatus'] = $this->AsignacionChipModel->SelectMaestro(2);
+		$data['producto'] = $this->AsignacionChipModel->SelectMaestro(346);
+		$data['adjunto'] = $this->AsignacionChipModel->SelectAdjunto($user['Id_Colaborador'], $user['Id_Cat_Puesto'], $user['Jefe_Inmediato']);
+		$data['ascendente'] = $this->AsignacionChipModel->getSuperiorColaborador($user['Jefe_Inmediato']);
+
+		
         $this->load->view('templates/header.php');  
         $this->load->view('asignacionchip/home.php', $data);
         $this->load->view('templates/footer.php');											
@@ -144,10 +147,11 @@ class AsignacionChip extends CI_Controller {
 			$resutl = $this->AsignacionChipModel->getNumRangoICCDID($del, $al);			
 			
 			$table = '<br><br>';
-			$table .= '<table class="highlight" id="tabla_ICCDID">';
+			$table .= '<table class="striped" id="tabla_ICCDID">';
 			$table .=	'<thead>';
 			$table .=	'	<tr>';
-			$table .=	'		<th class="teal lighten-2 white-text"></th>';			
+			$table .=	'		<th class="teal lighten-2 white-text"></th>';				
+			$table .=	'		<th class="teal lighten-2 white-text">Cons.</th>';			
 			$table .=	'		<th class="teal lighten-2 white-text">ICCDID</th>';		
 			$table .=	'		<th class="teal lighten-2 white-text">Asignado a:</th>';
 			$table .=	'	</tr>';
@@ -167,6 +171,10 @@ class AsignacionChip extends CI_Controller {
 					$nombre = "-";
 				}
 			$table .=	'	<tr>';	
+			$table .=	'		<td>';
+			$table .=	'			<input type="checkbox" class="filled-in" id="'.$row->ICCDID.'"  />';
+			$table .=	'			<label for="'.$row->ICCDID.'"></label>';
+			$table .=	'		</td>';			
 			$table .=	'		<td>'.$count.'</td>';			
 			$table .=	'		<td>'.$row->ICCDID.'</td>';		
 			$table .=	'		<td class="orange-text text-darken-4">'.$nombre.'</td>';

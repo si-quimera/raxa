@@ -164,10 +164,28 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="Jefe_Inmediato">Jege Inmediato</label>
+                                                    <label for="Jefe_Inmediato">Jefe Inmediato</label>
                                                     <?php echo form_error('Jefe_Inmediato'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
+                                                    <select name="Id_Cat_Puesto" id="Id_Cat_Puesto">
+                                                        <option value="" disabled selected>Elija su opción</option>
+                                                    <?php
+                                                        foreach ($puesto as $key => $row) {    
+															if($key == $edicion->Id_Cat_Puesto){
+													?>
+														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+													<?php	
+															}else{
+													?>
+														<option value="<?= $key ?>"><?= $row ?></option>
+													<?php																
+															}
+                                                        }                                               
+                                                    ?>
+                                                    </select>
+                                                    <label for="Id_Cat_Puesto">Puesto</label>
+                                                    <?php echo form_error('Id_Cat_Puesto'); ?>													
                                                 </div>	          												
                                             </div> 												
                                             <div class="row no-gutter">

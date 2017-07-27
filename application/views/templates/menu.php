@@ -45,7 +45,7 @@
                                 <li class="profile ">
                                     <a class="dropdown-button" href="#!" data-activates="dropdown-profile" data-constrainwidth="false" data-beloworigin="true" data-alignment="right">
                                         <div class="valign-wrapper">
-                                            <img src="<?= base_url() ?>/webroot/img/profile.jpg" class="circle responsive-img margin-right-10">
+                                            <i class="material-icons blue-text medium">account_circle</i>&nbsp;&nbsp;
 											<?php
 											$user = $this->session->userdata('usuario');
 											echo $user['Nombre'];
