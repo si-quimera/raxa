@@ -70,9 +70,9 @@ if($puesto_user->String2 == 2){
 														Consultar
 													</button>													
 												</div>
-                                            </div>  	
+                                            </div>  												
 											<div class="row no-gutter" id="form-colaborador">
-												<div class="col s6">
+												<div class="col s6 offset-s3">
 													<label for="Id_Almacen">Almacen</label>
                                                     <select name="Id_Almacen" id="Id_Almacen" class="browser-default <?= $bgcolor ?>" <?= $disabled ?>>
                                                         <option value="" selected>Elija su opción</option>
@@ -90,9 +90,8 @@ if($puesto_user->String2 == 2){
                                                        }                                               
                                                     ?>
                                                     </select>                                                    
-                                                    <?php echo form_error('Id_Ascendente'); ?>																											
-												</div>												
-												<div class="col s6">
+                                                    <?php echo form_error('Id_Almacen'); ?>																											
+													<br>
 													<label for="Id_Ascendente">Colaborador Ascendente</label>
                                                     <select name="Id_Ascendente" id="Id_Ascendente" class="browser-default">
                                                         <option value="" selected>Elija su opción</option>
@@ -123,7 +122,7 @@ if($puesto_user->String2 == 2){
 												</div>
 												<!-- human -->
 												<div class="col s6 ">													
-													<br>
+													<br><br>
 													<label for="Id_Adjuntos">Colaboradores Adjuntos</label>
                                                     <select name="Id_Adjuntos" id="Id_Adjuntos" class="browser-default">
                                                         <option value="" selected>Elija su opción</option>
