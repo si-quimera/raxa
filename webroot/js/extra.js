@@ -256,6 +256,8 @@
 
 
 	$('#button-validar').on('click', function() {		
+		$('html, body').animate({scrollTop:1000},'500');
+		
 		var ICCDID_del = $("#ICCDID_del").val();
 		var ICCDID_al = $("#ICCDID_al").val();
 		
@@ -291,43 +293,127 @@
 		}				
 	});
 
-	$('#Id_Colaborador').on('change', function() {
-		$("#Id_Almacen").val('');
-		if ($('#Id_Colaborador').val() !== ""){
-			$('#Id_Almacen').prop('disabled', 'disabled');			
-			$('#Id_Colaborador').prop('disabled', false);
-			$('#Id_Almacen').css('background-color', 'gray');
-		}else{
-			$('#Id_Colaborador').prop('disabled', false);
-			$('#Id_Almacen').prop('disabled', false);
-			$('#Id_Almacen').css('background-color', 'transparent');
-		}				
-	});	
-
-	$('#Id_Almacen').on('change', function() {
-		$("#Id_Colaborador").val('');
-		if ($('#Id_Almacen').val() !== ""){
-			$('#Id_Almacen').prop('disabled', false);
-			$('#Id_Colaborador').prop('disabled', 'disabled');
-			$('#Id_Colaborador').css('background-color', 'gray');
-		}else{
-			$('#Id_Colaborador').prop('disabled', false);
-			$('#Id_Almacen').prop('disabled', false);	
-			$('#Id_Colaborador').css('background-color', 'transparent');
-		}				
-	});	
-
 	$('#button-reset').on('click', function() {	
 		$("#table").html('');
 	});
 
+	$('#Id_Almacen').on('change', function() {
+		$("#Id_Ascendente").val('');
+		$("#Id_Adjuntos").val('');
+		$("#Id_Desendentes").val('');
+		if ($('#Id_Almacen').val() !== ""){
+			//Activamos por si esta desactivado
+			$('#Id_Almacen').prop('disabled', false);
+			//Desactivamos todos y cambiamos de color
+			$('#Id_Ascendente').prop('disabled', 'disabled');						
+			$('#Id_Ascendente').addClass('blue-grey lighten-4');
+			$('#Id_Adjuntos').prop('disabled', 'disabled');						
+			$('#Id_Adjuntos').addClass('blue-grey lighten-4');
+			$('#Id_Desendentes').prop('disabled', 'disabled');						
+			$('#Id_Desendentes').addClass('blue-grey lighten-4');			
+		}else{
+			$('#Id_Ascendente').prop('disabled', false);
+			$('#Id_Ascendente').removeClass('blue-grey lighten-4');
+			$('#Id_Adjuntos').prop('disabled', false);
+			$('#Id_Adjuntos').removeClass('blue-grey lighten-4');
+			$('#Id_Desendentes').prop('disabled', false);
+			$('#Id_Desendentes').removeClass('blue-grey lighten-4');			
+		}				
+	});	
+
+	$('#Id_Ascendente').on('change', function() {
+		$("#Id_Almacen").val('');
+		$("#Id_Adjuntos").val('');
+		$("#Id_Desendentes").val('');
+		if ($('#Id_Ascendente').val() !== ""){
+			//Activamos por si esta desactivado
+			$('#Id_Ascendente').prop('disabled', false);
+			//Desactivamos todos y cambiamos de color
+			if($("#isGZ").val() == 1){
+				$('#Id_Almacen').prop('disabled', 'disabled');						
+				$('#Id_Almacen').addClass('blue-grey lighten-4');
+			}
+			$('#Id_Adjuntos').prop('disabled', 'disabled');						
+			$('#Id_Adjuntos').addClass('blue-grey lighten-4');
+			$('#Id_Desendentes').prop('disabled', 'disabled');						
+			$('#Id_Desendentes').addClass('blue-grey lighten-4');			
+		}else{
+			if($("#isGZ").val() == 1){
+				$('#Id_Almacen').prop('disabled', false);
+				$('#Id_Almacen').removeClass('blue-grey lighten-4');
+			}
+			$('#Id_Adjuntos').prop('disabled', false);
+			$('#Id_Adjuntos').removeClass('blue-grey lighten-4');
+			$('#Id_Desendentes').prop('disabled', false);
+			$('#Id_Desendentes').removeClass('blue-grey lighten-4');			
+		}				
+	});	
+
+	$('#Id_Adjuntos').on('change', function() {
+		$("#Id_Almacen").val('');
+		$("#Id_Ascendente").val('');
+		$("#Id_Desendentes").val('');
+		if ($('#Id_Adjuntos').val() !== ""){
+			//Activamos por si esta desactivado
+			$('#Id_Adjuntos').prop('disabled', false);
+			//Desactivamos todos y cambiamos de color
+			$('#Id_Ascendente').prop('disabled', 'disabled');						
+			$('#Id_Ascendente').addClass('blue-grey lighten-4');
+			if($("#isGZ").val() == 1){
+				$('#Id_Almacen').prop('disabled', 'disabled');						
+				$('#Id_Almacen').addClass('blue-grey lighten-4');
+			}
+			$('#Id_Desendentes').prop('disabled', 'disabled');						
+			$('#Id_Desendentes').addClass('blue-grey lighten-4');			
+		}else{
+			$('#Id_Ascendente').prop('disabled', false);
+			$('#Id_Ascendente').removeClass('blue-grey lighten-4');
+			if($("#isGZ").val() == 1){
+				$('#Id_Almacen').prop('disabled', false);
+				$('#Id_Almacen').removeClass('blue-grey lighten-4');
+			}	
+			$('#Id_Desendentes').prop('disabled', false);
+			$('#Id_Desendentes').removeClass('blue-grey lighten-4');			
+		}				
+	});
+
+	$('#Id_Desendentes').on('change', function() {
+		$("#Id_Almacen").val('');
+		$("#Id_Ascendente").val('');
+		$("#Id_Adjuntos").val('');
+		if ($('#Id_Desendentes').val() !== ""){
+			//Activamos por si esta desactivado
+			$('#Id_Desendentes').prop('disabled', false);
+			//Desactivamos todos y cambiamos de color
+			$('#Id_Ascendente').prop('disabled', 'disabled');						
+			$('#Id_Ascendente').addClass('blue-grey lighten-4');
+			if($("#isGZ").val() == 1){
+				$('#Id_Almacen').prop('disabled', 'disabled');						
+				$('#Id_Almacen').addClass('blue-grey lighten-4');
+			}
+			$('#Id_Adjuntos').prop('disabled', 'disabled');						
+			$('#Id_Adjuntos').addClass('blue-grey lighten-4');			
+		}else{
+			$('#Id_Ascendente').prop('disabled', false);
+			$('#Id_Ascendente').removeClass('blue-grey lighten-4');
+			if($("#isGZ").val() == 1){
+				$('#Id_Almacen').prop('disabled', false);
+				$('#Id_Almacen').removeClass('blue-grey lighten-4');
+			}
+			$('#Id_Adjuntos').prop('disabled', false);
+			$('#Id_Adjuntos').removeClass('blue-grey lighten-4');			
+		}				
+	});
 
 
+	$("#checkAll").click(function () {
+		$('input:checkbox').not(this).prop('checked', this.checked);
+	});
+	
 
-
-
-
-
+	$("#checkAll").change(function () {
+		$('input:checkbox').not(this).prop('', this.checked);
+	});
 
 
 

@@ -17,20 +17,27 @@ class AsignacionChip extends CI_Controller {
 					'max_length'     => '* Se requiere 20 caracteres.',
 					'min_length'     => '* Se requiere 20 caracteres.'
 			)
-		);		
-		
-        $this->form_validation->set_rules('Id_Colaborador', 'Colaborador', 'callback_selects_check',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);		
+		);				
         $this->form_validation->set_rules('Id_Almacen', 'Almacen', 'callback_selects_check',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);		
-		
-		
+        $this->form_validation->set_rules('Id_Ascendente', 'Ascendente', 'callback_selects_check',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('Id_Adjuntos', 'Adjuntos', 'callback_selects_check',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Id_Desendentes', 'Desendentes', 'callback_selects_check',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
         $this->form_validation->set_rules('Id_Cat_Sts_Asig_Chip', 'Estatus Asignación Chip', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
@@ -46,18 +53,105 @@ class AsignacionChip extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){								
 				$Id_Almacen = $this->input->post('Id_Almacen');
-				$Id_Colaborador = $this->input->post('Id_Colaborador');				
+				$Id_Ascendente = $this->input->post('Id_Ascendente');
+				$Id_Adjuntos = $this->input->post('Id_Adjuntos');
+				$Id_Desendentes = $this->input->post('Id_Desendentes');
 				$Id_Cat_Sts_Asig_Chip = $this->input->post('Id_Cat_Sts_Asig_Chip');
 				$Id_Cat_Tipo_Producto = $this->input->post('Id_Cat_Tipo_Producto');		
-				
+				$isGZ = $this->input->post('isGZ');
+				$listar_simms = $this->input->post('listar_simms');
+								
 				$ICCDID_del = $this->input->post('ICCDID_del');
 				$ICCDID_al = $this->input->post('ICCDID_al');			
-				$del = substr($ICCDID_del, 0,19);
-				$al = substr($ICCDID_al, 0,19);				
 				
 				$count = 0;
-				$ok = 0;			
+				$ok = 0;				
+			
+				foreach ($listar_simms as $ICCDID) {
+					
+					if($isGZ == 1){
+						if($Id_Almacen > 0){
+							$Almacen  = $Id_Almacen;
+							$Colaborador = NULL;
+						}else{
+							if($Id_Ascendente > 0){
+								$Colaborador = $Id_Ascendente;
+								$Almacen  = NULL;
+							}
+							if($Id_Adjuntos > 0){
+								$Colaborador = $Id_Adjuntos;
+								$Almacen  = NULL;							
+							}
+							if($Id_Desendentes > 0){
+								$Colaborador = $Id_Desendentes;
+								$Almacen  = NULL;							
+							}								
+						}
+					}else if($isGZ == 0){
+						if($Id_Ascendente > 0){
+							$Colaborador = $Id_Ascendente;
+							$Almacen  = NULL;
+						}
+						if($Id_Adjuntos > 0){
+							$Colaborador = $Id_Adjuntos;
+							$Almacen  = NULL;							
+						}
+						if($Id_Desendentes > 0){
+							$Colaborador = $Id_Desendentes;
+							$Almacen  = NULL;							
+						}						
+					}
+					$data = array(
+						'ICCDID'	=>  $ICCDID,
+						'Fec_Asignacion' => date("Y-m-d H:i:s"),
+						'Id_Colaborador' => $Colaborador,
+						'Id_Almacen' => $Almacen,
+						'Id_Cat_Sts_Asig_Chip' => $Id_Cat_Sts_Asig_Chip,
+						'Id_Cat_Tipo_Producto' => $Id_Cat_Tipo_Producto												
+					);		
+					
+					$error = $this->AsignacionChipModel->asignarChip($data);
+					
+					if ($error['code'] !== 0){
+						$count = $count + 1;
+						$msg_error = $error['code'] . ' / ' . $error['message'];
+						break;
+					}else{
+						$ok = $ok + 1;
+						
+						$info = array(
+							'Fecha_Salida_RAXA_Ctrl' => date("Y-m-d H:i:s")
+						);
+						$error = $this->AsignacionChipModel->updateDateInvCentral($ICCDID, $info);																								
+					}					
+					unset($data);
+				}
 				
+				
+				if($count > 0){
+					$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Se produjo un error al importar el archivo ['.$msg_error.']</div>');
+				}else{
+					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se asignaron un total de '.$ok.' Chip(s)!</div>');
+					redirect(base_url(). 'AsignacionChip/');					
+				}				
+				
+			
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				//$del = substr($ICCDID_del, 0,19);
+				//$al = substr($ICCDID_al, 0,19);				
+				
+				//$count = 0;
+				//$ok = 0;			
+				
+				/*
 				$ICCDID_data = $this->AsignacionChipModel->getDataRangoICCDID($del, $al);	
 				foreach ($ICCDID_data as $row) { 
 
@@ -100,8 +194,7 @@ class AsignacionChip extends CI_Controller {
 					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se asignaron un total de '.$ok.' Chip(s)!</div>');
 					redirect(base_url(). 'AsignacionChip/');					
 				}	
-				
-				
+				*/
 			}
 		}		
 		#Datos Usuario			
@@ -121,17 +214,32 @@ class AsignacionChip extends CI_Controller {
 	
 	public function selects_check(){
 		$almacen = $this->input->post('Id_Almacen');	
-		$colaborador = $this->input->post('Id_Colaborador');
+		$ascendente = $this->input->post('Id_Ascendente');
+		$adjuntos = $this->input->post('Id_Adjuntos');
+		$desendentes = $this->input->post('Id_Desendentes');
+		$isGZ = $this->input->post('isGZ');
 		
-		if($almacen > 0 &&  $colaborador > 0){
-			$this->form_validation->set_message('selects_check', '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario selecionar un Almacen o un Colaborador');
-			return FALSE;
-		}else if($almacen == "" &&  $colaborador == ""){
-			$this->form_validation->set_message('selects_check', '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario selecionar un Almacen o un Colaborador');
-			return FALSE;
-		}else{
-			return TRUE;
-		}				
+		if($isGZ == '1'){
+			if($almacen > 0 &&  $ascendente > 0 &&  $adjuntos > 0 &&  $desendentes > 0){
+				$this->form_validation->set_message('selects_check', '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario selecionar un destino.');
+				return FALSE;
+			}else if($almacen == "" &&  $ascendente == "" &&  $adjuntos == "" &&  $desendentes == ""){
+				$this->form_validation->set_message('selects_check', '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario selecionar un destino.');
+				return FALSE;
+			}else{
+				return TRUE;
+			}						
+		}elseif($isGZ == '0'){
+			if($ascendente > 0 &&  $adjuntos > 0 &&  $desendentes > 0){
+				$this->form_validation->set_message('selects_check', '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario selecionar un destino.');
+				return FALSE;
+			}else if($ascendente == "" &&  $adjuntos == "" &&  $desendentes == ""){
+				$this->form_validation->set_message('selects_check', '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario selecionar un destino.');
+				return FALSE;
+			}else{
+				return TRUE;
+			}				
+		}
 	}	
 	
 	
@@ -172,7 +280,7 @@ class AsignacionChip extends CI_Controller {
 				}
 			$table .=	'	<tr>';	
 			$table .=	'		<td>';
-			$table .=	'			<input type="checkbox" class="filled-in" id="'.$row->ICCDID.'"  />';
+			$table .=	'			<input type="checkbox" class="filled-in" name="listar_simms[]" value="'.$row->ICCDID.'" id="'.$row->ICCDID.'"  />';
 			$table .=	'			<label for="'.$row->ICCDID.'"></label>';
 			$table .=	'		</td>';			
 			$table .=	'		<td>'.$count.'</td>';			

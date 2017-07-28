@@ -983,6 +983,18 @@ class Catalagos extends CI_Controller {
 					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'
 			)
 		);			
+        $this->form_validation->set_rules('Jefe_Inmediato', 'Jefe Inmediato', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Id_Cat_Puesto', 'Puesto', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+		
+		
 
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){				

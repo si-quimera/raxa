@@ -369,7 +369,7 @@ class CatalagoModel extends CI_Model{
     public function getPuestos(){	
 		$puesto= array();
 		$this->db->where('Id_Cat_Sec', 339);
-		$this->db->order_by('String2', 'DESC'); 
+		$this->db->order_by('String2', 'ASC'); 
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
             $puesto[$row->Id_Cat_Prim] = $row->Nombre .' / '.$row->String1;    

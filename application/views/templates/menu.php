@@ -60,7 +60,6 @@
                             <ul id="dropdown-pro" class="dropdown-content">
                                 <li ><a href="<?= base_url() ?>RegPortabilidad/">Registro Portabilidad</a></li>
 								<li ><a href="<?= base_url() ?>AsignacionChip/">Asignacion de SIMs</a></li>
-                                <li ><a href="css_grid.html">Re-Asignacion de SIMs</a></li>
                             </ul>
                             <ul id="dropdown-seg" class="dropdown-content">
                                 <li ><a href="components_badges.html">Validacion de Calidad</a></li>
@@ -100,7 +99,7 @@
 							</ul>
 
 							<ul id='dinamicos' class='dropdown-content'>
-								<li><a href="<?= base_url() ?>Catalagos/cadenas/">Cadenas / Maestro</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/cadenas/">Cadenas</a></li>
 							</ul>							
 							
 							

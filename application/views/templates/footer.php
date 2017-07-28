@@ -41,7 +41,21 @@
         <script src="<?= base_url(); ?>webroot/bower_components/slimscroll/jquery.slimscroll.js" type="text/javascript"></script>
 		
         <script src="<?= base_url(); ?>webroot/js/pages/dashboard.js" type="text/javascript"></script>			
-		
-		
+		<script type="text/javascript">
+			$( document ).ready(function() {
+				$('.autocomplete').autocomplete({
+				data: {
+					<?php
+					$iccdid = $this->AsignacionChipModel->getAllICCDID();
+					foreach ($iccdid as $key => $row){
+						echo "\"".$row->ICCDID."\" : null,\n";
+					}
+					?>
+				},
+				limit: 10		
+				});					
+
+			});	  		
+		</script>					
     </body>
 </html>

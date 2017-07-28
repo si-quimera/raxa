@@ -1,12 +1,15 @@
 <?php
 $usuario = $this->session->userdata('usuario');
 $puesto_user = $this->AsignacionChipModel->getPuestoColaborador($usuario['Id_Cat_Puesto']);
+
 if($puesto_user->String2 == 2){
 	$disabled = "";
 	$bgcolor = "";
+	$isGZ = "1";
 }else{
 	$disabled = "disabled";
 	$bgcolor = "blue-grey lighten-4";
+	$isGZ = "0";
 }
 ?>
 		<!-- ####### -->
@@ -32,9 +35,6 @@ if($puesto_user->String2 == 2){
 				<section id="apps_crud">
 					<div class="crud-app">																		
                         <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Roles/' ?>">
-                                <i class="large material-icons">undo</i>
-                            </a>
                             <button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
                                 <i class="large material-icons">keyboard_arrow_up</i>
                             </button>
@@ -49,19 +49,20 @@ if($puesto_user->String2 == 2){
                                     if ($msg){
                                         echo $msg;
                                     }																											
-                                    ?>                             
+                                    ?>                    
+									<input type="hidden" name="isGZ" id="isGZ" value="<?= $isGZ ?>"> 
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">    											
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
-													<input type="text" name="ICCDID_del" id="ICCDID_del" value="<?= $this->input->post('ICCDID_del') ?>" data-length="20">
+													<input type="text" name="ICCDID_del" id="ICCDID_del" value="<?= $this->input->post('ICCDID_del') ?>" data-length="20" class="autocomplete">
 													<label for="ICCDID_del">ICCDID Del</label>													                                                  
                                                     <?php echo form_error('ICCDID_del'); ?>																																							
                                                 </div>
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
-													<input type="text" name="ICCDID_al" id="ICCDID_al" value="<?= $this->input->post('ICCDID_al') ?>" data-length="20">
+													<input type="text" name="ICCDID_al" id="ICCDID_al" value="<?= $this->input->post('ICCDID_al') ?>" data-length="20" class="autocomplete">
 													<label for="ICCDID_al">ICCDID Al</label>													                                                  
                                                     <?php echo form_error('ICCDID_al'); ?>																																							
                                                 </div>	
@@ -113,7 +114,7 @@ if($puesto_user->String2 == 2){
 												</div>	
 												<!-- human -->
 												<div class="col s6">
-													<p class="right-align large blue-text ">
+													<p class="right-align large blue-text">
 														<strong>																												
 														<?= $usuario['Nombre'] . ' ' . $usuario['Ap_Pat'] . ' ' . $usuario['Ap_Mat'] ?><br>
 														<i class="material-icons large blue-text">accessibility</i>
@@ -304,13 +305,26 @@ if($puesto_user->String2 == 2){
                                                 <button type="reset" id="button-reset" class="btn-flat waves-effect">
                                                     LIMPIAR CAMPOS
                                                 </button>
-                                                <button type="submit" class="btn-flat waves-effect">
-                                                    ASIGNAR
-                                                </button>
                                             </div>
                                         </div>
-                                    </div>								
-									<div class="row no-gutter">
+                                    </div>			
+									<div class="row no-gutter" id="target">
+										<br>
+										<div class="col s6 ">
+											<p class="left-align">
+											
+											<input type="checkbox" class="filled-in " id="checkAll"  />
+											<label for="checkAll">Seleccionar Todos</label>
+												
+											</p>	
+										</div>					
+										<div class="col s6 ">
+											<p class="right-align">
+											<button class="btn waves-effect waves-light red" type="submit" name="action">Asignar
+												<i class="material-icons right">send</i>
+											</button>												
+											</p>	
+										</div>
 										<div class="col s12" id="table">   
 										</div>										
 									</div>																		
@@ -321,6 +335,8 @@ if($puesto_user->String2 == 2){
                             </div>
                         <?= form_close() ?>		
 					</div>
+					
+					
 				</section>
             </div>
         </main>

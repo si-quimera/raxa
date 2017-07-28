@@ -98,4 +98,10 @@ class AsignacionChipModel extends CI_Model{
         return $superior; 		
 	}
 	
+	public function getAllICCDID(){
+        $query = $this->db->get('Salida_Inv_Central');   
+		return $query->result();		
+	}
+	
+	
 }
