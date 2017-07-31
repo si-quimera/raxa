@@ -901,6 +901,7 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/header.php');  
         $this->load->view('catalago/colaborador.php', $data);
         $this->load->view('templates/footer.php');		
+			
 	}
 
 	public function newColaborador(){				
@@ -982,12 +983,7 @@ class Catalagos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
 					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'
 			)
-		);			
-        $this->form_validation->set_rules('Jefe_Inmediato', 'Jefe Inmediato', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);	
+		);				
         $this->form_validation->set_rules('Id_Cat_Puesto', 'Puesto', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
@@ -1029,12 +1025,13 @@ class Catalagos extends CI_Controller {
 
 			}
 		}		
+							
 		$data['jefes'] = $this->CatalagoModel->getJefes();
-		$data['grupo'] = $this->CatalagoModel->getGrupo();
-		$data['puesto'] = $this->CatalagoModel->getPuestos();		
+		$data['grupo'] = $this->CatalagoModel->getGrupo();	
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
         $this->load->view('catalago/newColaborador.php', $data);
         $this->load->view('templates/footer.php');			
+
 	}
 
 	public function editColaborador($id = NULL){				
@@ -1155,7 +1152,6 @@ class Catalagos extends CI_Controller {
 		}		
 		$data['grupo'] = $this->CatalagoModel->getGrupo();
 		$data['jefes'] = $this->CatalagoModel->getJefes();
-		$data['puesto'] = $this->CatalagoModel->getPuestos();
 		$data['sucursal'] = $this->CatalagoModel->getSucursal();
 		$data['edicion'] = $this->CatalagoModel->getByIdColaborador($id);
         $this->load->view('catalago/editColaborador.php', $data);
@@ -1283,8 +1279,45 @@ class Catalagos extends CI_Controller {
 			}				
 		}		
 	}
+	
+	public function genUsername(){
+		if ($this->input->method() == 'post'){
+			$name = $this->input->post('name');	
+			$apepat = $this->input->post('apepat');	
+			if($name != "" && $apepat != ""){
+				$usuario = $this->randomUsername($name . ' ' . $apepat);
+				$busca = $this->CatalagoModel->searchUsername($usuario);
+				if($busca > 0){
+					$newUsuario = substr($usuario, 0, strlen($usuario)-1);
+					$ultimo = substr($usuario, strlen($usuario)-1, strlen($usuario)-1);
+					$ultimo = $ultimo  + 1;	
+					echo $usuario = $newUsuario . $ultimo;
+				}else{
+					echo $usuario;
+				}
+			}
+		}	
+	}	
+	
+	function randomUsername($string) {
+		$pattern = " ";
+		$firstPart = strstr(strtolower($string), $pattern, true);
+		$secondPart = substr(strstr(strtolower($string), $pattern, false), 0,3);
+		$nrRand = rand(0, 100);
+		$username = trim($firstPart).trim($secondPart).trim($nrRand);
+		return $username;
+	}
 
-
+	public function randomPassword() {
+		$alphabet = "abcdefghijklmnopqrstuwxyzABCDEFGHIJKLMNOPQRSTUWXYZ0123456789";
+		$pass = array(); //remember to declare $pass as an array
+		$alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+		for ($i = 0; $i < 8; $i++) {
+			$n = rand(0, $alphaLength);
+			$pass[] = $alphabet[$n];
+		}
+		echo implode($pass); //turn the array into a string
+	}
 
 
 

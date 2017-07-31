@@ -366,15 +366,10 @@ class CatalagoModel extends CI_Model{
         return $jefe;        
     }		
 	
-    public function getPuestos(){	
-		$puesto= array();
-		$this->db->where('Id_Cat_Sec', 339);
-		$this->db->order_by('String2', 'ASC'); 
-        $query = $this->db->get('Cat_Maestro');            
-        foreach ($query->result() as $row){
-            $puesto[$row->Id_Cat_Prim] = $row->Nombre .' / '.$row->String1;    
-        }      
-        return $puesto;        
+    public function getAreas(){	
+		$this->db->where('Nombre', 'Areas');
+        $query = $this->db->get('Cat_Maestro');  
+		return $query->row();
     }	
 	
 	public function addColaborador($data){
@@ -461,6 +456,16 @@ class CatalagoModel extends CI_Model{
         $this->db->update('Cat_Maestro', $data);
         return $error = $this->db->error();                          
     }		
+	
+	public function searchUsername($user){
+        $this->db->where('User', $user);
+        return $this->db->count_all_results('Cat_Colaboradores');						
+	}	
+	
+	public function getSubAreas($id){
+		$this->db->where('Id_Cat_Sec', $id);
+        return $this->db->get('Cat_Maestro');  
+	}	
 	
 	
 }

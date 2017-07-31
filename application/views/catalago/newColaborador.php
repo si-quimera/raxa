@@ -120,8 +120,9 @@
 													<?php echo form_error('email'); ?>
                                                 </div>	
 												<div class="input-field col s6">
-                                                    <select name="Id_Grupo" id="Id_Grupo">
+                                                    <select name="Id_Grupo" id="Id_Grupo">														
                                                         <option value="" disabled selected>Elija su opción</option>
+														<option value=""></option>
                                                     <?php
                                                         foreach ($grupo as $key => $row) {    
 													?>
@@ -135,8 +136,9 @@
                                                 </div>											
                                             </div> 
                                             <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato">
+                                                <div class="col s6">
+													<label for="Jefe_Inmediato">Jefe Inmediato</label>
+                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato" class="browser-default">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($jefes as $key => $row) {    
@@ -151,42 +153,66 @@
 															}
                                                         }                                               
                                                     ?>
-                                                    </select>
-                                                    <label for="Jefe_Inmediato">Jege Inmediato</label>
+                                                    </select>                                                    
                                                     <?php echo form_error('Jefe_Inmediato'); ?>
                                                 </div>
-                                                <div class="input-field col s6">
-                                                    <select name="Id_Cat_Puesto" id="Id_Cat_Puesto">
+                                                <div class="col s6">
+													 <label for="Id_Cat_Puesto">Puesto</label>
+                                                    <select name="Id_Cat_Puesto" id="Id_Cat_Puesto" class="browser-default">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
-                                                        foreach ($puesto as $key => $row) {    
-															if($key == $this->input->post('Id_Cat_Puesto')){
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+														$raiz = $this->CatalagoModel->getAreas();																															
+														$nombre_raiz = $raiz->Nombre;
+														$Id_Cat_Prim = $raiz->Id_Cat_Prim;
+														$level1 = $this->CatalagoModel->getSubAreas($Id_Cat_Prim);																					
+														foreach ($level1->result() as $row1) {   
+															$nombre_level1 = $row1->Nombre;
+															if($row1->Id_Cat_Prim == $this->input->post('Id_Cat_Puesto')){
+													?>	
+															<option value="<?= $row1->Id_Cat_Prim ?>" selected="selected"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?></option>
 													<?php	
 															}else{
-													?>
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php																
+													?>	
+															<option value="<?= $row1->Id_Cat_Prim ?>"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?></option>
+													<?php																	
 															}
-                                                        }                                               
+															$level2 = $this->CatalagoModel->getSubAreas($row1->Id_Cat_Prim);	
+															foreach ($level2->result() as $row2) { 
+																$nombre_level2 = $row2->Nombre;
+																if($row2->Id_Cat_Prim == $this->input->post('Id_Cat_Puesto')){																
+													?>	
+																<option value="<?= $row2->Id_Cat_Prim ?>" selected="selected"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?> &raquo;&raquo; <?= $nombre_level2 ?></option>
+													<?php	
+																}else{
+													?>	
+																<option value="<?= $row2->Id_Cat_Prim ?>"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?>&raquo;&raquo; <?= $nombre_level2 ?></option>
+													<?php	
+																}
+															}
+														}                                              
                                                     ?>
                                                     </select>
-                                                    <label for="Id_Cat_Puesto">Puesto</label>
+                                                   
                                                     <?php echo form_error('Id_Cat_Puesto'); ?>														
                                                 </div>	          												
                                             </div> 												
                                             <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <input name="User" id="User" type="text" value="">
-                                                    <label for="User">Usuario</label>
+                                                <div class="input-field col s5">
+                                                    <input name="User" id="User" type="text" value="" placeholder=" ">
+                                                    <label for="User" class="active">Usuario</label>													       
 													<?php echo form_error('User'); ?>
                                                 </div>
-                                                <div class="input-field col s6">
-                                                    <input name="Password" id="Password" type="password" value="">
+												<div class="input-field col s1">
+													<a class="btn-floating waves-effect waves-light tooltipped" id="btn-usuario" data-position="bottom" data-delay="50" data-tooltip="Generar Usuario"><i class="material-icons">build</i></a>
+												</div>
+                                                <div class="input-field col s5">
+                                                    <input name="Password" id="Password" type="text" value="" placeholder=" ">
                                                     <label for="Password">Password</label>
 													<?php echo form_error('Password'); ?>
-                                                </div>	          												
+                                                </div>	
+												<div class="input-field col s1">
+													<a class="btn-floating waves-effect waves-light tooltipped" id="btn-password" data-position="bottom" data-delay="50" data-tooltip="Generar Password"><i class="material-icons">build</i></a>
+												</div>												
                                             </div> 												
                                         </div>
                                         <div class="panel-footer">

@@ -1,5 +1,4 @@
-(function ($) {
-	
+(function ($) {		
 	var origen = 'raxa/';
 	//var origen = '';
 	
@@ -9,7 +8,8 @@
 	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/delString/';
 	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/updateString/';
 	var path_ICCDID = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/validar/';
-	
+	var path_username = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/genUsername/';
+	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/randomPassword/';	
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -255,9 +255,7 @@
 	});
 
 
-	$('#button-validar').on('click', function() {		
-		$('html, body').animate({scrollTop:1000},'500');
-		
+	$('#button-validar').on('click', function() {						
 		var ICCDID_del = $("#ICCDID_del").val();
 		var ICCDID_al = $("#ICCDID_al").val();
 		
@@ -267,6 +265,8 @@
 		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){			
 			var $toastContent = $('<span><i class="material-icons">warning</i> ICCDID incompleto para hacer la validación. </span>');
 			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
+			$("#msg-validar").html('');
+			$("#list-ICCDID").html('');			
 		}else{						
 			var number_del = ICCDID_del.substring(0, 18);
 			var number_al = ICCDID_al.substring(0, 18);
@@ -284,6 +284,7 @@
 					},
 					success:  function (response) { 					
 						$("#table").html(response);
+						$('html, body').animate({scrollTop:1000},'500');
 					}
 				}); 		
 			}else{
@@ -405,17 +406,71 @@
 		}				
 	});
 
-
 	$("#checkAll").click(function () {
 		$('input:checkbox').not(this).prop('checked', this.checked);
 	});
 	
-
 	$("#checkAll").change(function () {
 		$('input:checkbox').not(this).prop('', this.checked);
 	});
 
 
+	$('#btn-usuario').on('click', function() {			
+		var Nombre = $("#Nombre").val();
+		var Ap_Pat = $("#Ap_Pat").val();		
+		
+		if(Nombre !== "" && Ap_Pat !== ""){
+			var parametros = {       
+				'name' : $("#Nombre").val(),
+				'apepat' : $("#Ap_Pat").val()
+			};			
+
+			$.ajax({
+				data:  parametros,
+				url:   path_username,
+				type:  'post',
+				beforeSend: function() {
+				},
+				success:  function (response) { 
+					$("#User").val(response);
+				}
+			});         		
+		}else{
+			var $toastContent = $('<span><i class="material-icons tiny">warning</i> Es necesario introducir el Nombre y Apellido para generar el Usuario. </span>');
+			Materialize.toast($toastContent, 5000, 'red');						
+		}
+    });
+	
+	
+	$('#btn-password').on('click', function() {				
+		$.ajax({
+			url:   path_password,
+			type:  'post',
+			beforeSend: function() {
+			},
+			success:  function (response) { 
+				$("#Password").val(response);
+			}
+		});         		
+
+    });	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 
