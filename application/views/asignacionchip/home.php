@@ -310,28 +310,31 @@ if($puesto_user->String2 == 2){
                                     </div>			
 									<div class="row no-gutter" id="target">
 										<br>
-										<div class="col s6 ">
+										<div class="col s6">
 											<p class="left-align">
 											
 											<input type="checkbox" class="filled-in " id="checkAll"  />
 											<label for="checkAll">Seleccionar Todos</label>
 												
-											</p>	
+											</p>
+											<br>
 										</div>					
-										<div class="col s6 ">
+										<div class="col s6">
 											<p class="right-align">
 											<button class="btn waves-effect waves-light red" type="submit" name="action">Asignar
 												<i class="material-icons right">send</i>
 											</button>												
 											</p>	
-										</div>
-										<div class="col s12" id="table">   
-										</div>										
+											<br>
+										</div>	
+										<div class="col s2"></div>
+										<div class="col s8">   
+											<div id="table"></div>
+										</div>			
+										<div class="col s2"></div>	
 									</div>																		
                                 </div>																
-                                <div class="col s12 m4">
-                                    <div class="helper">&nbsp;</div>
-                                </div>
+
                             </div>
                         <?= form_close() ?>		
 					</div>

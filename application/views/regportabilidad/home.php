@@ -37,29 +37,12 @@
                                     }
                                     ?>                             
                                     <div class="panel panel-bordered">				
-                                        <div class="panel-body">                                           
-                                            <div class="row no-gutter">
-                                                <div class="col s12">
-													<label for="Id_Cat_Sec">Id Cat Sec</label>
-                                                    <select name="Id_Cat_Sec" id="Id_Cat_Sec" class="browser-default">
-                                                        <option value="" disabled selected>Elija su opción</option>
-														<option value=""></option>
-                                                    <?php
-                                                        foreach ($master as $key => $row) {    
-													?>
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php	
-                                                        }                                               
-                                                    ?>
-                                                    </select>                                                    
-                                                    <?php echo form_error('Id_Cat_Sec'); ?>
-                                                </div>											
-                                            </div>  
+                                        <div class="panel-body">                                                    
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Nombre" id="Nombre" type="text" value="">
-                                                    <label for="Nombre">Nombre</label>
-													<?php echo form_error('Nombre'); ?>
+                                                    <input type="text" name="Fec_Asignacion" class="datepicker">
+                                                    <label for="Fec_Asignacion">Fecha de Operación</label>
+													<?php echo form_error('Fec_Asignacion'); ?>
                                                 </div>													
                                                 <div class="input-field col s6">
                                                     <input name="String1" id="String1" type="text" value="">
@@ -67,31 +50,6 @@
 													<?php echo form_error('String1'); ?>
                                                 </div>											
                                             </div>  
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <input name="String2" id="String2" type="text" value="">
-                                                    <label for="String2">String 2</label>
-													<?php echo form_error('String2'); ?>
-                                                </div>														
-                                                <div class="input-field col s6">
-                                                    <input name="String3" id="String3" type="text" value="">
-                                                    <label for="String3">String 3</label>
-													<?php echo form_error('String3'); ?>
-                                                </div>												
-                                            </div>
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <input name="String4" id="String4" type="text" value="">
-                                                    <label for="String4">String 4</label>
-													<?php echo form_error('String4'); ?>
-                                                </div>													
-                                                <div class="input-field col s6">
-                                                    <input name="String5" id="String5" type="text" value="">
-                                                    <label for="String5">String 5</label>
-													<?php echo form_error('String5'); ?>
-                                                </div>	
-                                                <div class="input-field col s6"></div>												
-                                            </div>  											
                                         </div>
                                         <div class="panel-footer">
                                             <div class="right-align">

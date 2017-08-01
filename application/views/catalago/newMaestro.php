@@ -44,9 +44,9 @@
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
-                                                <div class="col s12">
+                                                <div class="col s12">														
 													<label for="Id_Cat_Sec">Id Cat Sec</label>
-                                                    <select name="Id_Cat_Sec" id="Id_Cat_Sec" class="browser-default">
+                                                    <select name="Id_Cat_Sec" id="Id_Cat_Sec" class="browser-default select2-container">
                                                         <option value="" disabled selected>Elija su opción</option>
 														<option value=""></option>
                                                     <?php													
@@ -104,11 +104,17 @@
                                     </div>
                                 </div>
                                 <div class="col s12 m4">
-                                    <div class="helper">&nbsp;</div>
+                                    <div class="helper">&nbsp;
+									
+								
+	
+									
+									
+									</div>
                                 </div>
                             </div>
                         <?= form_close() ?>						
-						
+										
 						
 						
 					</div>

@@ -1320,7 +1320,36 @@ class Catalagos extends CI_Controller {
 	}
 
 
-
+	public function perfiles(){
+        
+        $config['base_url'] = base_url() . 'catalagos/perfiles/';
+        $config['total_rows'] = $this->CatalagoModel->countPerfil();
+        $config['per_page'] = 10;   
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 5;        
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';          
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';   
+        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
+        $config['cur_tag_close'] = '</a></li>';
+        
+        $this->pagination->initialize($config);
+        $result = $this->CatalagoModel->getAllPerfil($config['per_page']); 
+                    
+        $data['consulta'] = $result;
+        $data['pagination'] = $this->pagination->create_links();
+		
+        $this->load->view('templates/header.php');  
+        $this->load->view('catalago/perfiles.php', $data);
+        $this->load->view('templates/footer.php');		
+	}
 
 
 

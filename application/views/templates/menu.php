@@ -95,7 +95,8 @@
 								<li><a href="<?= base_url() ?>Catalagos/grupo/">Grupo</a></li>
 								<li><a href="<?= base_url() ?>Catalagos/colaborador/">Colaboradores</a></li>								
 								<li><a href="<?= base_url() ?>Catalagos/carrier/">Carrier</a></li>																																
-								<li><a href="<?= base_url() ?>Catalagos/maestro/">Maestro</a></li>																
+								<li><a href="<?= base_url() ?>Catalagos/maestro/">Maestro</a></li>
+								<li><a href="<?= base_url() ?>Catalagos/perfiles/">Perfiles</a></li>
 							</ul>
 
 							<ul id='dinamicos' class='dropdown-content'>

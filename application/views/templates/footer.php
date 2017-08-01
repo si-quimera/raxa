@@ -40,7 +40,13 @@
         <script src="<?= base_url(); ?>webroot/bower_components/amcharts3/amcharts/themes/light.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/bower_components/slimscroll/jquery.slimscroll.js" type="text/javascript"></script>
 		
-        <script src="<?= base_url(); ?>webroot/js/pages/dashboard.js" type="text/javascript"></script>			
+        <script src="<?= base_url(); ?>webroot/js/pages/dashboard.js" type="text/javascript"></script>	
+
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+
+
+		
 		<script type="text/javascript">
 			$( document ).ready(function() {
 				$('.autocomplete').autocomplete({
@@ -53,7 +59,12 @@
 					?>
 				},
 				limit: 10		
-				});					
+				});
+				
+				
+				$('#Id_Cat_Sec').select2();			
+				$('#Jefe_Inmediato').select2();
+				$('#Id_Cat_Puesto').select2();
 
 			});	  		
 		</script>					

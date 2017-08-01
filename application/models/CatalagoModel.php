@@ -262,11 +262,10 @@ class CatalagoModel extends CI_Model{
 		//$nombres = $this->getPathMaestro();
 						
 		$master = array();
+		$this->db->where('Id_Cat_Sec', 1);
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
-			if (is_null($row->Id_Cat_Sec)){
-				$master[$row->Id_Cat_Prim] = $row->Nombre;   
-			}	
+			$master[$row->Id_Cat_Prim] = $row->Nombre;   
         }      
         return $master;        
     } 	
@@ -466,6 +465,17 @@ class CatalagoModel extends CI_Model{
 		$this->db->where('Id_Cat_Sec', $id);
         return $this->db->get('Cat_Maestro');  
 	}	
+	
+    public function countPerfil(){
+        $number = $this->db->count_all('Cat_Perfiles');
+        return intval($number);
+    }  	
+	
+	
+    public function getAllPerfil($number_per_page){
+		$this->db->order_by('Id_Perfil', 'DESC');  
+        return $this->db->get('Cat_Perfiles', $number_per_page, $this->uri->segment(3));
+    } 	
 	
 	
 }

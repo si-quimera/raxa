@@ -59,7 +59,7 @@
                                                     <label for="Ap_Mat">Ap Materno</label>
 													<?php echo form_error('Ap_Mat'); ?>
                                                 </div>	
-                                                <div class="input-field col s6">
+                                                <div class="col s6">
 													<label for="Fec_Nac">Fecha Nacimiento</label>
                                                     <input name="Fec_Nac" type="text" class="datepicker" id="Fec_Nac" value="">                                                    
 													<?php echo form_error('Fec_Nac'); ?>																																						
@@ -138,7 +138,7 @@
                                             <div class="row no-gutter">
                                                 <div class="col s6">
 													<label for="Jefe_Inmediato">Jefe Inmediato</label>
-                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato" class="browser-default">
+                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato" class="browser-default select2-container">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($jefes as $key => $row) {    
@@ -158,7 +158,7 @@
                                                 </div>
                                                 <div class="col s6">
 													 <label for="Id_Cat_Puesto">Puesto</label>
-                                                    <select name="Id_Cat_Puesto" id="Id_Cat_Puesto" class="browser-default">
+                                                    <select name="Id_Cat_Puesto" id="Id_Cat_Puesto" class="browser-default select2-container">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
 														$raiz = $this->CatalagoModel->getAreas();																															

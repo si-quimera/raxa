@@ -1,5 +1,6 @@
 (function ($) {		
 	var origen = 'raxa/';
+	$("#table").hide();
 	//var origen = '';
 	
 	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/selectSubs/';	
@@ -14,7 +15,10 @@
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
 		selectYears: 100, // Creates a dropdown of 15 years to control year
-		format: 'yyyy-mm-dd' 
+		format: 'yyyy-mm-dd' ,
+		today: 'Hoy',
+		clear: 'Limpiar',
+		close: 'Aceptar',		
 	});
 
 	$('.dropdown-button2').dropdown({
@@ -285,6 +289,7 @@
 					success:  function (response) { 					
 						$("#table").html(response);
 						$('html, body').animate({scrollTop:1000},'500');
+						$("#table").show();
 					}
 				}); 		
 			}else{
