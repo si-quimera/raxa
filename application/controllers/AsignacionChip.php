@@ -134,67 +134,7 @@ class AsignacionChip extends CI_Controller {
 					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se asignaron un total de '.$ok.' Chip(s)!</div>');
 					redirect(base_url(). 'AsignacionChip/');					
 				}				
-				
-			
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				//$del = substr($ICCDID_del, 0,19);
-				//$al = substr($ICCDID_al, 0,19);				
-				
-				//$count = 0;
-				//$ok = 0;			
-				
-				/*
-				$ICCDID_data = $this->AsignacionChipModel->getDataRangoICCDID($del, $al);	
-				foreach ($ICCDID_data as $row) { 
 
-					if($Id_Almacen == ""){
-						$Id_Almacen = NULL;
-					}
-
-					if($Id_Colaborador == ""){
-						$Id_Colaborador = NULL;
-					}					
-					
-					$data = array(
-						'ICCDID'	=>  $row->ICCDID,
-						'Fec_Asignacion' => date("Y-m-d H:i:s"),
-						'Id_Colaborador' => $Id_Colaborador,
-						'Id_Almacen' => $Id_Almacen,
-						'Id_Cat_Sts_Asig_Chip' => $Id_Cat_Sts_Asig_Chip,
-						'Id_Cat_Tipo_Producto' => $Id_Cat_Tipo_Producto												
-					);
-					$error = $this->AsignacionChipModel->asignarChip($data);
-					
-					if ($error['code'] !== 0){
-						$count = $count + 1;
-						$msg_error = $error['code'] . ' / ' . $error['message'];
-						break;
-					}else{
-						$ok = $ok + 1;
-						
-						$info = array(
-							'Fecha_Salida_RAXA_Ctrl' => date("Y-m-d H:i:s")
-						);
-						$error = $this->AsignacionChipModel->updateDateInvCentral($row->ICCDID, $info);																								
-					}															
-					unset($data);																									
-				}
-
-				if($count > 0){
-					$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Se produjo un error al importar el archivo ['.$msg_error.']</div>');
-				}else{
-					$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Se asignaron un total de '.$ok.' Chip(s)!</div>');
-					redirect(base_url(). 'AsignacionChip/');					
-				}	
-				*/
 			}
 		}		
 		#Datos Usuario			
@@ -202,7 +142,7 @@ class AsignacionChip extends CI_Controller {
 				
 		$data['almacen'] = $this->AsignacionChipModel->SelectAlmacen();
 		$data['estatus'] = $this->AsignacionChipModel->SelectMaestro(2);
-		$data['producto'] = $this->AsignacionChipModel->SelectMaestro(346);
+		$data['producto'] = $this->AsignacionChipModel->SelectMaestro(377);
 		$data['adjunto'] = $this->AsignacionChipModel->SelectAdjunto($user['Id_Colaborador'], $user['Id_Cat_Puesto'], $user['Jefe_Inmediato']);
 		$data['ascendente'] = $this->AsignacionChipModel->getSuperiorColaborador($user['Jefe_Inmediato']);
 

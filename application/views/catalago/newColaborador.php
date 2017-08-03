@@ -43,79 +43,79 @@
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Nombre" id="Nombre" type="text" value="">
+                                                    <input name="Nombre" id="Nombre" type="text" value="<?= $this->input->post('Nombre') ?>">
                                                     <label for="Nombre">Nombre</label>
 													<?php echo form_error('Nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input name="Ap_Pat" id="Ap_Pat" type="text" value="">
+                                                    <input name="Ap_Pat" id="Ap_Pat" type="text" value="<?= $this->input->post('Ap_Pats') ?>">
                                                     <label for="Ap_Pat">Ap Paterno</label>
 													<?php echo form_error('Ap_Pat'); ?>
                                                 </div>	          												
                                             </div>  
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Ap_Mat" id="Ap_Mat" type="text" value="">
+                                                    <input name="Ap_Mat" id="Ap_Mat" type="text" value="<?= $this->input->post('Ap_Mat') ?>">
                                                     <label for="Ap_Mat">Ap Materno</label>
 													<?php echo form_error('Ap_Mat'); ?>
                                                 </div>	
                                                 <div class="col s6">
 													<label for="Fec_Nac">Fecha Nacimiento</label>
-                                                    <input name="Fec_Nac" type="text" class="datepicker" id="Fec_Nac" value="">                                                    
+                                                    <input name="Fec_Nac" type="text" class="datepicker" id="Fec_Nac" value="<?= $this->input->post('Fec_Nac') ?>">                                                    
 													<?php echo form_error('Fec_Nac'); ?>																																						
                                                 </div>												
                                             </div>  
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Calle" id="Calle" type="text" value="">
+                                                    <input name="Calle" id="Calle" type="text" value="<?= $this->input->post('Calle') ?>">
                                                     <label for="Calle">Calle</label>
 													<?php echo form_error('Calle'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input name="Colonia" id="Colonia" type="text" value="">
+                                                    <input name="Colonia" id="Colonia" type="text" value="<?= $this->input->post('Colonia') ?>">
                                                     <label for="Colonia">Colonia</label>
 													<?php echo form_error('Colonia'); ?>
                                                 </div>	          												
                                             </div>  											
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Municipio" id="Municipio" type="text" value="">
+                                                    <input name="Municipio" id="Municipio" type="text" value="<?= $this->input->post('Municipio') ?>">
                                                     <label for="Municipio">Municipio</label>
 													<?php echo form_error('Municipio'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input name="CP" id="CP" type="text" value="">
+                                                    <input name="CP" id="CP" type="text" value="<?= $this->input->post('CP') ?>">
                                                     <label for="CP">CP</label>
 													<?php echo form_error('CP'); ?>
                                                 </div>	          												
                                             </div> 
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Estado" id="Estado" type="text" value="">
+                                                    <input name="Estado" id="Estado" type="text" value="<?= $this->input->post('Estado') ?>">
                                                     <label for="Estado">Estado</label>
 													<?php echo form_error('Estado'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input name="Pais" id="Pais" type="text" value="">
+                                                    <input name="Pais" id="Pais" type="text" value="<?= $this->input->post('Pais') ?>">
                                                     <label for="Pais">Pais</label>
 													<?php echo form_error('Pais'); ?>
                                                 </div>	          												
                                             </div> 
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Tel" id="Tel" type="text" value="">
+                                                    <input name="Tel" id="Tel" type="text" value="<?= $this->input->post('Tel') ?>">
                                                     <label for="Tel">Tel</label>
 													<?php echo form_error('Tel'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input name="Cel" id="Cel" type="text" value="">
+                                                    <input name="Cel" id="Cel" type="text" value="<?= $this->input->post('Cel') ?>">
                                                     <label for="Cel">Cel</label>
 													<?php echo form_error('Cel'); ?>
                                                 </div>	          												
                                             </div> 	
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="email" id="email" type="text" value="">
+                                                    <input name="email" id="email" type="text" value="<?= $this->input->post('email') ?>">
                                                     <label for="email">Email</label>
 													<?php echo form_error('email'); ?>
                                                 </div>	
@@ -125,9 +125,15 @@
 														<option value=""></option>
                                                     <?php
                                                         foreach ($grupo as $key => $row) {    
+															if($key == $this->input->post('Id_Grupo')){
+													?>
+														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+													<?php
+															}else{
 													?>
 														<option value="<?= $key ?>"><?= $row ?></option>
 													<?php	
+															}
                                                         }                                               
                                                     ?>
                                                     </select>
@@ -198,7 +204,7 @@
                                             </div> 												
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
-                                                    <input name="User" id="User" type="text" value="" placeholder=" ">
+                                                    <input name="User" id="User" type="text" value="<?= $this->input->post('User') ?>" placeholder=" ">
                                                     <label for="User" class="active">Usuario</label>													       
 													<?php echo form_error('User'); ?>
                                                 </div>
@@ -206,7 +212,7 @@
 													<a class="btn-floating waves-effect waves-light tooltipped" id="btn-usuario" data-position="bottom" data-delay="50" data-tooltip="Generar Usuario"><i class="material-icons">build</i></a>
 												</div>
                                                 <div class="input-field col s5">
-                                                    <input name="Password" id="Password" type="text" value="" placeholder=" ">
+                                                    <input name="Password" id="Password" type="text" value="<?= $this->input->post('Password') ?>" placeholder=" ">
                                                     <label for="Password">Password</label>
 													<?php echo form_error('Password'); ?>
                                                 </div>	

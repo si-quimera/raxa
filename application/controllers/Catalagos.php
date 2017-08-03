@@ -953,9 +953,12 @@ class Catalagos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);			
-        $this->form_validation->set_rules('CP', 'CP', 'required',
+        $this->form_validation->set_rules('CP', 'CP', 'required|numeric|max_length[5]|min_length[5]',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe ser numerico.',
+					'min_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 5 digitos.',
+					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 5 digitos.'
 			)
 		);	
         $this->form_validation->set_rules('Estado', 'Estado', 'required',
@@ -968,14 +971,20 @@ class Catalagos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);			
-        $this->form_validation->set_rules('Tel', 'Tel', 'required',
+        $this->form_validation->set_rules('Tel', 'Tel', 'required|numeric|max_length[10]|min_length[10]',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe ser numerico.',
+					'min_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.',				
+					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.'				
 			)
 		);	
-        $this->form_validation->set_rules('Cel', 'Cel', 'required',
+        $this->form_validation->set_rules('Cel', 'Cel', 'required|numeric|max_length[10]|min_length[10]',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe ser numerico.',
+					'min_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.',				
+					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.'				
 			)
 		);			
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
