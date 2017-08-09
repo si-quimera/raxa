@@ -2,15 +2,24 @@
 $usuario = $this->session->userdata('usuario');
 $puesto_user = $this->AsignacionChipModel->getPuestoColaborador($usuario['Id_Cat_Puesto']);
 
-if($puesto_user->String2 == 2){
+
+if(isset($puesto_user->String2)){
+	if($puesto_user->String2 == 2){
+		$disabled = "";
+		$bgcolor = "";
+		$isGZ = "1";
+	}else{
+		$disabled = "disabled";
+		$bgcolor = "blue-grey lighten-4";
+		$isGZ = "0";
+	}
+}else if($usuario['User'] == 'administrador'){
 	$disabled = "";
 	$bgcolor = "";
 	$isGZ = "1";
-}else{
-	$disabled = "disabled";
-	$bgcolor = "blue-grey lighten-4";
-	$isGZ = "0";
 }
+
+
 ?>
 		<!-- ####### -->
         <!-- Content -->

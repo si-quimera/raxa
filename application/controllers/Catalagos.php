@@ -1360,9 +1360,120 @@ class Catalagos extends CI_Controller {
         $this->load->view('templates/footer.php');		
 	}
 
+	public function newPerfil(){				
+        $this->load->view('templates/header.php');  
+		
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
+        $this->form_validation->set_rules('Descripcion', 'Descripcion', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+		
+        if ($this->form_validation->run() == TRUE) {         
+            if ($this->input->method() == 'post'){
+                $data = array(
+					'Descripcion'	=>  $this->input->post('Descripcion'),
+					'Id_Sucursa'	=>  $this->input->post('Id_Sucursa'),
+                    'Id_Ciudad'	=>  $this->input->post('Id_Ciudad'),
+					'Id_Estado'	=>  $this->input->post('Id_Estado'),
+					'Id_Zona'	=>  $this->input->post('Id_Zona'),
+					'Id_Cat_Departamento'	=>  $this->input->post('Id_Cat_Departamento'),
+					'Id_Cat_Empresa'	=>  $this->input->post('Id_Cat_Empresa'),
+					'Perfil_Padre_Id'	=>  $this->input->post('Perfil_Padre_Id')
+                );            
+                $error = $this->CatalagoModel->addPerfil($data);
+                if ($error['code'] === 0){
+                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Perfil registrado correctamente!</div>');
+                    redirect(base_url(). 'Catalagos/Perfiles/');
+                }else{
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Perfil!</div>');
+                }																							
+			}
+		}
+							
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+		$data['ciudad'] = $this->CatalagoModel->getCiudad();
+		$data['estados'] = $this->CatalagoModel->getEdos();
+		$data['zona'] = $this->CatalagoModel->getZona();
+				
+		$this->load->view('catalago/newPerfil.php', $data);
+        $this->load->view('templates/footer.php');			
+	}
 
-
-
+	public function editPerfil($id){				
+        $this->load->view('templates/header.php');  
+		
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
+        $this->form_validation->set_rules('Descripcion', 'Descripcion', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+		
+        if ($this->form_validation->run() == TRUE) {         
+            if ($this->input->method() == 'post'){
+                $data = array(
+					'Descripcion'	=>  $this->input->post('Descripcion'),
+					'Id_Sucursa'	=>  $this->input->post('Id_Sucursa'),
+                    'Id_Ciudad'	=>  $this->input->post('Id_Ciudad'),
+					'Id_Estado'	=>  $this->input->post('Id_Estado'),
+					'Id_Zona'	=>  $this->input->post('Id_Zona'),
+					'Id_Cat_Departamento'	=>  $this->input->post('Id_Cat_Departamento'),
+					'Id_Cat_Empresa'	=>  $this->input->post('Id_Cat_Empresa'),
+					'Perfil_Padre_Id'	=>  $this->input->post('Perfil_Padre_Id')
+                );            
+                $error = $this->CatalagoModel->addPerfil($data);
+                if ($error['code'] === 0){
+                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Perfil registrado correctamente!</div>');
+                    redirect(base_url(). 'Catalagos/Perfiles/');
+                }else{
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Perfil!</div>');
+                }																							
+			}
+		}
+							
+		$data['sucursal'] = $this->CatalagoModel->getSucursal();
+		$data['ciudad'] = $this->CatalagoModel->getCiudad();
+		$data['estados'] = $this->CatalagoModel->getEdos();
+		$data['zona'] = $this->CatalagoModel->getZona();
+		$data['edicion'] = $this->CatalagoModel->getByIdPerfil($id);
+				
+		$this->load->view('catalago/editPerfil.php', $data);
+        $this->load->view('templates/footer.php');			
+	}	
+	
+	
+	public function delPerfil($id = NULL){        
+        $this->CatalagoModel->deletePerfil($id);
+        $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Perfil borrado correctamente!</div>');
+        redirect(base_url(). 'Catalagos/Perfiles/');  
+    }	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 

@@ -466,16 +466,32 @@ class CatalagoModel extends CI_Model{
         return $this->db->get('Cat_Maestro');  
 	}	
 	
+	/* --- */
+	
     public function countPerfil(){
         $number = $this->db->count_all('Cat_Perfiles');
         return intval($number);
     }  	
-	
-	
+		
     public function getAllPerfil($number_per_page){
 		$this->db->order_by('Id_Perfil', 'DESC');  
         return $this->db->get('Cat_Perfiles', $number_per_page, $this->uri->segment(3));
     } 	
+				
+	public function addPerfil($data){
+		$this->db->insert('Cat_Perfiles', $data);        
+		return $error = $this->db->error();
+    } 		
 	
+	public function deletePerfil($id){
+        $this->db->where('Id_Perfil', $id);
+        $this->db->delete('Cat_Perfiles');
+    }  	
+	
+	public function getByIdPerfil($id){
+        $this->db->where('Id_Perfil', $id);
+        $query = $this->db->get('Cat_Perfiles');
+        return $query->row();						
+	}		
 	
 }
