@@ -10,18 +10,20 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">account_circle</i> EDITAR PERFIL
+				                <i class="material-icons">account_circle</i> AGREGAR PERFIL
 				            </h1>
 				        </div>
 				    </div>
-				</div>                                
+				</div>
+                
+                
                 <!-- #### -->
                 <!-- Body -->
                 <!-- #### -->
 				<section id="apps_crud">
 					<div class="crud-app">																		
                         <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Catalagos/Perfiles' ?>">
+                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Perfiles' ?>">
                                 <i class="large material-icons">undo</i>
                             </a>
                             <button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -29,9 +31,8 @@
                             </button>
                         </div>			
                         <?php
-                        $hidden = array('Id_Perfil' => $edicion->Id_Perfil);
-                        echo form_open('Catalagos/editPerfil/'.$edicion->Id_Perfil, '', $hidden); 
-                        ?>						
+                        echo form_open('Perfiles/newPerfil/'); 
+                        ?> 
                             <div class="row">
                                 <div class="col s12 m8">
                                     <?php
@@ -40,11 +41,11 @@
                                         echo $msg;
                                     }
                                     ?>                             
-                                    <div class="panel panel-bordered">											
+                                    <div class="panel panel-bordered">				
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <input name="Descripcion" id="Descripcion" type="text" value="<?= $edicion->Descripcion ?>">
+                                                    <input name="Descripcion" id="Descripcion" type="text" value="">
                                                     <label for="Descripcion">Descripcion</label>
 													<?php echo form_error('Descripcion'); ?>
                                                 </div>
@@ -53,7 +54,7 @@
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($sucursal as $key => $row) {    
-															if($key == $edicion->Id_Sucursa){
+															if($key == $this->input->post('Id_Ciudad')){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -75,7 +76,7 @@
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($ciudad as $key => $row) {    
-															if($key == $edicion->Id_Ciudad){
+															if($key == $this->input->post('Id_Ciudad')){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -95,7 +96,7 @@
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($estados as $key => $row) {    
-															if($key == $edicion->Id_Estado){
+															if($key == $this->input->post('Id_Estado')){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -117,7 +118,7 @@
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($zona as $key => $row) {    
-															if($key == $edicion->Id_Zona){															
+															if($key == $this->input->post('Id_Zona')){															
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 														
@@ -134,68 +135,9 @@
                                                     <?php echo form_error('Id_Zona'); ?>
                                                 </div>	
                                                 <div class="input-field col s6">
-                                                    <select name="Id_Cat_Departamento" id="Id_Cat_Departamento">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                        foreach ($depto as $key => $row) {    
-															if($key == $edicion->Id_Cat_Departamento){			
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-													<?php	
-															}else{
-													?>															
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php
-															}
-                                                        }                                               
-                                                    ?>
-                                                    </select>
-                                                    <label for="Id_Cat_Departamento">Departamento</label>
-                                                    <?php echo form_error('Id_Cat_Departamento'); ?>
                                                 </div>												
                                             </div>  
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <select name="Id_Cat_Empresa" id="Id_Cat_Empresa">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                        foreach ($empresa as $key => $row) {    
-															if($key == $edicion->Id_Cat_Empresa){																	
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>														
-													<?php	
-															}else{
-													?>															
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php	
-															}
-                                                        }                                               
-                                                    ?>
-                                                    </select>
-                                                    <label for="Id_Cat_Empresa">Empresa</label>
-                                                    <?php echo form_error('Id_Cat_Empresa'); ?>
-                                                </div>	
-                                                <div class="input-field col s6">
-                                                    <select name="Perfil_Padre_Id" id="Perfil_Padre_Id">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                        foreach ($perfil as $key => $row) {    
-															if($key == $edicion->Perfil_Padre_Id){	
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-													<?php	
-															}else{
-													?>															
-														<option value="<?= $key ?>"><?= $row ?></option>														
-													<?php	
-															}
-                                                        }                                               
-                                                    ?>
-                                                    </select>
-                                                    <label for="Perfil_Padre_Id">Perfil</label>
-                                                    <?php echo form_error('Perfil_Padre_Id'); ?>
-                                                </div>												
-                                            </div>  											
+											
                                         </div>
                                         <div class="panel-footer">
                                             <div class="right-align">

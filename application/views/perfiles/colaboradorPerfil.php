@@ -10,22 +10,26 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">account_circle</i> CATALAGO PERFILES
+				                <i class="material-icons large">transfer_within_a_station</i> ASIGNAR COLABORADOR <i class="material-icons blue-text">trending_flat</i> PERFIL
 				            </h1>
 				        </div>
 				    </div>
-				</div>
-                
-                
+				</div>                                
                 <!-- #### -->
                 <!-- Body -->
                 <!-- #### -->
 				<section id="apps_crud">
 					<div class="crud-app">
-						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Perfil" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newPerfil">
+						<div class="fixed-action-btn">							
+							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Colaborador > Perfil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/NewColaboradorPerfil">
 								<i class="large material-icons">add</i>
 							</a>
+							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Catalago Perfiles" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/">
+								<i class="material-icons large">account_circle</i>
+							</a>								
+							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Asignar Menu->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/MenuPerfil">
+								<i class="material-icons large">playlist_add_check</i>
+							</a>																				
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
 								<i class="large material-icons">keyboard_arrow_up</i>
 							</button>
@@ -51,7 +55,9 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Descripcion</th>
+											<th>Colaborador</th>
+											<th>Menu > Perfil</th>
+											<th>Activo</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
@@ -62,14 +68,25 @@
 									foreach ($consulta->result() as $row) {                                         
 									?>
 										<tr>
-											<td><?= $row->Descripcion ?></td>
+											<td><?= $colaborador[$row->Id_Colaborador] ?></td>
+											<td><?= $perfiles[$row->Id_Menu_Perfil] ?></td>
+											<td>
+												<?php
+												if($row->Activo == 1){
+													echo "Activo";
+												}else{
+													echo "Desactivado";
+												}
+												
+												?>
+											</td>
 											<td class="center-align">
 												<div class="btn-group">
-													<a href="<?= base_url() ?>catalagos/editPerfil/<?= $row->Id_Perfil ?>" class="btn-flat btn-small waves-effect">
+													<a href="<?= base_url() ?>Perfiles/editColaboradorPerfil/<?= $row->Id_Colaborador_Perfil ?>" class="btn-flat btn-small waves-effect">
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo  <?= $row->Id_Perfil ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delPerfil/" . $row->Id_Perfil ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo  <?= $colaborador[$row->Id_Colaborador] ?>?&quot;)) { window.location.href = '<?= base_url() . "Perfiles/delColaboradorPerfil/" . $row->Id_Colaborador_Perfil ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>

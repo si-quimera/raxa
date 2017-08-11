@@ -10,7 +10,7 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">settings_input_antenna</i> AGREGAR CARRIER
+				                <i class="material-icons">settings_input_antenna</i> EDITAR CARRIER
 				            </h1>
 				        </div>
 				    </div>

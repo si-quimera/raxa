@@ -1,3 +1,30 @@
+<?php
+$user = $this->session->userdata('usuario');
+
+function cargaSubMenus($submenu) {
+	if (empty($submenu)) return "";
+	$strSubMenu = "<ul id=\"" . $submenu[0]->String2. "\" class=\"dropdown-content\">" . PHP_EOL;
+	foreach ($submenu as $key => $value) {
+		if($value->String3 != ""){
+			$subsubmenu = 'class="dropdown-button2" data-hover="true" data-activates="'.$value->String3.'"';
+		}else{
+			$subsubmenu = "";
+		}
+		$link = $value->String5;
+		//if ($value->acceso==1) {
+		$strSubMenu .= PHP_EOL .
+		"										<li> " . PHP_EOL .
+		"											<a href=\"".base_url().$link."\" ".$subsubmenu."> " . PHP_EOL .
+		"											" . $value->Nombre . PHP_EOL .
+		"											</a> " . cargaSubMenus($value->submenu) . "\n" .														
+		"										</li> " . PHP_EOL;
+		//}
+	}
+	$strSubMenu .= "									</ul>" . PHP_EOL;
+	return $strSubMenu;
+}
+
+?>
 		<!-- #### -->
         <!-- Menu -->
         <!-- #### -->
@@ -15,94 +42,43 @@
                                     <b class="main-text"></b> 
                                 </span>
                             </a>
-
                             <!-- Desktop -->
-                            <ul class="right hide-on-med-and-down">
-                                <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-pro" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
-                                        Producto<i class="material-icons dropdown-icon right">arrow_drop_down</i>
-                                    </a>
-                                </li>
-
-                                <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-seg" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
-                                        Seguimiento<i class="material-icons dropdown-icon right">arrow_drop_down</i>
-                                    </a>
-                                </li>
-
-                                <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-con" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
-                                        Consultas<i class="material-icons dropdown-icon right">arrow_drop_down</i>
-                                    </a>
-                                </li>
-
-                                <li >
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-adm" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
-                                        Administración<i class="material-icons dropdown-icon right">arrow_drop_down</i>
-                                    </a>
-                                </li>
-
+                            <ul class="right hide-on-med-and-down">																
+<?php
+foreach ($user['raxa_menu'][0]->submenu as $key => $value) {
+	$link = $value->String5;
+	//if ($value->acceso==1) {
+?>
+								<li>
+									<a class="dropdown-button" href="<?=$link?>" data-activates="<?= $value->String2 ?>" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
+										<?=$value->Nombre?><i class="material-icons dropdown-icon right">arrow_drop_down</i>										
+									</a>
+									<?php
+										echo cargaSubMenus($value->submenu);
+									?>									
+								</li>																
+<?php
+	//}
+}
+?>								
                                 <li class="profile ">
-                                    <a class="dropdown-button" href="#!" data-activates="dropdown-profile" data-constrainwidth="false" data-beloworigin="true" data-alignment="right">
+                                    <a class="dropdown-button" href="#!" data-activates="dropdown-profile" data-constrainwidth="false" data-beloworigin="true" data-alignment="right" data-hover="true">
                                         <div class="valign-wrapper">
                                             <i class="material-icons blue-text medium">account_circle</i>&nbsp;&nbsp;
-											<?php
-											$user = $this->session->userdata('usuario');
+											<?php											
 											echo $user['Nombre'];
 											?>											                                           
                                             <i class="material-icons dropdown-icon right">arrow_drop_down</i>
                                         </div>
-                                    </a>
+                                    </a>									
+									<ul id="dropdown-profile" class="dropdown-content">
+										<li><a href="<?= base_url() ?>Login/logout/">Cerrar la sesión </a></li>
+									</ul>									
+									
                                 </li>
                             </ul>
 
-                            <!-- Dropdowns -->
-                            <ul id="dropdown-pro" class="dropdown-content">
-                                <li ><a href="<?= base_url() ?>RegPortabilidad/">Registro Portabilidad</a></li>
-								<li ><a href="<?= base_url() ?>AsignacionChip/">Asignacion de SIMs</a></li>
-                            </ul>
-                            <ul id="dropdown-seg" class="dropdown-content">
-                                <li ><a href="components_badges.html">Validacion de Calidad</a></li>
-                                <li ><a href="components_buttons.html">Activacion de SIM</a></li>
-                                <li ><a href="components_breadcrumbs.html">Generacion Portabilidad</a></li>
-                                <li ><a href="components_cards.html">Recarga Promocion</a></li>
-                                <li ><a href="components_chips.html">Validacion de Actividad</a></li>
-                            </ul>
-                            <ul id="dropdown-con" class="dropdown-content">
-                                <li ><a href="js_collapsible.html">Portabilidad</a></li>
-                                <li ><a href="#">Asignacion de SIM's</a></li>
-                            </ul>
-                            <ul id="dropdown-adm" class="dropdown-content">
-                                <li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="estaticos">Catalogos Estaticos</a></li>
-								<li ><a class="dropdown-button2" data-hover="true" href="#!" data-activates="dinamicos">Catalogos Dinamicos</a></li>
-                                <li ><a href="<?= base_url() ?>SalidaInv/index/?order=ICCDID">Salida del Inv. Central</a></li>
-                                <li ><a href="apps_datatables.html">Cambio de Password</a></li>
-                                <li ><a href="<?= base_url() ?>Roles/">Asignacion de Roles</a></li>
-                            </ul>
-
-                            <ul id="dropdown-profile" class="dropdown-content">
-                                <li><a href="<?= base_url() ?>Login/logout/">Cerrar la sesión </a></li>
-                            </ul>
-
-							
-	
-							<ul id='estaticos' class='dropdown-content'>
-								<li><a href="<?= base_url() ?>Catalagos/zona/">Zona</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/estado/">Estado</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/ciudad/">Ciudad / Mun / Del</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/sucursal/">Sucursal</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/almacen/">Almacen</a></li>																
-								<li><a href="<?= base_url() ?>Catalagos/grupo/">Grupo</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/colaborador/">Colaboradores</a></li>								
-								<li><a href="<?= base_url() ?>Catalagos/carrier/">Carrier</a></li>																																
-								<li><a href="<?= base_url() ?>Catalagos/maestro/">Maestro</a></li>
-								<li><a href="<?= base_url() ?>Catalagos/perfiles/">Perfiles</a></li>
-							</ul>
-
-							<ul id='dinamicos' class='dropdown-content'>
-								<li><a href="<?= base_url() ?>Catalagos/cadenas/">Cadenas</a></li>
-							</ul>							
-							
+    
 							
 							
                             <!-- Mobile -->

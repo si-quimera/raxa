@@ -1,7 +1,8 @@
 (function ($) {		
-	var origen = 'raxa/';
-	$("#table").hide();
+	var origen = 'raxa/';	
 	//var origen = '';
+	
+//$("#table").hide();	
 	
 	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/selectSubs/';	
 	var path_table = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/drawTabla/';

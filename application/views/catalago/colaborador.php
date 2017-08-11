@@ -50,10 +50,26 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Nombre</th>
-											<th>Ap Paterno</th>
-											<th>Ap Materno</th>
-											<th>Grupo</th>
+											<th>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Nombre&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												Nombre
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Nombre&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+											</th>
+											<th>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Pat&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												Ap Paterno
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Pat&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+											</th>
+											<th>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Mat&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												Ap Materno
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Mat&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+											</th>
+											<th>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Estado&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												Estado
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Estado&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+											</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
@@ -67,14 +83,7 @@
 											<td><?= $row->Nombre ?></td>
 											<td><?= $row->Ap_Pat ?></td>
 											<td><?= $row->Ap_Mat ?></td>
-											<td>
-											<?php
-											if(is_null($row->Id_Grupo)){
-												echo "-";
-											}else{
-												echo $grupo[$row->Id_Grupo];
-											}											 
-											?></td>
+											<td><?= $row->Estado ?></td>
 											<td class="center-align">
 												<div class="btn-group">
 													<a href="<?= base_url() ?>catalagos/editColaborador/<?= $row->Id_Colaborador ?>" class="btn-flat btn-small waves-effect">

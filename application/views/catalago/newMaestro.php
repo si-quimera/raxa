@@ -48,7 +48,7 @@
 													<label for="Id_Cat_Sec">Id Cat Sec</label>
                                                     <select name="Id_Cat_Sec" id="Id_Cat_Sec" class="browser-default select2-container">
                                                         <option value="" disabled selected>Elija su opción</option>
-														<option value=""></option>
+														<option value="1">/ [Raiz]</option>
                                                     <?php													
                                                         foreach ($master as $key => $row) {    
 															$raiz_nombre = $row;

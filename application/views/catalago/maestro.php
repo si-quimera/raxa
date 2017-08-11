@@ -25,7 +25,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nueva Zona" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newMaestro">
+							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Maestro" data-position="top" data-delay="50" href="<?= base_url() ?>Catalagos/newMaestro">
 								<i class="large material-icons">add</i>
 							</a>
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -137,13 +137,31 @@
 															</a>
 														</div>
 													</td>
+												</tr>		
+												<?php	
+														$nivel4 = $this->CatalagoModel->getMaestros($row3->Id_Cat_Prim);
+														foreach ($nivel4->result() as $row4) {
+															$row4_nombre = $row4->Nombre;
+												?>
+												<tr>
+													<td>
+														<?= $raiz_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row1_nombre ?> <i class="material-icons tiny red-text">fast_forward</i> <?= $row2_nombre ?><i class="material-icons tiny red-text">fast_forward</i> <?= $row3_nombre ?><i class="material-icons tiny red-text">fast_forward</i> <?= $row4_nombre ?>
+													</td>											
+													<td class="center-align">
+														<div class="btn-group">
+															<a href="<?= base_url() ?>catalagos/editMaestro/<?= $row4->Id_Cat_Prim ?>" class="btn-flat btn-small waves-effect">
+																<i class="material-icons">create</i>
+															</a>
+
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row4->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row4->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+																<i class="material-icons">delete</i>
+															</a>
+														</div>
+													</td>
 												</tr>										
-												<?php													
-													}
-												
-												
-												
-												
+									<?php
+														}												
+													}																																																
 												}																																												
 											}																																	
 										}																								

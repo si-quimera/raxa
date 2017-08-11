@@ -48,7 +48,7 @@
 													<?php echo form_error('Nombre'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <input name="Ap_Pat" id="Ap_Pat" type="text" value="<?= $this->input->post('Ap_Pats') ?>">
+                                                    <input name="Ap_Pat" id="Ap_Pat" type="text" value="<?= $this->input->post('Ap_Pat') ?>">
                                                     <label for="Ap_Pat">Ap Paterno</label>
 													<?php echo form_error('Ap_Pat'); ?>
                                                 </div>	          												

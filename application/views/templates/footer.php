@@ -65,6 +65,10 @@
 				$('#Id_Cat_Sec').select2();			
 				$('#Jefe_Inmediato').select2();
 				$('#Id_Cat_Puesto').select2();
+				$('#Id_Perfil').select2();
+				$('#Id_Colaborador').select2();
+				$('#Id_Cat_Menu').select2();
+				
 
 			});	  		
 		</script>					

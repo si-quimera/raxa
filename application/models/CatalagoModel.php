@@ -343,8 +343,24 @@ class CatalagoModel extends CI_Model{
     }    
     
     public function getAllColaborador($number_per_page){
-		$this->db->order_by('Id_Colaborador', 'DESC');  
-        return $this->db->get('Cat_Colaboradores', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+			$pageNo = $_GET['page'];
+		}
+        if (empty($_GET['order'])) {
+            $order = 'Id_Colaborador';
+        }else{
+			$order = $_GET['order'];
+		}
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+			$by = $_GET['by'];
+		}		
+		
+		$this->db->order_by($order, $by); 		
+        return $this->db->get('Cat_Colaboradores', $number_per_page, $pageNo);
     }  	
 	
     public function getGrupo(){	
@@ -468,30 +484,7 @@ class CatalagoModel extends CI_Model{
 	
 	/* --- */
 	
-    public function countPerfil(){
-        $number = $this->db->count_all('Cat_Perfiles');
-        return intval($number);
-    }  	
-		
-    public function getAllPerfil($number_per_page){
-		$this->db->order_by('Id_Perfil', 'DESC');  
-        return $this->db->get('Cat_Perfiles', $number_per_page, $this->uri->segment(3));
-    } 	
-				
-	public function addPerfil($data){
-		$this->db->insert('Cat_Perfiles', $data);        
-		return $error = $this->db->error();
-    } 		
 	
-	public function deletePerfil($id){
-        $this->db->where('Id_Perfil', $id);
-        $this->db->delete('Cat_Perfiles');
-    }  	
 	
-	public function getByIdPerfil($id){
-        $this->db->where('Id_Perfil', $id);
-        $query = $this->db->get('Cat_Perfiles');
-        return $query->row();						
-	}		
 	
 }

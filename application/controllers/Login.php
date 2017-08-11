@@ -12,7 +12,9 @@ class Login extends CI_Controller {
                 redirect(base_url(). 'Login/'); 
             } else {
                 #Datos Usuario
-                $this->session->set_userdata($data);                    
+				$id_user = $data['usuario']['Id_Colaborador'];
+				$data['usuario']['raxa_menu'] = $this->PerfilesModel->loadMenu($id_user);								
+                $this->session->set_userdata($data);                    				
                 redirect(base_url()); 
             }									
 		}
