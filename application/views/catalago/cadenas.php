@@ -33,7 +33,8 @@
 						<div class="row">
 							<div class="col s12">
 								<div class="row no-gutter">								
-									<div class=" right-left col s3">    
+									<div class=" right-left col s3">   
+										<input type="hidden" name="select_order" id="select_order" value="" />
 										<label>Nivel 0</label>
 										<select id="raiz" name="raiz" class="browser-default">
 											<option value="" selected>Elija su opción</option>

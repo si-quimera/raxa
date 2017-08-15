@@ -447,6 +447,29 @@ class CatalagoModel extends CI_Model{
 		}       	
 	}
 	
+	public function getSubMenuPrimOrder($id, $order, $by){
+		$this->db->where('Id_Cat_Prim', $id);	
+		$this->db->order_by($order, $by);		
+        return $this->db->get('Cat_Maestro');                   
+	}	
+	
+	public function getSubMenuSecOrder($id, $order, $by){
+		$this->db->where('Id_Cat_Sec', $id);	
+		$this->db->order_by($order, $by);		
+        return $this->db->get('Cat_Maestro');                   
+	}	
+	
+	public function getDataByIdOrderMaestro($id, $order, $by){
+		$this->db->where('Id_Cat_Sec', $id);	
+		$number = $this->db->count_all_results('Cat_Maestro');
+		if($number == 0){
+			return $this->getSubMenuPrimOrder($id, $order,$by);
+			//return $this->db->get('Cat_Maestro');	
+		}else{
+			return $this->getSubMenuSecOrder($id,  $order,$by);
+		}       	
+	}	
+	
 	public function addString($data){
 		$this->db->insert('Cat_Maestro', $data);        
 		return $error = $this->db->error();

@@ -45,9 +45,13 @@ function cargaSubMenus($submenu) {
                             <!-- Desktop -->
                             <ul class="right hide-on-med-and-down">																
 <?php
-foreach ($user['raxa_menu'][0]->submenu as $key => $value) {
-	$link = $value->String5;
-	//if ($value->acceso==1) {
+
+
+		
+if(!empty($user['raxa_menu'][0]->submenu)){		
+	foreach ($user['raxa_menu'][0]->submenu as $key => $value) {
+		$link = $value->String5;
+		//if ($value->acceso==1) {
 ?>
 								<li>
 									<a class="dropdown-button" href="<?=$link?>" data-activates="<?= $value->String2 ?>" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
@@ -58,7 +62,8 @@ foreach ($user['raxa_menu'][0]->submenu as $key => $value) {
 									?>									
 								</li>																
 <?php
-	//}
+		//}
+	}
 }
 ?>								
                                 <li class="profile ">

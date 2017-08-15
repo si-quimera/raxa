@@ -1205,12 +1205,12 @@ class Catalagos extends CI_Controller {
 		$table = '<table class="highlight" id="tabla_cadenas">';
 		$table .=	'<thead>';
 		$table .=	'	<tr>';
-		$table .=	'		<th>Nombre</th>';		
-		$table .=	'		<th>String 1</th>';
-		$table .=	'		<th>String 2</th>';
-		$table .=	'		<th>String 3</th>';
-		$table .=	'		<th>String 4</th>';
-		$table .=	'		<th>String 5</th>';
+		$table .=	'		<th><a href="#!" class="nombre_desc" data-order="Nombre" data-by="DESC"><i class="material-icons tiny">get_app</i></a> Nombre <a href="#!" class="nombre_asc" data-order="Nombre" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';		
+		$table .=	'		<th><a href="#!" class="string1_desc" data-order="String1" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 1 <a href="#!" class="string1_asc" data-order="String1" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string2_desc" data-order="String2" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 2 <a href="#!" class="string2_asc" data-order="String2" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string3_desc" data-order="String3" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 3 <a href="#!" class="string3_asc" data-order="String3" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string4_desc" data-order="String4" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 4 <a href="#!" class="string4_asc" data-order="String4" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string5_desc" data-order="String5" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 5 <a href="#!" class="string5_asc" data-order="String5" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
 		$table .=	'		<th class="center-align" data-searchable="false" data-orderable="false">Actions</th>';
 		$table .=	'	</tr>';
 		$table .=	'</thead>';
@@ -1242,6 +1242,54 @@ class Catalagos extends CI_Controller {
 		echo $table;
 		
 	}
+	
+	public function drawTablaOrder(){
+		$id = $this->input->post('id');
+		$order = $this->input->post('order');
+		$by = $this->input->post('by');
+		
+		$query = $this->CatalagoModel->getDataByIdOrderMaestro($id, $order, $by);
+		
+		$table = '<table class="highlight" id="tabla_cadenas">';
+		$table .=	'<thead>';
+		$table .=	'	<tr>';
+		$table .=	'		<th><a href="#!" class="nombre_desc" data-order="Nombre" data-by="DESC"><i class="material-icons tiny">get_app</i></a> Nombre <a href="#!" class="nombre_asc" data-order="Nombre" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';		
+		$table .=	'		<th><a href="#!" class="string1_desc" data-order="String1" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 1 <a href="#!" class="string1_asc" data-order="String1" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string2_desc" data-order="String2" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 2 <a href="#!" class="string2_asc" data-order="String2" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string3_desc" data-order="String3" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 3 <a href="#!" class="string3_asc" data-order="String3" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string4_desc" data-order="String4" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 4 <a href="#!" class="string4_asc" data-order="String4" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th><a href="#!" class="string5_desc" data-order="String5" data-by="DESC"><i class="material-icons tiny">get_app</i></a> String 5 <a href="#!" class="string5_asc" data-order="String5" data-by="ASC"><i class="material-icons tiny">file_upload</i></a></th>';
+		$table .=	'		<th class="center-align" data-searchable="false" data-orderable="false">Actions</th>';
+		$table .=	'	</tr>';
+		$table .=	'</thead>';
+		$table .=	'<tbody>';
+		foreach ($query->result() as $row){			
+		$table .=	'	<tr>';	
+		$table .=	'		<td id="row0'.$row->Id_Cat_Prim.'">'.$row->Nombre.'</td>';		
+		$table .=	'		<td id="row1'.$row->Id_Cat_Prim.'">'.$row->String1.'</td>';
+		$table .=	'		<td id="row2'.$row->Id_Cat_Prim.'">'.$row->String2.'</td>';
+		$table .=	'		<td id="row3'.$row->Id_Cat_Prim.'">'.$row->String3.'</td>';
+		$table .=	'		<td id="row4'.$row->Id_Cat_Prim.'">'.$row->String4.'</td>';
+		$table .=	'		<td id="row5'.$row->Id_Cat_Prim.'">'.$row->String5.'</td>';
+		$table .=	'		<td class="center-align">';
+		$table .=	'			<div class="btn-group">';
+		$table .=	'				<a href="#!" class="edit_class btn-flat btn-small waves-effect" id="'.$row->Id_Cat_Prim.'">';
+		$table .=	'					<i class="material-icons">create</i>';
+		$table .=	'				</a>';													
+		$table .=	'				<a href="#!" class="delete_class btn-flat btn-small waves-effect" id="'.$row->Id_Cat_Prim.'">';
+		$table .=	'					<i class="material-icons">delete</i>';
+		$table .=	'				</a>';		
+		$table .=	'			</div>';
+		$table .=	'		</td>';
+		$table .=	'	</tr>';		
+				}
+		$table .=	'</tbody>';
+		$table .=	'</table>';			
+		$table .=	'<input type="hidden" name="id_prim" id="id_prim" value="'.$id.'" />';
+		$table .=	'<br><br><br><br><br>';
+		echo $table;
+		
+	}	
 	
 	public function newString(){
 		if ($this->input->method() == 'post'){

@@ -6,6 +6,7 @@
 	
 	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/selectSubs/';	
 	var path_table = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/drawTabla/';
+	var path_table_order = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/drawTablaOrder/';	
 	var path_add = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/newString/';
 	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/delString/';
 	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/updateString/';
@@ -50,6 +51,28 @@
 			  $('#new_item').addClass('pulse');
 			}
 		});						
+	}
+	
+	// Recarga contenido de la tabla con un orden dado por el usuario
+	function reDrawTableOrder(identifica, order, by){ 
+		var parametros = {                    
+			'id' : identifica,
+			'order' : order,
+			'by' : by
+		};		
+		
+		$.ajax({
+			data:  parametros,
+			url:   path_table_order,
+			type:  'post',
+			beforeSend: function () {
+			},
+			success:  function (response) {                     
+			  $("#table").html(response);
+			  $('#new_item').removeAttr('disabled');
+			  $('#new_item').addClass('pulse');
+			}
+		});						
 	}	
 	
 	$('#raiz').on('change', function() {		
@@ -67,7 +90,8 @@
 			},
 			success:  function (response) {                     
 			  $("#sub1").html(response);
-			  reDrawTable(identifica);
+			  reDrawTable(identifica);			  
+			  $("#select_order").val('#raiz');
 			  $("#sub2").html("");
 			  $("#sub3").html("");
 			}
@@ -89,6 +113,7 @@
 			},
 			success:  function (response) {                     
 			  $("#sub2").html(response);
+			  $("#select_order").val('#sub1');
 			  reDrawTable(identifica);
 			}
 		}); 
@@ -109,6 +134,7 @@
 			},
 			success:  function (response) {                     
 			  $("#sub3").html(response);
+			  $("#select_order").val('#sub2');
 			  reDrawTable(identifica);
 			}
 		}); 
@@ -116,7 +142,8 @@
 	
 	$('#sub3').on('change', function() {
 		reDrawTable(0);
-		var identifica = $("#sub3").val();		
+		var identifica = $("#sub3").val();	
+		$("#select_order").val('#sub3');
 		reDrawTable(identifica);
 	});	
 
@@ -462,24 +489,134 @@
     });	
 	
 	
+	$(document).on('click', '.nombre_desc', function() {		
+		//reDrawTableOrder(0);	
+		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});
 	
+	$(document).on('click', '.nombre_asc', function() {		
+		//reDrawTableOrder(0);		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});	
 	
+	$(document).on('click', '.string1_desc', function() {		
+		//reDrawTableOrder(0);	
+		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});
 	
+	$(document).on('click', '.string1_asc', function() {		
+		//reDrawTableOrder(0);		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});	
+		
+	$(document).on('click', '.string2_desc', function() {		
+		//reDrawTableOrder(0);	
+		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	$(document).on('click', '.string2_asc', function() {		
+		//reDrawTableOrder(0);		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});	
 
 
+	$(document).on('click', '.string3_desc', function() {		
+		//reDrawTableOrder(0);	
+		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});
+	
+	$(document).on('click', '.string3_asc', function() {		
+		//reDrawTableOrder(0);		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});	
 
+
+	$(document).on('click', '.string4_desc', function() {		
+		//reDrawTableOrder(0);	
+		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});
+	
+	$(document).on('click', '.string4_asc', function() {		
+		//reDrawTableOrder(0);		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});	
+
+
+	$(document).on('click', '.string5_desc', function() {		
+		//reDrawTableOrder(0);	
+		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});
+	
+	$(document).on('click', '.string5_asc', function() {		
+		//reDrawTableOrder(0);		
+		var select = $("#select_order").val();
+		var identifica = $(select).val();		
+		var order = $(this).data("order");
+		var by = $(this).data("by");
+                   
+		reDrawTableOrder(identifica, order, by);	   
+	});	
 
 
 
