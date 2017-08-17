@@ -69,37 +69,52 @@
                                                 <div class="col s6">
 													<label for="Id_Cat_Menu">Menu</label>
                                                     <select name="Id_Cat_Menu" id="Id_Cat_Menu" class="browser-default select2-container">
-                                                        <option value="" disabled selected>Elija su opción</option>
+                                                        <option value="" disabled selected>Elija su opción</option>														
                                                     <?php
-                                                        foreach ($menus as $key => $row) {    
-															if($key == $edicion->Id_Cat_Menu){
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+														$raiz = $this->PerfilesModel->getMenus();																															
+														$nombre_raiz = $raiz->Nombre;
+														$Id_Cat_Prim = $raiz->Id_Cat_Prim;
+														$level1 = $this->PerfilesModel->getSubMenus($Id_Cat_Prim);																					
+														foreach ($level1->result() as $row1) {   
+															$nombre_level1 = $row1->Nombre;
+															if($row1->Id_Cat_Prim == $edicion->Id_Cat_Menu){
+													?>	
+															<option value="<?= $row1->Id_Cat_Prim ?>" selected="selected"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?></option>
 													<?php	
 															}else{
-													?>														
-														<option value="<?= $key ?>"><?= $row ?></option>														
-													<?php	
+													?>	
+															<option value="<?= $row1->Id_Cat_Prim ?>"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?></option>
+													<?php																	
 															}
-                                                        }                                               
-                                                    ?>
-                                                    </select>                                                   
+															$level2 = $this->PerfilesModel->getSubMenus($row1->Id_Cat_Prim);	
+															foreach ($level2->result() as $row2) { 
+																$nombre_level2 = $row2->Nombre;
+																if($row2->Id_Cat_Prim == $edicion->Id_Cat_Menu){																
+													?>	
+																<option value="<?= $row2->Id_Cat_Prim ?>" selected="selected"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?> &raquo;&raquo; <?= $nombre_level2 ?></option>
+													<?php	
+																}else{
+													?>	
+																<option value="<?= $row2->Id_Cat_Prim ?>"><?= $nombre_raiz ?> &raquo;&raquo; <?= $nombre_level1 ?>&raquo;&raquo; <?= $nombre_level2 ?></option>
+													<?php	
+																}
+															}
+														}                                              
+                                                    ?>														
+														
+                                                    </select>
+                                                    
                                                     <?php echo form_error('Id_Cat_Menu'); ?>
                                                 </div>												
                                             </div>  
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <select name="Acceso" id="Acceso">
-                                                        <option value="" disabled selected>Elija su opción</option>														
-                                                    </select>
-                                                    <label for="Acceso">Acceso</label>
-                                                    <?php echo form_error('Acceso'); ?>
-                                                </div>	
+                                            <div class="row no-gutter">	
                                                 <div class="input-field col s6">
                                                     <input name="Descripcion" id="Descripcion" type="text" value="<?= $edicion->Descripcion ?>">
                                                     <label for="Descripcion">Descripcion</label>
 													<?php echo form_error('Descripcion'); ?>													
-												</div>												
+												</div>					
+                                                <div class="input-field col s6">
+                                                </div>												
                                             </div>  											
                                         </div>
                                         <div class="panel-footer">

@@ -308,14 +308,7 @@ if(isset($puesto_user->String2)){
                                                     <?php echo form_error('Id_Cat_Tipo_Producto'); ?>															
 												</div>												
                                             </div> 											
-                                        </div>
-                                        <div class="panel-footer">
-                                            <div class="right-align">
-                                                <button type="reset" id="button-reset" class="btn-flat waves-effect">
-                                                    LIMPIAR CAMPOS
-                                                </button>
-                                            </div>
-                                        </div>
+                                        </div>           										
                                     </div>			
 									<div class="row no-gutter" id="target">
 										<br>
@@ -330,6 +323,9 @@ if(isset($puesto_user->String2)){
 										</div>					
 										<div class="col s6">
 											<p class="right-align">
+											<button class="btn waves-effect waves-light" type="button" id="button-reset"  name="reset">Limpiar Campos
+												<i class="material-icons right">send</i>
+											</button>												
 											<button class="btn waves-effect waves-light red" type="submit" name="action">Asignar
 												<i class="material-icons right">send</i>
 											</button>												

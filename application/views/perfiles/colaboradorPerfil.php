@@ -21,13 +21,13 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">							
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Colaborador > Perfil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/NewColaboradorPerfil">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Nuevo Colaborador > Perfil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/NewColaboradorPerfil">
 								<i class="large material-icons">add</i>
 							</a>
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Catalago Perfiles" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Catalago Perfiles" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/">
 								<i class="material-icons large">account_circle</i>
 							</a>								
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Asignar Menu->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/MenuPerfil">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Asignar Menu->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/MenuPerfil">
 								<i class="material-icons large">playlist_add_check</i>
 							</a>																				
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -56,7 +56,7 @@
 									<thead>
 										<tr>
 											<th>Colaborador</th>
-											<th>Menu > Perfil</th>
+											<th>Perfil</th>
 											<th>Activo</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
@@ -69,7 +69,7 @@
 									?>
 										<tr>
 											<td><?= $colaborador[$row->Id_Colaborador] ?></td>
-											<td><?= $perfiles[$row->Id_Menu_Perfil] ?></td>
+											<td><?= $perfiles[$row->Id_Perfil] ?></td>
 											<td>
 												<?php
 												if($row->Activo == 1){

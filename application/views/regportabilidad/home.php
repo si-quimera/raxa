@@ -26,7 +26,7 @@
                             </button>
                         </div>			
                         <?php
-                        echo form_open('Catalagos/newMaestro/'); 
+                        echo form_open('RegPortabilidad/'); 
                         ?> 
                             <div class="row">
                                 <div class="col s8 m8">

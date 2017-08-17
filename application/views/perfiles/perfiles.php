@@ -21,13 +21,13 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">							
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Perfil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/NewPerfil">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Nuevo Perfil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/NewPerfil">
 								<i class="large material-icons">add</i>
 							</a>
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Asignar Menu->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/MenuPerfil">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Asignar Menu->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/MenuPerfil">
 								<i class="material-icons large">playlist_add_check</i>
 							</a>								
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Asignar Colaborador->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/ColaboradorPerfil">
+							<a class="btn-floating btn-large tooltipped" data-tooltip="Asignar Colaborador->Pefil" data-position="top" data-delay="50" href="<?= base_url() ?>Perfiles/ColaboradorPerfil">
 								<i class="material-icons large">transfer_within_a_station</i>
 							</a>																				
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -55,7 +55,13 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Descripcion</th>
+											<th>
+												<a href="<?= base_url() ?>Perfiles/index/?order=Descripcion&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Descripcion
+												<a href="<?= base_url() ?>Perfiles/index/?order=Descripcion&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>																								
+											</th>
+											<th>Departamento</th>
+											<th>Empresa</th>											
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
@@ -67,6 +73,8 @@
 									?>
 										<tr>
 											<td><?= $row->Descripcion ?></td>
+											<td><?= $depto[$row->Id_Cat_Departamento] ?></td>
+											<td><?= $empresa[$row->Id_Cat_Empresa] ?></td>											
 											<td class="center-align">
 												<div class="btn-group">
 													<a href="<?= base_url() ?>Perfiles/editPerfil/<?= $row->Id_Perfil ?>" class="btn-flat btn-small waves-effect">

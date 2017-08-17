@@ -51,24 +51,24 @@
 									<thead>
 										<tr>
 											<th>
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Nombre&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Nombre&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
 												Nombre
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Nombre&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Nombre&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
 											</th>
 											<th>
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Pat&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Pat&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
 												Ap Paterno
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Pat&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Pat&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
 											</th>
 											<th>
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Mat&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Mat&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
 												Ap Materno
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Mat&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Ap_Mat&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
 											</th>
 											<th>
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Estado&amp;by=DESC"><i class="material-icons tiny">get_app</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Estado&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
 												Estado
-												<a href="<?= base_url() ?>catalagos/colaborador/?order=Estado&amp;by=ASC"><i class="material-icons tiny">file_upload</i></a>
+												<a href="<?= base_url() ?>catalagos/colaborador/?order=Estado&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
 											</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions

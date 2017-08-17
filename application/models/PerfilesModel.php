@@ -9,8 +9,24 @@ class PerfilesModel extends CI_Model{
     }  	
 		
     public function getAllPerfil($number_per_page){
-		$this->db->order_by('Id_Perfil', 'DESC');  
-        return $this->db->get('Cat_Perfiles', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+			$pageNo = $_GET['page'];
+		}
+        if (empty($_GET['order'])) {
+            $order = 'Id_Perfil';
+        }else{
+			$order = $_GET['order'];
+		}
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+			$by = $_GET['by'];
+		}			
+		
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Perfiles', $number_per_page, $pageNo);
     } 	
 				
 	public function addPerfil($data){
@@ -57,14 +73,21 @@ class PerfilesModel extends CI_Model{
     public function getMenus(){
 		$menu = array();
 		$this->db->where('Id_Cat_Sec', 1);
-		$this->db->where('String1', 1);
+		$this->db->where('Nombre', 'Menu');
+        $query = $this->db->get('Cat_Maestro');            
+        return $query->row();       
+    }  	
+	
+    public function getMenusName(){
+		$menu = array();
+
         $query = $this->db->get('Cat_Maestro');            
         foreach ($query->result() as $row){
             $menu[$row->Id_Cat_Prim] = $row->Nombre;    
         }      
         return $menu;        
-    }  
-
+    } 	
+	
     public function getColaborador(){
 		$colaborador = array();
         $query = $this->db->get('Cat_Colaboradores');            
@@ -111,13 +134,13 @@ class PerfilesModel extends CI_Model{
 		return $error = $this->db->error();
     } 	
 	
-    public function getMenuPerfil(){
-		$menu = array();
-        $query = $this->db->get('Menu_Perfiles');            
+    public function getPerfil(){
+		$perfil = array();
+        $query = $this->db->get('Cat_Perfiles');            
         foreach ($query->result() as $row){
-            $menu[$row->Id_Menu_Perfil] = $row->Descripcion;    
+            $perfil[$row->Id_Perfil] = $row->Descripcion;    
         }      
-        return $menu;        
+        return $perfil;        
     } 	
 	
 	public function setSelect($field, $select){
@@ -145,51 +168,68 @@ class PerfilesModel extends CI_Model{
 
     public function loadMenu($user) {
         $qry_menu_inicial = 
-           "SELECT m.Id_Cat_Prim, 0 as nivel, 0 AS submenu , m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
-            FROM Cat_Maestro  m
-            JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu
-            join Colaborador_Perfil p ON p.Id_Menu_Perfil = mp.Id_Menu_Perfil 
-            WHERE String1 = 1 AND Id_Colaborador = '".$user."';";
+           "SELECT m.Id_Cat_Prim, m.Id_Cat_Sec, 0 as nivel, 0 AS submenu , m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5 FROM Cat_Maestro m "
+				. "	JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu "
+				. " JOIN Colaborador_Perfil p ON p.Id_Perfil = mp.Id_Perfil "
+				. "WHERE Id_Colaborador = '".$user."' AND m.String1 = 1 AND p.activo = 1;";
 
         $menu = $this->db->query($qry_menu_inicial)->result();
-		$this->cargaSubMenu($menu, 1);
+		sort($menu);
+		foreach ($menu as $key => $value) {
+			$value->submenu = $this->cargaSubMenu($value->Id_Cat_Prim, 2);
+			foreach ($value->submenu as $key => $value) {
+				$value->submenu = $this->cargaSubMenu($value->Id_Cat_Prim, 3);
+			}
+		}
 		
-
+		//echo "<pre>";
+		//print_r($menu);
+		//echo "</pre>";
         return $menu;
+	
     }
-
-    private function cargaSubMenu( $menu, $nivel) {
-		
+	
+    private function cargaSubMenu($Id_Cat_Sec, $nivel) {		
 		$qry_menu_hijos = 
-           "SELECT m.Id_Cat_Prim, 0 as nivel, NULL as submenu, m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
-            FROM Cat_Maestro m WHERE Id_Cat_Sec =? ;";		
-		
-		
-        foreach ($menu as $key => $value) {
-            $menu_interno = $this->db->query($qry_menu_hijos, array($value->Id_Cat_Prim));
-            if ($menu_interno->num_rows() > 0) {
-                $value->submenu = $this->cargaSubMenu($menu_interno->result(), $nivel+1);
-                $value->nivel = $nivel;
-            } else {
-                $value->nivel = $nivel;
-            }
-			
-			
-			
-        }
-        $nivel++;
-		
+           "SELECT m.Id_Cat_Prim,m.Id_Cat_Sec, 0 as nivel, NULL as submenu, m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
+            FROM Cat_Maestro m WHERE Id_Cat_Sec = ".$Id_Cat_Sec." AND m.String1 = ".$nivel." ;";		
+				
+        $submenu = $this->db->query($qry_menu_hijos)->result();			
+        return $submenu;
+    } 	
 
-		
-        return $menu;
+	
+	
+	public function getIDMaestro($item){	
+		$this->db->where('Nombre', $item);
+        $query = $this->db->get('Cat_Maestro');            
+        return $result = $query->row_array();        		
+    } 
 
-    }  
+    public function getDepto($id){
+		$depto = array();
+		$this->db->where('Id_Cat_Sec', $id);
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+            $depto[$row->Id_Cat_Prim] = $row->Nombre;    
+        }      
+        return $depto;        
+    } 
 
+    public function getEmpresa($id){
+		$empresa = array();
+		$this->db->where('Id_Cat_Sec', $id);
+        $query = $this->db->get('Cat_Maestro');            
+        foreach ($query->result() as $row){
+            $empresa[$row->Id_Cat_Prim] = $row->Nombre;    
+        }      
+        return $empresa;        
+    } 
 
-
-
-
-
+	public function getSubMenus($id){
+		$this->db->where('Id_Cat_Sec', $id);
+        return $this->db->get('Cat_Maestro');  
+	}
 
 
 

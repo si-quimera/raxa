@@ -50,11 +50,12 @@
 													<?php echo form_error('Descripcion'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
-                                                    <select name="Id_Sucursal" id="Id_Sucursal">
+													
+                                                    <select name="Id_Cat_Empresa" id="Id_Cat_Empresa">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
-                                                        foreach ($sucursal as $key => $row) {    
-															if($key == $this->input->post('Id_Ciudad')){
+                                                        foreach ($empresa as $key => $row) {    
+															if($key == $this->input->post('Id_Cat_Empresa')){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -66,17 +67,19 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="Id_Sucursal">Sucursal</label>
-                                                    <?php echo form_error('Id_Sucursal'); ?>
+                                                    <label for="Id_Cat_Empresa">Empresa</label>
+                                                    <?php echo form_error('Id_Cat_Empresa'); ?>
+													
                                                 </div>												
                                             </div>  
+											
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
-                                                    <select name="Id_Ciudad" id="Id_Ciudad">
+                                                    <select name="Id_Cat_Departamento" id="Id_Cat_Departamento">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
-                                                        foreach ($ciudad as $key => $row) {    
-															if($key == $this->input->post('Id_Ciudad')){
+                                                        foreach ($depto as $key => $row) {    
+															if($key == $this->input->post('Id_Cat_Departamento')){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -88,55 +91,12 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="Id_Ciudad">Ciudad</label>
-                                                    <?php echo form_error('Id_Ciudad'); ?>
+                                                    <label for="Id_Cat_Departamento">Departamento</label>
+                                                    <?php echo form_error('Id_Cat_Departamento'); ?>
                                                 </div>	
-                                                <div class="input-field col s6">
-                                                    <select name="Id_Estado" id="Id_Estado">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                        foreach ($estados as $key => $row) {    
-															if($key == $this->input->post('Id_Estado')){
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-													<?php	
-															}else{
-													?>														
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php	
-															}
-                                                        }                                               
-                                                    ?>
-                                                    </select>
-                                                    <label for="Id_Estado">Estado</label>
-                                                    <?php echo form_error('Id_Estado'); ?>
-                                                </div>												
+                                                <div class="input-field col s6"></div>												
                                             </div>  
-                                            <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <select name="Id_Zona" id="Id_Zona">
-                                                        <option value="" disabled selected>Elija su opción</option>
-                                                    <?php
-                                                        foreach ($zona as $key => $row) {    
-															if($key == $this->input->post('Id_Zona')){															
-													?>
-														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-														
-													<?php	
-															}else{
-													?>															
-														<option value="<?= $key ?>"><?= $row ?></option>
-													<?php	
-															}
-                                                        }                                               
-                                                    ?>
-                                                    </select>
-                                                    <label for="Id_Zona">Zona</label>
-                                                    <?php echo form_error('Id_Zona'); ?>
-                                                </div>	
-                                                <div class="input-field col s6">
-                                                </div>												
-                                            </div>  
+											
 											
                                         </div>
                                         <div class="panel-footer">

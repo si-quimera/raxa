@@ -48,7 +48,7 @@
 					<div class="panel panel-bordered z-depth-1">
 						<div class="panel-header">
 							<h5>
-								Inicia sesión en <b class="main-text">Raxxa</b>
+								Inicia sesión en <b class="main-text">raxa</b>
 							</h5>
 						</div>
 

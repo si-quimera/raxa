@@ -48,11 +48,12 @@ class CatalagoModel extends CI_Model{
     }  
 
     public function getZona(){	
+		$zona = array();
         $query = $this->db->get('Cat_Zona');            
         foreach ($query->result() as $row){
             $zona[$row->Id_Zona] = $row->Nombre;    
         }      
-        return @$zona;        
+        return $zona;        
     }  	
 	
     public function deleteEdos($id){
@@ -90,11 +91,12 @@ class CatalagoModel extends CI_Model{
     }  
 
     public function getEdos(){	
+		$edos = array();
         $query = $this->db->get('Cat_Estado');            
         foreach ($query->result() as $row){
             $edos[$row->Id_Estado] = $row->Nombre;    
         }      
-        return @$edos;        
+        return $edos;        
     }  		
 	
     public function deleteCiudad($id){

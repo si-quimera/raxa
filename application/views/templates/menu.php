@@ -47,11 +47,9 @@ function cargaSubMenus($submenu) {
 <?php
 
 
-		
-if(!empty($user['raxa_menu'][0]->submenu)){		
-	foreach ($user['raxa_menu'][0]->submenu as $key => $value) {
+if(!empty($user['raxa_menu'])){		
+	foreach ($user['raxa_menu'] as $item => $value) {
 		$link = $value->String5;
-		//if ($value->acceso==1) {
 ?>
 								<li>
 									<a class="dropdown-button" href="<?=$link?>" data-activates="<?= $value->String2 ?>" data-constrainwidth="false" data-beloworigin="true" data-hover="true">
@@ -62,7 +60,6 @@ if(!empty($user['raxa_menu'][0]->submenu)){
 									?>									
 								</li>																
 <?php
-		//}
 	}
 }
 ?>								
@@ -77,6 +74,7 @@ if(!empty($user['raxa_menu'][0]->submenu)){
                                         </div>
                                     </a>									
 									<ul id="dropdown-profile" class="dropdown-content">
+										<li><a href="#">Cambio de Password </a></li>
 										<li><a href="<?= base_url() ?>Login/logout/">Cerrar la sesión </a></li>
 									</ul>									
 									

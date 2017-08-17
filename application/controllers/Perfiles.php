@@ -5,11 +5,14 @@ class Perfiles extends CI_Controller {
 
 	public function index(){
         
-        $config['base_url'] = base_url() . 'Perfiles/';
+        $config['base_url'] = base_url() . 'Perfiles/index/';
         $config['total_rows'] = $this->PerfilesModel->countPerfil();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
         $config['num_links'] = 5;        
+		$config['reuse_query_string'] = TRUE;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';		
         $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
         $config['prev_tag_open'] = '<li class="waves-effect">';
         $config['prev_tag_close'] = '</li>';
@@ -29,6 +32,11 @@ class Perfiles extends CI_Controller {
         $data['consulta'] = $result;
         $data['pagination'] = $this->pagination->create_links();
 		
+		$empresa_id = $this->PerfilesModel->getIDMaestro('Empresas');
+		$depto_id = $this->PerfilesModel->getIDMaestro('Departamentos');
+		$data['depto'] = $this->PerfilesModel->getDepto($depto_id['Id_Cat_Prim']);
+		$data['empresa'] = $this->PerfilesModel->getEmpresa($empresa_id['Id_Cat_Prim']);				
+		
         $this->load->view('templates/header.php');  
         $this->load->view('perfiles/perfiles.php', $data);
         $this->load->view('templates/footer.php');		
@@ -43,38 +51,26 @@ class Perfiles extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);
-        $this->form_validation->set_rules('Id_Sucursal', 'Sucursal', 'required',
+		
+		
+        $this->form_validation->set_rules('Id_Cat_Empresa', 'Empresa', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('Id_Ciudad', 'Ciudad', 'required',
+        $this->form_validation->set_rules('Id_Cat_Departamento', 'Departamento', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('Id_Estado', 'Estado', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);	
-        $this->form_validation->set_rules('Id_Zona', 'Zona', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);			
+		
 		
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
 					'Descripcion'	=>  $this->input->post('Descripcion'),
-					'Id_Sucursal'	=>  $this->input->post('Id_Sucursal'),
-                    'Id_Ciudad'	=>  $this->input->post('Id_Ciudad'),
-					'Id_Estado'	=>  $this->input->post('Id_Estado'),
-					'Id_Zona'	=>  $this->input->post('Id_Zona'),
 					'Id_Cat_Departamento'	=>  $this->input->post('Id_Cat_Departamento'),
-					'Id_Cat_Empresa'	=>  $this->input->post('Id_Cat_Empresa'),
-					'Perfil_Padre_Id'	=>  $this->input->post('Perfil_Padre_Id')
+					'Id_Cat_Empresa'	=>  $this->input->post('Id_Cat_Empresa')
                 );            
                 $error = $this->PerfilesModel->addPerfil($data);
                 if ($error['code'] === 0){
@@ -85,11 +81,13 @@ class Perfiles extends CI_Controller {
                 }																							
 			}
 		}
-							
-		$data['sucursal'] = $this->CatalagoModel->getSucursal();
-		$data['ciudad'] = $this->CatalagoModel->getCiudad();
-		$data['estados'] = $this->CatalagoModel->getEdos();
-		$data['zona'] = $this->CatalagoModel->getZona();
+		
+		
+		$empresa_id = $this->PerfilesModel->getIDMaestro('Empresas');
+		$depto_id = $this->PerfilesModel->getIDMaestro('Departamentos');
+		$data['depto'] = $this->PerfilesModel->getDepto($depto_id['Id_Cat_Prim']);
+		$data['empresa'] = $this->PerfilesModel->getEmpresa($empresa_id['Id_Cat_Prim']);
+		
 				
 		$this->load->view('perfiles/newPerfil.php', $data);
         $this->load->view('templates/footer.php');			
@@ -103,19 +101,26 @@ class Perfiles extends CI_Controller {
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
-		);	
+		);
 		
+        $this->form_validation->set_rules('Id_Cat_Empresa', 'Empresa', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);	
+        $this->form_validation->set_rules('Id_Cat_Departamento', 'Departamento', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+		
+	
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
 					'Descripcion'	=>  $this->input->post('Descripcion'),
-					'Id_Sucursal'	=>  $this->input->post('Id_Sucursal'),
-                    'Id_Ciudad'	=>  $this->input->post('Id_Ciudad'),
-					'Id_Estado'	=>  $this->input->post('Id_Estado'),
-					'Id_Zona'	=>  $this->input->post('Id_Zona'),
 					'Id_Cat_Departamento'	=>  $this->input->post('Id_Cat_Departamento'),
-					'Id_Cat_Empresa'	=>  $this->input->post('Id_Cat_Empresa'),
-					'Perfil_Padre_Id'	=>  $this->input->post('Perfil_Padre_Id')
+					'Id_Cat_Empresa'	=>  $this->input->post('Id_Cat_Empresa')
                 );            
                 $error = $this->PerfilesModel->updatePerfil($id, $data);
                 if ($error['code'] === 0){
@@ -126,11 +131,12 @@ class Perfiles extends CI_Controller {
                 }																							
 			}
 		}
-							
-		$data['sucursal'] = $this->CatalagoModel->getSucursal();
-		$data['ciudad'] = $this->CatalagoModel->getCiudad();
-		$data['estados'] = $this->CatalagoModel->getEdos();
-		$data['zona'] = $this->CatalagoModel->getZona();
+	
+		$empresa_id = $this->PerfilesModel->getIDMaestro('Empresas');
+		$depto_id = $this->PerfilesModel->getIDMaestro('Departamentos');
+		$data['depto'] = $this->PerfilesModel->getDepto($depto_id['Id_Cat_Prim']);
+		$data['empresa'] = $this->PerfilesModel->getEmpresa($empresa_id['Id_Cat_Prim']);
+		
 		$data['edicion'] = $this->PerfilesModel->getByIdPerfil($id);
 				
 		$this->load->view('perfiles/editPerfil.php', $data);
@@ -145,7 +151,7 @@ class Perfiles extends CI_Controller {
     }
 	
 	public function MenuPerfil(){
-        $config['base_url'] = base_url() . 'Perfiles/';
+        $config['base_url'] = base_url() . 'Perfiles/MenuPerfil/';
         $config['total_rows'] = $this->PerfilesModel->countMenuPerfil();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -169,7 +175,7 @@ class Perfiles extends CI_Controller {
         $data['consulta'] = $result;
         $data['pagination'] = $this->pagination->create_links();
 		$data['perfiles'] = $this->PerfilesModel->getPerfiles();
-		$data['menus'] = $this->PerfilesModel->getMenus();				
+		$data['menus'] = $this->PerfilesModel->getMenusName();				
 		
         $this->load->view('templates/header.php');  
         $this->load->view('perfiles/menuPerfil.php', $data);
@@ -201,8 +207,7 @@ class Perfiles extends CI_Controller {
                 $data = array(
 					'Id_Perfil'	=>  $this->input->post('Id_Perfil'),
                     'Id_Cat_Menu'	=>  $this->input->post('Id_Cat_Menu'),
-					'Descripcion'	=>  $this->input->post('Descripcion'),
-					'Acceso'	=>  $this->input->post('Acceso')
+					'Descripcion'	=>  $this->input->post('Descripcion')
                 );            
                 $error = $this->PerfilesModel->addMenuPerfil($data);
                 if ($error['code'] === 0){
@@ -244,7 +249,6 @@ class Perfiles extends CI_Controller {
                 $data = array(
 					'Id_Perfil'	=>  $this->input->post('Id_Perfil'),
                     'Id_Cat_Menu'	=>  $this->input->post('Id_Cat_Menu'),
-					'Acceso'	=>  $this->input->post('Acceso'),
 					'Descripcion'	=>  $this->input->post('Descripcion')					
                 );            
                 $error = $this->PerfilesModel->updateMenuPerfil($id, $data);
@@ -271,7 +275,7 @@ class Perfiles extends CI_Controller {
     }	
 	
 	public function ColaboradorPerfil(){
-        $config['base_url'] = base_url() . 'Perfiles/ColaboradorPerfil';
+        $config['base_url'] = base_url() . 'Perfiles/ColaboradorPerfil/';
         $config['total_rows'] = $this->PerfilesModel->countColaboradorPerfil();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -292,7 +296,7 @@ class Perfiles extends CI_Controller {
         $this->pagination->initialize($config);
         $result = $this->PerfilesModel->getAllColaboradorPerfil($config['per_page']);   
 		 
-		$data['perfiles'] = $this->PerfilesModel->getMenuPerfil();
+		$data['perfiles'] = $this->PerfilesModel->getPerfil();
 		$data['colaborador'] = $this->PerfilesModel->getColaborador();		
 		$data['pagination'] = $this->pagination->create_links();
         $data['consulta'] = $result;			
@@ -311,7 +315,7 @@ class Perfiles extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('Id_Menu_Perfil', 'Menu', 'required',
+        $this->form_validation->set_rules('Id_Perfil', 'Perfil', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -326,7 +330,7 @@ class Perfiles extends CI_Controller {
             if ($this->input->method() == 'post'){
                 $data = array(
 					'Id_Colaborador'	=>  $this->input->post('Id_Colaborador'),
-                    'Id_Menu_Perfil'	=>  $this->input->post('Id_Menu_Perfil'),
+                    'Id_Perfil'	=>  $this->input->post('Id_Perfil'),
 					'Activo'	=>  $this->input->post('Activo')
                 );            
                 $error = $this->PerfilesModel->addColaboradorPerfil($data);
@@ -338,7 +342,7 @@ class Perfiles extends CI_Controller {
                 }																							
 			}
 		}
-		$data['perfiles'] = $this->PerfilesModel->getMenuPerfil();
+		$data['perfiles'] = $this->PerfilesModel->getPerfil();
 		$data['colaborador'] = $this->PerfilesModel->getColaborador();
 		$this->load->view('perfiles/newColaboradorPerfil.php', $data);
         $this->load->view('templates/footer.php');			
@@ -353,7 +357,7 @@ class Perfiles extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('Id_Menu_Perfil', 'Menu', 'required',
+        $this->form_validation->set_rules('Id_Perfil', 'Perfil', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -368,7 +372,7 @@ class Perfiles extends CI_Controller {
             if ($this->input->method() == 'post'){
                 $data = array(
 					'Id_Colaborador'	=>  $this->input->post('Id_Colaborador'),
-                    'Id_Menu_Perfil'	=>  $this->input->post('Id_Menu_Perfil'),
+                    'Id_Perfil'	=>  $this->input->post('Id_Perfil'),
 					'Activo'	=>  $this->input->post('Activo')
                 );            
                 $error = $this->PerfilesModel->updateColaboradorPerfil($id, $data);
@@ -380,7 +384,7 @@ class Perfiles extends CI_Controller {
                 }																							
 			}
 		}
-		$data['perfiles'] = $this->PerfilesModel->getMenuPerfil();
+		$data['perfiles'] = $this->PerfilesModel->getPerfil();
 		$data['colaborador'] = $this->PerfilesModel->getColaborador();
 		$data['edicion'] = $this->PerfilesModel->getByIdColaboradorPerfil($id);
 		

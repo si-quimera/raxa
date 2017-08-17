@@ -69,7 +69,7 @@
 																<i class="material-icons">create</i>
 															</a>
 
-															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 																<i class="material-icons">delete</i>
 															</a>
 														</div>
@@ -90,7 +90,7 @@
 																<i class="material-icons">create</i>
 															</a>
 
-															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row1->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row1->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row1->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row1->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 																<i class="material-icons">delete</i>
 															</a>
 														</div>
@@ -111,7 +111,7 @@
 																<i class="material-icons">create</i>
 															</a>
 
-															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row2->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row2->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row2->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row2->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 																<i class="material-icons">delete</i>
 															</a>
 														</div>
@@ -132,7 +132,7 @@
 																<i class="material-icons">create</i>
 															</a>
 
-															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row3->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row3->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row3->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row3->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 																<i class="material-icons">delete</i>
 															</a>
 														</div>
@@ -153,7 +153,7 @@
 																<i class="material-icons">create</i>
 															</a>
 
-															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row4->Id_Cat_Prim ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row4->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+															<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo # <?= $row4->Nombre ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalagos/delMaestro/" . $row4->Id_Cat_Prim ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 																<i class="material-icons">delete</i>
 															</a>
 														</div>

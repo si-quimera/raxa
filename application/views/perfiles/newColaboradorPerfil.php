@@ -65,12 +65,12 @@
                                                     <?php echo form_error('Id_Colaborador'); ?>
                                                 </div>													
                                                 <div class="col s6">
-													<label for="Id_Menu_Perfil">Menu > Pefil</label> 
-                                                    <select name="Id_Menu_Perfil" id="Id_Perfil" class="browser-default select2-container">
+													<label for="Id_Perfil">Menu > Pefil</label> 
+                                                    <select name="Id_Perfil" id="Id_Perfil" class="browser-default select2-container">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($perfiles as $key => $row) {    
-															if($key == $this->input->post('Id_Menu_Perfil')){
+															if($key == $this->input->post('Id_Perfil')){
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php	
@@ -82,7 +82,7 @@
                                                         }                                               
                                                     ?>
                                                     </select>                                                     
-													<?php echo form_error('Id_Menu_Perfil'); ?>
+													<?php echo form_error('Id_Perfil'); ?>
                                                 </div>											
                                             </div>  
                                             <div class="row no-gutter">
