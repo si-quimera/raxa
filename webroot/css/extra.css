@@ -86,3 +86,7 @@ and open the template in the editor.
     color: rgba(0,0,0,0.26);
     border-bottom: 1px dotted rgba(0,0,0,0.26);
 }
+
+.select-height{
+    height: 200px;
+}

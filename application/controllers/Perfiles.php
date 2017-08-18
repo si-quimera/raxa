@@ -151,129 +151,13 @@ class Perfiles extends CI_Controller {
     }
 	
 	public function MenuPerfil(){
-        $config['base_url'] = base_url() . 'Perfiles/MenuPerfil/';
-        $config['total_rows'] = $this->PerfilesModel->countMenuPerfil();
-        $config['per_page'] = 10;   
-        $config['uri_segment'] = 3;
-        $config['num_links'] = 5;        
-        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
-        $config['prev_tag_open'] = '<li class="waves-effect">';
-        $config['prev_tag_close'] = '</li>';
-        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
-        $config['next_tag_open'] = '<li class="waves-effect">';
-        $config['next_tag_close'] = '</li>';
-        $config['full_tag_open'] = '<ul class="pagination">';
-        $config['full_tag_close'] = '</ul>';          
-        $config['num_tag_open'] = '<li class="waves-effect">';
-        $config['num_tag_close'] = '</li>';   
-        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
-        $config['cur_tag_close'] = '</a></li>';
-        
-        $this->pagination->initialize($config);
-        $result = $this->PerfilesModel->getAllMenuPerfil($config['per_page']); 
-                    
-        $data['consulta'] = $result;
-        $data['pagination'] = $this->pagination->create_links();
 		$data['perfiles'] = $this->PerfilesModel->getPerfiles();
-		$data['menus'] = $this->PerfilesModel->getMenusName();				
-		
+		$data['menus'] = $this->PerfilesModel->getMenusPerfiles();			
         $this->load->view('templates/header.php');  
         $this->load->view('perfiles/menuPerfil.php', $data);
         $this->load->view('templates/footer.php');		
 	}
-	
-	public function newMenuPerfil(){				
-        $this->load->view('templates/header.php');  
-		
-        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('Id_Perfil', 'Perfil', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);	
-        $this->form_validation->set_rules('Id_Cat_Menu', 'Menu', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);	
-        $this->form_validation->set_rules('Descripcion', 'Descripción', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);			
-		
-        if ($this->form_validation->run() == TRUE) {         
-            if ($this->input->method() == 'post'){
-                $data = array(
-					'Id_Perfil'	=>  $this->input->post('Id_Perfil'),
-                    'Id_Cat_Menu'	=>  $this->input->post('Id_Cat_Menu'),
-					'Descripcion'	=>  $this->input->post('Descripcion')
-                );            
-                $error = $this->PerfilesModel->addMenuPerfil($data);
-                if ($error['code'] === 0){
-                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i>Asignacion Menu > Perfil registrado correctamente!</div>');
-                    redirect(base_url(). 'Perfiles/MenuPerfil');
-                }else{
-                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Asignacion Menu > Perfil!</div>');
-                }																							
-			}
-		}
-		$data['perfiles'] = $this->PerfilesModel->getPerfiles();
-		$data['menus'] = $this->PerfilesModel->getMenus();
-		$this->load->view('perfiles/newMenuPerfil.php', $data);
-        $this->load->view('templates/footer.php');			
-	}	
-	
-	public function editMenuPerfil($id){				
-        $this->load->view('templates/header.php');  
-		
-        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('Id_Perfil', 'Perfil', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);	
-        $this->form_validation->set_rules('Id_Cat_Menu', 'Menu', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);			
-        $this->form_validation->set_rules('Descripcion', 'Descripción', 'required',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
-			)
-		);			
-		
-        if ($this->form_validation->run() == TRUE) {         
-            if ($this->input->method() == 'post'){
-                $data = array(
-					'Id_Perfil'	=>  $this->input->post('Id_Perfil'),
-                    'Id_Cat_Menu'	=>  $this->input->post('Id_Cat_Menu'),
-					'Descripcion'	=>  $this->input->post('Descripcion')					
-                );            
-                $error = $this->PerfilesModel->updateMenuPerfil($id, $data);
-                if ($error['code'] === 0){
-                    $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Edicion de Asignación Menu > Perfil registrado correctamente!</div>');
-                    redirect(base_url(). 'Perfiles/MenuPerfil');
-                }else{
-                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error en la Edicion Asignacion Menu > Perfil!</div>');
-                }																							
-			}
-		}
-		$data['perfiles'] = $this->PerfilesModel->getPerfiles();
-		$data['menus'] = $this->PerfilesModel->getMenus();
-		$data['edicion'] = $this->PerfilesModel->getByIdMenuPerfil($id);
-		$this->load->view('perfiles/editMenuPerfil.php', $data);
-        $this->load->view('templates/footer.php');			
-	}	
-	
-	
-	public function delMenuPerfil($id = NULL){        
-        $this->PerfilesModel->deleteMenuPerfil($id);
-        $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Asignacion Menu > Perfil borrado correctamente!</div>');
-        redirect(base_url(). 'Perfiles/MenuPerfil');  
-    }	
-	
+					
 	public function ColaboradorPerfil(){
         $config['base_url'] = base_url() . 'Perfiles/ColaboradorPerfil/';
         $config['total_rows'] = $this->PerfilesModel->countColaboradorPerfil();
@@ -400,11 +284,82 @@ class Perfiles extends CI_Controller {
     }		
 	
 	
+	public function getConfigPerfil(){
+        if ($this->input->method() == 'post'){ 
+			
+			$menus = array();
+				$raiz = $this->PerfilesModel->getMenus();																															
+				$level1 = $this->PerfilesModel->getSubMenus($raiz->Id_Cat_Prim);																					
+				foreach ($level1->result() as $row1) {   
+					$nombre_level1 = $row1->Nombre;	
+					$menus[$row1->Id_Cat_Prim] = $nombre_level1;					
+					$level2 = $this->PerfilesModel->getSubMenus($row1->Id_Cat_Prim);	
+					foreach ($level2->result() as $row2) { 
+						$nombre_level2 = $row2->Nombre;	
+						$menus[$row2->Id_Cat_Prim] = $nombre_level1 . " »» " . $nombre_level2;															
+						$level3 = $this->PerfilesModel->getSubMenus($row2->Id_Cat_Prim);	
+						foreach ($level3->result() as $row3) { 
+							$nombre_level3 = $row3->Nombre;		
+							$menus[$row3->Id_Cat_Prim] = $nombre_level1 . " »» " . $nombre_level2. " »» " . $nombre_level3;
+						}																									
+					}
+				}                                              
+			
+            #Recupera lo guardado                        
+            $Id_Perfil = $this->input->post('Id_Perfil');            
+            $result = $this->PerfilesModel->getMenusSavePerfiles($Id_Perfil); 
+            
+            foreach ($result->result() as $row){   
+                $select[] = array('Id_Cat_Prim' =>  $row->Id_Cat_Menu, 'Perfil' => ucwords($menus[$row->Id_Cat_Menu]));   
+            }
+            
+            if(isset($select)){
+                echo json_encode($select);                                         
+            }
+        } 										
+	}
+	
+    public function savePerfil(){
+        if ($this->input->method() == 'post'){ 
+            $perfil = $this->input->post('perfil');
+            $Id_Perfil = $this->input->post('Id_Perfil');       
+			
+            #Borramos todo lo que existe
+            $this->PerfilesModel->delConfigPerfil($Id_Perfil); 
+            
+			if(count($perfil) > 0){
+				foreach ($perfil as $valor) {
+					$data[] = array(
+						'Id_Perfil'   =>  $Id_Perfil, 
+						'Id_Cat_Menu'  =>  $valor
+					);                                
+				}     
+            #Guardamos todo lo nuevo
+            $this->PerfilesModel->saveConfigPerfil($data);       
+			} 
+            echo "ok";
+        }        
+    }	
 	
 	
-	
-	
-	
+	public function loadSelectPerfil(){
+		$raiz = $this->PerfilesModel->getMenus();																															
+		$level1 = $this->PerfilesModel->getSubMenus($raiz->Id_Cat_Prim);																					
+		foreach ($level1->result() as $row1) {   
+			$nombre_level1 = $row1->Nombre;	
+			echo '<option value="'. $row1->Id_Cat_Prim . '">'. $nombre_level1 . '</option>';																																		
+			$level2 = $this->PerfilesModel->getSubMenus($row1->Id_Cat_Prim);	
+			foreach ($level2->result() as $row2) { 
+				$nombre_level2 = $row2->Nombre;																
+				echo '<option value="' . $row2->Id_Cat_Prim .'">'. $nombre_level1 .' &raquo;&raquo; ' . $nombre_level2 .'</option>';
+				$level3 = $this->PerfilesModel->getSubMenus($row2->Id_Cat_Prim);	
+				foreach ($level3->result() as $row3) { 
+					$nombre_level3 = $row3->Nombre;																
+					echo '<option value="' . $row3->Id_Cat_Prim . '">'. $nombre_level1 .' &raquo;&raquo; '. $nombre_level2 . '&raquo;&raquo;' . $nombre_level3 . '</option>';														
+				}																									
+			}
+		}                                                     				
+	}	
 	
 	
 	

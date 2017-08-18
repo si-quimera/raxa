@@ -12,7 +12,10 @@
 	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/updateString/';
 	var path_ICCDID = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/validar/';
 	var path_username = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/genUsername/';
-	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/randomPassword/';	
+	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/randomPassword/';
+	var path_perfil = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/getConfigPerfil/';
+	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
+	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -618,10 +621,92 @@
 		reDrawTableOrder(identifica, order, by);	   
 	});	
 
+	
+	$('#Id_Perfil').on('change', function(event) {		
+		event.preventDefault(); 
+		
+		$('#search_to option').each(function(index, option) {
+			$(option).remove();
+		});		
+						
+		//load ....				
+		reDrawMenusSelect();		
+	});	
+	
+
+	// Recarga contenido de la tabla
+	function reDrawMenusSelect(){ 
+		
+		$.ajax({
+			url:   path_perfil_select,
+			type:  'post',
+			beforeSend: function () {
+			},
+			success:  function (response){                     
+			  $("#search").html(response);			  
+				var parametros = {                    
+					'Id_Perfil' : $("#Id_Perfil").val()
+				};				
+			  
+				$.ajax({
+					data:  parametros,
+					url:   path_perfil,
+					type:  'post',
+					beforeSend: function () {				
+					},
+					success:  function (code) {     				
+						if (code!=undefined && code!="" && code.length!=0){
+						   lugares = JSON.parse(code);
+							$.each(lugares, function (i, item) {
+								$("#search option[value='"+item.Id_Cat_Prim+"']").remove();
+								$('#search_to').append($('<option>', {
+									value: item.Id_Cat_Prim, text: item.Perfil
+								}));                                  						
+									
+							});                               
+						}	
+						//hide load
+					}
+				}); 			  
+			  
+			  
+			  
+			}
+		});						
+	}
 
 
 
+	$('#perfil_save').click(function(event) {         
+		event.preventDefault();                       
 
+		$('#search_to option').prop('selected', true); // Select All  
+		
+		var parametros = {                    
+			'Id_Perfil' : $("#Id_Perfil").val(),
+			'perfil' : $("select#search_to").val()
+		};		
+		
+		if($("#Id_Perfil").val() === "") {
+			var $toastContent = $('<span><i class="material-icons tiny">warning</i> Es necesario seleccionar un Perfil. </span>');
+			Materialize.toast($toastContent, 5000, 'red');
+		}else{                            
+			$.ajax({
+				url:        path_perfil_save,
+				type:       'post',
+				data:       parametros,
+				success:    function(code){                                
+				   if(code == 'ok' ){                                   					   
+						var $toastContent = $('<span><i class="material-icons">mode_edit</i> Se guardo la configuración del Perfil con exito! </span>');
+						Materialize.toast($toastContent, 7000, 'green');
+				   }else{
+						var $toastContent = $('<span><i class="material-icons tiny">warning</i> Error al guardar las configuracón del Perfil. </span>');
+						Materialize.toast($toastContent, 5000, 'red');  					
+				   }
+				}
+			}); 
+		}                                                                                                       
+	});
 
 
 

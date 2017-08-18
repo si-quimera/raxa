@@ -168,7 +168,7 @@ class PerfilesModel extends CI_Model{
 
     public function loadMenu($user) {
         $qry_menu_inicial = 
-           "SELECT m.Id_Cat_Prim, m.Id_Cat_Sec, 0 as nivel, 0 AS submenu , m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5 FROM Cat_Maestro m "
+           "SELECT DISTINCT m.Id_Cat_Prim, m.Id_Cat_Sec, 0 as nivel, 0 AS submenu , m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5 FROM Cat_Maestro m "
 				. "	JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu "
 				. " JOIN Colaborador_Perfil p ON p.Id_Perfil = mp.Id_Perfil "
 				. "WHERE Id_Colaborador = '".$user."' AND m.String1 = 1 AND p.activo = 1;";
@@ -182,17 +182,13 @@ class PerfilesModel extends CI_Model{
 			}
 		}
 		
-		//echo "<pre>";
-		//print_r($menu);
-		//echo "</pre>";
-        return $menu;
-	
+        return $menu;	
     }
 	
     private function cargaSubMenu($Id_Cat_Sec, $nivel) {		
 		$qry_menu_hijos = 
-           "SELECT m.Id_Cat_Prim,m.Id_Cat_Sec, 0 as nivel, NULL as submenu, m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
-            FROM Cat_Maestro m WHERE Id_Cat_Sec = ".$Id_Cat_Sec." AND m.String1 = ".$nivel." ;";		
+           "SELECT DISTINCT m.Id_Cat_Prim,m.Id_Cat_Sec, 0 as nivel, NULL as submenu, m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
+            FROM Cat_Maestro m JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu WHERE Id_Cat_Sec = ".$Id_Cat_Sec." AND m.String1 = ".$nivel." ORDER BY 1;";		
 				
         $submenu = $this->db->query($qry_menu_hijos)->result();			
         return $submenu;
@@ -231,8 +227,30 @@ class PerfilesModel extends CI_Model{
         return $this->db->get('Cat_Maestro');  
 	}
 
+    public function getMenusPerfiles(){
+		$this->db->where('String4', 'menu');
+		$this->db->order_by('String1', 'DESC');
+        $query = $this->db->get('Cat_Maestro');                      
+        return $query;        
+    } 	
 
-
+    public function getMenusSavePerfiles($id){
+		$this->db->where('Id_Perfil', $id);
+        $query = $this->db->get('Menu_Perfiles');                      
+        return $query;        
+    } 
+	
+    public function delConfigPerfil($id){
+        $this->db->where('Id_Perfil', $id);
+        $this->db->delete('Menu_Perfiles');
+    }  	
+	
+	
+    public function saveConfigPerfil($data){
+        $this->db->insert_batch('Menu_Perfiles',$data);        
+        return $error = $this->db->error();                           
+    }  	
+	
 	
 	
 	

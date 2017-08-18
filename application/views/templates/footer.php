@@ -30,6 +30,7 @@
         <script src="<?= base_url(); ?>webroot/js/utils.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/js/colors.js" type="text/javascript"></script>
 		<script src="<?= base_url(); ?>webroot/js/extra.js" type="text/javascript"></script>
+		<script src="<?= base_url(); ?>webroot/js/multiselect.min.js" type="text/javascript"></script>
         <!--<script src="<?= base_url(); ?>webroot/js/theme-switcher.js" type="text/javascript"></script> -->
         <!-- ################ -->
         <!-- Page javascripts -->
@@ -45,7 +46,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
 
-
+		
 		
 		<script type="text/javascript">
 			$( document ).ready(function() {
@@ -60,8 +61,7 @@
 				},
 				limit: 10		
 				});
-				
-				
+											
 				$('#Id_Cat_Sec').select2();			
 				$('#Jefe_Inmediato').select2();
 				$('#Id_Cat_Puesto').select2();
@@ -69,6 +69,7 @@
 				$('#Id_Colaborador').select2();
 				$('#Id_Cat_Menu').select2();
 				
+				$('#search').multiselect();				
 
 			});	  		
 		</script>					
