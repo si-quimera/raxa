@@ -4,15 +4,15 @@
 	
 //$("#table").hide();	
 	
-	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/selectSubs/';	
-	var path_table = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/drawTabla/';
-	var path_table_order = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/drawTablaOrder/';	
-	var path_add = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/newString/';
-	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/delString/';
-	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/updateString/';
+	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/selectSubs/';	
+	var path_table = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/drawTabla/';
+	var path_table_order = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/drawTablaOrder/';	
+	var path_add = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/newString/';
+	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/delString/';
+	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/updateString/';
 	var path_ICCDID = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/validar/';
-	var path_username = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/genUsername/';
-	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalagos/randomPassword/';
+	var path_username = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/genUsername/';
+	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/randomPassword/';
 	var path_perfil = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/getConfigPerfil/';
 	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
 	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
@@ -629,7 +629,7 @@
 			$(option).remove();
 		});		
 						
-		//load ....				
+		$("#preload").show();				
 		reDrawMenusSelect();		
 	});	
 	
@@ -666,6 +666,7 @@
 							});                               
 						}	
 						//hide load
+						$("#preload").hide();
 					}
 				}); 			  
 			  

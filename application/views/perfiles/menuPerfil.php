@@ -40,13 +40,18 @@
                         echo form_open('', 'id="frmPerfiles"');  
                         ?> 
                             <div class="row">
+								<div style="height: 20px;">
+									<div class="progress" id="preload" style="display: none;">
+										<div class="indeterminate"></div>
+									</div>
+								</div>									
                                 <div class="col s12 m12">
                                     <?php
                                     $msg = $this->session->flashdata('msg');
                                     if ($msg){
                                         echo $msg;
                                     }
-                                    ?>                             
+                                    ?>  
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">                                           
                                             <div class="row no-gutter">
@@ -99,9 +104,6 @@
                                         </div>
                                         <div class="panel-footer">
                                             <div class="right-align">
-                                                <button type="reset" class="btn-flat waves-effect">
-                                                    BORRAR
-                                                </button>
                                                 <button type="button" id="perfil_save" class="btn-flat waves-effect">
                                                     GUARDAR
                                                 </button>

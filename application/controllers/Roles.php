@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Roles extends CI_Controller {
 	public function index(){
-        $config['base_url'] = base_url() . 'catalagos/zona/';
+        $config['base_url'] = base_url() . 'Catalogos/zona/';
         $config['total_rows'] = $this->RolesModel->countRoles();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
