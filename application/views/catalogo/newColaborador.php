@@ -108,11 +108,33 @@
 													<?php echo form_error('Tel'); ?>
                                                 </div>
                                                 <div class="input-field col s6">
+                                                </div>	          												
+                                            </div> 	
+                                            <div class="row no-gutter">
+                                                <div class="input-field col s6">
                                                     <input name="Cel" id="Cel" type="text" value="<?= $this->input->post('Cel') ?>">
                                                     <label for="Cel">Cel</label>
 													<?php echo form_error('Cel'); ?>
-                                                </div>	          												
-                                            </div> 	
+                                                </div>												
+                                                <div class="input-field col s6">
+                                                    <input name="IMEI" id="IMEI" type="text" value="<?= $this->input->post('IMEI') ?>">
+                                                    <label for="IMEI">IMEI</label>
+													<?php echo form_error('IMEI'); ?>
+                                                </div>          												
+                                            </div> 		
+                                            <div class="row no-gutter">
+                                                <div class="input-field col s6">
+                                                    <input name="Cel2" id="Cel2" type="text" value="<?= $this->input->post('Cel2') ?>">
+                                                    <label for="Cel2">Cel 2</label>
+													<?php echo form_error('Cel2'); ?>
+                                                </div>													
+                                                <div class="input-field col s6">
+                                                    <input name="IMEI2" id="IMEI2" type="text" value="<?= $this->input->post('IMEI2') ?>">
+                                                    <label for="IMEI2">IMEI 2</label>
+													<?php echo form_error('IMEI2'); ?>
+                                                </div>										
+                                            </div> 											
+
                                             <div class="row no-gutter">
                                                 <div class="input-field col s6">
                                                     <input name="email" id="email" type="text" value="<?= $this->input->post('email') ?>">
@@ -197,11 +219,22 @@
 															}
 														}                                              
                                                     ?>
-                                                    </select>
-                                                   
+                                                    </select>                                                   
                                                     <?php echo form_error('Id_Cat_Puesto'); ?>														
                                                 </div>	          												
-                                            </div> 												
+                                            </div> 	
+                                            <div class="row no-gutter">
+                                                <div class="input-field col s6">													
+                                                    <select name="Activo" id="Activo">
+                                                        <option value="" disabled selected>Elija su opción</option>	
+														<option value="1" <?= $this->PerfilesModel->setSelect('1', $this->input->post('Activo')); ?>>Si</option>
+														<option value="0" <?= $this->PerfilesModel->setSelect('0', $this->input->post('Activo')); ?>>No</option>
+                                                    </select>            
+													<label for="Activo">Activo</label>
+                                                    <?php echo form_error('Activo'); ?>
+                                                </div>	
+                                                <div class="input-field col s6"></div>												
+                                            </div>  											
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
                                                     <input name="User" id="User" type="text" value="<?= $this->input->post('User') ?>" placeholder=" ">

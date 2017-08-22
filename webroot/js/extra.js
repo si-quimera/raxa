@@ -10,12 +10,14 @@
 	var path_add = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/newString/';
 	var path_del = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/delString/';
 	var path_update = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/updateString/';
-	var path_ICCDID = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/validar/';
+	var path_ICCDID_almacen = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarAlmacen/';
+	var path_ICCDID = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/Validar/';
 	var path_username = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/genUsername/';
 	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/randomPassword/';
 	var path_perfil = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/getConfigPerfil/';
 	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
 	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
+	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';	
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -290,9 +292,17 @@
 	});
 
 
-	$('#button-validar').on('click', function() {						
+	$('#button-almacen').on('click', function() {	
+		
 		var ICCDID_del = $("#ICCDID_del").val();
 		var ICCDID_al = $("#ICCDID_al").val();
+		var Id_Almacen_From = $("#Id_Almacen_From").val();
+				
+		if(Id_Almacen_From == 0){
+			path = path_ICCDID_almacen;
+		}else{
+			path = path_ICCDID;
+		}
 		
 		$("#msg-validar").html('');
 		$("#list-ICCDID").html('');
@@ -302,6 +312,12 @@
 			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
 			$("#msg-validar").html('');
 			$("#list-ICCDID").html('');			
+		}else if(Id_Almacen_From == ""){
+			var $toastContent = $('<span><i class="material-icons">warning</i> Es necesario seleccionar un Almacen de Origen</span>');
+			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
+			$("#msg-validar").html('');
+			$("#list-ICCDID").html('');			
+		
 		}else{						
 			var number_del = ICCDID_del.substring(0, 18);
 			var number_al = ICCDID_al.substring(0, 18);
@@ -309,11 +325,12 @@
 			if(number_del <= number_al){
 				var parametros = {       
 					'ICCDID_al' : ICCDID_al,
-					'ICCDID_del' : ICCDID_del
+					'ICCDID_del' : ICCDID_del,
+					'Id_Almacen_From' : Id_Almacen_From
 				};							
 				$.ajax({
 					data:  parametros,
-					url:   path_ICCDID,
+					url:   path,
 					type:  'post',
 					beforeSend: function() {
 					},
@@ -334,30 +351,6 @@
 		$("#table").html('');
 	});
 
-	$('#Id_Almacen').on('change', function() {
-		$("#Id_Ascendente").val('');
-		$("#Id_Adjuntos").val('');
-		$("#Id_Desendentes").val('');
-		if ($('#Id_Almacen').val() !== ""){
-			//Activamos por si esta desactivado
-			$('#Id_Almacen').prop('disabled', false);
-			//Desactivamos todos y cambiamos de color
-			$('#Id_Ascendente').prop('disabled', 'disabled');						
-			$('#Id_Ascendente').addClass('blue-grey lighten-4');
-			$('#Id_Adjuntos').prop('disabled', 'disabled');						
-			$('#Id_Adjuntos').addClass('blue-grey lighten-4');
-			$('#Id_Desendentes').prop('disabled', 'disabled');						
-			$('#Id_Desendentes').addClass('blue-grey lighten-4');			
-		}else{
-			$('#Id_Ascendente').prop('disabled', false);
-			$('#Id_Ascendente').removeClass('blue-grey lighten-4');
-			$('#Id_Adjuntos').prop('disabled', false);
-			$('#Id_Adjuntos').removeClass('blue-grey lighten-4');
-			$('#Id_Desendentes').prop('disabled', false);
-			$('#Id_Desendentes').removeClass('blue-grey lighten-4');			
-		}				
-	});	
-
 	$('#Id_Ascendente').on('change', function() {
 		$("#Id_Almacen").val('');
 		$("#Id_Adjuntos").val('');
@@ -366,19 +359,11 @@
 			//Activamos por si esta desactivado
 			$('#Id_Ascendente').prop('disabled', false);
 			//Desactivamos todos y cambiamos de color
-			if($("#isGZ").val() == 1){
-				$('#Id_Almacen').prop('disabled', 'disabled');						
-				$('#Id_Almacen').addClass('blue-grey lighten-4');
-			}
 			$('#Id_Adjuntos').prop('disabled', 'disabled');						
 			$('#Id_Adjuntos').addClass('blue-grey lighten-4');
 			$('#Id_Desendentes').prop('disabled', 'disabled');						
 			$('#Id_Desendentes').addClass('blue-grey lighten-4');			
 		}else{
-			if($("#isGZ").val() == 1){
-				$('#Id_Almacen').prop('disabled', false);
-				$('#Id_Almacen').removeClass('blue-grey lighten-4');
-			}
 			$('#Id_Adjuntos').prop('disabled', false);
 			$('#Id_Adjuntos').removeClass('blue-grey lighten-4');
 			$('#Id_Desendentes').prop('disabled', false);
@@ -396,19 +381,11 @@
 			//Desactivamos todos y cambiamos de color
 			$('#Id_Ascendente').prop('disabled', 'disabled');						
 			$('#Id_Ascendente').addClass('blue-grey lighten-4');
-			if($("#isGZ").val() == 1){
-				$('#Id_Almacen').prop('disabled', 'disabled');						
-				$('#Id_Almacen').addClass('blue-grey lighten-4');
-			}
 			$('#Id_Desendentes').prop('disabled', 'disabled');						
 			$('#Id_Desendentes').addClass('blue-grey lighten-4');			
 		}else{
 			$('#Id_Ascendente').prop('disabled', false);
-			$('#Id_Ascendente').removeClass('blue-grey lighten-4');
-			if($("#isGZ").val() == 1){
-				$('#Id_Almacen').prop('disabled', false);
-				$('#Id_Almacen').removeClass('blue-grey lighten-4');
-			}	
+			$('#Id_Ascendente').removeClass('blue-grey lighten-4');	
 			$('#Id_Desendentes').prop('disabled', false);
 			$('#Id_Desendentes').removeClass('blue-grey lighten-4');			
 		}				
@@ -424,19 +401,11 @@
 			//Desactivamos todos y cambiamos de color
 			$('#Id_Ascendente').prop('disabled', 'disabled');						
 			$('#Id_Ascendente').addClass('blue-grey lighten-4');
-			if($("#isGZ").val() == 1){
-				$('#Id_Almacen').prop('disabled', 'disabled');						
-				$('#Id_Almacen').addClass('blue-grey lighten-4');
-			}
 			$('#Id_Adjuntos').prop('disabled', 'disabled');						
 			$('#Id_Adjuntos').addClass('blue-grey lighten-4');			
 		}else{
 			$('#Id_Ascendente').prop('disabled', false);
 			$('#Id_Ascendente').removeClass('blue-grey lighten-4');
-			if($("#isGZ").val() == 1){
-				$('#Id_Almacen').prop('disabled', false);
-				$('#Id_Almacen').removeClass('blue-grey lighten-4');
-			}
 			$('#Id_Adjuntos').prop('disabled', false);
 			$('#Id_Adjuntos').removeClass('blue-grey lighten-4');			
 		}				
@@ -710,9 +679,81 @@
 	});
 
 
+	$('#Id_Colaboradores').on('change', function() {
+		$("#Id_Almacen_To").val('');
+		if ($('#Id_Colaboradores').val() !== ""){
+			//Activamos por si esta desactivado
+			$('#Id_Colaboradores').prop('disabled', false);
+			//Desactivamos todos y cambiamos de color
+			$('#Id_Almacen_To').prop('disabled', 'disabled');						
+			$('#Id_Almacen_To').addClass('blue-grey lighten-4');			
+		}else{
+			$('#Id_Almacen_To').prop('disabled', false);
+			$('#Id_Almacen_To').removeClass('blue-grey lighten-4');
+			$('#Id_Colaboradores').prop('disabled', false);
+			$('#Id_Colaboradores').removeClass('blue-grey lighten-4');			
+		}				
+	});
+	
+	$('#Id_Almacen_To').on('change', function() {
+		$("#Id_Colaboradores").val('');
+		if ($('#Id_Almacen_To').val() !== ""){
+			//Activamos por si esta desactivado
+			$('#Id_Almacen_To').prop('disabled', false);
+			//Desactivamos todos y cambiamos de color
+			$('#Id_Colaboradores').prop('disabled', 'disabled');						
+			$('#Id_Colaboradores').addClass('blue-grey lighten-4');			
+		}else{
+			$('#Id_Almacen_To').prop('disabled', false);
+			$('#Id_Almacen_To').removeClass('blue-grey lighten-4');
+			$('#Id_Colaboradores').prop('disabled', false);
+			$('#Id_Colaboradores').removeClass('blue-grey lighten-4');			
+		}				
+	});	
 
-
-
+	$('#button-validar').on('click', function() {	
+		
+		var ICCDID_del = $("#ICCDID_del").val();
+		var ICCDID_al = $("#ICCDID_al").val();
+		var Id_Colaborador = $("#Id_Colaborador").val();
+				
+		
+		$("#msg-validar").html('');
+		$("#list-ICCDID").html('');
+		
+		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){			
+			var $toastContent = $('<span><i class="material-icons">warning</i> ICCDID incompleto para hacer la validación. </span>');
+			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
+			$("#msg-validar").html('');
+			$("#list-ICCDID").html('');			
+		}else{						
+			var number_del = ICCDID_del.substring(0, 18);
+			var number_al = ICCDID_al.substring(0, 18);
+			
+			if(number_del <= number_al){
+				var parametros = {       
+					'ICCDID_al' : ICCDID_al,
+					'ICCDID_del' : ICCDID_del,
+					'Id_Colaborador' : Id_Colaborador
+				};							
+				$.ajax({
+					data:  parametros,
+					url:   path_ICCDID_colaborador,
+					type:  'post',
+					beforeSend: function() {
+					},
+					success:  function (response) { 					
+						$("#table").html(response);
+						$('html, body').animate({scrollTop:1000},'500');
+						$("#table").show();
+					}
+				}); 		
+			}else{
+				var $toastContent = $('<span><i class="material-icons tiny">warning</i> ICCDID Del debe ser menor que ICCDID Al . </span>');
+				Materialize.toast($toastContent, 5000, 'yellow darken-3');					
+			}	
+		}				
+	});
 
 
 

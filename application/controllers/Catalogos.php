@@ -1001,7 +1001,11 @@ class Catalogos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);			
-		
+        $this->form_validation->set_rules('Activo', 'Activo', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
 		
 
         if ($this->form_validation->run() == TRUE) {         
@@ -1022,10 +1026,14 @@ class Catalogos extends CI_Controller {
 					'Pais'	=>  $this->input->post('Pais'),
 					'Tel'	=>  $this->input->post('Tel'),
 					'Cel'	=>  $this->input->post('Cel'),
+					'IMEI'	=>  $this->input->post('IMEI'),
+					'Cel2'	=>  $this->input->post('Cel2'),
+					'IMEI2'	=>  $this->input->post('IMEI2'),					
 					'email'	=>  $this->input->post('email'),
 					'Id_Grupo'	=>  $this->input->post('Id_Grupo'),
 					'Password'	=>  $Password,
 					'User'	=>  $this->input->post('User'),
+					'Activo' =>  $this->input->post('Activo'),
                 );            
                 $error = $this->CatalogoModel->addColaborador($data);
                 if ($error['code'] === 0){
@@ -1095,9 +1103,12 @@ class Catalogos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);			
-        $this->form_validation->set_rules('CP', 'CP', 'required',
+        $this->form_validation->set_rules('CP', 'CP', 'required|numeric|max_length[5]|min_length[5]',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe ser numerico.',
+					'min_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 5 digitos.',
+					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 5 digitos.'
 			)
 		);	
         $this->form_validation->set_rules('Estado', 'Estado', 'required',
@@ -1110,14 +1121,20 @@ class Catalogos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);			
-        $this->form_validation->set_rules('Tel', 'Tel', 'required',
+        $this->form_validation->set_rules('Tel', 'Tel', 'required|numeric|max_length[10]|min_length[10]',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe ser numerico.',
+					'min_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.',				
+					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.'				
 			)
 		);	
-        $this->form_validation->set_rules('Cel', 'Cel', 'required',
+        $this->form_validation->set_rules('Cel', 'Cel', 'required|numeric|max_length[10]|min_length[10]',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe ser numerico.',
+					'min_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.',				
+					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.'				
 			)
 		);			
         $this->form_validation->set_rules('email', 'email', 'required|valid_email',
@@ -1125,7 +1142,18 @@ class Catalogos extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
 					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'
 			)
-		);		
+		);				
+        $this->form_validation->set_rules('Id_Cat_Puesto', 'Puesto', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('Activo', 'Activo', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+				
 		
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
@@ -1147,10 +1175,14 @@ class Catalogos extends CI_Controller {
 					'Pais'	=>  $this->input->post('Pais'),
 					'Tel'	=>  $this->input->post('Tel'),
 					'Cel'	=>  $this->input->post('Cel'),
+					'IMEI'	=>  $this->input->post('IMEI'),
+					'Cel2'	=>  $this->input->post('Cel2'),
+					'IMEI2'	=>  $this->input->post('IMEI2'),
 					'email'	=>  $this->input->post('email'),
 					'Id_Grupo'	=>  $this->input->post('Id_Grupo'),
 					'Password'	=>  $Password,
-					'User'	=>  $this->input->post('User'),															
+					'User'	=>  $this->input->post('User'),	
+					'Activo' =>  $this->input->post('Activo'),
                 );            
                 $error = $this->CatalogoModel->updateColaborador($id, $data);
                 if ($error['code'] === 0){

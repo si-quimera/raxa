@@ -1,17 +1,5 @@
 <?php
 $usuario = $this->session->userdata('usuario');
-$perfil = strtoupper($usuario['perfil']->Descripcion);
-$puesto_user = $this->AsignacionChipModel->getPerfilAccess($perfil);
-
-
-if($puesto_user['Error'] == 1 ){
-	$id_colaborador = $usuario['Id_Colaborador'];		
-}else{	
-	$data_perfil = $this->AsignacionChipModel->getColaboradorPerfil($puesto_user['Id_Perfil']);	
-	$id_colaborador = $data_perfil->Id_Colaborador;
-}
-
-
 ?>
 		<!-- ####### -->
         <!-- Content -->
@@ -25,7 +13,7 @@ if($puesto_user['Error'] == 1 ){
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">sd_storage</i> ASIGNACION DE CHIP
+				                <i class="material-icons">sd_storage</i> ASIGNACION DE CHIP ENTRE ALMACEN
 				            </h1>
 				        </div>
 				    </div>
@@ -41,7 +29,7 @@ if($puesto_user['Error'] == 1 ){
                             </button>
                         </div>			
                         <?php
-                        echo form_open('AsignacionChip/'); 
+                        echo form_open('AsignacionChip/Almacen/'); 
                         ?> 
                             <div class="row">
                                 <div class="col s12 m12">
@@ -51,7 +39,6 @@ if($puesto_user['Error'] == 1 ){
                                         echo $msg;
                                     }																											
                                     ?>                    
-									<input type="hidden" name="Id_Colaborador" id="Id_Colaborador" value="<?= $usuario['Id_Colaborador'] ?>"> 
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">    											
                                             <div class="row no-gutter">
@@ -67,20 +54,21 @@ if($puesto_user['Error'] == 1 ){
 													<label for="ICCDID_al">ICCDID Al</label>													                                                  
                                                     <?php echo form_error('ICCDID_al'); ?>																																							
                                                 </div>	
-												<div class="input-field col s2">
-													<button class="btn waves-effect waves-light" id="button-validar" type="button" name="button-validar">
-														Consultar
+												<div class="input-field col s2">																									
+													<button class="btn waves-effect waves-light" id="button-almacen" type="button" name="button-almacen">
+														Validar
 													</button>													
 												</div>
                                             </div>  												
 											<div class="row no-gutter" id="form-colaborador">
 												<div class="col s6 offset-s3">
-													<label for="Id_Ascendente">Colaborador Ascendente</label>
-                                                    <select name="Id_Ascendente" id="Id_Ascendente" class="browser-default">
+													<label for="Id_Almacen_From">Almacen Origen</label>
+                                                    <select name="Id_Almacen_From" id="Id_Almacen_From" class="browser-default">
                                                         <option value="" selected>Elija su opción</option>
+														<option value="0" <?= $this->PerfilesModel->setSelect('0', $this->input->post('Id_Almacen_From')); ?>>Almacen Central</option>
                                                     <?php
-                                                       foreach ($ascendente as $key => $row) {    
-														   if($key == $this->input->post('Id_Ascendente')){														   
+                                                       foreach ($almacen as $key => $row) {    
+														   if($key == $this->input->post('Id_Almacen_From')){														   
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php
@@ -90,28 +78,26 @@ if($puesto_user['Error'] == 1 ){
 													<?php	
 														   }
                                                        }                                               
-                                                    ?>
+                                                    ?>													
                                                     </select>                                                    
-                                                    <?php echo form_error('Id_Ascendente'); ?>																											
+                                                    <?php echo form_error('Id_Almacen_From'); ?>																																																					
 												</div>	
 												<!-- human -->
-												<div class="col s6">
-													<p class="right-align large blue-text">
+												<div class="col s12">
+													<p class="center-align large blue-text">
 														<strong>																												
 														<?= $usuario['Nombre'] . ' ' . $usuario['Ap_Pat'] . ' ' . $usuario['Ap_Mat'] ?><br>
 														<i class="material-icons large blue-text">accessibility</i>
 														</strong>
 													</p>
 												</div>
-												<!-- human -->
-												<div class="col s6 ">													
-													<br><br>
-													<label for="Id_Adjuntos">Colaboradores Adjuntos</label>
-                                                    <select name="Id_Adjuntos" id="Id_Adjuntos" class="browser-default">
+												<div class="col s6 offset-s3">
+													<label for="Id_Almacen_To">Almacen Destino</label>
+                                                    <select name="Id_Almacen_To" id="Id_Almacen_To" class="browser-default">
                                                         <option value="" selected>Elija su opción</option>
-                                                    <?php												
-                                                       foreach ($adjunto as $key => $row) {    
-														   if($key == $this->input->post('Id_Adjuntos')){														   
+                                                    <?php
+                                                       foreach ($almacen as $key => $row) {    
+														   if($key == $this->input->post('Id_Almacen_To')){														   
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php
@@ -123,120 +109,27 @@ if($puesto_user['Error'] == 1 ){
                                                        }                                               
                                                     ?>
                                                     </select>                                                    
-                                                    <?php echo form_error('Id_Adjuntos'); ?>																																
-												</div>
-												<div class="col s6 offset-s3">
-													<label for="Id_Desendentes">Colaboradores Desendentes</label>
-                                                    <select name="Id_Desendentes" id="Id_Desendentes" class="browser-default">
+                                                    <?php echo form_error('Id_Almacen_To'); ?>	
+													
+													
+													<label for="Id_Colaboradores">Colaborador Destino</label>
+                                                    <select name="Id_Colaboradores" id="Id_Colaboradores" class="browser-default">
                                                         <option value="" selected>Elija su opción</option>
-                                                    <?php														
-														$raiz = $this->AsignacionChipModel->getDataColaborador($id_colaborador);
-														foreach ($raiz->result() as $row) {    
-															$puesto = $this->AsignacionChipModel->getPuestoColaborador($row->Id_Cat_Puesto);
-															$raiz_nombre =  $puesto->Nombre . ' - ' .$row->Nombre. ' ' . $row->Ap_Pat . ' ' . $row->Ap_Mat;
-															if($row->Id_Colaborador == $this->input->post('Id_Desendentes')){														   
+                                                    <?php
+                                                       foreach ($admins as $key => $row) {    
+														   if($key == $this->input->post('Id_Colaboradores')){														   
 													?>
-														<option value="<?= $row->Id_Colaborador ?>" selected="selected"><?= $raiz_nombre ?></option>
+														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php
 														   }else{
 													?>														   
-														<option value="<?= $row->Id_Colaborador ?>"><?= $raiz_nombre ?></option>
+														<option value="<?= $key ?>"><?= $row ?></option>
 													<?php	
 														   }
-														   # ------- #
-															$nivel1 = $this->AsignacionChipModel->getDataColaborador($row->Id_Colaborador);
-															foreach ($nivel1->result() as $row1) {
-																$puesto = $this->AsignacionChipModel->getPuestoColaborador($row1->Id_Cat_Puesto);																
-																$row1_nombre = $puesto->Nombre . ' - ' . $row1->Nombre. ' ' . $row1->Ap_Pat . ' ' . $row1->Ap_Mat;	
-																if($row1->Id_Colaborador == $this->input->post('Id_Desendentes')){
-													?>
-																<option value="<?= $row1->Id_Colaborador ?>" selected="selected"><?= $row1_nombre ?></option>																																
-													<?php			
-																}else{
-													?>				
-																<option value="<?= $row1->Id_Colaborador ?>"><?= $row1_nombre ?></option>																																		
-													<?php																
-																}																		
-																# ------- #
-																$nivel2 = $this->AsignacionChipModel->getDataColaborador($row1->Id_Colaborador);
-																foreach ($nivel2->result() as $row2) {
-																	$puesto = $this->AsignacionChipModel->getPuestoColaborador($row2->Id_Cat_Puesto);	
-																	$row2_nombre = $puesto->Nombre . ' - ' . $row2->Nombre. ' ' . $row2->Ap_Pat . ' ' . $row2->Ap_Mat;	
-																	if($row2->Id_Colaborador == $this->input->post('Id_Desendentes')){
-														?>
-																	<option value="<?= $row2->Id_Colaborador ?>" selected="selected"><?= $row2_nombre ?></option>																																
-														<?php			
-																	}else{
-														?>				
-																	<option value="<?= $row2->Id_Colaborador ?>"><?= $row2_nombre ?></option>																																		
-														<?php																
-																	}																		
-																	# ------- #
-																	$nivel3 = $this->AsignacionChipModel->getDataColaborador($row2->Id_Colaborador);
-																	foreach ($nivel3->result() as $row3) {
-																		$puesto3 = $this->AsignacionChipModel->getPuestoColaborador($row3->Id_Cat_Puesto);
-																		$row3_nombre = $puesto3->Nombre . ' - ' . $row3->Nombre. ' ' . $row3->Ap_Pat . ' ' . $row3->Ap_Mat;	
-																		if($row3->Id_Colaborador == $this->input->post('Id_Desendentes')){
-															?>
-																		<option value="<?= $row3->Id_Colaborador ?>" selected="selected"><?= $row3_nombre ?></option>																																
-															<?php			
-																		}else{
-															?>				
-																		<option value="<?= $row3->Id_Colaborador ?>"><?= $row3_nombre ?></option>																																		
-															<?php																
-																		}																			
-																		# ------- #
-																		$nivel4 = $this->AsignacionChipModel->getDataColaborador($row3->Id_Colaborador);
-																		foreach ($nivel4->result() as $row4) {
-																			$puesto4 = $this->AsignacionChipModel->getPuestoColaborador($row4->Id_Cat_Puesto);
-																			$row4_nombre = $puesto4->Nombre . ' - ' .$row4->Nombre. ' ' . $row4->Ap_Pat . ' ' . $row4->Ap_Mat;	
-																			if($row4->Id_Colaborador == $this->input->post('Id_Desendentes')){
-																?>
-																			<option value="<?= $row4->Id_Colaborador ?>" selected="selected"><?= $row4_nombre ?></option>																																
-																<?php			
-																			}else{
-																?>				
-																			<option value="<?= $row4->Id_Colaborador ?>"><?= $row4_nombre ?></option>																																		
-																<?php																
-																			}	
-																			# ------- #
-																			$nivel5 = $this->AsignacionChipModel->getDataColaborador($row4->Id_Colaborador);
-																			foreach ($nivel5->result() as $row5) {
-																				$puesto5 = $this->AsignacionChipModel->getPuestoColaborador($row5->Id_Cat_Puesto);
-																				$row5_nombre = $puesto5->Nombre . ' - ' .$row5->Nombre . ' ' . $row5->Ap_Pat . ' ' . $row5->Ap_Mat;	
-																				if($row5->Id_Colaborador == $this->input->post('Id_Desendentes')){
-																	?>
-																				<option value="<?= $row5->Id_Colaborador ?>" selected="selected"><?= $row5_nombre ?></option>																																
-																	<?php			
-																				}else{
-																	?>				
-																				<option value="<?= $row5->Id_Colaborador ?>"><?= $row5_nombre ?></option>																																		
-																	<?php																
-																				}			
-																				# ------- #
-																				$nivel6 = $this->AsignacionChipModel->getDataColaborador($row5->Id_Colaborador);
-																				foreach ($nivel6->result() as $row6) {
-																					$puesto6 = $this->AsignacionChipModel->getPuestoColaborador($row6->Id_Cat_Puesto);
-																					$row6_nombre = $puesto6->Nombre . ' - ' .$row6->Nombre . ' ' . $row6->Ap_Pat . ' ' . $row6->Ap_Mat;	
-																					if($row6->Id_Colaborador == $this->input->post('Id_Desendentes')){
-																		?>
-																					<option value="<?= $row6->Id_Colaborador ?>" selected="selected"><?= $$row6_nombre ?></option>																																
-																		<?php			
-																					}else{
-																		?>				
-																					<option value="<?= $row6->Id_Colaborador ?>"><?= $row6_nombre ?></option>																																		
-																		<?php																
-																					}																																									
-																				}
-																			}
-																		}																		
-																	}																		
-																}																	
-															}	
                                                        }                                               
                                                     ?>
                                                     </select>                                                    
-                                                    <?php echo form_error('Id_Desendentes'); ?>													
+                                                    <?php echo form_error('Id_Colaboradores'); ?>														
 												</div>												
 											</div>	
                                             <div class="row no-gutter">
@@ -244,6 +137,7 @@ if($puesto_user['Error'] == 1 ){
 													<label for="Id_Cat_Sts_Asig_Chip">Estatus de Asignacion Chip</label>
                                                     <select name="Id_Cat_Sts_Asig_Chip" id="Id_Cat_Sts_Asig_Chip" class="browser-default">
                                                         <option value="" disabled selected>Elija su opción</option>
+														
                                                     <?php
                                                        foreach ($estatus as $key => $row) {    
 														   if($key == $this->input->post('Id_Cat_Sts_Asig_Chip')){														   

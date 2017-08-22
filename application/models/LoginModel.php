@@ -5,16 +5,32 @@ class LoginModel extends CI_Model{
     public function checkUser($user, $pass){				
         $this->db->where('User', $user);
         $query = $this->db->get('Cat_Colaboradores');        		
-		$usuario = $query->row_array();
-		
-		$Password = $this->encryption->decrypt($usuario['Password']);		
+		$usuario = $query->row_array();		
+		$Password = $this->encryption->decrypt($usuario['Password']);	
+		$Activo = $usuario['Activo'];
        
 		if (!isset($usuario)) return "Error: Usuario no existe.";       
 		if ($Password != $pass) return "Error: Contraseña incorrecta.";		
-												
+		if ($Activo == 0) return "Error: Usuario desactivado, contacte a su Administrador";
+		
+		
 		return $usuario;					
     } 	
 	
+	public function getPerfilData($id){
+        $query = "SELECT cat.Id_Perfil, cat.Descripcion FROM "
+				. "`Cat_Colaboradores` as c "
+				. "JOIN Colaborador_Perfil as p on c.Id_Colaborador = p.Id_Colaborador "
+				. "JOIN Cat_Perfiles as cat on p.Id_Perfil = "
+				. "cat.Id_Perfil WHERE c.Id_Colaborador = '".$id."' ";
+
+		return $this->db->query($query)->row();			 
+	}
+	
+
+
+
+
 	
 	
 }

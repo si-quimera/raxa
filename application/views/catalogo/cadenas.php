@@ -23,7 +23,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
 						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped" id="new_item" data-tooltip="Nuevo Item" data-position="top" data-delay="50" href="" data-target="modal1" disabled>
+							<a class="btn-floating btn-large tooltipped" id="new_item" data-tooltip="Nuevo Item" data-position="top" data-delay="50" href="#!" data-target="modal1">
 								<i class="large material-icons">add</i>
 							</a>							
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">

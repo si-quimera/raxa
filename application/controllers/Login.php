@@ -11,9 +11,10 @@ class Login extends CI_Controller {
                 $this->session->set_flashdata('msg', '<div class="card-panel red darken-4">'.$result.'</div>');
                 redirect(base_url(). 'Login/'); 
             } else {
-                #Datos Usuario
+                #Datos Usuario				
 				$id_user = $data['usuario']['Id_Colaborador'];
 				$data['usuario']['raxa_menu'] = $this->PerfilesModel->loadMenu($id_user);								
+				$data['usuario']['perfil'] = $this->LoginModel->getPerfilData($id_user);
                 $this->session->set_userdata($data);                    				
                 redirect(base_url()); 
             }									

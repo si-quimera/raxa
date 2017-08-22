@@ -227,7 +227,19 @@
                                                    
                                                     <?php echo form_error('Id_Cat_Puesto'); ?>														
                                                 </div>	          												
-                                            </div> 												
+                                            </div> 		
+                                            <div class="row no-gutter">
+                                                <div class="input-field col s6">													
+                                                    <select name="Activo" id="Activo">
+                                                        <option value="" disabled selected>Elija su opción</option>	
+														<option value="1" <?= $this->PerfilesModel->setSelect('1', $edicion->Activo); ?>>Si</option>
+														<option value="0" <?= $this->PerfilesModel->setSelect('0', $edicion->Activo); ?>>No</option>
+                                                    </select>            
+													<label for="Activo">Activo</label>
+                                                    <?php echo form_error('Activo'); ?>
+                                                </div>	
+                                                <div class="input-field col s6"></div>												
+                                            </div>  											
                                             <div class="row no-gutter">
                                                 <div class="input-field col s5">
                                                     <input name="User" id="User" type="text" value="<?= $edicion->User ?>">
