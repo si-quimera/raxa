@@ -361,19 +361,8 @@ class Perfiles extends CI_Controller {
 		}                                                     				
 	}	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
 	
 	
 	

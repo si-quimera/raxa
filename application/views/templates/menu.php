@@ -3,6 +3,8 @@ $user = $this->session->userdata('usuario');
 
 function cargaSubMenus($submenu) {
 	if (empty($submenu)) return "";
+
+	
 	$strSubMenu = "<ul id=\"" . $submenu[0]->String2. "\" class=\"dropdown-content\">" . PHP_EOL;
 	foreach ($submenu as $key => $value) {
 		if($value->String3 != ""){
@@ -74,7 +76,7 @@ if(!empty($user['raxa_menu'])){
                                         </div>
                                     </a>									
 									<ul id="dropdown-profile" class="dropdown-content">
-										<li><a href="#">Cambio de Password </a></li>
+										<li><a href="#!" data-position="top" data-delay="50" data-target="modal0">Cambio de Password </a></li>
 										<li><a href="<?= base_url() ?>Login/logout/">Cerrar la sesión </a></li>
 									</ul>									
 									
@@ -89,6 +91,73 @@ if(!empty($user['raxa_menu'])){
                                 <i class="material-icons">menu</i>
                             </a>
                         </div>
+						
+						<!-- Modal Structure Add-->
+						<div id="modal0" class="modal">
+							<div class="modal-content">
+								<h5></h5>										
+								<div class="crud-app">																				
+									<?php
+									$attributes = array('id' => 'myform');
+									echo form_open('/', $attributes);											
+									?> 
+										<div class="row">
+											<div class="col s12 m12">
+												<?php
+												$msg = $this->session->flashdata('msg');
+												if ($msg){
+													echo $msg;
+												}
+												?>                             		
+												<div class="panel-body">                                           
+													<div class="row no-gutter">		
+														<div class="input-field col s6 active">
+															<input name="Nombre" id="Nombre" type="text" value="" placeholder=" " disabled>
+															<label for="Nombre">Nombre</label>
+															<input type="hidden" name="update_id" id="update_id" value="" />
+														</div>																	
+														<div class="input-field col s6">
+															<input name="String1" id="String1" type="text" value="" placeholder=" ">
+															<label for="String1">String 1</label>
+														</div>																
+													</div>  
+													<div class="row no-gutter">
+														<div class="input-field col s6">
+															<input name="String2" id="String2" type="text" value=""  placeholder=" ">
+															<label for="String2">String 2</label>
+														</div>														
+														<div class="input-field col s6">
+															<input name="String3" id="String3" type="text" value="" placeholder=" ">
+															<label for="String3">String 3</label>
+														</div>												
+													</div>
+													<div class="row no-gutter">
+														<div class="input-field col s6">
+															<input name="String4" id="String4" type="text" value="" placeholder=" ">
+															<label for="String4">String 4</label>
+														</div>													
+														<div class="input-field col s6">
+															<input name="String5" id="String5" type="text" value="" placeholder=" ">
+															<label for="String5">String 5</label>
+														</div>												
+													</div>  											
+												</div>
+												<div class="panel-footer">
+													<div class="right-align">
+														<button type="button" class="btn-flat waves-effect modal-close">
+															CERRAR
+														</button>																
+														<button type="button" id="botton-edit" class="btn-flat waves-effect">
+															ACTUALIZAR
+														</button>																
+													</div>
+												</div>
+											</div>
+										</div>
+									<?= form_close() ?>						
+								</div>
+							</div>																						
+						</div>   						
 
 					
                         <!-- ########### -->

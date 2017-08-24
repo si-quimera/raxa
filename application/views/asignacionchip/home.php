@@ -1,15 +1,6 @@
 <?php
 $usuario = $this->session->userdata('usuario');
-$perfil = strtoupper($usuario['perfil']->Descripcion);
-$puesto_user = $this->AsignacionChipModel->getPerfilAccess($perfil);
-
-
-if($puesto_user['Error'] == 1 ){
-	$id_colaborador = $usuario['Id_Colaborador'];		
-}else{	
-	$data_perfil = $this->AsignacionChipModel->getColaboradorPerfil($puesto_user['Id_Perfil']);	
-	$id_colaborador = $data_perfil->Id_Colaborador;
-}
+$id_colaborador = $usuario['Id_Colaborador'];
 
 
 ?>
@@ -25,7 +16,7 @@ if($puesto_user['Error'] == 1 ){
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">sd_storage</i> ASIGNACION DE CHIP
+				                <i class="material-icons">sd_storage</i> ASIGNACION DE SIM(s)
 				            </h1>
 				        </div>
 				    </div>
@@ -51,7 +42,7 @@ if($puesto_user['Error'] == 1 ){
                                         echo $msg;
                                     }																											
                                     ?>                    
-									<input type="hidden" name="Id_Colaborador" id="Id_Colaborador" value="<?= $usuario['Id_Colaborador'] ?>"> 
+									<input type="hidden" name="Id_Colabora" id="Id_Colabora" value="<?= $usuario['Id_Colaborador'] ?>"> 
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">    											
                                             <div class="row no-gutter">
@@ -59,13 +50,15 @@ if($puesto_user['Error'] == 1 ){
 													<i class="material-icons prefix">sd_storage</i>
 													<input type="text" name="ICCDID_del" id="ICCDID_del" value="<?= $this->input->post('ICCDID_del') ?>" data-length="20" class="autocomplete">
 													<label for="ICCDID_del">ICCDID Del</label>													                                                  
-                                                    <?php echo form_error('ICCDID_del'); ?>																																							
+                                                    <?php echo form_error('ICCDID_del'); ?>	
+													<?php echo form_error('listar_simms[]'); ?>
                                                 </div>
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
 													<input type="text" name="ICCDID_al" id="ICCDID_al" value="<?= $this->input->post('ICCDID_al') ?>" data-length="20" class="autocomplete">
 													<label for="ICCDID_al">ICCDID Al</label>													                                                  
-                                                    <?php echo form_error('ICCDID_al'); ?>																																							
+                                                    <?php echo form_error('ICCDID_al'); ?>	
+													
                                                 </div>	
 												<div class="input-field col s2">
 													<button class="btn waves-effect waves-light" id="button-validar" type="button" name="button-validar">
@@ -305,11 +298,13 @@ if($puesto_user['Error'] == 1 ){
 											</p>	
 											<br>
 										</div>	
-										<div class="col s2"></div>
-										<div class="col s8">   
+										<div class="col s1"></div>
+										<div class="col s10">   
+											<div style="overflow: auto; height: 600px;">
 											<div id="table"></div>
+											</div>
 										</div>			
-										<div class="col s2"></div>	
+										<div class="col s1"></div>	
 									</div>																		
                                 </div>																
 

@@ -13,7 +13,7 @@ $usuario = $this->session->userdata('usuario');
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">sd_storage</i> ASIGNACION DE CHIP ENTRE ALMACEN
+				                <i class="material-icons">sd_storage</i> ASIGNACION DE SIM(s) ENTRE ALMACEN
 				            </h1>
 				        </div>
 				    </div>
@@ -46,7 +46,8 @@ $usuario = $this->session->userdata('usuario');
 													<i class="material-icons prefix">sd_storage</i>
 													<input type="text" name="ICCDID_del" id="ICCDID_del" value="<?= $this->input->post('ICCDID_del') ?>" data-length="20" class="autocomplete">
 													<label for="ICCDID_del">ICCDID Del</label>													                                                  
-                                                    <?php echo form_error('ICCDID_del'); ?>																																							
+                                                    <?php echo form_error('ICCDID_del'); ?>	
+													<?php echo form_error('listar_simms[]'); ?>
                                                 </div>
                                                 <div class="input-field col s5">
 													<i class="material-icons prefix">sd_storage</i>
@@ -199,11 +200,13 @@ $usuario = $this->session->userdata('usuario');
 											</p>	
 											<br>
 										</div>	
-										<div class="col s2"></div>
-										<div class="col s8">   
+										<div class="col s1"></div>
+										<div class="col s10">   
+											<div style="overflow: auto; height: 600px;">
 											<div id="table"></div>
+											</div>
 										</div>			
-										<div class="col s2"></div>	
+										<div class="col s1"></div>	
 									</div>																		
                                 </div>																
 

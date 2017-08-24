@@ -990,7 +990,7 @@ class Catalogos extends CI_Controller {
 					'max_length' => '<i class="material-icons tiny">do_not_disturb_on</i>%s debe tener 10 digitos.'				
 			)
 		);			
-        $this->form_validation->set_rules('email', 'email', 'required|valid_email',
+        $this->form_validation->set_rules('email', 'Correo Electronico', 'required|valid_email',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
 					'valid_email'	=> '<i class="material-icons tiny">do_not_disturb_on</i> %s debe contener una dirección de correo electrónico válida.'

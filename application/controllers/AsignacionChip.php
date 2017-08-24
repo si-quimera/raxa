@@ -4,20 +4,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class AsignacionChip extends CI_Controller {
 	public function index(){				
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('ICCDID_del', 'ICCDID Del', 'required|max_length[20]|min_length[20]',
+			
+		$this->form_validation->set_rules('listar_simms[]', 'ICCDID', 'required',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
-					'max_length'     => '* Se requiere 20 caracteres.',
-					'min_length'     => '* Se requiere 20 caracteres.'
-			)
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario seleccionar uno o mas de un %s de la lista de abajo.'
+			)								
 		);		
-        $this->form_validation->set_rules('ICCDID_al', 'ICCDID Al', 'required|max_length[20]|min_length[20]',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
-					'max_length'     => '* Se requiere 20 caracteres.',
-					'min_length'     => '* Se requiere 20 caracteres.'
-			)
-		);					
+		
         $this->form_validation->set_rules('Id_Ascendente', 'Ascendente', 'callback_selects_check',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
@@ -52,7 +45,7 @@ class AsignacionChip extends CI_Controller {
 				$Id_Cat_Sts_Asig_Chip = $this->input->post('Id_Cat_Sts_Asig_Chip');
 				$Id_Cat_Tipo_Producto = $this->input->post('Id_Cat_Tipo_Producto');		
 				$listar_simms = $this->input->post('listar_simms');
-				$Id_Colaborador = $this->input->post('Id_Colaborador');
+				$Id_Colaborador = $this->input->post('Id_Colabora');
 				
 								
 				$ICCDID_del = $this->input->post('ICCDID_del');
@@ -144,11 +137,15 @@ class AsignacionChip extends CI_Controller {
 		if ($this->input->method() == 'post'){
 			$ICCDID_del = $this->input->post('ICCDID_del');
 			$ICCDID_al = $this->input->post('ICCDID_al');			
-			$del = substr($ICCDID_del, 0,19);
-			$al = substr($ICCDID_al, 0,19);
+			$del = substr($ICCDID_del, 0,18);
+			$al = substr($ICCDID_al, 0,18);
 			$Id_Almacen_From = $this->input->post('Id_Almacen_From');
 			
-			$resutl = $this->AsignacionChipModel->getNumRangoICCDID($del, $al, $Id_Almacen_From);			
+			if($ICCDID_del == "" || $ICCDID_al == ""){				
+				$resutl = $this->AsignacionChipModel->getNumAllICCDID($Id_Almacen_From);			
+			}else{
+				$resutl = $this->AsignacionChipModel->getNumRangoICCDID($del, $al, $Id_Almacen_From);		
+			}
 			
 			$table = '<br><br>';
 			$table .= '<table class="striped" id="tabla_ICCDID">';
@@ -196,11 +193,16 @@ class AsignacionChip extends CI_Controller {
 	public function ValidarAlmacen(){
 		if ($this->input->method() == 'post'){
 			$ICCDID_del = $this->input->post('ICCDID_del');
-			$ICCDID_al = $this->input->post('ICCDID_al');			
-			$del = substr($ICCDID_del, 0,19);
-			$al = substr($ICCDID_al, 0,19);
-			
-			$resutl = $this->AsignacionChipModel->getNumRangoAlmacenICCDID($del, $al);			
+			$ICCDID_al = $this->input->post('ICCDID_al');	
+			$Id_Almacen_From = $this->input->post('Id_Almacen_From');
+			$del = substr($ICCDID_del, 0,18);
+			$al = substr($ICCDID_al, 0,18);
+						
+			if($ICCDID_del == "" || $ICCDID_al == ""){					
+				$resutl = $this->AsignacionChipModel->getNumAllAlmacenICCDID($Id_Almacen_From);
+			}else{				
+				$resutl = $this->AsignacionChipModel->getNumRangoAlmacenICCDID($del, $al, $Id_Almacen_From);	
+			}					
 			
 			$table = '<br><br>';
 			$table .= '<table class="striped" id="tabla_ICCDID">';
@@ -246,21 +248,13 @@ class AsignacionChip extends CI_Controller {
 	}	
 		
 	public function Almacen() {			
-        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('ICCDID_del', 'ICCDID Del', 'required|max_length[20]|min_length[20]',
+        $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');	
+		$this->form_validation->set_rules('listar_simms[]', 'ICCDID', 'required',
 			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
-					'max_length'     => '* Se requiere 20 caracteres.',
-					'min_length'     => '* Se requiere 20 caracteres.'
-			)
-		);		
-        $this->form_validation->set_rules('ICCDID_al', 'ICCDID Al', 'required|max_length[20]|min_length[20]',
-			array(
-					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
-					'max_length'     => '* Se requiere 20 caracteres.',
-					'min_length'     => '* Se requiere 20 caracteres.'
-			)
-		);				
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Es necesario seleccionar uno o mas de un %s de la lista de abajo.'
+			)				
+				
+		);					
         $this->form_validation->set_rules('Id_Almacen_From', 'Almacen Origen', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
@@ -286,8 +280,7 @@ class AsignacionChip extends CI_Controller {
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);			
-		
-				
+						
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){								
 				$Id_Almacen_From = $this->input->post('Id_Almacen_From');
@@ -336,7 +329,11 @@ class AsignacionChip extends CI_Controller {
 							$info = array(
 								'Fecha_Salida_RAXA_Ctrl' => date("Y-m-d H:i:s")
 							);
-							$error = $this->AsignacionChipModel->updateDateInvCentral($ICCDID, $info);																								
+							$error = $this->AsignacionChipModel->updateDateInvCentral($ICCDID, $info);	
+
+							$this->AsignacionChipModel->updateAlmacenInvCentralStatus($ICCDID, $Id_Almacen_From);
+							
+							
 						}					
 						unset($data);
 					}
@@ -389,11 +386,15 @@ class AsignacionChip extends CI_Controller {
 		if ($this->input->method() == 'post'){
 			$ICCDID_del = $this->input->post('ICCDID_del');
 			$ICCDID_al = $this->input->post('ICCDID_al');			
-			$del = substr($ICCDID_del, 0,19);
-			$al = substr($ICCDID_al, 0,19);
+			$del = substr($ICCDID_del, 0,18);
+			$al = substr($ICCDID_al, 0,18);
 			$Id_Colaborador = $this->input->post('Id_Colaborador');
 			
-			$resutl = $this->AsignacionChipModel->getNumRangoColaboradorICCDID($del, $al, $Id_Colaborador);			
+			if($ICCDID_del == "" || $ICCDID_al == ""){
+				$resutl = $this->AsignacionChipModel->getNumAllColaboradorICCDID($Id_Colaborador);						
+			}else{				
+				$resutl = $this->AsignacionChipModel->getNumRangoColaboradorICCDID($del, $al, $Id_Colaborador);	
+			}	
 			
 			$table = '<br><br>';
 			$table .= '<table class="striped" id="tabla_ICCDID">';
@@ -438,7 +439,11 @@ class AsignacionChip extends CI_Controller {
 		}		
 	}		
 	
-	
+	public function AutoColaborador() {		
+		$Id_Colaborador = $this->input->get('Id_Colaborador');
+		$result = $this->AsignacionChipModel->getAutoColaborador($Id_Colaborador);		
+		json_encode($result);		
+	}
 	
 	
 	

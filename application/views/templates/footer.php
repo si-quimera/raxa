@@ -1,4 +1,5 @@
-       <!-- ###### -->
+    
+		<!-- ###### -->
         <!-- Footer -->
         <!-- ###### -->
         <footer class="page-footer">		
@@ -39,28 +40,18 @@
         <script src="<?= base_url(); ?>webroot/bower_components/amcharts3/amcharts/serial.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/bower_components/amcharts3/amcharts/gauge.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/bower_components/amcharts3/amcharts/themes/light.js" type="text/javascript"></script>
-        <script src="<?= base_url(); ?>webroot/bower_components/slimscroll/jquery.slimscroll.js" type="text/javascript"></script>
-		
+        <script src="<?= base_url(); ?>webroot/bower_components/slimscroll/jquery.slimscroll.js" type="text/javascript"></script>		
         <script src="<?= base_url(); ?>webroot/js/pages/dashboard.js" type="text/javascript"></script>	
-
+        <!-- ################ -->
+        <!-- Extra javascripts -->
+        <!-- ################ -->
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
-
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.full.min.js"></script>				
 		
 		
 		<script type="text/javascript">
 			$( document ).ready(function() {
-				$('.autocomplete').autocomplete({
-				data: {
-					<?php
-					$iccdid = $this->AsignacionChipModel->getAllICCDID();
-					foreach ($iccdid as $key => $row){
-						echo "\"".$row->ICCDID."\" : null,\n";
-					}
-					?>
-				},
-				limit: 10		
-				});
+								
 											
 				$('#Id_Cat_Sec').select2();			
 				$('#Jefe_Inmediato').select2();
@@ -68,8 +59,7 @@
 				$('#Id_Perfil').select2();
 				$('#Id_Colaborador').select2();
 				$('#Id_Cat_Menu').select2();
-				
-				$('#search').multiselect();				
+				$('#ICCDID').select2();	
 
 			});	  		
 		</script>					

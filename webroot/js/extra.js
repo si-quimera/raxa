@@ -2,8 +2,6 @@
 	var origen = 'raxa/';	
 	//var origen = '';
 	
-//$("#table").hide();	
-	
 	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/selectSubs/';	
 	var path_table = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/drawTabla/';
 	var path_table_order = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/drawTablaOrder/';	
@@ -17,7 +15,7 @@
 	var path_perfil = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/getConfigPerfil/';
 	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
 	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
-	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';	
+	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';			
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -25,7 +23,7 @@
 		format: 'yyyy-mm-dd' ,
 		today: 'Hoy',
 		clear: 'Limpiar',
-		close: 'Aceptar',		
+		close: 'Aceptar'		
 	});
 
 	$('.dropdown-button2').dropdown({
@@ -154,8 +152,10 @@
 
 	//Activar Modal de otra manera no funciona
 	$('.modal').modal();
-		$('#modal1').on('click', function() {
-    });
+	
+	
+	//$('#modal1').on('click', function() {
+    //});
 	
 	//Activar Modal de otra manera no funciona
 	$('#new_item').on('click', function() {
@@ -307,43 +307,37 @@
 		$("#msg-validar").html('');
 		$("#list-ICCDID").html('');
 		
-		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){			
-			var $toastContent = $('<span><i class="material-icons">warning</i> ICCDID incompleto para hacer la validación. </span>');
-			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
-			$("#msg-validar").html('');
-			$("#list-ICCDID").html('');			
-		}else if(Id_Almacen_From == ""){
+		if(ICCDID_al == "" || ICCDID_del == ""){
+			var number_del = "";
+			var number_al =  "";								
+		}else{									
+			var number_del = ICCDID_del.substring(0, 18);
+			var number_al = ICCDID_al.substring(0, 18);
+		}		
+			
+		if(Id_Almacen_From == ""){
 			var $toastContent = $('<span><i class="material-icons">warning</i> Es necesario seleccionar un Almacen de Origen</span>');
 			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
 			$("#msg-validar").html('');
-			$("#list-ICCDID").html('');			
-		
+			$("#list-ICCDID").html('');					
 		}else{						
-			var number_del = ICCDID_del.substring(0, 18);
-			var number_al = ICCDID_al.substring(0, 18);
-			
-			if(number_del <= number_al){
-				var parametros = {       
-					'ICCDID_al' : ICCDID_al,
-					'ICCDID_del' : ICCDID_del,
-					'Id_Almacen_From' : Id_Almacen_From
-				};							
-				$.ajax({
-					data:  parametros,
-					url:   path,
-					type:  'post',
-					beforeSend: function() {
-					},
-					success:  function (response) { 					
-						$("#table").html(response);
-						$('html, body').animate({scrollTop:1000},'500');
-						$("#table").show();
-					}
-				}); 		
-			}else{
-				var $toastContent = $('<span><i class="material-icons tiny">warning</i> ICCDID Del debe ser menor que ICCDID Al . </span>');
-				Materialize.toast($toastContent, 5000, 'yellow darken-3');					
-			}	
+			var parametros = {       
+				'ICCDID_al' : ICCDID_al,
+				'ICCDID_del' : ICCDID_del,
+				'Id_Almacen_From' : Id_Almacen_From
+			};							
+			$.ajax({
+				data:  parametros,
+				url:   path,
+				type:  'post',
+				beforeSend: function() {
+				},
+				success:  function (response) { 					
+					$("#table").html(response);
+					$('html, body').animate({scrollTop:1000},'500');
+					$("#table").show();
+				}
+			}); 			
 		}				
 	});
 
@@ -715,49 +709,65 @@
 		
 		var ICCDID_del = $("#ICCDID_del").val();
 		var ICCDID_al = $("#ICCDID_al").val();
-		var Id_Colaborador = $("#Id_Colaborador").val();
-				
-		
+		var Id_Colaborador = $("#Id_Colabora").val();
+						
 		$("#msg-validar").html('');
 		$("#list-ICCDID").html('');
 		
-		if(ICCDID_al.length < 20 || ICCDID_del.length < 20){			
-			var $toastContent = $('<span><i class="material-icons">warning</i> ICCDID incompleto para hacer la validación. </span>');
-			Materialize.toast($toastContent, 5000, 'yellow darken-3');	
-			$("#msg-validar").html('');
-			$("#list-ICCDID").html('');			
-		}else{						
+		if(ICCDID_al == "" || ICCDID_del == ""){
+			var number_del = "";
+			var number_al =  "";								
+		}else{									
 			var number_del = ICCDID_del.substring(0, 18);
 			var number_al = ICCDID_al.substring(0, 18);
-			
-			if(number_del <= number_al){
-				var parametros = {       
-					'ICCDID_al' : ICCDID_al,
-					'ICCDID_del' : ICCDID_del,
-					'Id_Colaborador' : Id_Colaborador
-				};							
-				$.ajax({
-					data:  parametros,
-					url:   path_ICCDID_colaborador,
-					type:  'post',
-					beforeSend: function() {
-					},
-					success:  function (response) { 					
-						$("#table").html(response);
-						$('html, body').animate({scrollTop:1000},'500');
-						$("#table").show();
-					}
-				}); 		
-			}else{
-				var $toastContent = $('<span><i class="material-icons tiny">warning</i> ICCDID Del debe ser menor que ICCDID Al . </span>');
-				Materialize.toast($toastContent, 5000, 'yellow darken-3');					
-			}	
-		}				
+		}
+
+		var parametros = {       
+			'ICCDID_al' : ICCDID_al,
+			'ICCDID_del' : ICCDID_del,
+			'Id_Colaborador' : Id_Colaborador
+		};							
+		$.ajax({
+			data:  parametros,
+			url:   path_ICCDID_colaborador,
+			type:  'post',
+			beforeSend: function() {
+			},
+			success:  function (response) { 					
+				$("#table").html(response);
+				$('html, body').animate({scrollTop:500},'500');
+				$("#table").show();
+			}
+		}); 		
+	
+						
 	});
 
 
 
+	//Autocomplete
+	$('.autocomplete').on('keydown', function() {
 
+
+
+		$.ajax({
+			type: 'GET',
+			url:  'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/AutoColaborador/?Id_Colaborador=' + $("#Id_Colabora").val(),
+			success: function(response) {
+				var countryArray = response;
+				var dataCountry = {};
+				for (var i = 0; i < countryArray.length; i++) {
+					//console.log(countryArray[i].name);
+					dataCountry[countryArray[i].name] = countryArray[i].flag; //countryArray[i].flag or null
+				}
+
+				$('.autocomplete').autocomplete({
+					data: dataCountry,
+					limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+				});
+		  }
+		});
+	});
 
 
 

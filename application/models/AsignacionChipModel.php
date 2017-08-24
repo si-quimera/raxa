@@ -33,23 +33,39 @@ class AsignacionChipModel extends CI_Model{
         }      
         return $adjunto; 
     } 	
+
+	public function getNumAllICCDID($almacen){				
+		$query = $this->db->query("SELECT ICCDID, 0 as Fecha_Salida_RAXA_Ctrl FROM `Asignacion_Chip` WHERE Id_Almacen = '".$almacen."' AND status = 0;");
+		return $query->result();						
+	}
 	
 	public function getNumRangoICCDID($del, $al, $almacen){				
-		$query = $this->db->query("SELECT ICCDID, 0 as Fecha_Salida_RAXA_Ctrl FROM `Asignacion_Chip` WHERE (SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."') AND Id_Almacen = '".$almacen."';");
-		return $query->result();		
-		//return json_encode($data);				
+		$query = $this->db->query("SELECT ICCDID, 0 as Fecha_Salida_RAXA_Ctrl FROM `Asignacion_Chip` WHERE (SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."') AND Id_Almacen = '".$almacen."' AND status = 0;");
+		return $query->result();						
 	}
 
-	public function getNumRangoAlmacenICCDID($del, $al){					
-		$query = $this->db->query("SELECT ICCDID, Fecha_Salida_RAXA_Ctrl FROM `Salida_Inv_Central` WHERE (SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."') AND Fecha_Salida_RAXA_Ctrl IS NULL;");
-		return $query->result();		
-		//return json_encode($data);				
+	public function getNumRangoAlmacenICCDID($del, $al, $almacen){		
+		if($almacen == 0){
+			$query = $this->db->query("SELECT ICCDID, Fecha_Salida_RAXA_Ctrl FROM `Salida_Inv_Central` WHERE (SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."') AND Fecha_Salida_RAXA_Ctrl IS NULL;");
+		}else{
+			$query = $this->db->query("SELECT ICCDID, 0 as Fecha_Salida_RAXA_Ctrl FROM `Asignacion_Chip` WHERE (SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."') AND Id_Almacen = '".$almacen."' AND status = 0;");
+		}
+		return $query->result();						
 	}	
 
 	public function getNumRangoColaboradorICCDID($del, $al, $colaborador){				
 		$query = $this->db->query("SELECT ICCDID, 0 as Fecha_Salida_RAXA_Ctrl FROM `Asignacion_Chip` WHERE (SUBSTRING(ICCDID,1,18) BETWEEN '".$del."' AND '".$al."') AND Id_Colaborador = '".$colaborador."' AND status = 0;");
-		return $query->result();		
-		//return json_encode($data);				
+		return $query->result();						
+	}
+
+	public function getNumAllColaboradorICCDID($colaborador){				
+		$query = $this->db->query("SELECT ICCDID, 0 as Fecha_Salida_RAXA_Ctrl FROM `Asignacion_Chip` WHERE Id_Colaborador = '".$colaborador."' AND status = 0;");
+		return $query->result();						
+	}	
+	
+	public function getNumAllAlmacenICCDID($almacen){
+		$query = $this->db->query("SELECT ICCDID, Fecha_Salida_RAXA_Ctrl FROM `Salida_Inv_Central` WHERE Fecha_Salida_RAXA_Ctrl IS NULL;");
+		return $query->result();						
 	}	
 	
 	
@@ -79,6 +95,17 @@ class AsignacionChipModel extends CI_Model{
         $this->db->update('Asignacion_Chip', $data);
         return $error = $this->db->error();  						
 	}	
+	
+	public function updateAlmacenInvCentralStatus($id, $Id_Almacen){
+		$data = array(
+			'status' => 1
+		);
+		
+        $this->db->where('ICCDID', $id);
+		$this->db->where('Id_Almacen', $Id_Almacen);
+        $this->db->update('Asignacion_Chip', $data);
+        return $error = $this->db->error();  						
+	}		
 	
 	public function getDataAsignadoChip($id){
 		$this->db->order_by('Fec_Asignacion', 'DESC'); 
@@ -159,12 +186,13 @@ class AsignacionChipModel extends CI_Model{
         foreach ($query->result() as $row){
             $almacen[$row->Id_Colaborador] = $row->Nombre . ' ' . $row->Ap_Pat . ' ' . $row->Ap_Mat;	
         }      
-        return $almacen; 
-
-		
+        return $almacen; 		
 	}
 	
-	
+	public function getAutoColaborador($Id_Colaborador){
+		$query = $this->db->query("SELECT ICCDID FROM `Asignacion_Chip` WHERE Id_Colaborador = '".$Id_Colaborador."' AND status = 0;");
+		return $query->result();		
+	}
 	
 	
 	
