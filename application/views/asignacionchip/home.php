@@ -1,8 +1,6 @@
 <?php
 $usuario = $this->session->userdata('usuario');
 $id_colaborador = $usuario['Id_Colaborador'];
-
-
 ?>
 		<!-- ####### -->
         <!-- Content -->

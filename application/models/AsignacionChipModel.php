@@ -190,8 +190,8 @@ class AsignacionChipModel extends CI_Model{
 	}
 	
 	public function getAutoColaborador($Id_Colaborador){
-		$query = $this->db->query("SELECT ICCDID FROM `Asignacion_Chip` WHERE Id_Colaborador = '".$Id_Colaborador."' AND status = 0;");
-		return $query->result();		
+		$query = $this->db->query("SELECT ICCDID as name FROM `Asignacion_Chip` WHERE Id_Colaborador = '".$Id_Colaborador."' AND status = 0;");
+		return $query->result_array();		
 	}
 	
 	

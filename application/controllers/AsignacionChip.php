@@ -441,8 +441,8 @@ class AsignacionChip extends CI_Controller {
 	
 	public function AutoColaborador() {		
 		$Id_Colaborador = $this->input->get('Id_Colaborador');
-		$result = $this->AsignacionChipModel->getAutoColaborador($Id_Colaborador);		
-		json_encode($result);		
+		$result = $this->AsignacionChipModel->getAutoColaborador($Id_Colaborador);			
+		echo json_encode($result);		
 	}
 	
 	

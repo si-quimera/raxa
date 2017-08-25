@@ -3,6 +3,33 @@ if(!$this->session->userdata('usuario') ){
     $pagina_login = base_url() . 'Login/';
     redirect($pagina_login);
 } 
+
+$usuario = $this->session->userdata('usuario');
+
+$con = $this->router->fetch_class();
+$met = $this->router->fetch_method();
+
+if($met == 'index'){
+	$acceso = $con."/";
+}else{
+	$acceso = $con."/".$met."/";
+}
+
+function recursiveSearch(&$array, $val){
+    if(is_array($array)){
+        foreach($array as $key => &$arrayElement){
+			if($arrayElement->String5 == $val){
+				echo  "ok";
+				break;
+			}else{
+				recursiveSearch($arrayElement->submenu, $val);
+			}				 				            
+        }
+    }
+}
+
+$e = recursiveSearch($usuario['raxa_menu'], $acceso);
+
 ?>
 <!DOCTYPE html>
 <html>
