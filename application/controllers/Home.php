@@ -9,4 +9,8 @@ class Home extends CI_Controller {
         $this->load->view('home/home.php');
         $this->load->view('templates/footer.php');
 	}
+	
+	public function error401(){
+		$this->load->view('errors/html/error_401.php');
+	}
 }

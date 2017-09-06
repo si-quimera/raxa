@@ -16,11 +16,10 @@ if($met == 'index'){
 	$acceso = $con."/".$met."/";
 }
 
-
-
 #Busca en el arreglo
 $access = 'NO';
 
+#Busca en arreglo si existe acceso
 function recursiveSearch(&$array, $val, &$access){
 	
     if(is_array($array)){
@@ -42,7 +41,7 @@ function recursiveSearch(&$array, $val, &$access){
 $datos = recursiveSearch($usuario['raxa_menu'], $acceso, $access);
 
 if($datos == 'NO' && $con != 'home' && $con != 'Login'){
-	redirect(base_url().'home');
+	redirect(base_url().'error401/');
 }
 
 ?>

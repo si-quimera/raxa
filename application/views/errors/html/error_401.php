@@ -4,26 +4,29 @@
         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        <title>Login | RAXA</title>
-        <meta name="author" content="Quimera Soft">
+        <title>Error 401 | Raxa</title>
+        <meta name="author" content="Felippe Rodrigo Puhle">
         
         <!-- ##### -->
         <!-- Fonts -->
         <!-- ##### -->
         <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
+        <link href="http://fonts.googleapis.com/css?family=Oswald:400" rel="stylesheet" type="text/css"/>
         <!-- ################## -->
         <!-- Global stylesheets -->
         <!-- ################## -->
         <link href="<?= base_url(); ?>webroot/bower_components/Materialize/css/materialize.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>webroot/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url(); ?>webroot/css/login.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>webroot/css/error.css" rel="stylesheet" type="text/css" />
         <!-- ################# -->
         <!-- Theme stylesheets -->
         <!-- ################# -->
         <link href="<?= base_url(); ?>webroot/css/themes/light.css" id="ssThemeColor" rel="stylesheet" type="text/css" />
-        <link href="<?= base_url(); ?>webroot/css/themes/main/blue.css" id="ssMainColor" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>webroot/css/themes/main/materialize-blue.css" id="ssMainColor" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>webroot/css/themes/alternative/blue.css" id="ssAlternativeColor" rel="stylesheet" type="text/css" />
-
+        <!-- ################ -->
+        <!-- Util stylesheets -->
+        <!-- ################ -->
         <!-- ##### -->
         <!-- Icons -->
         <!-- ##### -->
@@ -37,44 +40,15 @@
         <!-- Content -->
         <!-- ####### -->
         <main>
-            <div class="login-wrapper">
-				<?php
-				$msg = $this->session->flashdata('msg');
-				if ($msg){
-					echo $msg;
-				}
-					echo form_open('Login/'); 
-				?>  				
-					<div class="panel panel-bordered z-depth-1">
-						<div class="panel-header">
-							<h5>
-								Inicia sesión en <b class="main-text">raxa</b>
-							</h5>
-						</div>
+            <div class="error-wrapper">
+			<div id="code">
+				4<i class="fa fa-frown-o"></i>1
+			</div>
 
-						<div class="panel-body">
-							<div class="row no-gutter margin-bottom-0">
-								<div class="input-field col s12">
-									<input type="text" name="Usuario" id="Usuario" value="" required>
-									<label for="Usuario">Usuario</label>
-								</div>
-							</div>
-							<div class="row no-gutter margin-bottom-0">
-								<div class="input-field col s12">
-									<input type="password" name="Password" id="Password" value="" required>
-									<label for="Password">Password</label>
-								</div>
-							</div>
-						</div>
-						<div class="panel-footer">
-							<div class="right-align">
-								<button type="submit" class="btn-flat waves-effect">
-									ACCEDER
-								</button>
-							</div>
-						</div>
-					</div>
-				</form>
+			<h1>Unauthorized (No autorizado)</h1>
+			<p>Perfil no autorizado para este contenido, por favor contacta a tu Administrador.</p>
+			<br><br>
+			<h8><a href="<?= base_url() . 'home' ?>"><i class="material-icons">home</i> <br>Regresar al Inicio </a></h8>
             </div>
         </main>
 
