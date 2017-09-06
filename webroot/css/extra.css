@@ -115,3 +115,8 @@ and open the template in the editor.
 .autocomplete-content {    
     position: absolute !important;
 }
+
+.striped{
+	font-size: 12px!important;
+	width: 100%!important;
+}

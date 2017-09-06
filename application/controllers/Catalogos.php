@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Catalogos extends CI_Controller {
 	public function zona(){
         
-        $config['base_url'] = base_url() . 'catalogos/zona/';
+        $config['base_url'] = base_url() . 'Catalogos/Zona/';
         $config['total_rows'] = $this->CatalogoModel->countZona();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -51,7 +51,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addZona($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Zona registrado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/zona/');
+                    redirect(base_url(). 'Catalogos/Zona/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Zona!</div>');
                 }				
@@ -81,7 +81,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateZona($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Zona actualizada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/zona/');
+                    redirect(base_url(). 'Catalogos/Zona/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Zona!</div>');
                 }				
@@ -98,14 +98,14 @@ class Catalogos extends CI_Controller {
 	public function delZona($id = NULL){        
         $this->CatalogoModel->deleteZona($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Zona borrada correctamente!</div>');
-        redirect(base_url(). 'Catalogos/zona/');  
+        redirect(base_url(). 'Catalogos/Zona/');  
     }   	
 	
 	/* -- */
 	
 	public function estado(){
         
-        $config['base_url'] = base_url() . 'catalogos/estado/';
+        $config['base_url'] = base_url() . 'Catalogos/Estado/';
         $config['total_rows'] = $this->CatalogoModel->countEdos();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -160,7 +160,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addEdos($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Estado registrado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/estado/');
+                    redirect(base_url(). 'Catalogos/Estado/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Estado!</div>');
                 }				
@@ -196,7 +196,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateEdos($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Estado actualizado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/estado/');
+                    redirect(base_url(). 'Catalogos/Estado/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Estado!</div>');
                 }				
@@ -212,14 +212,14 @@ class Catalogos extends CI_Controller {
 	public function delEstado($id = NULL){        
         $this->CatalogoModel->deleteEdos($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Estado borrado correctamente!</div>');
-        redirect(base_url(). 'Catalogos/estado/');  
+        redirect(base_url(). 'Catalogos/Estado/');  
     } 	
 	
 	/* --- */
 	
 	public function ciudad(){
         
-        $config['base_url'] = base_url() . 'catalogos/zona/';
+        $config['base_url'] = base_url() . 'Catalogos/Ciudad/';
         $config['total_rows'] = $this->CatalogoModel->countCiudad();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -273,7 +273,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addCiudad($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Ciudad registrada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/ciudad/');
+                    redirect(base_url(). 'Catalogos/Ciudad/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Ciudad!</div>');
                 }				
@@ -309,7 +309,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateCiudad($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Ciudad actualizada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/ciudad/');
+                    redirect(base_url(). 'Catalogos/Ciudad/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Ciudad!</div>');
                 }				
@@ -325,14 +325,14 @@ class Catalogos extends CI_Controller {
 	public function delCiudad($id = NULL){        
         $this->CatalogoModel->deleteCiudad($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Ciudad borrada correctamente!</div>');
-        redirect(base_url(). 'Catalogos/ciudad/');  
+        redirect(base_url(). 'Catalogos/Ciudad/');  
     } 		
 	
 	/* --- */
 	
 	public function sucursal(){
         
-        $config['base_url'] = base_url() . 'catalogos/sucursal/';
+        $config['base_url'] = base_url() . 'Catalogos/Sucursal/';
         $config['total_rows'] = $this->CatalogoModel->countSuc();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -386,7 +386,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addSuc($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Sucursal registrada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/sucursal/');
+                    redirect(base_url(). 'Catalogos/Sucursal/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Sucursal!</div>');
                 }				
@@ -423,7 +423,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateSuc($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Sucursal actualizada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/sucursal/');
+                    redirect(base_url(). 'Catalogos/Sucursal/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar la Sucursal!</div>');
                 }				
@@ -439,14 +439,14 @@ class Catalogos extends CI_Controller {
 	public function delSucursal($id = NULL){        
         $this->CatalogoModel->deleteSuc($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Sucursal borrada correctamente!</div>');
-        redirect(base_url(). 'Catalogos/sucursal/');  
+        redirect(base_url(). 'Catalogos/Sucursal/');  
     } 		
 	
 	/* ---- */
 	
 	public function carrier(){
         
-        $config['base_url'] = base_url() . 'catalogos/zona/';
+        $config['base_url'] = base_url() . 'Catalogos/Carrier/';
         $config['total_rows'] = $this->CatalogoModel->countCarrier();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -493,7 +493,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addCarrier($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Carrier registrado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/carrier/');
+                    redirect(base_url(). 'Catalogos/Carrier/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Carrier!</div>');
                 }				
@@ -523,7 +523,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateCarrier($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Carrier actualizado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/carrier/');
+                    redirect(base_url(). 'Catalogos/Carrier/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Carrier!</div>');
                 }				
@@ -539,14 +539,14 @@ class Catalogos extends CI_Controller {
 	public function delCarrier($id = NULL){        
         $this->CatalogoModel->deleteCarrier($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Carrier borrado correctamente!</div>');
-        redirect(base_url(). 'Catalogos/carrier/');  
+        redirect(base_url(). 'Catalogos/Carrier/');  
     }   	
 	
 	/* --- */
 	
 	public function grupo(){
         
-        $config['base_url'] = base_url() . 'catalogos/sucursal/';
+        $config['base_url'] = base_url() . 'Catalogos/Grupo/';
         $config['total_rows'] = $this->CatalogoModel->countGrupo();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -601,7 +601,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addGrupo($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Grupo registrado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/grupo/');
+                    redirect(base_url(). 'Catalogos/Grupo/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Grupo!</div>');
                 }				
@@ -638,7 +638,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateGrupo($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Grupo actualizado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/grupo/');
+                    redirect(base_url(). 'Catalogos/Grupo/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Grupo!</div>');
                 }				
@@ -654,13 +654,13 @@ class Catalogos extends CI_Controller {
 	public function delGrupo($id = NULL){        
         $this->CatalogoModel->deleteGrupo($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Grupo borrado correctamente!</div>');
-        redirect(base_url(). 'Catalogos/grupo/');  
+        redirect(base_url(). 'Catalogos/Grupo/');  
     }	
 	
 	public function maestro(){
 		
         
-        $config['base_url'] = base_url() . 'catalogos/maestro/';
+        $config['base_url'] = base_url() . 'Catalogos/Maestro/';
         $config['total_rows'] = $this->CatalogoModel->countMaestro();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -708,7 +708,7 @@ class Catalogos extends CI_Controller {
 			$error = $this->CatalogoModel->addMaestro($data);
 			if ($error['code'] === 0){
 				$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Item Maestro registrado correctamente!</div>');
-				redirect(base_url(). 'Catalogos/maestro/');
+				redirect(base_url(). 'Catalogos/Maestro/');
 			}else{
 				$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Item Maestro!</div>');
 			}				
@@ -738,7 +738,7 @@ class Catalogos extends CI_Controller {
 			$error = $this->CatalogoModel->updateMaestro($id, $data);
 			if ($error['code'] === 0){
 				$this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Item Maestro editado correctamente!</div>');
-				redirect(base_url(). 'Catalogos/maestro/');
+				redirect(base_url(). 'Catalogos/Maestro/');
 			}else{
 				$this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Item Maestro!</div>');
 			}				
@@ -754,11 +754,11 @@ class Catalogos extends CI_Controller {
 	public function delMaestro($id = NULL){        
         $this->CatalogoModel->deleteMaestro($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Item Maestro borrado correctamente!</div>');
-        redirect(base_url(). 'Catalogos/maestro/');  
+        redirect(base_url(). 'Catalogos/Maestro/');  
     }	
 
 	public function almacen(){        
-        $config['base_url'] = base_url() . 'catalogos/almacen/';
+        $config['base_url'] = base_url() . 'Catalogos/Almacen/';
         $config['total_rows'] = $this->CatalogoModel->countAlmacen();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -815,7 +815,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addAlmacen($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Almacen registrada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/almacen/');
+                    redirect(base_url(). 'Catalogos/Almacen/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Almacen!</div>');
                 }				
@@ -854,7 +854,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateAlmacen($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Almacen editado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/almacen/');
+                    redirect(base_url(). 'Catalogos/Almacen/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al editar el Almacen!</div>');
                 }				
@@ -869,11 +869,11 @@ class Catalogos extends CI_Controller {
 	public function delAlmacen($id = NULL){        
         $this->CatalogoModel->deleteAlmacen($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Alamacen borrado correctamente!</div>');
-        redirect(base_url(). 'Catalogos/almacen/');  
+        redirect(base_url(). 'Catalogos/Almacen/');  
     }	
 
 	public function colaborador(){        
-        $config['base_url'] = base_url() . 'catalogos/colaborador/';
+        $config['base_url'] = base_url() . 'Catalogos/Colaborador/';
         $config['total_rows'] = $this->CatalogoModel->countColaborador();
         $config['per_page'] = 10;   
         $config['uri_segment'] = 3;
@@ -1038,7 +1038,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->addColaborador($data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Colaborador registrada correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/colaborador/');
+                    redirect(base_url(). 'Catalogos/Colaborador/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Colaborador!</div>');
                 }				
@@ -1187,7 +1187,7 @@ class Catalogos extends CI_Controller {
                 $error = $this->CatalogoModel->updateColaborador($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Colaborador editado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/colaborador/');
+                    redirect(base_url(). 'Catalogos/Colaborador/');
                 }else{
                     $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al editar el Colaborador!</div>');
                 }				
@@ -1205,7 +1205,7 @@ class Catalogos extends CI_Controller {
 	public function delColaborador($id = NULL){        
         $this->CatalogoModel->deleteColaborador($id);
         $this->session->set_flashdata('msg', '<div class="card-panel red darken-2"><i class="material-icons tiny">done_all</i> Colaborador borrado correctamente!</div>');
-        redirect(base_url(). 'Catalogos/colaborador/');  
+        redirect(base_url(). 'Catalogos/Colaborador/');  
     }	
 
 

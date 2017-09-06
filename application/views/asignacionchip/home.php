@@ -314,3 +314,4 @@ $id_colaborador = $usuario['Id_Colaborador'];
 				</section>
             </div>
         </main>
+		

@@ -175,6 +175,7 @@
 										</div>
 									</div>																						
 								</div>
+								<!-- Modal Structure Add-->
 							</div>
 						</div>
 					</div>	

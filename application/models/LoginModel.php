@@ -28,7 +28,12 @@ class LoginModel extends CI_Model{
 	}
 	
 
-
+	public function ChangePassword($data){      		
+		$user = $this->session->userdata('usuario');						
+        $this->db->where('Id_Colaborador', $user['Id_Colaborador']);
+        $this->db->update('Cat_Colaboradores', $data);
+        return $error = $this->db->error();                             			
+	}
 
 
 	

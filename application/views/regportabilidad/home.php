@@ -39,18 +39,18 @@
                                     <div class="panel panel-bordered">				
                                         <div class="panel-body">                                                    
                                             <div class="row no-gutter">
-                                                <div class="col s3">
+                                                <div class="input-field col s3">
 													<label for="Fecha_Registro_Porta">Fecha Registro</label>
-                                                    <input type="text" name="Fecha_Registro_Porta" class="datepicker" value="<?= date("Y-m-d H:i:s") ?>">                                                    
+                                                    <input type="text" name="Fecha_Registro_Porta" value="<?= date("Y-m-d H:i:s") ?>" readonly="readonly">                                                    
 													<?php echo form_error('Fecha_Registro_Porta'); ?>
                                                 </div>	
-												<div class="col s3"></div>	
-                                                <div class="col s3">
+												<div class="input-field col s3"></div>	
+                                                <div class="input-field col s3">
 													<label for="Vigencia_NIP">Vigencia NIP</label>
                                                     <input type="text" name="Vigencia_NIP" class="datepicker" value="<?= $this->input->post('Vigencia_NIP') ?>">                                                    
 													<?php echo form_error('Vigencia_NIP'); ?>																										
 												</div>	
-												<div class="col s3"></div>											
+												<div class="input-field col s3"></div>											
                                             </div>  											
                                             <div class="row no-gutter">												
                                                 <div class="input-field  col s6">

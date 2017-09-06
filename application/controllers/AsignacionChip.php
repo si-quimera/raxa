@@ -445,6 +445,12 @@ class AsignacionChip extends CI_Controller {
 		echo json_encode($result);		
 	}
 	
+	public function AutoAlmacen() {		
+		$Id_Almacen = $this->input->get('Id_Almacen');
+		$result = $this->AsignacionChipModel->getAutoAlmacen($Id_Almacen);			
+		echo json_encode($result);		
+	}	
+	
 	
 	
 	

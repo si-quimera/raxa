@@ -194,6 +194,15 @@ class AsignacionChipModel extends CI_Model{
 		return $query->result_array();		
 	}
 	
+	public function getAutoAlmacen($Id_Almacen){
+		if($Id_Almacen != 0){		
+			$query = $this->db->query("SELECT ICCDID as name FROM `Asignacion_Chip` WHERE Id_Almacen = '".$Id_Almacen."' AND status = 0;");
+		}else{
+			$query = $this->db->query("SELECT ICCDID as name FROM `Salida_Inv_Central` WHERE Fecha_Salida_RAXA_Ctrl IS NULL;");
+		}
+		return $query->result_array();		
+	}	
+	
 	
 	
 	

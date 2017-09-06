@@ -15,7 +15,8 @@
 	var path_perfil = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/getConfigPerfil/';
 	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
 	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
-	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';			
+	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';
+		
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -743,15 +744,42 @@
 						
 	});
 
-
-	//Autocomplete
+	//Autocomplete	
 	$(function() {
 		
+		//Autocompletar Colaborador
+		if($("#Id_Colabora").val() !== undefined){			
+			$.ajax({
+				type: 'GET',
+				url:  'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/AutoColaborador/?Id_Colaborador=' + $("#Id_Colabora").val(),
+				success: function(response) {
+					var countryArray = JSON.parse(response);
+					var dataCountry = {};
+					for (var i = 0; i < countryArray.length; i++) {
+						//console.log(countryArray[i].name);
+						dataCountry[countryArray[i].name] = countryArray[i].flag; //countryArray[i].flag or null
+					}
+					$('.autocomplete').autocomplete({
+						data: dataCountry,
+						limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
+					});
+				}
+			});		
+		}
+	
+	
+	
+	
+	
+	});	
+	
+	//Autocompletar Almacen
+	$('#Id_Almacen_From').on('change', function() {
 		$.ajax({
 			type: 'GET',
-			//url: 'https://restcountries.eu/rest/v2/all?fields=name',
-			url:  'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/AutoColaborador/?Id_Colaborador=' + $("#Id_Colabora").val(),
+			url:  'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/AutoAlmacen/?Id_Almacen=' + $("#Id_Almacen_From").val(),
 			success: function(response) {
+			
 				var countryArray = JSON.parse(response);
 				var dataCountry = {};
 				for (var i = 0; i < countryArray.length; i++) {
@@ -763,8 +791,32 @@
 					limit: 10, // The max amount of results that can be shown at once. Default: Infinity.
 				});
 			}
-		});
-	});	
+		});			
+	});
+	
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -6,29 +6,44 @@ if(!$this->session->userdata('usuario') ){
 
 $usuario = $this->session->userdata('usuario');
 
+#Modulos Accesado
 $con = $this->router->fetch_class();
 $met = $this->router->fetch_method();
-
+#Si es el index
 if($met == 'index'){
 	$acceso = $con."/";
 }else{
 	$acceso = $con."/".$met."/";
 }
 
-function recursiveSearch(&$array, $val){
+
+
+#Busca en el arreglo
+$access = 'NO';
+
+function recursiveSearch(&$array, $val, &$access){
+	
     if(is_array($array)){
         foreach($array as $key => &$arrayElement){
-			if($arrayElement->String5 == $val){
-				echo  "ok";
-				break;
-			}else{
-				recursiveSearch($arrayElement->submenu, $val);
-			}				 				            
+			if($access != 'NO') return $access;			
+			//echo $arrayElement->String5 . "= " . $val . "<br>";
+			if(strtolower($arrayElement->String5) == strtolower($val)){
+				$access = 'SI';		
+				return $access;				
+			}else{								
+				recursiveSearch($arrayElement->submenu, $val, $access);
+			}				
+			
         }
     }
+	return $access;
 }
 
-$e = recursiveSearch($usuario['raxa_menu'], $acceso);
+$datos = recursiveSearch($usuario['raxa_menu'], $acceso, $access);
+
+if($datos == 'NO' && $con != 'home' && $con != 'Login'){
+	redirect(base_url().'home');
+}
 
 ?>
 <!DOCTYPE html>
@@ -47,7 +62,7 @@ $e = recursiveSearch($usuario['raxa_menu'], $acceso);
         <!-- ################## -->
         <!-- Global stylesheets -->
         <!-- ################## -->
-        <link href="<?= base_url(); ?>webroot/bower_components/Materialize/dist/css/materialize.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>webroot/bower_components/Materialize/css/materialize.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>webroot/bower_components/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>webroot/bower_components/code-prettify/src/prettify.css" rel="stylesheet" type="text/css" />
         <link href="<?= base_url(); ?>webroot/css/admin.css" rel="stylesheet" type="text/css" />
