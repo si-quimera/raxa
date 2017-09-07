@@ -803,6 +803,8 @@
 			
 		var Num_Cliente = $(this).attr('id');
 		var ICCDID = $(this).attr('data-iccdid');
+		var error = $(this).attr('data-error');
+		var fase = $(this).attr('data-fase');
 
 		$("#Num_Cliente_item").val(Num_Cliente);		
 		$("#ICCDID_item").val(ICCDID);	
@@ -863,6 +865,8 @@
 									} // Callback for Modal close
 								});
       							//Abre el modal	
+								$('#Id_Cat_Fase_Portabilidad').val(fase);
+								
 								$('#modal2').modal('open');							
 							}else{
 								var $toastContent = $('<span><i class="material-icons">warning</i> Ocurrio un error al momento de Bloquear el registro</span>');
@@ -902,6 +906,19 @@
 				success:    function(response){                                
 					var Update = JSON.parse(response);
 					console.log(Update);
+					$('#porta-' + Num_Cliente_item).html($("#Id_Cat_Fase_Portabilidad option:selected").text());
+					
+					if ($('#Id_Cat_Error_Portabilidad').prop('selectedIndex') == 0){
+						$('#error-' + Num_Cliente_item).html("");
+					}else{
+						$('#error-' + Num_Cliente_item).html($("#Id_Cat_Error_Portabilidad option:selected").text());						
+					}
+
+					var $toastContent = $('<span><i class="material-icons">mode_edit</i> Se actualizo con exito el registro. </span>');
+					Materialize.toast($toastContent, 5000, 'green');					
+					
+					$('#modal2').modal('close');
+					
 				}
 			}); 		
 		}else{

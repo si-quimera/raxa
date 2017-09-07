@@ -10,7 +10,7 @@
 				    <div class="col s12">
 				        <div class="page-header">
 				            <h1>
-				                <i class="material-icons">map</i> ACTIVACIÓN SIM
+				                <i class="material-icons">map</i> ACTIVACIÓN SIM / SEGUIMIENTO
 				            </h1>
 				        </div>
 				    </div>
@@ -140,8 +140,7 @@
 												?>
 											</td>
 											<td class="center-align">
-												<a href="#!" class="edit_status" id="<?= $row->Num_Cliente ?>" data-iccdid="<?= $row->ICCDID ?>" data-fase="<?= $row->Id_Cat_Fase_Portabilidad ?>" data-error="<?= $row->Id_Cat_Error_Portabilidad ?>"><i class="material-icons">mode_edit</i></a>
-												
+												<a href="<?= base_url() . 'Consultas/Log/' . $row->Num_Cliente ?>"><i class="material-icons">timeline</i></a>
 											</td>
 										</tr>										
 									<?php

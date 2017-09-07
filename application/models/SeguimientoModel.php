@@ -16,7 +16,7 @@ class SeguimientoModel extends CI_Model{
 			$pageNo = $_GET['page'];
 		}
         if (empty($_GET['order'])) {
-            $order = 'Fecha_Registro_Porta';
+            $order = 'Lineas_RAXA.Fecha_Registro_Porta';
         }else{
 			$order = $_GET['order'];
 		}
@@ -25,7 +25,9 @@ class SeguimientoModel extends CI_Model{
         }else{
 			$by = $_GET['by'];
 		}		
-		$this->db->where('Id_Cat_Tipo_Producto', $id);	
+		$this->db->where('Lineas_RAXA.Id_Cat_Tipo_Producto', $id);	
+		$this->db->join('Cat_Colaboradores', 'Cat_Colaboradores.Id_Colaborador = Lineas_RAXA.Id_Colaborador');
+		$this->db->join('Cat_Carrier', 'Cat_Carrier.Id_Carrier = Lineas_RAXA.Id_Carrier');
 		$this->db->order_by($order, $by); 		
         return $this->db->get('Lineas_RAXA', $number_per_page, $pageNo);
     }  	
@@ -50,38 +52,7 @@ class SeguimientoModel extends CI_Model{
     } 	
 	
 	
-    public function countLog($id){
-		$this->db->where('Num_Cliente', $id);	
-		$number = $this->db->count_all_results('Seg_Lineas_RAXA');		
-        return intval($number);
-    }    
-    
-    public function getAllLog($number_per_page, $id){
-        if (empty($_GET['page'])) {
-            $pageNo = 0;
-        }else{
-			$pageNo = $_GET['page'];
-		}
-        if (empty($_GET['order'])) {
-            $order = 'Fecha_Actividad';
-        }else{
-			$order = $_GET['order'];
-		}
-        if (empty($_GET['by'])) {
-            $by = 'DESC';
-        }else{
-			$by = $_GET['by'];
-		}		
-		$this->db->where('Num_Cliente', $id);	
-		$this->db->order_by($order, $by); 		
-        return $this->db->get('Seg_Lineas_RAXA', $number_per_page, $pageNo);
-    } 	
 	
-	public function getByIdLog($id){
-        $this->db->where('Num_Cliente', $id);
-        $query = $this->db->get('Seg_Lineas_RAXA');
-        return $query->row();						
-	}	
 	
 	public function onBloqueo($ICCDID, $Num_Cliente){
 		$data = array(
