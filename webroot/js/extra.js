@@ -16,7 +16,10 @@
 	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
 	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
 	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';
-		
+	var path_on_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/OnBloqueo/';
+	var path_off_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/OffBloqueo/';	
+	var path_check_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/CheckBloqueo/';	
+	var path_update_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/UpdateBloqueo/';			
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
@@ -795,10 +798,120 @@
 	});
 	
 	
+	//change status
+	$(document).on('click', '.edit_status', function() {	
+			
+		var Num_Cliente = $(this).attr('id');
+		var ICCDID = $(this).attr('data-iccdid');
+
+		$("#Num_Cliente_item").val(Num_Cliente);		
+		$("#ICCDID_item").val(ICCDID);	
+		
+		var parametros = {       
+			'Num_Cliente' : Num_Cliente,
+			'ICCDID' : ICCDID,
+		};			
+		
+		$.ajax({
+			data:  parametros,
+			url:   path_check_bloqueo,
+			type:  'post',
+			beforeSend: function() {
+			},
+			success:  function (response) { 
+				var porta = JSON.parse(response);
+				if(porta.bloqueo == 1){
+					var $toastContent = $('<span><i class="material-icons">warning</i> El registro Num de Cliente '+ porta.Num_Cliente +' se encuentra bloqueado por otro usuario.</span>');
+					Materialize.toast($toastContent, 5000, 'red');	
+					$('#status-'+Num_Cliente).html('<div class="led-red"></div>');
+				}else{					
+					$.ajax({
+						data:  parametros,
+						url:   path_on_bloqueo,
+						type:  'post',
+						beforeSend: function() {
+							$('#status-'+Num_Cliente).html('<div class="led-red"></div>');
+						},
+						success:  function (response) { 		
+							var Bloqueo = JSON.parse(response);
+							if(Bloqueo.Status == 'ON'){
+								//configuracion de parametros
+								$('#modal2').modal({
+									ready: function(modal, trigger) { // Callback for Modal open. Modal and trigger parameters available.
+										//console.log(modal, trigger);
+									},
+									complete: function() { 
+										console.log('Closed Modal'); 	
+										// Se cierra el modal regresa el status se libera.
+										$.ajax({
+											data:  parametros,
+											url:   path_off_bloqueo,
+											type:  'post',
+											beforeSend: function() {	
+											},
+											success:  function (response) { 		
+												var Bloqueo = JSON.parse(response);
+												if(Bloqueo.Status == 'ON'){
+													$('#status-'+Num_Cliente).html('<div class="led-green"></div>');
+												}else{
+													var $toastContent = $('<span><i class="material-icons">warning</i> Ocurrio un error al momento de Bloquear el registro</span>');
+													Materialize.toast($toastContent, 5000, 'red');									
+												}
+											}
+										});										  
+
+									} // Callback for Modal close
+								});
+      							//Abre el modal	
+								$('#modal2').modal('open');							
+							}else{
+								var $toastContent = $('<span><i class="material-icons">warning</i> Ocurrio un error al momento de Bloquear el registro</span>');
+								Materialize.toast($toastContent, 5000, 'red');									
+							}
+						}
+					});
+				}
+			}
+		}); 				   
+	});
 
 
 
 
+	$('#activacion-sim').click(function(event) {         
+		event.preventDefault();                       
+		
+		var Id_Cat_Fase_Portabilidad =  $("#Id_Cat_Fase_Portabilidad").val();
+		var Id_Cat_Error_Portabilidad =  $("#Id_Cat_Error_Portabilidad").val();
+		var Num_Cliente_item =  $("#Num_Cliente_item").val();
+		var ICCDID_item =  $("#ICCDID_item").val();
+		
+		var parametros = {                    
+			'Id_Cat_Fase_Portabilidad' : Id_Cat_Fase_Portabilidad,
+			'Id_Cat_Error_Portabilidad' : Id_Cat_Error_Portabilidad,
+			'Num_Cliente_item' : Num_Cliente_item,
+			'ICCDID_item' : ICCDID_item
+		};				
+                          
+						  
+		if(Id_Cat_Fase_Portabilidad !== ""){						  
+			$.ajax({
+				url:        path_update_bloqueo,
+				type:       'post',
+				data:       parametros,
+				success:    function(response){                                
+					var Update = JSON.parse(response);
+					console.log(Update);
+				}
+			}); 		
+		}else{
+			var $toastContent = $('<span><i class="material-icons">warning</i> Es necesario selecionar un Fase de Portabilidad</span>');
+			Materialize.toast($toastContent, 5000, 'red');				
+			
+			
+		}
+		                                                                                                     
+	});
 
 
 

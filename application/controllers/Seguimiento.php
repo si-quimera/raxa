@@ -6,7 +6,7 @@ class Seguimiento extends CI_Controller {
 	public function ActSIM(){	
         $config['base_url'] = base_url() . 'Seguimiento/ActSIM/';
         $config['total_rows'] = $this->SeguimientoModel->countActivacionSIM(378);
-        $config['per_page'] = 10;   
+        $config['per_page'] = 50;   
         $config['uri_segment'] = 3;
         $config['num_links'] = 5;        
 		$config['reuse_query_string'] = TRUE;
@@ -34,6 +34,7 @@ class Seguimiento extends CI_Controller {
 		$data['carrier'] = $this->SeguimientoModel->SelectCarrier();
 		$data['portabilidad'] = $this->AsignacionChipModel->SelectMaestro(14);
 		$data['producto'] = $this->AsignacionChipModel->SelectMaestro(377);
+		$data['errores'] = $this->AsignacionChipModel->SelectMaestro(383);
 		
         $this->load->view('templates/header.php');  
         $this->load->view('seguimiento/activacion.php', $data);
@@ -44,7 +45,7 @@ class Seguimiento extends CI_Controller {
 	public function ActSIMBeneficio(){	
         $config['base_url'] = base_url() . 'Seguimiento/ActSIMBeneficio/';
         $config['total_rows'] = $this->SeguimientoModel->countActivacionSIM(379);
-        $config['per_page'] = 10;   
+        $config['per_page'] = 50;   
         $config['uri_segment'] = 3;
         $config['num_links'] = 5;        
 		$config['reuse_query_string'] = TRUE;
@@ -82,7 +83,7 @@ class Seguimiento extends CI_Controller {
 	public function Log($id){	
         $config['base_url'] = base_url() . 'Seguimiento/Log/';
         $config['total_rows'] = $this->SeguimientoModel->countLog($id);
-        $config['per_page'] = 10;   
+        $config['per_page'] = 50;   
         $config['uri_segment'] = 3;
         $config['num_links'] = 5;        
 		$config['reuse_query_string'] = TRUE;
@@ -109,7 +110,7 @@ class Seguimiento extends CI_Controller {
 		$data['colaborador'] = $this->SeguimientoModel->SelectColaborador();
 		$data['portabilidad'] = $this->AsignacionChipModel->SelectMaestro(14);
 		$data['producto'] = $this->AsignacionChipModel->SelectMaestro(377);
-		$data['error'] = $this->AsignacionChipModel->SelectMaestro(384);
+		$data['errores'] = $this->AsignacionChipModel->SelectMaestro(383);
 		$data['status'] = $this->AsignacionChipModel->SelectMaestro(7);
 		
         $this->load->view('templates/header.php');  
@@ -158,6 +159,75 @@ class Seguimiento extends CI_Controller {
 	}	
 	
 	
+	public function OnBloqueo(){
+		if ($this->input->method() == 'post'){
+			$Num_Cliente = $this->input->post('Num_Cliente');
+			$ICCDID = $this->input->post('ICCDID');		
+			
+			$error = $this->SeguimientoModel->onBloqueo($ICCDID, $Num_Cliente);
+			if ($error['code'] === 0){
+				$data = array('Status' => 'ON');
+			}else{
+				$data = array('Status' => 'OFF');
+			}			
+		}else{
+			$data = array('Error' => 'Unauthorized');			
+		}		
+		echo json_encode($data);		
+	}
 	
+	public function OffBloqueo(){
+		if ($this->input->method() == 'post'){
+			$Num_Cliente = $this->input->post('Num_Cliente');
+			$ICCDID = $this->input->post('ICCDID');		
+			
+			$error = $this->SeguimientoModel->offBloqueo($ICCDID, $Num_Cliente);
+			if ($error['code'] === 0){
+				$data = array('Status' => 'ON');
+			}else{
+				$data = array('Status' => 'OFF');
+			}			
+		}else{
+			$data = array('Error' => 'Unauthorized');			
+		}		
+		echo json_encode($data);		
+	}	
 	
+	public function CheckBloqueo(){
+		if ($this->input->method() == 'post'){
+			$Num_Cliente = $this->input->post('Num_Cliente');
+			$ICCDID = $this->input->post('ICCDID');					
+			$data = $this->SeguimientoModel->CheckBloqueo($ICCDID, $Num_Cliente);						
+		}else{
+			$data = array('Error' => 'Unauthorized');			
+		}		
+		echo json_encode($data);		
+	}	
+	
+	public function UpdateBloqueo(){
+		if ($this->input->method() == 'post'){
+			$Id_Cat_Fase_Portabilidad = $this->input->post('Id_Cat_Fase_Portabilidad');
+			$Id_Cat_Error_Portabilidad = $this->input->post('Id_Cat_Error_Portabilidad');
+			$Num_Cliente_item = $this->input->post('Num_Cliente_item');
+			$ICCDID_item = $this->input->post('ICCDID_item');
+			
+			$datos = array(
+				'Id_Cat_Fase_Portabilidad' => $Id_Cat_Fase_Portabilidad,
+				'Id_Cat_Error_Portabilidad' => $Id_Cat_Error_Portabilidad
+			);							
+			
+			$error = $this->SeguimientoModel->updateBloqueo($ICCDID_item, $Num_Cliente_item, $datos);	
+			
+			
+			
+			if (@$error['code'] === 0){
+				$data = array('Update' => 'OK');
+			}else{
+				$data = array('Update' => 'FAIL');
+			}			
+		}else{
+			$data = array('Error' => 'Unauthorized');			
+		}		
+		echo json_encode($data);					
+	}
 }

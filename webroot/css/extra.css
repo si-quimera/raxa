@@ -120,3 +120,31 @@ and open the template in the editor.
 	font-size: 12px!important;
 	width: 100%!important;
 }
+
+
+.led-red {
+    margin: 20px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #f04400;
+    border-radius: 50%;
+    
+}
+
+.led-yellow {
+    margin: 20px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #f0e200;
+    border-radius: 50%;
+    
+}
+
+.led-green {
+    margin: 20px auto;
+    width: 12px;
+    height: 12px;
+    background-color: #29c700;
+    border-radius: 50%;
+    
+}

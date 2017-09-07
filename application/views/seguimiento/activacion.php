@@ -89,9 +89,12 @@
 											<th>
 												Error
 											</th>
+											<th class="center-align">
+												Status
+											</th>	
 											<th>
-												Seguimiento
-											</th>											
+												Opciones
+											</th>												
 										</tr>
 									</thead>
 									<tbody>									
@@ -99,18 +102,18 @@
 									foreach ($consulta->result() as $row) {                                         
 									?>
 										<tr>																						
-											<td id="row0<?= $row->Num_Cliente ?>"><strong><?= $row->Num_Cliente ?></strong></td>
-											<td id="row1<?= $row->Num_Cliente ?>"><?= $colaborador[$row->Id_Colaborador] ?></td>
-											<td id="row2<?= $row->Num_Cliente ?>"><?= $row->Nom_Persona_Porta ?></td>
-											<td id="row3<?= $row->Num_Cliente ?>"><?= $row->NIP_Portar ?></td>
-											<td id="row4<?= $row->Num_Cliente ?>"><?= $row->Vigencia_NIP ?></td>
-											<td id="row6<?= $row->Num_Cliente ?>"><?= $carrier[$row->Id_Carrier] ?></td>											
-											<td id="row7<?= $row->Num_Cliente ?>"><?= $row->ICCDID ?></td>
-											<td id="row8<?= $row->Num_Cliente ?>"><?= $row->Fecha_Registro_Porta ?></td>
-											<td id="row9<?= $row->Num_Cliente ?>"><?= $portabilidad[$row->Id_Cat_Fase_Portabilidad] ?></td>
-											<td id="row10<?= $row->Num_Cliente ?>"><?= $row->Tel_Fijo_Alterno ?></td>
-											<td id="row11<?= $row->Num_Cliente ?>"><?= $row->email ?></td>
-											<td id="row12<?= $row->Num_Cliente ?>"><?= $producto[$row->Id_Cat_Tipo_Producto] ?></td>
+											<td id="row0<?= $row->Num_Cliente ?>"><strong><?= $row->Num_Cliente ?></a></td>
+											<td><?= $colaborador[$row->Id_Colaborador] ?></td>
+											<td><?= $row->Nom_Persona_Porta ?></td>
+											<td><?= $row->NIP_Portar ?></td>
+											<td><?= $row->Vigencia_NIP ?></td>
+											<td><?= $carrier[$row->Id_Carrier] ?></td>											
+											<td><?= $row->ICCDID ?></td>
+											<td><?= $row->Fecha_Registro_Porta ?></td>
+											<td class="green-text" id="porta-<?= $row->Num_Cliente ?>"><?= $portabilidad[$row->Id_Cat_Fase_Portabilidad] ?></td>
+											<td><?= $row->Tel_Fijo_Alterno ?></td>
+											<td><a href="mailto:<?= $row->email ?>"><?= $row->email ?></a></td>
+											<td><?= $producto[$row->Id_Cat_Tipo_Producto] ?></td>
 											<td class="center-align">
 												<?php
 												if($row->Foto_Credencial_ICCDID != ''){
@@ -120,8 +123,23 @@
 												}
 												?>												
 											</td>
-											<td><?= $row->Id_Cat_Error_Portabilidad ?></td>
+											<td class="red-text" id="error-<?= $row->Num_Cliente ?>"><?= $row->Id_Cat_Error_Portabilidad ?></td>
+											<td class="center-align" id="status-<?= $row->Num_Cliente ?>">
+												<?php
+												if($row->bloqueo == 0){
+												?>
+												<div class="led-green"></div>
+												<?php
+												}else{
+												?>
+												<div class="led-red"></div>
+												<?php
+												}
+												?>
+											</td>
 											<td class="center-align">
+												<a href="#!" class="edit_status" id="<?= $row->Num_Cliente ?>" data-iccdid="<?= $row->ICCDID ?>"><i class="material-icons">mode_edit</i></a>
+												
 												<a href="<?= base_url() . 'Seguimiento/Log/' . $row->Num_Cliente ?>"><i class="material-icons">timeline</i></a>
 											</td>
 										</tr>										
@@ -146,155 +164,48 @@
 											echo form_open('/', $attributes);											
 											?> 
 												<div class="row">
-													<div class="col s12 m12">
-														<?php
-														$msg = $this->session->flashdata('msg');
-														if ($msg){
-															echo $msg;
-														}
-														?>                             		
+													<div class="col s12 m12">                        		
 														<div class="panel-body">                                           
-															<div class="row no-gutter">
-																<div class="col s3">
-																	<label for="Fecha_Registro_Porta">Fecha Registro</label>
-																	<input type="text" name="Fecha_Registro_Porta" id="Fecha_Registro_Porta" class="datepicker" placeholder=" " value="">                                                    								
-																</div>	
-																<div class="col s3"></div>	
-																<div class="col s3">
-																	<label for="Vigencia_NIP">Vigencia NIP</label>
-																	<input type="text" name="Vigencia_NIP" id="Vigencia_NIP" class="datepicker" placeholder=" " value="">                                                    																																											
-																</div>	
-																<div class="col s3"></div>											
-															</div>  											
-															<div class="row no-gutter">												
-																<div class="input-field  col s6">
-																	<label for="Nom_Persona_Porta">Nombre del Cliente</label>
-																	<input type="text" name="Nom_Persona_Porta" id="Nom_Persona_Porta" value="">                                                    	
-																</div>					
-																<div class="input-field col s6">
-																	<input name="Num_Cliente" id="Num_Cliente" type="text" placeholder=" " value="">
-																	<label for="Num_Cliente">Numero de Cliente</label>
-																</div>													
-															</div> 											
-															<div class="row no-gutter">
-																<div class="input-field col s3">
-																	<input name="NIP_Portar" id="NIP" type="text" placeholder=" " value="">
-																	<label for="NIP_Portar">NIP</label>																
-																</div>						
-																<div class="col s3"></div>
-																	<div class="col s6">
-																		<label for="Id_Carrier">Carrier</label>
-																		<select name="Id_Carrier" id="Id_Carrier" class="browser-default">
-																			<option value="" selected>Elija su opción</option>
-																		<?php
-																		   foreach ($carrier as $key => $row) {    
-																		   if($key == $this->input->post('Id_Carrier')){														   
-																	?>
-																		<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
+															<div class="row no-gutter">	
+																<div class=" col s6">
+																	<label for="Id_Cat_Fase_Portabilidad">Fase Portabilidad</label>
+																	<select name="Id_Cat_Fase_Portabilidad" id="Id_Cat_Fase_Portabilidad" class="browser-default">
+																		<option value="NULL" selected>Elija su opción</option>
 																	<?php
-																		   }else{
+																	   foreach ($portabilidad as $key => $row) {    												   
 																	?>														   
 																		<option value="<?= $key ?>"><?= $row ?></option>
 																	<?php	
-																		   }
 																	   }                                               
 																	?>														
 																	</select>	
-																	<?php echo form_error('Id_Carrier'); ?>													
-																</div>																							
-															</div> 	
-															<div class="row no-gutter">
-																<div class="input-field col s6">
-																	<input name="Tel_Fijo_Alterno" id="Tel_Fijo_Alterno" type="text" value="<?= $this->input->post('Tel_Fijo_Alterno') ?>">
-																	<label for="Tel_Fijo_Alterno">Telefono Fijo Alterno</label>
-																	<?php echo form_error('Tel_Fijo_Alterno'); ?>
-																</div>													
-																<div class="input-field col s6">
-																	<input name="email" id="email" type="text" value="<?= $this->input->post('email') ?>">
-																	<label for="email">Correo Electronico</label>
-																	<?php echo form_error('email'); ?>
-																</div>																						
-															</div> 												
-															<div class="row no-gutter">			                                                									                                             													
-																<div class="col s6">													
-																	<label for="ICCDID">ICCDID</label>
-																	<select name="ICCDID" id="ICCDID" class="browser-default">
-																		<option value="" selected>Elija su opción</option>
-																	<?php
-																	   foreach ($ICCDID as $key => $row) {    
-																		   if($key == $this->input->post('ICCDID')){														   
-																	?>
-																		<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-																	<?php
-																		   }else{
-																	?>														   
-																		<option value="<?= $key ?>"><?= $row ?></option>
-																	<?php	
-																		   }
-																	   }                                               
-																	?>														
-																	</select>	
-																	<?php echo form_error('ICCDID'); ?>	
-																</div>															
-															</div> 			
-															<div class="row no-gutter">
+																	<?php echo form_error('Id_Cat_Fase_Portabilidad'); ?>
+																</div>												
 																<div class="col s6">	
-																	<label for="Id_Cat_Tipo_Producto">Tipo Produdcto</label>
-																	<select name="Id_Cat_Tipo_Producto" id="Id_Cat_Tipo_Producto" class="browser-default">
-																		<option value="" selected>Elija su opción</option>
+																	<label for="Id_Cat_Error_Portabilidad">Error Portabilidad</label>
+																	<select name="Id_Cat_Error_Portabilidad" id="Id_Cat_Error_Portabilidad" class="browser-default">
+																		<option value="NULL" selected>Elija su opción</option>
 																	<?php
-																	   foreach ($tipo as $key => $row) {    
-																		   if($key == $this->input->post('Id_Cat_Tipo_Producto')){														   
-																	?>
-																		<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-																	<?php
-																		   }else{
+																	   foreach ($errores as $key => $row) {    												  
 																	?>														   
 																		<option value="<?= $key ?>"><?= $row ?></option>
 																	<?php	
-																		   }
 																	   }                                               
 																	?>	
 																	</select>                                                    
-																	<?php echo form_error('Id_Cat_Tipo_Producto'); ?>															
-																</div>		
-																<div class=" col s6">
-																	<select name="Id_Cat_Fase_Portabilidad" id="Id_Cat_Fase_Portabilidad" class="browser-default" style="visibility: hidden;">
-																		<option value="" selected>Elija su opción</option>
-																	<?php
-																	   foreach ($fase as $key => $row) {    
-																		   if($row == 'Registrado'){														   
-																	?>
-																		<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
-																	<?php
-																		   }else{
-																	?>														   
-																		<option value="<?= $key ?>"><?= $row ?></option>
-																	<?php	
-																		   }
-																	   }                                               
-																	?>														
-																	</select>													
-
-																</div>												
+																	<?php echo form_error('Id_Cat_Error_Portabilidad'); ?>															
+																</div>																	
 															</div>
-															<div class="row no-gutter">
-																<div class="input-field col s6">
-																	<input name="String4" id="String4" type="text" value="" placeholder=" ">
-																	<label for="String4">String 4</label>
-																</div>													
-																<div class="input-field col s6">
-																	<input name="String5" id="String5" type="text" value="" placeholder=" ">
-																	<label for="String5">String 5</label>
-																</div>												
-															</div>  											
+																
 														</div>
 														<div class="panel-footer">
 															<div class="right-align">
+																<input type="hidden" name="Num_Cliente_item" id="Num_Cliente_item" value="" />
+																<input type="hidden" name="ICCDID_item" id="ICCDID_item" value="" />
 																<button type="button" class="btn-flat waves-effect modal-close">
 																	CERRAR
 																</button>																
-																<button type="button" id="botton-edit" class="btn-flat waves-effect">
+																<button type="button" id="activacion-sim" class="btn-flat waves-effect">
 																	ACTUALIZAR
 																</button>																
 															</div>
@@ -306,6 +217,5 @@
 									</div>																						
 								</div>
 								<!-- Modal Structure Add-->				
-				
 				
         </main>

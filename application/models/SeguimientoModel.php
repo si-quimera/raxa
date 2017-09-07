@@ -83,4 +83,41 @@ class SeguimientoModel extends CI_Model{
         return $query->row();						
 	}	
 	
+	public function onBloqueo($ICCDID, $Num_Cliente){
+		$data = array(
+			'bloqueo' => 1
+		);		
+        $this->db->where('ICCDID', $ICCDID);
+		$this->db->where('Num_Cliente', $Num_Cliente);
+        $this->db->update('Lineas_RAXA', $data);
+        return $error = $this->db->error();  						
+	}	
+	
+	public function offBloqueo($ICCDID, $Num_Cliente){
+		$data = array(
+			'bloqueo' => 0
+		);		
+        $this->db->where('ICCDID', $ICCDID);
+		$this->db->where('Num_Cliente', $Num_Cliente);
+        $this->db->update('Lineas_RAXA', $data);
+        return $error = $this->db->error();  						
+	}		
+	
+	public function checkBloqueo($ICCDID, $Num_Cliente){	
+        $this->db->where('ICCDID', $ICCDID);
+		$this->db->where('Num_Cliente', $Num_Cliente);
+        $query = $this->db->get('Lineas_RAXA');
+		return $query->row(); 					
+	}	
+	
+	public function updateBloqueo($ICCDID, $Num_Cliente, $data){
+        $this->db->where('ICCDID', $ICCDID);
+		$this->db->where('Num_Cliente', $Num_Cliente);
+        $this->db->update('Lineas_RAXA', $data);
+        return $error = $this->db->error();  						
+	}		
+	
+	
+	
+	
 }
