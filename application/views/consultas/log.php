@@ -22,11 +22,8 @@
                 <!-- #### -->
 				<section id="apps_crud">
 					<div class="crud-app">
-						<div class="fixed-action-btn">
-							<a class="btn-floating btn-large tooltipped pulse" data-tooltip="Nuevo Estado" data-position="top" data-delay="50" href="<?= base_url() ?>Seguimiento/NewLog/<?= $this->uri->segment(3) ?>">
-								<i class="large material-icons">add</i>
-							</a>							
-                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Seguimiento/ActSIM' ?>">
+						<div class="fixed-action-btn">						
+                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Consultas/ActSIM' ?>">
                                 <i class="large material-icons">undo</i>
                             </a>							
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -90,7 +87,7 @@
 											<td>
 												<?php
 												if(!is_null($row->Id_Cat_Error_Portabilidad)){				
-													echo $error[$row->Id_Cat_Error_Portabilidad];
+													echo $errores[$row->Id_Cat_Error_Portabilidad];
 												}else{
 													echo "-";
 												}												
@@ -147,12 +144,9 @@
 											<td><?= $row->Fecha_Val_Actividad ?></td>
 											<td class="center-align">
 												<div class="btn-group">
-													<a href="<?= base_url() ?>Seguimiento/EditLog/<?= $row->Num_Cliente ?>" class="btn-flat btn-small waves-effect">
+													<a href="<?= base_url() ?>Consultas/EditLog/<?= $row->Num_Cliente ?>" class="btn-flat btn-small waves-effect">
 														<i class="material-icons">create</i>
 													</a>													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo <?= $row->Num_Cliente ?>?&quot;)) { window.location.href = '<?= base_url() . "Catalogos/delCarrier/" . $row->Num_Cliente ?>' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
-														<i class="material-icons">delete</i>
-													</a>
 												</div>
 											</td>
 										</tr>										

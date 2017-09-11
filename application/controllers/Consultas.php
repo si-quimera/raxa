@@ -124,12 +124,58 @@ class Consultas extends CI_Controller {
         $this->load->view('templates/header.php');  
 		
         $this->form_validation->set_error_delimiters('<div class="red-text">', '</div>');
-        $this->form_validation->set_rules('Nombre', 'Nombre', 'required',
+        $this->form_validation->set_rules('Id_Cat_Status', 'Status Portabilidad', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
 		);	
-        $this->form_validation->set_rules('Id_Zona', 'Zona', 'required',
+        $this->form_validation->set_rules('Id_Cat_Error_Portabilidad', 'Error de Portabilidad', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);
+        $this->form_validation->set_rules('Num_Llamadas_Entrantes', 'Num Llamadas Entrantes', 'required|numeric',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere un numero.',
+			)
+		);	
+        $this->form_validation->set_rules('Num_Llamadas_Salientes', 'Num Llamadas Salientes', 'required|numeric',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere un numero.',
+			)
+		);	
+        $this->form_validation->set_rules('Num_SMS', 'Num SMS', 'required|numeric',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere un numero.',
+			)
+		);
+        $this->form_validation->set_rules('Num_Datos', 'Num Datos', 'required|numeric',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere un numero.',
+			)
+		);	
+        $this->form_validation->set_rules('Num_Actv_Total', 'Num Actv Total', 'required|numeric',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere un numero.',
+			)
+		);	
+        $this->form_validation->set_rules('Fecha_Recarga', 'Fecha Recarga', 'required',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
+			)
+		);			
+        $this->form_validation->set_rules('Monto_Recarga', 'Monto Recarga', 'required|numeric',
+			array(
+					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.',
+					'numeric'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere un numero.',
+			)
+		);			
+        $this->form_validation->set_rules('Fecha_Val_Actividad', 'Fecha Val Actividad', 'required',
 			array(
 					'required'	=> '<i class="material-icons tiny">do_not_disturb_on</i> Se requiere %s.'
 			)
@@ -138,15 +184,23 @@ class Consultas extends CI_Controller {
         if ($this->form_validation->run() == TRUE) {         
             if ($this->input->method() == 'post'){
                 $data = array(
-                    'Nombre'	=>  $this->input->post('Nombre'),
-					'Id_Zona'	=>  $this->input->post('Id_Zona')
+                    'Id_Cat_Status'	=>  $this->input->post('Id_Cat_Status'),
+					'Id_Cat_Error_Portabilidad'	=>  $this->input->post('Id_Cat_Error_Portabilidad'),
+					'Num_Llamadas_Entrantes'	=>  $this->input->post('Num_Llamadas_Entrantes'),
+					'Num_Llamadas_Salientes'	=>  $this->input->post('Num_Llamadas_Salientes'),
+					'Num_SMS'	=>  $this->input->post('Num_SMS'),
+					'Num_Datos'	=>  $this->input->post('Num_Datos'),
+					'Num_Actv_Total'	=>  $this->input->post('Num_Actv_Total'),
+					'Fecha_Recarga'	=>  $this->input->post('Fecha_Recarga'),
+					'Monto_Recarga'	=>  $this->input->post('Monto_Recarga'),
+					'Fecha_Val_Actividad'	=>  $this->input->post('Fecha_Val_Actividad')
                 );            
                 $error = $this->ConsultasModel->updateEdos($id, $data);
                 if ($error['code'] === 0){
                     $this->session->set_flashdata('msg', '<div class="card-panel green darken-3"><i class="material-icons tiny">done_all</i> Estado actualizado correctamente!</div>');
-                    redirect(base_url(). 'Catalogos/Estado/');
+                    redirect(base_url(). 'Consultas/Log/' . $id);
                 }else{
-                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al registrar el Estado!</div>');
+                    $this->session->set_flashdata('msg', '<div class="card-panel red accent-4"><i class="material-icons tiny">do_not_disturb_on</i> Error al actualizar el registro!</div>');
                 }				
 
 			}

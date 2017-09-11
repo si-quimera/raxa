@@ -37,5 +37,11 @@ class ConsultasModel extends CI_Model{
         return $query->row();						
 	}
 	
+	public function updateEdos($id, $data){
+        $this->db->where('Num_Cliente', $id);
+        $this->db->update('Seg_Lineas_RAXA', $data);
+        return $error = $this->db->error();  				
+		
+	}
 		
 }

@@ -120,12 +120,18 @@
 												<?php
 												if($row->Foto_Credencial_ICCDID != ''){
 												?>
-												<a href="<?= base_url() . '/webroot/ife/' . $row->Foto_Credencial_ICCDID ?>" target="_blank"><i class="material-icons">attach_file</i></a>
+												<a href="<?= base_url() . 'webroot/ife/' . $row->Foto_Credencial_ICCDID ?>" target="_blank"><i class="material-icons">attach_file</i></a>
 												<?php	
 												}
 												?>												
 											</td>
-											<td class="red-text" id="error-<?= $row->Num_Cliente ?>"><?= $row->Id_Cat_Error_Portabilidad ?></td>
+											<td class="red-text" id="error-<?= $row->Num_Cliente ?>">
+												<?php
+												if(!is_null($row->Id_Cat_Error_Portabilidad)){
+													echo $errores[$row->Id_Cat_Error_Portabilidad]; 
+												}			
+												?>
+											</td>
 											<td class="center-align" id="status-<?= $row->Num_Cliente ?>">
 												<?php
 												if($row->bloqueo == 0){

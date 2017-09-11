@@ -23,7 +23,7 @@
 				<section id="apps_crud">
 					<div class="crud-app">
                         <div class="fixed-action-btn">
-                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Seguimiento/Log/' . $edicion->Num_Cliente ?>">
+                            <a class="btn-floating btn-large tooltipped" data-tooltip="Regresar" data-position="top" data-delay="50" href="<?= base_url().'Consultas/Log/' . $edicion->Num_Cliente ?>">
                                 <i class="large material-icons">undo</i>
                             </a>
                             <button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
@@ -32,7 +32,7 @@
                         </div>			
                         <?php
                         $hidden = array('Num_Cliente' => $edicion->Num_Cliente);
-                        echo form_open('Seguimiento/EditLog/'.$edicion->Num_Cliente, '', $hidden); 
+                        echo form_open('Consultas/EditLog/'.$edicion->Num_Cliente, '', $hidden); 
                         ?>
                             <div class="row">
                                 <div class="col s12 m8">
@@ -51,7 +51,7 @@
 														<option value="" selected>Elija su opción</option>
 													<?php
 													foreach ($status as $key => $row) {    
-													   if($key == $edicion->Id_Cat_Status){														   
+													   if($key == $edicion->Id_Cat_Status || $key == $this->input->post('Id_Cat_Status')){														   
 													?>
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php
@@ -71,8 +71,8 @@
 														<option value="" selected>Elija su opción</option>
 													<?php
 													foreach ($error as $key => $row) {    
-													   if($key == $edicion->Id_Cat_Error_Portabilidad){														   
-													?>
+													   if($key == $edicion->Id_Cat_Error_Portabilidad || $key == $this->input->post('Id_Cat_Error_Portabilidad')){														   
+													?> 
 														<option value="<?= $key ?>" selected="selected"><?= $row ?></option>
 													<?php
 													   }else{
@@ -108,7 +108,7 @@
                                                 </div>	
 												<div class="input-field col s3"></div>
                                                 <div class="input-field col s3">
-                                                    <input name="Num_Datos" id="Num_Datos" type="text" value="<?= $edicion->Num_Datos ?>">
+                                                    <input name="Num_Datos" id="Num_Datos" type="text" value="<?= $this->input->post('Num_Datos') ?>">
                                                     <label for="Num_Datos">Num Datos</label>
 													<?php echo form_error('Num_Datos'); ?>
                                                 </div>	
@@ -116,14 +116,14 @@
 											</div>	
                                             <div class="row no-gutter">											
                                                 <div class="input-field col s3">
-                                                    <input name="Num_Actv_Total" id="Num_Actv_Total" type="text" value="<?= $edicion->Num_Actv_Total ?>">
+                                                    <input name="Num_Actv_Total" id="Num_Actv_Total" type="text" value="<?= $this->input->post('Num_Actv_Total') ?>">
                                                     <label for="Num_Actv_Total">Num Actv Total</label>
 													<?php echo form_error('Num_Actv_Total'); ?>
                                                 </div>	
 												<div class="input-field col s3"></div>
                                                 <div class="input-field col s3">
 													
-                                                    <input name="Fecha_Recarga" id="Fecha_Recarga" type="text" class="datepicker" value="<?= $edicion->Fecha_Recarga ?>">
+                                                    <input name="Fecha_Recarga" id="Fecha_Recarga" type="text" class="datepicker" value="<?= $this->input->post('Fecha_Recarga') ?>">
                                                     <label for="Fecha_Recarga">Fecha de Recarga</label>
 													<?php echo form_error('Fecha_Recarga'); ?>
                                                 </div>	
@@ -131,14 +131,14 @@
 											</div>
                                             <div class="row no-gutter">											
                                                 <div class="input-field col s3">
-                                                    <input name="Monto_Recarga" id="Monto_Recarga" type="text" value="<?= $edicion->Monto_Recarga ?>">
+                                                    <input name="Monto_Recarga" id="Monto_Recarga" type="text" value="<?= $this->input->post('Monto_Recarga') ?>">
                                                     <label for="Monto_Recarga">Monto Recarga / $</label>
 													<?php echo form_error('Monto_Recarga'); ?>
                                                 </div>	
 												<div class="input-field col s3"></div>
                                                 <div class="input-field col s3">
 													
-                                                    <input name="Fecha_Val_Actividad" id="Fecha_Val_Actividad" type="text" class="datepicker" value="<?= $edicion->Fecha_Val_Actividad ?>">                                                    
+                                                    <input name="Fecha_Val_Actividad" id="Fecha_Val_Actividad" type="text" class="datepicker" value="<?= date("Y-m-d H:i:s") ?>">                                                    
 													<label for="Fecha_Val_Actividad">Fecha Val Actividad</label> 
 													<?php echo form_error('Fecha_Val_Actividad'); ?>
                                                 </div>	
@@ -151,7 +151,7 @@
                                                     BORRAR
                                                 </button>
                                                 <button type="submit" class="btn-flat waves-effect">
-                                                    GUARDAR
+                                                    ACTUALIZAR
                                                 </button>
                                             </div>
                                         </div>

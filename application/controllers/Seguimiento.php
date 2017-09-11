@@ -73,6 +73,7 @@ class Seguimiento extends CI_Controller {
 		$data['carrier'] = $this->SeguimientoModel->SelectCarrier();
 		$data['portabilidad'] = $this->AsignacionChipModel->SelectMaestro(14);
 		$data['producto'] = $this->AsignacionChipModel->SelectMaestro(377);
+		$data['errores'] = $this->AsignacionChipModel->SelectMaestro(383);
 		
         $this->load->view('templates/header.php');  
         $this->load->view('seguimiento/beneficio.php', $data);

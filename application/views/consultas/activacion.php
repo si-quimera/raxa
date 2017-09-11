@@ -89,9 +89,6 @@
 											<th>
 												Error
 											</th>
-											<th class="center-align">
-												Status
-											</th>	
 											<th>
 												Opciones
 											</th>												
@@ -125,19 +122,12 @@
 												}
 												?>												
 											</td>
-											<td class="red-text" id="error-<?= $row->Num_Cliente ?>"><?= $row->Id_Cat_Error_Portabilidad ?></td>
-											<td class="center-align" id="status-<?= $row->Num_Cliente ?>">
+											<td class="red-text" id="error-<?= $row->Num_Cliente ?>">
 												<?php
-												if($row->bloqueo == 0){
-												?>
-												<div class="led-green"></div>
-												<?php
-												}else{
-												?>
-												<div class="led-red"></div>
-												<?php
-												}
-												?>
+												if(!is_null($row->Id_Cat_Error_Portabilidad)){
+													echo $errores[$row->Id_Cat_Error_Portabilidad]; 
+												}			
+												?>																						
 											</td>
 											<td class="center-align">
 												<a href="<?= base_url() . 'Consultas/Log/' . $row->Num_Cliente ?>"><i class="material-icons">timeline</i></a>
