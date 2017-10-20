@@ -6,15 +6,50 @@
                 <!-- ###### -->
                 <!-- Header -->
                 <!-- ###### -->
-				<div class="row">
-				    <div class="col s12">
-				        <div class="page-header">
-				            <h1>
-				                <i class="material-icons">map</i> ACTIVACIÓN SIM
-				            </h1>
-				        </div>
-				    </div>
-				</div>
+                <div class="row">
+                    <div class="col s12">
+                        <div class="page-header">
+                            <h1>
+                                <i class="material-icons">map</i> ACTIVACIÓN SIM
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+                <div id="PeopleTableContainer" style="width: 600px;"></div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 
                 
                 <!-- #### -->

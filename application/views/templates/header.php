@@ -84,7 +84,12 @@ if($datos == 'NO' && $con != 'home' && $con != 'Login'){
         <!-- ##### -->
         <!-- Icons -->
         <!-- ##### -->
-        <link rel="shortcut icon" href="<?= base_url(); ?>webroot/img/favicon.ico" type="image/x-icon">		
+        <link rel="shortcut icon" href="<?= base_url(); ?>webroot/img/favicon.ico" type="image/x-icon">
+
+        <!-- Include one of jTable styles. -->
+        <link href="<?= base_url(); ?>webroot/bower_components/jtable.2.4.0/themes/metro/blue/jtable.min.css" rel="stylesheet" type="text/css" />
+        <link href="<?= base_url(); ?>webroot/bower_components/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+
     </head>
 
     <body>

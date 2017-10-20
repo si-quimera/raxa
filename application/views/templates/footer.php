@@ -22,6 +22,7 @@
         <!-- Global javascripts -->
         <!-- ################## -->
         <script src="<?= base_url(); ?>webroot/bower_components/jquery/dist/jquery.js" type="text/javascript"></script>
+
         <script src="<?= base_url(); ?>webroot/bower_components/Materialize/js/materialize.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/bower_components/code-prettify/src/prettify.js" type="text/javascript"></script>
         <script src="<?= base_url(); ?>webroot/js/admin.js" type="text/javascript"></script>
@@ -46,13 +47,15 @@
         <!-- Extra javascripts -->
         <!-- ################ -->
 		<link href="<?= base_url(); ?>webroot/bower_components/select2/dist/css/select2.min.css" rel="stylesheet" />
-		<script src="<?= base_url(); ?>webroot/bower_components/select2/dist/js/select2.full.min.js"></script>				
-				
-		<!--
-		<link type="text/css" rel="stylesheet" href="<?= base_url(); ?>webroot/bower_components/jsgrid/jsgrid.min.css" />
-		<link type="text/css" rel="stylesheet" href="<?= base_url(); ?>webroot/bower_components/jsgrid/jsgrid-theme.min.css" />
-		<script type="text/javascript" src="<?= base_url(); ?>webroot/bower_components/jsgrid/jsgrid.min.js"></script>
-		-->
+		<script src="<?= base_url(); ?>webroot/bower_components/select2/dist/js/select2.full.min.js"></script>
+
+
+
+        <!-- Include jTable script file. -->
+        <script src="<?= base_url(); ?>webroot/bower_components/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
+        <script src="<?= base_url(); ?>webroot/bower_components/jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
+
+
   
 		<script type="text/javascript">
 			$( document ).ready(function() {
@@ -67,7 +70,49 @@
 				$('#ICCDID').select2();	
 				
 				// Select para asignacion de perfiles
-				$('#search').multiselect();	
+				$('#search').multiselect();
+
+
+				//Llenado Tabla Dinamica
+
+                //Prepare jTable
+                $('#PeopleTableContainer').jtable({
+                    title: 'ACTIVACIÓN SIM',
+                    actions: {
+                        listAction: 'http://localhost:8888/raxa/RestAPI/ActSim',
+                        createAction: 'PersonActions.php?action=create',
+                        updateAction: 'PersonActions.php?action=update',
+                        deleteAction: 'PersonActions.php?action=delete'
+                    },
+                    fields: {
+                        Fecha_Actividad: {
+                            title: 'Fecha Act.',
+                            width: '40%',
+                            key: true,
+                            create: false,
+                            edit: false
+                        },
+                        Num_Cliente: {
+                            title: 'Num Cliente',
+                            width: '40%'
+                        },
+                        Age: {
+                            title: 'Age',
+                            width: '20%'
+                        },
+                        RecordDate: {
+                            title: 'Record date',
+                            width: '30%',
+                            type: 'date',
+                            create: false,
+                            edit: false
+                        }
+                    }
+                });
+
+                //Load person list from server
+                $('#PeopleTableContainer').jtable('load');
+
 			});	  					
 		</script>
 		
