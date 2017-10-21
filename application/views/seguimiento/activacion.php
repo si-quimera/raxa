@@ -2,6 +2,30 @@
         <!-- Content -->
         <!-- ####### -->
         <main>
+            <style>
+                .select-reset {
+                    background-color: rgba(255, 255, 255, 0.9);
+                    width: inherit;
+                    padding: inherit;
+                    border: inherit;
+                    border-radius: inherit;
+                    height:inherit;
+                }
+
+
+                .input-reset{
+                    background-color: inherit !important;;
+                    border: none !important;;
+                    outline: inherit !important;;
+                    height: inherit !important;
+                    width: inherit !important;;
+                    font-size: inherit !important;;
+                    margin: inherit !important;;
+                    padding: inherit !important;;
+
+
+                }
+            </style>
             <div class="main-content">
                 <!-- ###### -->
                 <!-- Header -->

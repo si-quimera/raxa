@@ -12,15 +12,24 @@ class RestAPI extends CI_Controller{
 
     public function ActSim()
     {
-        //if ($this->input->method() == 'get'){
-            $result = $this->RestAPIModel->GetAllActSim();
+        $result = $this->RestAPIModel->GetAllActSim();
 
-            //Return result to jTable
-            $jTableResult = array();
-            $jTableResult['Result'] = "OK";
-            $jTableResult['Records'] = $result;
-            print json_encode($jTableResult);
-        //}
+        //Return result to jTable
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Records'] = $result;
+        echo json_encode($jTableResult);
+
+    }
+
+    public  function Colaborador()
+    {
+        $result = $this->RestAPIModel->GetColaborador();
+
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Options'] = $result;
+        echo json_encode($jTableResult);
 
 
 

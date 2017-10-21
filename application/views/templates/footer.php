@@ -85,27 +85,19 @@
                         deleteAction: 'PersonActions.php?action=delete'
                     },
                     fields: {
-                        Fecha_Actividad: {
-                            title: 'Fecha Act.',
-                            width: '40%',
-                            key: true,
-                            create: false,
-                            edit: false
-                        },
                         Num_Cliente: {
                             title: 'Num Cliente',
+                            width: '10%'
+                        },
+                        Id_Colaborador: {
+                            title: 'Colaborador',
+                            width: '40%',
+                            options: 'http://localhost:8888/raxa/RestAPI/Colaborador',
+                            edit: true
+                        },
+                        Nom_Persona_Porta: {
+                            title: 'Nombre Porta',
                             width: '40%'
-                        },
-                        Age: {
-                            title: 'Age',
-                            width: '20%'
-                        },
-                        RecordDate: {
-                            title: 'Record date',
-                            width: '30%',
-                            type: 'date',
-                            create: false,
-                            edit: false
                         }
                     }
                 });
