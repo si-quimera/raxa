@@ -18,6 +18,7 @@ class RestAPI extends CI_Controller{
         $jTableResult = array();
         $jTableResult['Result'] = "OK";
         $jTableResult['Records'] = $result;
+        $jTableResult['TotalRecordCount'] = $this->db->count_all_results('Lineas_RAXA');
         echo json_encode($jTableResult);
 
     }
@@ -30,9 +31,46 @@ class RestAPI extends CI_Controller{
         $jTableResult['Result'] = "OK";
         $jTableResult['Options'] = $result;
         echo json_encode($jTableResult);
+    }
 
+    public  function Carrier()
+    {
+        $result = $this->RestAPIModel->GetCarrier();
 
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Options'] = $result;
+        echo json_encode($jTableResult);
+    }
 
+    public  function FasePorta()
+    {
+        $result = $this->RestAPIModel->GetFasePorta();
+
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Options'] = $result;
+        echo json_encode($jTableResult);
+    }
+
+    public  function Producto()
+    {
+        $result = $this->RestAPIModel->GetProducto();
+
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Options'] = $result;
+        echo json_encode($jTableResult);
+    }
+
+    public  function Error()
+    {
+        $result = $this->RestAPIModel->GetError();
+
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Options'] = $result;
+        echo json_encode($jTableResult);
     }
 
 }

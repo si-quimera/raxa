@@ -1700,7 +1700,7 @@ THE SOFTWARE.
                 .addClass('jtable-input jtable-dropdown-input');
 
             //Create select element
-            var $select = $('<select class="' + field.inputClass + '" id="Edit-' + fieldName + '" name="' + fieldName + '"></select>')
+            var $select = $('<select class="' + field.inputClass + ' browser-default select-reset" id="Edit-' + fieldName + '" name="' + fieldName + '"></select>')
                 .appendTo($containerDiv);
 
             //add options
@@ -3715,7 +3715,7 @@ THE SOFTWARE.
             self._$pageSizeChangeArea.append('<span>' + self.options.messages.pageSizeChangeLabel + ': </span>');
 
             //Page size change combobox
-            var $pageSizeChangeCombobox = $('<select></select>').appendTo(self._$pageSizeChangeArea);
+            var $pageSizeChangeCombobox = $('<select class="browser-default select-reset"></select>').appendTo(self._$pageSizeChangeArea);
 
             //Add page sizes to the combobox
             for (var i = 0; i < self.options.pageSizes.length; i++) {
@@ -3751,7 +3751,7 @@ THE SOFTWARE.
             //Goto page input
             if (self.options.gotoPageArea == 'combobox') {
 
-                self._$gotoPageInput = $('<select></select>')
+                self._$gotoPageInput = $('<select class="browser-default select-reset"></select>')
                     .appendTo(this._$gotoPageArea)
                     .data('pageCount', 1)
                     .change(function() {

@@ -75,29 +75,100 @@
 
 				//Llenado Tabla Dinamica
 
+                var spanishMessages = {
+                    save: 'Guardar',
+                    saving: 'Guardando',
+                    cancel: 'Cancelar',
+                    close: 'Cerrar',
+                    editRecord: 'Editar Registro',
+                    deleteText: 'Eliminar',
+
+
+                };
+
+
+
                 //Prepare jTable
                 $('#PeopleTableContainer').jtable({
-                    title: 'ACTIVACIÓN SIM',
+                    messages: spanishMessages, //Lozalize
+                    paging: true, //Enable paging
+                    pageSize: 100, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'Num_Cliente DESC', //Set default sorting
+                    addRecordButton: false,
+                    pageList: 'minimal',
+                    columnResizable: true,
                     actions: {
                         listAction: 'http://localhost:8888/raxa/RestAPI/ActSim',
-                        createAction: 'PersonActions.php?action=create',
+                        createAction: '',
                         updateAction: 'PersonActions.php?action=update',
                         deleteAction: 'PersonActions.php?action=delete'
                     },
                     fields: {
                         Num_Cliente: {
-                            title: 'Num Cliente',
-                            width: '10%'
+                            title: '# Cliente',
+                            width: '12%'
                         },
                         Id_Colaborador: {
                             title: 'Colaborador',
-                            width: '40%',
+                            width: '30%',
                             options: 'http://localhost:8888/raxa/RestAPI/Colaborador',
                             edit: true
                         },
                         Nom_Persona_Porta: {
-                            title: 'Nombre Porta',
-                            width: '40%'
+                            title: 'Nombre',
+                            width: '30%'
+                        },
+                        NIP_Portar: {
+                            title: ' NIP ',
+                            width: '10%'
+                        },
+                        Vigencia_NIP: {
+                            title: 'Vigencia NIP',
+                            width: '12%',
+                            type: 'date'
+                        },
+                        Id_Carrier: {
+                            title: 'CARRIER',
+                            width: '30%',
+                            options: 'http://localhost:8888/raxa/RestAPI/Carrier',
+                            edit: true
+                        },
+                        ICCDID : {
+                            title: ' ICCDID ',
+                            width: '5%'
+                        },
+                        Fecha_Registro_Porta : {
+                            title: ' Fecha Registro ',
+                            width: '5%',
+                            type: 'date',
+                            displayFormat: 'yy-mm-dd'
+                        },
+                        Id_Cat_Fase_Portabilidad : {
+                            title: ' Fase Portabilidad ',
+                            width: '5%',
+                            options: 'http://localhost:8888/raxa/RestAPI/FasePorta',
+                            edit: true
+                        },
+                        Tel_Fijo_Alterno : {
+                            title: ' Telefono ',
+                            width: '5%'
+                        },
+                        email : {
+                            title: ' Email ',
+                            width: '5%'
+                        },
+                        Id_Cat_Tipo_Producto : {
+                            title: ' Tipo Producto ',
+                            width: '5%',
+                            options: 'http://localhost:8888/raxa/RestAPI/Producto',
+                            edit: true
+                        },
+                        Id_Cat_Error_Portabilidad : {
+                            title: ' Error ',
+                            width: '5%',
+                            options: 'http://localhost:8888/raxa/RestAPI/Error',
+                            edit: true
                         }
                     }
                 });
