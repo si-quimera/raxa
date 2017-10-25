@@ -1,5 +1,5 @@
-(function ($) {		
-	var origen = 'raxa/';	
+(function ($) {
+	var origen = 'raxa/';
 	//var origen = '';
 	
 	var path = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/selectSubs/';	

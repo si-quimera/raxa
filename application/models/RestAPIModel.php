@@ -10,19 +10,62 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RestAPIModel extends CI_Model{
 
-    public function GetAllActSim(){
-
+    public function GetAllActSim()
+    {
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
 
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
+
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $this->db->limit($jtPageSize, $jtStartIndex);
+        $this->db->where('Id_Cat_Tipo_Producto', 378);
+
+        if($buscar != "" && $en != ""){
+            $this->db->like($en, $buscar);
+        }
         $query = $this->db->get('Lineas_RAXA');
         return $query->result();
     }
 
-    public function GetColaborador(){
+    public function GetAllActSimBen()
+    {
+        $jtSorting = explode( " ", $this->input->get('jtSorting'));
+        $jtStartIndex = $this->input->get('jtStartIndex');
+        $jtPageSize = $this->input->get('jtPageSize');
+
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
+
+        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
+        $this->db->limit($jtPageSize, $jtStartIndex);
+        $this->db->where('Id_Cat_Tipo_Producto', 379);
+
+        if($buscar != "" && $en != ""){
+            $this->db->like($en, $buscar);
+        }
+        $query = $this->db->get('Lineas_RAXA');
+        return $query->result();
+    }
+
+    public function UpdateActSim($id, $data)
+    {
+        $this->db->where('Num_Cliente', $id);
+        $this->db->update('Lineas_RAXA', $data);
+        return $error = $this->db->error();
+    }
+
+    public function DeleteActSim($id)
+    {
+        $this->db->where('Num_Cliente', $id);
+        $this->db->delete('Lineas_RAXA');
+        return $error = $this->db->error();
+    }
+
+    public function GetColaborador()
+    {
         $colabora = array();
         $query = $this->db->get('Cat_Colaboradores');
         foreach ($query->result() as $row){
@@ -33,7 +76,8 @@ class RestAPIModel extends CI_Model{
         return $colabora;
     }
 
-    public function GetCarrier(){
+    public function GetCarrier()
+    {
         $carrier = array();
         $query = $this->db->get('Cat_Carrier');
         foreach ($query->result() as $row){
@@ -44,7 +88,8 @@ class RestAPIModel extends CI_Model{
         return $carrier;
     }
 
-    public function GetFasePorta(){
+    public function GetFasePorta()
+    {
         $fase = array();
         $this->db->where('Id_Cat_Sec', 14);
         $query = $this->db->get('Cat_Maestro');
@@ -56,7 +101,8 @@ class RestAPIModel extends CI_Model{
         return $fase;
     }
 
-    public function GetProducto(){
+    public function GetProducto()
+    {
         $producto = array();
         $this->db->where('Id_Cat_Sec', 377);
         $query = $this->db->get('Cat_Maestro');
@@ -68,7 +114,8 @@ class RestAPIModel extends CI_Model{
         return $producto;
     }
 
-    public function GetError(){
+    public function GetError()
+    {
         $error = array();
         $this->db->where('Id_Cat_Sec', 383);
         $query = $this->db->get('Cat_Maestro');

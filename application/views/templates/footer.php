@@ -59,6 +59,9 @@
   
 		<script type="text/javascript">
 			$( document ).ready(function() {
+
+                var origen = 'raxa/';
+                //var origen = '';
 				
 				//Select con busqueda
 				$('#Id_Cat_Sec').select2();			
@@ -74,7 +77,6 @@
 
 
 				//Llenado Tabla Dinamica
-
                 var spanishMessages = {
                     save: 'Guardar',
                     saving: 'Guardando',
@@ -82,15 +84,14 @@
                     close: 'Cerrar',
                     editRecord: 'Editar Registro',
                     deleteText: 'Eliminar',
-
+                    areYouSure: '¿Estás seguro?',
+                    deleteConfirmation: 'Este registro será eliminado. ¿Estás seguro?'
 
                 };
 
-
-
                 //Prepare jTable
-                $('#PeopleTableContainer').jtable({
-                    messages: spanishMessages, //Lozalize
+                $('#PortaTableContainer').jtable({
+                    messages: spanishMessages, //Localize
                     paging: true, //Enable paging
                     pageSize: 100, //Set page size (default: 10)
                     sorting: true, //Enable sorting
@@ -99,39 +100,45 @@
                     pageList: 'minimal',
                     columnResizable: true,
                     actions: {
-                        listAction: 'http://localhost:8888/raxa/RestAPI/ActSim',
+                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSim',
                         createAction: '',
-                        updateAction: 'PersonActions.php?action=update',
-                        deleteAction: 'PersonActions.php?action=delete'
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim',
+                        deleteAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/DelActSim'
                     },
                     fields: {
                         Num_Cliente: {
                             title: '# Cliente',
-                            width: '12%'
+                            width: '12%',
+                            key: true,
+                            create: false,
+                            edit: false
                         },
                         Id_Colaborador: {
                             title: 'Colaborador',
                             width: '30%',
-                            options: 'http://localhost:8888/raxa/RestAPI/Colaborador',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
                             edit: true
                         },
                         Nom_Persona_Porta: {
                             title: 'Nombre',
-                            width: '30%'
+                            width: '30%',
+                            edit: true
                         },
                         NIP_Portar: {
                             title: ' NIP ',
-                            width: '10%'
+                            width: '10%',
+                            edit: true
                         },
                         Vigencia_NIP: {
                             title: 'Vigencia NIP',
                             width: '12%',
-                            type: 'date'
+                            type: 'date',
+                            edit: true
                         },
                         Id_Carrier: {
                             title: 'CARRIER',
                             width: '30%',
-                            options: 'http://localhost:8888/raxa/RestAPI/Carrier',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Carrier',
                             edit: true
                         },
                         ICCDID : {
@@ -141,40 +148,163 @@
                         Fecha_Registro_Porta : {
                             title: ' Fecha Registro ',
                             width: '5%',
-                            type: 'date',
-                            displayFormat: 'yy-mm-dd'
+                            edit : false,
+                            display:function(data){
+                                return data.record.Fecha_Registro_Porta;
+
+                            }
                         },
                         Id_Cat_Fase_Portabilidad : {
                             title: ' Fase Portabilidad ',
                             width: '5%',
-                            options: 'http://localhost:8888/raxa/RestAPI/FasePorta',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/FasePorta',
                             edit: true
                         },
                         Tel_Fijo_Alterno : {
                             title: ' Telefono ',
-                            width: '5%'
+                            width: '5%',
+                            edit: true
                         },
                         email : {
                             title: ' Email ',
-                            width: '5%'
+                            width: '5%',
+                            edit: true
                         },
                         Id_Cat_Tipo_Producto : {
                             title: ' Tipo Producto ',
                             width: '5%',
-                            options: 'http://localhost:8888/raxa/RestAPI/Producto',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Producto',
                             edit: true
                         },
                         Id_Cat_Error_Portabilidad : {
                             title: ' Error ',
                             width: '5%',
-                            options: 'http://localhost:8888/raxa/RestAPI/Error',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
                             edit: true
                         }
                     }
                 });
 
-                //Load person list from server
-                $('#PeopleTableContainer').jtable('load');
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsButton').click(function (e) {
+                    e.preventDefault();
+                    $('#PortaTableContainer').jtable('load', {
+                        en: $('#en').val(),
+                        buscar: $('#buscar').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsButton').click();
+
+
+                //Prepare jTable
+                $('#PortaBenTableContainer').jtable({
+                    messages: spanishMessages, //Localize
+                    paging: true, //Enable paging
+                    pageSize: 100, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'Num_Cliente DESC', //Set default sorting
+                    addRecordButton: false,
+                    pageList: 'minimal',
+                    columnResizable: true,
+                    actions: {
+                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSimBen',
+                        createAction: '',
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim',
+                        deleteAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/DelActSim'
+                    },
+                    fields: {
+                        Num_Cliente: {
+                            title: '# Cliente',
+                            width: '12%',
+                            key: true,
+                            create: false,
+                            edit: false
+                        },
+                        Id_Colaborador: {
+                            title: 'Colaborador',
+                            width: '30%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
+                            edit: true
+                        },
+                        Nom_Persona_Porta: {
+                            title: 'Nombre',
+                            width: '30%',
+                            edit: true
+                        },
+                        NIP_Portar: {
+                            title: ' NIP ',
+                            width: '10%',
+                            edit: true
+                        },
+                        Vigencia_NIP: {
+                            title: 'Vigencia NIP',
+                            width: '12%',
+                            type: 'date',
+                            edit: true
+                        },
+                        Id_Carrier: {
+                            title: 'CARRIER',
+                            width: '30%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Carrier',
+                            edit: true
+                        },
+                        ICCDID : {
+                            title: ' ICCDID ',
+                            width: '5%'
+                        },
+                        Fecha_Registro_Porta : {
+                            title: ' Fecha Registro ',
+                            width: '5%',
+                            edit : false,
+                            display:function(data){
+                                return data.record.Fecha_Registro_Porta;
+
+                            }
+                        },
+                        Id_Cat_Fase_Portabilidad : {
+                            title: ' Fase Portabilidad ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/FasePorta',
+                            edit: true
+                        },
+                        Tel_Fijo_Alterno : {
+                            title: ' Telefono ',
+                            width: '5%',
+                            edit: true
+                        },
+                        email : {
+                            title: ' Email ',
+                            width: '5%',
+                            edit: true
+                        },
+                        Id_Cat_Tipo_Producto : {
+                            title: ' Tipo Producto ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Producto',
+                            edit: true
+                        },
+                        Id_Cat_Error_Portabilidad : {
+                            title: ' Error ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
+                            edit: true
+                        }
+                    }
+                });
+
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsBenButton').click(function (e) {
+                    e.preventDefault();
+                    $('#PortaBenTableContainer').jtable('load', {
+                        en: $('#en').val(),
+                        buscar: $('#buscar').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsBenButton').click();
 
 			});	  					
 		</script>

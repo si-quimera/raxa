@@ -2,26 +2,25 @@
         <!-- Content -->
         <!-- ####### -->
         <main>
-            <style>
+            <style type="text/css">
                 .select-reset {
                     background-color: rgba(255, 255, 255, 0.9);
-                    width: inherit;
-                    padding: inherit;
-                    border: inherit;
-                    border-radius: inherit;
-                    height:inherit;
+                    width: inherit !important;
+                    padding: inherit !important;
+                    border: inherit !important;
+                    border-radius: inherit !important;
+                    height:inherit !important;
                 }
 
 
                 .input-reset{
-                    background-color: inherit !important;;
-                    border: none !important;;
-                    outline: inherit !important;;
+                    background-color: inherit !important;
+                    outline: inherit !important;
                     height: inherit !important;
-                    width: inherit !important;;
-                    font-size: inherit !important;;
-                    margin: inherit !important;;
-                    padding: inherit !important;;
+                    width: inherit !important;
+                    font-size: inherit !important;
+                    margin: inherit !important;
+                    padding: inherit !important;
 
 
                 }
@@ -56,37 +55,29 @@
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
 								<i class="large material-icons">keyboard_arrow_up</i>
 							</button>
-						</div>			
-						<div class="row">
-
-                            <div class="filtering">
-                                <form>
-                                    Name: <input type="text" name="name" id="name" class="input-reset " />
-                                    City:
-                                    <select id="cityId" name="cityId" class="browser-default">
-                                        <option selected="selected" value="0">All cities</option>
-                                        <option value="1">Adana</option>
-                                        <option value="2">Ankara</option>
-                                        <option value="3">Athens</option>
-                                        <option value="4">Beijing</option>
-                                        <option value="5">Berlin</option>
-                                        <option value="6">Bursa</option>
-                                        <option value="7">İstanbul</option>
-                                        <option value="8">London</option>
-                                        <option value="9">Madrid</option>
-                                        <option value="10">Mekke</option>
-                                        <option value="11">New York</option>
-                                        <option value="12">Paris</option>
-                                        <option value="13">Samsun</option>
-                                        <option value="14">Trabzon</option>
-                                        <option value="15">Volos</option>
+						</div>
+                            <div class="row">
+                                <div class="input-field col s3">
+                                    <input type="text" name="buscar" id="buscar" />
+                                    <label for="CP">Buscar</label>
+                                </div>
+                                <div class="input-field col s3">
+                                    <select id="en" name="en" >
+                                        <option selected="selected" value="">Seleccionar opción</option>
+                                        <option value="Num_Cliente"># Cliente</option>
+                                        <option value="Fecha_Registro_Porta">Fecha Registro</option>
+                                        <option value="Nom_Persona_Porta">Nombre Porta</option>
+                                        <option value="NIP_Portar">NIP Porta</option>
+                                        <option value="ICCDID">ICCDID</option>
                                     </select>
-                                    <button type="submit" id="LoadRecordsButton">Load records</button>
-                                </form>
+                                    <label for="CP">Buscar</label>
+                                </div>
+                                <div class="input-field col s6">
+                                    <button type="submit" class="btn waves-effect" id="LoadRecordsButton">Buscar ...</button>
+                                </div>
                             </div>
 
-                            <div id="PeopleTableContainer" style="width: 100%"></div>
-						</div>
+                            <div id="PortaTableContainer" style="width: 100%"></div>
 					</div>
 				</section>
 
