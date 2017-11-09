@@ -168,8 +168,9 @@
                                                 </div>											
                                             </div> 
                                             <div class="row no-gutter">
-                                                <div class="input-field col s6">
-                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato select2-container">
+                                                <div class="col s6">
+                                                    <label for="Jefe_Inmediato">Jefe Inmediato</label>
+                                                    <select name="Jefe_Inmediato" id="Jefe_Inmediato" class="browser-default select2-container">
                                                         <option value="" disabled selected>Elija su opción</option>
                                                     <?php
                                                         foreach ($jefes as $key => $row) {    
@@ -185,7 +186,7 @@
                                                         }                                               
                                                     ?>
                                                     </select>
-                                                    <label for="Jefe_Inmediato">Jefe Inmediato</label>
+
                                                     <?php echo form_error('Jefe_Inmediato'); ?>
                                                 </div>
                                                 <div class="col s6">

@@ -89,7 +89,7 @@
 
                 };
 
-                //Prepare jTable
+                //Act SIM ---------
                 $('#PortaTableContainer').jtable({
                     messages: spanishMessages, //Localize
                     paging: true, //Enable paging
@@ -101,9 +101,7 @@
                     columnResizable: true,
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSim',
-                        createAction: '',
-                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim',
-                        deleteAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/DelActSim'
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
                     },
                     fields: {
                         Num_Cliente: {
@@ -114,15 +112,15 @@
                             edit: false
                         },
                         Id_Colaborador: {
-                            title: 'Colaborador',
-                            width: '30%',
+                            title: 'Ejecutivo',
+                            width: '20%',
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
-                            edit: true
+                            edit: false
                         },
                         Nom_Persona_Porta: {
-                            title: 'Nombre',
-                            width: '30%',
-                            edit: true
+                            title: 'Cliente',
+                            width: '20%',
+                            edit: false
                         },
                         NIP_Portar: {
                             title: ' NIP ',
@@ -137,16 +135,17 @@
                         },
                         Id_Carrier: {
                             title: 'CARRIER',
-                            width: '30%',
+                            width: '20%',
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Carrier',
-                            edit: true
+                            edit: false
                         },
                         ICCDID : {
                             title: ' ICCDID ',
-                            width: '5%'
+                            width: '5%',
+                            edit: true
                         },
                         Fecha_Registro_Porta : {
-                            title: ' Fecha Registro ',
+                            title: ' Fecha Reg Porta',
                             width: '5%',
                             edit : false,
                             display:function(data){
@@ -158,15 +157,20 @@
                             title: ' Fase Portabilidad ',
                             width: '5%',
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/FasePorta',
-                            edit: true
+                            edit: false
                         },
                         Tel_Fijo_Alterno : {
-                            title: ' Telefono ',
+                            title: ' Telefono Fijo',
                             width: '5%',
-                            edit: true
+                            edit: false
                         },
                         email : {
                             title: ' Email ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Num_Tel_Temporal : {
+                            title: ' Num Provisional ',
                             width: '5%',
                             edit: true
                         },
@@ -174,7 +178,13 @@
                             title: ' Tipo Producto ',
                             width: '5%',
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Producto',
-                            edit: true
+                            edit: false
+                        },
+                        Id_Cat_Validacion : {
+                            title: ' Status Validación ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/StatusPorta',
+                            edit: false
                         },
                         Id_Cat_Error_Portabilidad : {
                             title: ' Error ',
@@ -196,9 +206,9 @@
 
                 //Load all records when page is first shown
                 $('#LoadRecordsButton').click();
+                //Act SIM ---------
 
-
-                //Prepare jTable
+                //Act SIM Ben ---------
                 $('#PortaBenTableContainer').jtable({
                     messages: spanishMessages, //Localize
                     paging: true, //Enable paging
@@ -210,9 +220,7 @@
                     columnResizable: true,
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSimBen',
-                        createAction: '',
-                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim',
-                        deleteAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/DelActSim'
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
                     },
                     fields: {
                         Num_Cliente: {
@@ -305,6 +313,245 @@
 
                 //Load all records when page is first shown
                 $('#LoadRecordsBenButton').click();
+                //Act SIM Ben ---------
+
+                //Val Cal ---------
+                $('#PortaValTableContainer').jtable({
+                    messages: spanishMessages, //Localize
+                    paging: true, //Enable paging
+                    pageSize: 100, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'Num_Cliente DESC', //Set default sorting
+                    addRecordButton: false,
+                    pageList: 'minimal',
+                    columnResizable: true,
+                    actions: {
+                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ValCal',
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditValCal'
+                    },
+                    fields: {
+                        Num_Cliente: {
+                            title: '# Cliente',
+                            width: '12%',
+                            key: true,
+                            create: false,
+                            edit: false
+                        },
+                        Id_Colaborador: {
+                            title: 'Ejecutivo',
+                            width: '20%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
+                            edit: false
+                        },
+                        Nom_Persona_Porta: {
+                            title: 'Cliente',
+                            width: '20%',
+                            edit: false
+                        },
+                        NIP_Portar: {
+                            title: ' NIP ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Vigencia_NIP: {
+                            title: 'Vigencia NIP',
+                            width: '12%',
+                            type: 'date',
+                            edit: false
+                        },
+                        Id_Carrier: {
+                            title: 'CARRIER',
+                            width: '10%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Carrier',
+                            edit: false
+                        },
+                        ICCDID : {
+                            title: ' ICCDID ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Fecha_Registro_Porta : {
+                            title: ' Fecha Reg Porta',
+                            width: '5%',
+                            edit : false,
+                            display:function(data){
+                                return data.record.Fecha_Registro_Porta;
+
+                            }
+                        },
+                        Id_Cat_Fase_Portabilidad : {
+                            title: ' Fase Porta ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/FasePorta',
+                            edit: true
+                        },
+                        Tel_Fijo_Alterno : {
+                            title: ' Telefono Fijo',
+                            width: '5%',
+                            edit: false
+                        },
+                        email : {
+                            title: ' Email ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Num_Tel_Temporal : {
+                            title: ' Num Provisional ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Id_Cat_Tipo_Producto : {
+                            title: ' Tipo Producto ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Producto',
+                            edit: false
+                        },
+                        Id_Cat_Validacion : {
+                            title: ' Status Validación ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/StatusPorta',
+                            edit: true
+                        },
+                        Id_Cat_Error_Portabilidad : {
+                            title: ' Error ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
+                            edit: true
+                        }
+                    }
+                });
+
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsVenButton').click(function (e) {
+                    e.preventDefault();
+                    $('#PortaValTableContainer').jtable('load', {
+                        en: $('#en').val(),
+                        buscar: $('#buscar').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsVenButton').click();
+
+
+                //Gen Porta ---------
+                $('#GenPortaTableContainer').jtable({
+                    messages: spanishMessages, //Localize
+                    paging: true, //Enable paging
+                    pageSize: 100, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'Num_Cliente DESC', //Set default sorting
+                    addRecordButton: false,
+                    pageList: 'minimal',
+                    columnResizable: true,
+                    actions: {
+                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/GenPorta',
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditGenPorta'
+                    },
+                    fields: {
+                        Num_Cliente: {
+                            title: '# Cliente',
+                            width: '12%',
+                            key: true,
+                            create: false,
+                            edit: false
+                        },
+                        Id_Colaborador: {
+                            title: 'Ejecutivo',
+                            width: '20%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
+                            edit: false
+                        },
+                        Nom_Persona_Porta: {
+                            title: 'Cliente',
+                            width: '20%',
+                            edit: false
+                        },
+                        NIP_Portar: {
+                            title: ' NIP ',
+                            width: '10%',
+                            edit: true
+                        },
+                        Vigencia_NIP: {
+                            title: 'Vigencia NIP',
+                            width: '12%',
+                            type: 'date',
+                            edit: true
+                        },
+                        Id_Carrier: {
+                            title: 'CARRIER',
+                            width: '20%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Carrier',
+                            edit: false
+                        },
+                        ICCDID : {
+                            title: ' ICCDID ',
+                            width: '5%',
+                            edit: true
+                        },
+                        Fecha_Registro_Porta : {
+                            title: ' Fecha Reg Porta',
+                            width: '5%',
+                            edit : false,
+                            display:function(data){
+                                return data.record.Fecha_Registro_Porta;
+
+                            }
+                        },
+                        Id_Cat_Fase_Portabilidad : {
+                            title: ' Fase Portabilidad ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/FasePorta',
+                            edit: false
+                        },
+                        Tel_Fijo_Alterno : {
+                            title: ' Telefono Fijo',
+                            width: '5%',
+                            edit: false
+                        },
+                        email : {
+                            title: ' Email ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Num_Tel_Temporal : {
+                            title: ' Num Provisional ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Id_Cat_Tipo_Producto : {
+                            title: ' Tipo Producto ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Producto',
+                            edit: false
+                        },
+                        Id_Cat_Validacion : {
+                            title: ' Status Validación ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/StatusPorta',
+                            edit: false
+                        },
+                        Id_Cat_Error_Portabilidad : {
+                            title: ' Error ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
+                            edit: true
+                        }
+                    }
+                });
+
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsGenButton').click(function (e) {
+                    e.preventDefault();
+                    $('#GenPortaTableContainer').jtable('load', {
+                        en: $('#en').val(),
+                        buscar: $('#buscar').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsGenButton').click();
+                //Gen Porta ---------
 
 			});	  					
 		</script>

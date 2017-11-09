@@ -10,8 +10,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RestAPIModel extends CI_Model{
 
-    public function GetAllActSim()
+    public function GetValCal()
     {
+
+        $usuario = $this->session->userdata('usuario');
+
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
@@ -22,6 +25,56 @@ class RestAPIModel extends CI_Model{
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 378);
+        $this->db->where('Id_Cat_Fase_Portabilidad', 15);
+        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+
+        if($buscar != "" && $en != ""){
+            $this->db->like($en, $buscar);
+        }
+        $query = $this->db->get('Lineas_RAXA');
+        return $query->result();
+    }
+
+    public function GetAllActSim()
+    {
+        $usuario = $this->session->userdata('usuario');
+
+        $jtSorting = explode( " ", $this->input->get('jtSorting'));
+        $jtStartIndex = $this->input->get('jtStartIndex');
+        $jtPageSize = $this->input->get('jtPageSize');
+
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
+
+        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
+        $this->db->limit($jtPageSize, $jtStartIndex);
+        $this->db->where('Id_Cat_Tipo_Producto', 378);
+        $this->db->where('Id_Cat_Fase_Portabilidad', 16);
+        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+
+        if($buscar != "" && $en != ""){
+            $this->db->like($en, $buscar);
+        }
+        $query = $this->db->get('Lineas_RAXA');
+        return $query->result();
+    }
+
+    public function GetGenPorta()
+    {
+        $usuario = $this->session->userdata('usuario');
+
+        $jtSorting = explode( " ", $this->input->get('jtSorting'));
+        $jtStartIndex = $this->input->get('jtStartIndex');
+        $jtPageSize = $this->input->get('jtPageSize');
+
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
+
+        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
+        $this->db->limit($jtPageSize, $jtStartIndex);
+        $this->db->where('Id_Cat_Tipo_Producto', 378);
+        $this->db->where('Id_Cat_Fase_Portabilidad', 0);
+        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
 
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
@@ -32,6 +85,8 @@ class RestAPIModel extends CI_Model{
 
     public function GetAllActSimBen()
     {
+        $usuario = $this->session->userdata('usuario');
+
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
@@ -42,6 +97,7 @@ class RestAPIModel extends CI_Model{
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 379);
+        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
 
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
@@ -49,6 +105,8 @@ class RestAPIModel extends CI_Model{
         $query = $this->db->get('Lineas_RAXA');
         return $query->result();
     }
+
+
 
     public function UpdateActSim($id, $data)
     {
@@ -118,6 +176,19 @@ class RestAPIModel extends CI_Model{
     {
         $error = array();
         $this->db->where('Id_Cat_Sec', 383);
+        $query = $this->db->get('Cat_Maestro');
+        foreach ($query->result() as $row){
+            $x['Value'] = $row->Id_Cat_Prim;
+            $x['DisplayText'] = $row->Nombre;
+            $error[] = $x;
+        }
+        return $error;
+    }
+
+    public function GetStatusPorta()
+    {
+        $error = array();
+        $this->db->where('Id_Cat_Sec', 7);
         $query = $this->db->get('Cat_Maestro');
         foreach ($query->result() as $row){
             $x['Value'] = $row->Id_Cat_Prim;

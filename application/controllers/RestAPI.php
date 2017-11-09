@@ -10,6 +10,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RestAPI extends CI_Controller{
 
+    public function ValCal()
+    {
+        if ($this->input->method() == 'post') {
+            $result = $this->RestAPIModel->GetValCal();
+
+            //Return result to jTable
+            $jTableResult = array();
+            $jTableResult['Result'] = "OK";
+            $jTableResult['Records'] = $result;
+            $jTableResult['TotalRecordCount'] = count($result);
+            echo json_encode($jTableResult);
+        }
+    }
+
+    public function GenPorta()
+    {
+        if ($this->input->method() == 'post') {
+            $result = $this->RestAPIModel->GetGenPorta();
+
+            //Return result to jTable
+            $jTableResult = array();
+            $jTableResult['Result'] = "OK";
+            $jTableResult['Records'] = $result;
+            $jTableResult['TotalRecordCount'] = count($result);
+            echo json_encode($jTableResult);
+        }
+    }
+
     public function ActSim()
     {
         if ($this->input->method() == 'post') {
@@ -19,7 +47,7 @@ class RestAPI extends CI_Controller{
             $jTableResult = array();
             $jTableResult['Result'] = "OK";
             $jTableResult['Records'] = $result;
-            $jTableResult['TotalRecordCount'] = $this->db->count_all_results('Lineas_RAXA');
+            $jTableResult['TotalRecordCount'] = count($result);
             echo json_encode($jTableResult);
         }
     }
@@ -33,7 +61,7 @@ class RestAPI extends CI_Controller{
             $jTableResult = array();
             $jTableResult['Result'] = "OK";
             $jTableResult['Records'] = $result;
-            $jTableResult['TotalRecordCount'] = $this->db->count_all_results('Lineas_RAXA');
+            $jTableResult['TotalRecordCount'] = count($result);
             echo json_encode($jTableResult);
         }
     }
@@ -42,16 +70,10 @@ class RestAPI extends CI_Controller{
     {
         if ($this->input->method() == 'post') {
             $data = array(
-                'Id_Colaborador'	=>  $this->input->post('Id_Colaborador'),
-                'Nom_Persona_Porta'	=>  $this->input->post('Nom_Persona_Porta'),
                 'NIP_Portar'	    =>  $this->input->post('NIP_Portar'),
                 'Vigencia_NIP'	    =>  $this->input->post('Vigencia_NIP'),
-                'Id_Carrier'	    =>  $this->input->post('Id_Carrier'),
                 'ICCDID'	        =>  $this->input->post('ICCDID'),
-                'Id_Cat_Fase_Portabilidad'	=>  $this->input->post('Id_Cat_Fase_Portabilidad'),
-                'Tel_Fijo_Alterno'	=>  $this->input->post('Tel_Fijo_Alterno'),
-                'email'	            =>  $this->input->post('email'),
-                'Id_Cat_Tipo_Producto'	=>  $this->input->post('Id_Cat_Tipo_Producto'),
+                'Num_Tel_Temporal'	=>  $this->input->post('Num_Tel_Temporal'),
                 'Id_Cat_Error_Portabilidad'	=>  $this->input->post('Id_Cat_Error_Portabilidad'),
             );
 
@@ -61,10 +83,16 @@ class RestAPI extends CI_Controller{
         }
     }
 
-    public function DelActSim()
+    public function EditValCal()
     {
         if ($this->input->method() == 'post') {
-            $result = $this->RestAPIModel->DeleteActSim($this->input->post('Num_Cliente'));
+            $data = array(
+                'Id_Cat_Fase_Portabilidad'	=>  $this->input->post('Id_Cat_Fase_Portabilidad'),
+                'Id_Cat_Validacion'	=>  $this->input->post('Id_Cat_Validacion'),
+                'Id_Cat_Error_Portabilidad'	=>  $this->input->post('Id_Cat_Error_Portabilidad'),
+            );
+
+            $result = $this->RestAPIModel->UpdateActSim($this->input->post('Num_Cliente'), $data);
             $jTableResult['Result'] = "OK";
             echo json_encode($jTableResult);
         }
@@ -113,6 +141,16 @@ class RestAPI extends CI_Controller{
     public  function Error()
     {
         $result = $this->RestAPIModel->GetError();
+
+        $jTableResult = array();
+        $jTableResult['Result'] = "OK";
+        $jTableResult['Options'] = $result;
+        echo json_encode($jTableResult);
+    }
+
+    public  function StatusPorta()
+    {
+        $result = $this->RestAPIModel->GetStatusPorta();
 
         $jTableResult = array();
         $jTableResult['Result'] = "OK";
