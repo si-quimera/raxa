@@ -167,29 +167,27 @@ class PerfilesModel extends CI_Model{
     }  		
 
     public function loadMenu($user) {
-        $qry_menu_inicial = 
-           "SELECT DISTINCT m.Id_Cat_Prim, m.Id_Cat_Sec, 0 as nivel, 0 AS submenu , m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5 FROM Cat_Maestro m "
-				. "	JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu "
-				. " JOIN Colaborador_Perfil p ON p.Id_Perfil = mp.Id_Perfil "
-				. "WHERE Id_Colaborador = '".$user."' AND m.String1 = 1 AND p.activo = 1;";
+        $qry_menu_inicial = "SELECT DISTINCT mae.Id_Cat_Prim, mae.Id_Cat_Sec, 0 as nivel, 0 AS submenu , mae.Nombre, mae.String1, mae.String2, mae.String3, mae.String4, mae.String5 FROM `Colaborador_Perfil` as col join Menu_Perfiles as men on col.id_perfil = men.Id_Perfil join Cat_Maestro as mae on men.Id_Cat_Menu = mae.Id_Cat_Prim  WHERE col.id_colaborador = '".$user."' AND mae.String1 = 1";
 
         $menu = $this->db->query($qry_menu_inicial)->result();
 		sort($menu);
 		foreach ($menu as $key => $value) {
-			$value->submenu = $this->cargaSubMenu($value->Id_Cat_Prim, 2);
+			$value->submenu = $this->cargaSubMenu($user,$value->Id_Cat_Prim, 2);
 			foreach ($value->submenu as $key => $value) {
-				$value->submenu = $this->cargaSubMenu($value->Id_Cat_Prim, 3);
+				$value->submenu = $this->cargaSubMenu($user,$value->Id_Cat_Prim, 3);
 			}
 		}
-		
-        return $menu;	
+
+        return $menu;
     }
 	
-    private function cargaSubMenu($Id_Cat_Sec, $nivel) {		
-		$qry_menu_hijos = 
-           "SELECT DISTINCT m.Id_Cat_Prim,m.Id_Cat_Sec, 0 as nivel, NULL as submenu, m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
-            FROM Cat_Maestro m JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu WHERE Id_Cat_Sec = ".$Id_Cat_Sec." AND m.String1 = ".$nivel." ORDER BY 1;";		
-				
+    private function cargaSubMenu($user, $Id_Cat_Sec, $nivel) {
+		//$qry_menu_hijos =
+        //   "SELECT DISTINCT m.Id_Cat_Prim,m.Id_Cat_Sec, 0 as nivel, NULL as submenu, m.Nombre, m.String1, m.String2, m.String3, m.String4, m.String5
+        //    FROM Cat_Maestro m JOIN Menu_Perfiles mp ON m.Id_Cat_Prim = mp.Id_Cat_Menu WHERE Id_Cat_Sec = ".$Id_Cat_Sec." AND m.String1 = ".$nivel." ORDER BY 1;";
+
+
+        $qry_menu_hijos = "SELECT DISTINCT mae.Id_Cat_Prim, mae.Id_Cat_Sec, 0 as nivel, NULL AS submenu , mae.Nombre, mae.String1, mae.String2, mae.String3, mae.String4, mae.String5 FROM `Colaborador_Perfil` as col join Menu_Perfiles as men on col.id_perfil = men.Id_Perfil join Cat_Maestro as mae on men.Id_Cat_Menu = mae.Id_Cat_Prim  WHERE  col.id_colaborador = '".$user."' AND mae.Id_Cat_Sec = '".$Id_Cat_Sec."' AND mae.String1 = '".$nivel."' ORDER BY 1";
         $submenu = $this->db->query($qry_menu_hijos)->result();			
         return $submenu;
     } 	

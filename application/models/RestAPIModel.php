@@ -15,6 +15,8 @@ class RestAPIModel extends CI_Model{
 
         $usuario = $this->session->userdata('usuario');
 
+        $perfil = strtolower($usuario['perfil']->Descripcion);
+
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
@@ -26,8 +28,9 @@ class RestAPIModel extends CI_Model{
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 378);
         $this->db->where('Id_Cat_Fase_Portabilidad', 15);
-        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
-
+        if( $perfil != 'administrador'){
+            $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+        }
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }
@@ -38,6 +41,8 @@ class RestAPIModel extends CI_Model{
     public function GetAllActSim()
     {
         $usuario = $this->session->userdata('usuario');
+
+        $perfil = strtolower($usuario['perfil']->Descripcion);
 
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
@@ -50,8 +55,9 @@ class RestAPIModel extends CI_Model{
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 378);
         $this->db->where('Id_Cat_Fase_Portabilidad', 16);
-        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
-
+        if( $perfil != 'administrador') {
+            $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+        }
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }
@@ -62,6 +68,8 @@ class RestAPIModel extends CI_Model{
     public function GetGenPorta()
     {
         $usuario = $this->session->userdata('usuario');
+
+        $perfil = strtolower($usuario['perfil']->Descripcion);
 
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
@@ -74,8 +82,9 @@ class RestAPIModel extends CI_Model{
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 378);
         $this->db->where('Id_Cat_Fase_Portabilidad', 0);
-        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
-
+        if( $perfil != 'administrador') {
+            $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+        }
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }
@@ -87,6 +96,8 @@ class RestAPIModel extends CI_Model{
     {
         $usuario = $this->session->userdata('usuario');
 
+        $perfil = strtolower($usuario['perfil']->Descripcion);
+
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
@@ -97,8 +108,9 @@ class RestAPIModel extends CI_Model{
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 379);
-        $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
-
+        if( $perfil != 'administrador') {
+            $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+        }
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }

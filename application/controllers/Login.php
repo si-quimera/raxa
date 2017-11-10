@@ -16,7 +16,7 @@ class Login extends CI_Controller {
 				$data['usuario']['raxa_menu'] = $this->PerfilesModel->loadMenu($id_user);								
 				$data['usuario']['perfil'] = $this->LoginModel->getPerfilData($id_user);
                 $this->session->set_userdata($data);                    				
-                redirect(base_url()); 
+                    redirect(base_url());
             }									
 		}
 	}
