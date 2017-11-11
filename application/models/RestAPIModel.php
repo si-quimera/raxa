@@ -200,7 +200,7 @@ class RestAPIModel extends CI_Model{
     public function GetStatusPorta()
     {
         $error = array();
-        $this->db->where('Id_Cat_Sec', 7);
+        $this->db->where('Id_Cat_Sec', 514);
         $query = $this->db->get('Cat_Maestro');
         foreach ($query->result() as $row){
             $x['Value'] = $row->Id_Cat_Prim;

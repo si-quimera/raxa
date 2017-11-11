@@ -72,9 +72,13 @@
                                     </select>
                                     <label for="CP">Buscar</label>
                                 </div>
-                                <div class="input-field col s6">
+                                <div class="input-field col s3">
                                     <button type="submit" class="btn waves-effect" id="LoadRecordsVenButton">Buscar ...</button>
                                 </div>
+                                <div class="input-field col s3 right-align ">
+                                    <a href="<?= base_url() ?>Seguimiento/Cuarentena/" class="waves-effect btn yellow accent-4"><i class="material-icons left">lock</i>Cuarentena</a>
+                                </div>
+
                             </div>
 
                             <div id="PortaValTableContainer" style="width: 100%"></div>

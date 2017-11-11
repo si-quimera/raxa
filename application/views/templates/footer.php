@@ -60,8 +60,8 @@
 		<script type="text/javascript">
 			$( document ).ready(function() {
 
-                var origen = 'raxa/';
-                //var origen = '';
+                //var origen = 'raxa/';
+                var origen = '';
 				
 				//Select con busqueda
 				$('#Id_Cat_Sec').select2();			
@@ -335,18 +335,32 @@
                             width: '12%',
                             key: true,
                             create: false,
-                            edit: false
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="Num_Cliente" class="input-reset" readonly style="width:120px" value="' + data.record.Num_Cliente + '" />';
+                                } else {
+                                    return '<input type="text" name="Num_Cliente" class="input-reset"  readonly style="width:120px" value="" />';
+                                }
+                            }
                         },
                         Id_Colaborador: {
                             title: 'Ejecutivo',
                             width: '20%',
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
-                            edit: false
+                            edit: true
                         },
                         Nom_Persona_Porta: {
                             title: 'Cliente',
                             width: '20%',
-                            edit: false
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="Nom_Persona_Porta" class="input-reset" readonly style="width:200px" value="' + data.record.Nom_Persona_Porta + '" />';
+                                } else {
+                                    return '<input type="text" name="Nom_Persona_Porta" class="input-reset"  readonly style="width:200px" value="" />';
+                                }
+                            }
                         },
                         NIP_Portar: {
                             title: ' NIP ',

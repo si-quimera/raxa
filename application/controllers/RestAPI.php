@@ -86,8 +86,18 @@ class RestAPI extends CI_Controller{
     public function EditValCal()
     {
         if ($this->input->method() == 'post') {
+
+
+            if($this->input->post('Id_Cat_Validacion') == 515){
+                $Fase_Portabilidad = 16;
+            }
+
+            if($this->input->post('Id_Cat_Validacion') != 515){
+                $Fase_Portabilidad = 517;
+            }
+
             $data = array(
-                'Id_Cat_Fase_Portabilidad'	=>  $this->input->post('Id_Cat_Fase_Portabilidad'),
+                'Id_Cat_Fase_Portabilidad'	=>  $Fase_Portabilidad,
                 'Id_Cat_Validacion'	=>  $this->input->post('Id_Cat_Validacion'),
                 'Id_Cat_Error_Portabilidad'	=>  $this->input->post('Id_Cat_Error_Portabilidad'),
             );
