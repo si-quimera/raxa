@@ -9,8 +9,23 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllZona($number_per_page){
-		$this->db->order_by('Id_Zona', 'DESC');  
-        return $this->db->get('Cat_Zona', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Zona';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Zona', $number_per_page, $pageNo);
     }  	
 	
     public function deleteZona($id){
@@ -43,8 +58,23 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllEdos($number_per_page){
-		$this->db->order_by('Id_Estado', 'DESC');  
-        return $this->db->get('Cat_Estado', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Estado';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Estado', $number_per_page, $pageNo);
     }  
 
     public function getZona(){	
@@ -86,8 +116,24 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllCiudad($number_per_page){
-		$this->db->order_by('Id_Ciudad', 'DESC');  
-        return $this->db->get('Cat_Ciudad', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Ciudad';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Ciudad', $number_per_page, $pageNo);
     }  
 
     public function getEdos(){	
@@ -129,8 +175,24 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllSuc($number_per_page){
-		$this->db->order_by('Id_Sucursal', 'DESC');  
-        return $this->db->get('Cat_Sucursal', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Sucursal';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Sucursal', $number_per_page, $pageNo);
     }  
 
     public function getCiudad(){	
@@ -172,8 +234,23 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllCarrier($number_per_page){
-		$this->db->order_by('Id_Carrier', 'DESC');  
-        return $this->db->get('Cat_Carrier', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Carrier';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Carrier', $number_per_page, $pageNo);
     }  	
 	
 	public function deleteCarrier($id){
@@ -206,8 +283,23 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllGrupo($number_per_page){
-		$this->db->order_by('Id_Grupo', 'DESC');  
-        return $this->db->get('Cat_Grupo', $number_per_page, $this->uri->segment(4));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Grupo';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Grupo', $number_per_page, $pageNo);
     } 	
 	
 	public function deleteGrupo($id){
@@ -302,8 +394,23 @@ class CatalogoModel extends CI_Model{
     }    
     
     public function getAllAlmacen($number_per_page){
-		$this->db->order_by('Id_Almacen', 'DESC');  
-        return $this->db->get('Cat_Almacen', $number_per_page, $this->uri->segment(3));
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Almacen';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+		$this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Almacen', $number_per_page, $pageNo);
     }  	
 	
     public function getSucursal(){	

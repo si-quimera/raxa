@@ -53,7 +53,11 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Nombre</th>
+											<th>
+												<a href="<?= base_url() ?>Catalogos/carrier/?order=Nombre&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Nombre
+												<a href="<?= base_url() ?>Catalogos/carrier/?order=Nombre&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>

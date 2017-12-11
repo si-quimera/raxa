@@ -70,6 +70,11 @@
 												Estado
 												<a href="<?= base_url() ?>Catalogos/colaborador/?order=Estado&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
 											</th>
+											<th>
+												<a href="<?= base_url() ?>Catalogos/colaborador/?order=Id_Grupo&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Grupo
+												<a href="<?= base_url() ?>Catalogos/colaborador/?order=Id_Grupo&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
@@ -84,6 +89,18 @@
 											<td><?= $row->Ap_Pat ?></td>
 											<td><?= $row->Ap_Mat ?></td>
 											<td><?= $row->Estado ?></td>
+											<?php
+												if (isset($grupo[$row->Id_Grupo])) {
+											?>
+												<td><?= $grupo[$row->Id_Grupo] ?></td>
+											<?php
+												} else {
+											?>
+												<td></td>
+											<?php
+												}
+												
+											?>
 											<td class="center-align">
 												<div class="btn-group">
 													<a href="<?= base_url() ?>Catalogos/editColaborador/<?= $row->Id_Colaborador ?>" class="btn-flat btn-small waves-effect">

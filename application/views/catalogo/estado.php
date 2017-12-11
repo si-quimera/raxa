@@ -53,8 +53,16 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Estado</th>
-											<th>Zona</th>
+											<th>
+												<a href="<?= base_url() ?>Catalogos/estado/?order=Nombre&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Estado
+												<a href="<?= base_url() ?>Catalogos/estado/?order=Nombre&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
+											<th>
+												<a href="<?= base_url() ?>Catalogos/estado/?order=Id_Zona&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Zona
+												<a href="<?= base_url() ?>Catalogos/estado/?order=Id_Zona&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>

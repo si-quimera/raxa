@@ -52,8 +52,16 @@
 								<table class="highlight">
 									<thead>
 										<tr>
-											<th>Ciudad</th>
-											<th>Estado</th>
+											<th>
+												<a href="<?= base_url() ?>Catalogos/ciudad/?order=Nombre&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Ciudad
+												<a href="<?= base_url() ?>Catalogos/ciudad/?order=Nombre&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
+											<th>
+												<a href="<?= base_url() ?>Catalogos/ciudad/?order=Id_Estado&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Estado
+												<a href="<?= base_url() ?>Catalogos/ciudad/?order=Id_Estado&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>
