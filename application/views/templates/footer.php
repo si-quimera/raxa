@@ -706,8 +706,24 @@
                 $('#LoadRecordsCuaButton').click();
 
                 //Cuarentena Cal ---------
-
-
+                
+                $("#buscar_perfil").click(function(){
+                    var parametros = {
+                        "descripcion" : $("#descripcion").val()
+                    };
+                    $.ajax({
+                                data:  parametros,
+                                url:   '<?php echo base_url(); ?>Perfiles/contenido_busqueda_perfiles',
+                                type:  'post',
+                                beforeSend: function () {
+                                $(".preloader-wrapper").attr("class","preloader-wrapper active");
+                                },
+                                success:  function (response) {              
+                                  $("#contenido_perfiles").html(response);
+                                  $(".preloader-wrapper").attr("class","preloader-wrapper");
+                                }
+                        });
+                });
 
 
 			});	  					

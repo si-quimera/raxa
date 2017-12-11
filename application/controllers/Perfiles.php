@@ -42,6 +42,89 @@ class Perfiles extends CI_Controller {
         $this->load->view('templates/footer.php');		
 	}
 
+	public function contenido_busqueda_perfiles(){
+		$descripcion = $this->input->post("descripcion");
+
+		$config['base_url'] = base_url() . 'Perfiles/index/';
+        $config['total_rows'] = $this->PerfilesModel->countPerfil();
+        $config['per_page'] = 10;   
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 5;        
+		$config['reuse_query_string'] = TRUE;
+		$config['page_query_string'] = TRUE;
+		$config['query_string_segment'] = 'page';		
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';          
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';   
+        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
+        $config['cur_tag_close'] = '</a></li>';
+        
+        $this->pagination->initialize($config);
+        $result = $this->PerfilesModel->getAllPerfilBuscador($config['per_page'], $descripcion); 
+                    
+        $data['consulta'] = $result;
+        $data['pagination'] = $this->pagination->create_links();
+		
+		$empresa_id = $this->PerfilesModel->getIDMaestro('Empresas');
+		$depto_id = $this->PerfilesModel->getIDMaestro('Departamentos');
+		$depto = $this->PerfilesModel->getDepto($depto_id['Id_Cat_Prim']);
+		$empresa = $this->PerfilesModel->getEmpresa($empresa_id['Id_Cat_Prim']);
+
+		echo '<table class="highlight">
+									<thead>
+										<tr>
+											<th>
+												<a href="<?= base_url() ?>Perfiles/index/?order=Descripcion&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Descripcion
+												<a href="<?= base_url() ?>Perfiles/index/?order=Descripcion&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>																								
+											</th>
+											<th>Departamento</th>
+											<th>Empresa</th>											
+											<th class="center-align" data-searchable="false" data-orderable="false">
+												Actions
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+									';
+									     
+									foreach ($result->result() as $row) {                                         
+									echo '
+										<tr>
+											<td>'. $row->Descripcion .'</td>
+											<td>'. $depto[$row->Id_Cat_Departamento] .'</td>
+											<td>'. $empresa[$row->Id_Cat_Empresa] .'</td>											
+											<td class="center-align">
+												<div class="btn-group">
+													<a href="'. base_url() .'Perfiles/editPerfil/'.$row->Id_Perfil.'" class="btn-flat btn-small waves-effect">
+														<i class="material-icons">create</i>
+													</a>
+													
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo  <?= $row->Descripcion ?>?&quot;)) { window.location.href = \'<?= base_url() . \'Perfiles/delPerfil/\' . $row->Id_Perfil ?>\' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+														<i class="material-icons">delete</i>
+													</a>
+												</div>
+											</td>
+										</tr>										
+									';
+									
+									}
+									echo '
+									</tbody>	
+								</table>
+								';								
+                                echo $this->pagination->create_links(); 
+
+
+	}
+
 	public function newPerfil(){				
         $this->load->view('templates/header.php');  
 		

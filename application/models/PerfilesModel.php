@@ -7,7 +7,28 @@ class PerfilesModel extends CI_Model{
         $number = $this->db->count_all('Cat_Perfiles');
         return intval($number);
     }  	
-		
+	
+    public function getAllPerfilBuscador($number_per_page,$descripcion){
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Perfil';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }           
+        $this->db->like('Descripcion', $descripcion, 'both');
+        $this->db->order_by($order, $by);  
+        return $this->db->get('Cat_Perfiles', $number_per_page, $pageNo);
+    }
+
     public function getAllPerfil($number_per_page){
         if (empty($_GET['page'])) {
             $pageNo = 0;
