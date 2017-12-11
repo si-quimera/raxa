@@ -24,6 +24,20 @@ class RestAPI extends CI_Controller{
         }
     }
 
+    public function CuaSim()
+    {
+        if ($this->input->method() == 'post') {
+            $result = $this->RestAPIModel->GetCuaSim();
+
+            //Return result to jTable
+            $jTableResult = array();
+            $jTableResult['Result'] = "OK";
+            $jTableResult['Records'] = $result;
+            $jTableResult['TotalRecordCount'] = count($result);
+            echo json_encode($jTableResult);
+        }
+    }
+
     public function GenPorta()
     {
         if ($this->input->method() == 'post') {

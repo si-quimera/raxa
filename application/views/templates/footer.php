@@ -99,6 +99,7 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
+                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSim',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
@@ -218,6 +219,7 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
+                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSimBen',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
@@ -325,6 +327,7 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
+                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ValCal',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditValCal'
@@ -458,6 +461,7 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
+                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/GenPorta',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditGenPorta'
@@ -566,6 +570,145 @@
                 //Load all records when page is first shown
                 $('#LoadRecordsGenButton').click();
                 //Gen Porta ---------
+
+
+                //Cuarentena Cal ---------
+                $('#PortaCuaTableContainer').jtable({
+                    messages: spanishMessages, //Localize
+                    paging: true, //Enable paging
+                    pageSize: 100, //Set page size (default: 10)
+                    sorting: true, //Enable sorting
+                    defaultSorting: 'Num_Cliente DESC', //Set default sorting
+                    addRecordButton: false,
+                    pageList: 'minimal',
+                    columnResizable: true,
+                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
+                    actions: {
+                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/CuaSIM',
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditValCal'
+                    },
+                    fields: {
+                        Num_Cliente: {
+                            title: '# Cliente',
+                            width: '12%',
+                            key: true,
+                            create: false,
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="Num_Cliente" class="input-reset" readonly style="width:120px" value="' + data.record.Num_Cliente + '" />';
+                                } else {
+                                    return '<input type="text" name="Num_Cliente" class="input-reset"  readonly style="width:120px" value="" />';
+                                }
+                            }
+                        },
+                        Id_Colaborador: {
+                            title: 'Ejecutivo',
+                            width: '20%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
+                            edit: true
+                        },
+                        Nom_Persona_Porta: {
+                            title: 'Cliente',
+                            width: '20%',
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="Nom_Persona_Porta" class="input-reset" readonly style="width:200px" value="' + data.record.Nom_Persona_Porta + '" />';
+                                } else {
+                                    return '<input type="text" name="Nom_Persona_Porta" class="input-reset"  readonly style="width:200px" value="" />';
+                                }
+                            }
+                        },
+                        NIP_Portar: {
+                            title: ' NIP ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Vigencia_NIP: {
+                            title: 'Vigencia NIP',
+                            width: '12%',
+                            type: 'date',
+                            edit: false
+                        },
+                        Id_Carrier: {
+                            title: 'CARRIER',
+                            width: '10%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Carrier',
+                            edit: false
+                        },
+                        ICCDID : {
+                            title: ' ICCDID ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Fecha_Registro_Porta : {
+                            title: ' Fecha Reg Porta',
+                            width: '5%',
+                            edit : false,
+                            display:function(data){
+                                return data.record.Fecha_Registro_Porta;
+
+                            }
+                        },
+                        Id_Cat_Fase_Portabilidad : {
+                            title: ' Fase Porta ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/FasePorta',
+                            edit: true
+                        },
+                        Tel_Fijo_Alterno : {
+                            title: ' Telefono Fijo',
+                            width: '5%',
+                            edit: false
+                        },
+                        email : {
+                            title: ' Email ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Num_Tel_Temporal : {
+                            title: ' Num Provisional ',
+                            width: '5%',
+                            edit: false
+                        },
+                        Id_Cat_Tipo_Producto : {
+                            title: ' Tipo Producto ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Producto',
+                            edit: false
+                        },
+                        Id_Cat_Validacion : {
+                            title: ' Status Validación ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/StatusPorta',
+                            edit: true
+                        },
+                        Id_Cat_Error_Portabilidad : {
+                            title: ' Error ',
+                            width: '5%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
+                            edit: true
+                        }
+                    }
+                });
+
+                //Re-load records when user click 'load records' button.
+                $('#LoadRecordsCuaButton').click(function (e) {
+                    e.preventDefault();
+                    $('#PortaCuaTableContainer').jtable('load', {
+                        en: $('#en').val(),
+                        buscar: $('#buscar').val()
+                    });
+                });
+
+                //Load all records when page is first shown
+                $('#LoadRecordsCuaButton').click();
+
+                //Cuarentena Cal ---------
+
+
+
 
 			});	  					
 		</script>

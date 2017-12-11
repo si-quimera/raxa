@@ -31,4 +31,11 @@ class Seguimiento extends CI_Controller {
 
     }
 
+    public function Cuarentena(){
+        $this->load->view('templates/header.php');
+        $this->load->view('seguimiento/cuarentena.php');
+        $this->load->view('templates/footer.php');
+
+    }
+
 }

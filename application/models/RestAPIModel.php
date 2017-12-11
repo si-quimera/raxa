@@ -10,6 +10,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RestAPIModel extends CI_Model{
 
+    public function GetCuaSim()
+    {
+
+        $usuario = $this->session->userdata('usuario');
+
+        $perfil = strtolower($usuario['perfil']->Descripcion);
+
+        $jtSorting = explode( " ", $this->input->get('jtSorting'));
+        $jtStartIndex = $this->input->get('jtStartIndex');
+        $jtPageSize = $this->input->get('jtPageSize');
+
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
+
+        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
+        $this->db->limit($jtPageSize, $jtStartIndex);
+        $this->db->where('Id_Cat_Validacion', 516);
+        if( $perfil != 'administrador'){
+            $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
+        }
+        if($buscar != "" && $en != ""){
+            $this->db->like($en, $buscar);
+        }
+        $query = $this->db->get('Lineas_RAXA');
+        return $query->result();
+    }
+
+
+
     public function GetValCal()
     {
 
