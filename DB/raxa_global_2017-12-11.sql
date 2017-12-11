@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# VersiÃ³n 4541
+# Versión 4541
 #
 # http://www.sequelpro.com/
 # https://github.com/sequelpro/sequelpro
 #
 # Host: localhost (MySQL 5.6.28)
 # Base de datos: raxa_global
-# Tiempo de GeneraciÃ³n: 2017-12-11 15:54:49 +0000
+# Tiempo de Generación: 2017-12-11 18:14:54 +0000
 # ************************************************************
 
 
@@ -899,7 +899,7 @@ CREATE TABLE `Lineas_RAXA` (
   `Vigencia_NIP` date DEFAULT NULL,
   `Num_Tel_Temporal` decimal(10,0) DEFAULT NULL,
   `Id_Carrier` int(11) DEFAULT NULL,
-  `ICCDID` varchar(20) COLLATE latin1_spanish_ci DEFAULT NULL,
+  `ICCDID` varchar(20) COLLATE latin1_spanish_ci NOT NULL DEFAULT '',
   `Fecha_Registro_Porta` datetime DEFAULT NULL,
   `Georeferencia` varchar(100) COLLATE latin1_spanish_ci DEFAULT NULL,
   `Id_Cat_Fase_Portabilidad` int(11) DEFAULT NULL,
@@ -911,13 +911,11 @@ CREATE TABLE `Lineas_RAXA` (
   `Id_Cat_Error_Portabilidad` int(11) DEFAULT NULL,
   `bloqueo` tinyint(4) DEFAULT '0',
   `Id_Cat_Validacion` int(11) DEFAULT NULL,
-  PRIMARY KEY (`Num_Cliente`),
+  PRIMARY KEY (`Num_Cliente`,`ICCDID`),
   KEY `R_22` (`Id_Carrier`),
   KEY `R_33` (`Id_Colaborador`),
-  KEY `R_36` (`ICCDID`),
   CONSTRAINT `lineas_raxa_ibfk_1` FOREIGN KEY (`Id_Carrier`) REFERENCES `Cat_Carrier` (`Id_Carrier`),
-  CONSTRAINT `lineas_raxa_ibfk_2` FOREIGN KEY (`Id_Colaborador`) REFERENCES `Cat_Colaboradores` (`Id_Colaborador`),
-  CONSTRAINT `lineas_raxa_ibfk_3` FOREIGN KEY (`ICCDID`) REFERENCES `Salida_Inv_Central` (`ICCDID`)
+  CONSTRAINT `lineas_raxa_ibfk_2` FOREIGN KEY (`Id_Colaborador`) REFERENCES `Cat_Colaboradores` (`Id_Colaborador`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_spanish_ci;
 
 LOCK TABLES `Lineas_RAXA` WRITE;
@@ -1484,6 +1482,7 @@ DROP TABLE IF EXISTS `Seg_Lineas_RAXA`;
 CREATE TABLE `Seg_Lineas_RAXA` (
   `Fecha_Actividad` datetime NOT NULL,
   `Num_Cliente` int(11) NOT NULL,
+  `ICCDID` int(20) NOT NULL DEFAULT '0',
   `Id_Colaborador` int(11) DEFAULT NULL,
   `Id_Cat_Status` int(11) DEFAULT NULL,
   `Id_Cat_Error_Portabilidad` int(11) DEFAULT NULL,
@@ -1496,7 +1495,7 @@ CREATE TABLE `Seg_Lineas_RAXA` (
   `Fecha_Recarga` date DEFAULT NULL,
   `Monto_Recarga` double(10,2) DEFAULT '0.00',
   `Fecha_Val_Actividad` datetime DEFAULT NULL,
-  PRIMARY KEY (`Fecha_Actividad`,`Num_Cliente`),
+  PRIMARY KEY (`Fecha_Actividad`,`Num_Cliente`,`ICCDID`),
   KEY `R_26` (`Num_Cliente`),
   KEY `R_27` (`Id_Cat_Status`),
   KEY `R_28` (`Id_Colaborador`),
@@ -1506,13 +1505,13 @@ CREATE TABLE `Seg_Lineas_RAXA` (
 LOCK TABLES `Seg_Lineas_RAXA` WRITE;
 /*!40000 ALTER TABLE `Seg_Lineas_RAXA` DISABLE KEYS */;
 
-INSERT INTO `Seg_Lineas_RAXA` (`Fecha_Actividad`, `Num_Cliente`, `Id_Colaborador`, `Id_Cat_Status`, `Id_Cat_Error_Portabilidad`, `Descripcion`, `Num_Llamadas_Entrantes`, `Num_Llamadas_Salientes`, `Num_SMS`, `Num_Datos`, `Num_Actv_Total`, `Fecha_Recarga`, `Monto_Recarga`, `Fecha_Val_Actividad`)
+INSERT INTO `Seg_Lineas_RAXA` (`Fecha_Actividad`, `Num_Cliente`, `ICCDID`, `Id_Colaborador`, `Id_Cat_Status`, `Id_Cat_Error_Portabilidad`, `Descripcion`, `Num_Llamadas_Entrantes`, `Num_Llamadas_Salientes`, `Num_SMS`, `Num_Datos`, `Num_Actv_Total`, `Fecha_Recarga`, `Monto_Recarga`, `Fecha_Val_Actividad`)
 VALUES
-	('2017-08-23 02:42:16',2147483647,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-	('2017-08-24 00:54:20',1234567890,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-	('2017-08-24 00:57:36',1234567891,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-	('2017-08-24 00:59:53',1234567894,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
-	('2017-09-05 18:29:44',1234567899,8,11,387,'REGISTRO INICIAL',23,0,32,0,0,'2017-09-21',1200.00,'2017-09-08 20:16:08');
+	('2017-08-23 02:42:16',2147483647,0,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	('2017-08-24 00:54:20',1234567890,0,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	('2017-08-24 00:57:36',1234567891,0,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	('2017-08-24 00:59:53',1234567894,0,8,NULL,NULL,'REGISTRO INICIAL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL),
+	('2017-09-05 18:29:44',1234567899,0,8,11,387,'REGISTRO INICIAL',23,0,32,0,0,'2017-09-21',1200.00,'2017-09-08 20:16:08');
 
 /*!40000 ALTER TABLE `Seg_Lineas_RAXA` ENABLE KEYS */;
 UNLOCK TABLES;

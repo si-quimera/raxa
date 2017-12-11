@@ -96,6 +96,7 @@ $usuario = $this->session->userdata('usuario');
 													<label for="Id_Almacen_To">Almacen Destino</label>
                                                     <select name="Id_Almacen_To" id="Id_Almacen_To" class="browser-default">
                                                         <option value="" selected>Elija su opción</option>
+                                                        <option value="0" <?= $this->PerfilesModel->setSelect('0', $this->input->post('Id_Almacen_From')); ?>>Almacen Central</option>
                                                     <?php
                                                        foreach ($almacen as $key => $row) {    
 														   if($key == $this->input->post('Id_Almacen_To')){														   
