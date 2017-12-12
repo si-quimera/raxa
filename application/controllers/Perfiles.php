@@ -94,8 +94,9 @@ class Perfiles extends CI_Controller {
 									</thead>
 									<tbody>
 									';
-									     
-									foreach ($result->result() as $row) {                                         
+									
+									foreach ($result->result() as $row) {    
+									$reload = "'".base_url()."Perfiles/delPerfil/".$row->Id_Perfil."'";                                     
 									echo '
 										<tr>
 											<td>'. $row->Descripcion .'</td>
@@ -107,7 +108,7 @@ class Perfiles extends CI_Controller {
 														<i class="material-icons">create</i>
 													</a>
 													
-													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo  <?= $row->Descripcion ?>?&quot;)) { window.location.href = \'<?= base_url() . \'Perfiles/delPerfil/\' . $row->Id_Perfil ?>\' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+													<a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo  '. $row->Descripcion.'?&quot;)) { window.location.href = '.$reload.' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
 														<i class="material-icons">delete</i>
 													</a>
 												</div>

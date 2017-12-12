@@ -872,6 +872,111 @@ class Catalogos extends CI_Controller {
         redirect(base_url(). 'Catalogos/Almacen/');  
     }	
 
+    public function contenido_busqueda_colaborador(){
+        $nombre = $this->input->post("nombre");
+
+        $config['base_url'] = base_url() . 'Catalogos/Colaborador/';
+        $config['total_rows'] = $this->CatalogoModel->countColaborador();
+        $config['per_page'] = 10;   
+        $config['uri_segment'] = 3;
+        $config['num_links'] = 5;        
+        $config['reuse_query_string'] = TRUE;
+        $config['page_query_string'] = TRUE;
+        $config['query_string_segment'] = 'page';       
+        $config['prev_link'] = '<i class="material-icons">chevron_left</i></a>';
+        $config['prev_tag_open'] = '<li class="waves-effect">';
+        $config['prev_tag_close'] = '</li>';
+        $config['next_link'] = '<i class="material-icons">chevron_right</i>';
+        $config['next_tag_open'] = '<li class="waves-effect">';
+        $config['next_tag_close'] = '</li>';
+        $config['full_tag_open'] = '<ul class="pagination">';
+        $config['full_tag_close'] = '</ul>';          
+        $config['num_tag_open'] = '<li class="waves-effect">';
+        $config['num_tag_close'] = '</li>';   
+        $config['cur_tag_open'] = '<li class="active"><a href="#!">';
+        $config['cur_tag_close'] = '</a></li>';                                                     
+        
+        $this->pagination->initialize($config);     
+        $result = $this->CatalogoModel->getAllColaboradorBusqueda($config['per_page'],$nombre); 
+        
+        $consulta = $result;
+        $pagination = $this->pagination->create_links();
+        $grupo = $this->CatalogoModel->getGrupo();
+
+        echo '
+        <table class="highlight">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Nombre&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+                                                Nombre
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Nombre&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+                                            </th>
+                                            <th>
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Ap_Pat&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+                                                Ap Paterno
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Ap_Pat&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+                                            </th>
+                                            <th>
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Ap_Mat&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+                                                Ap Materno
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Ap_Mat&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+                                            </th>
+                                            <th>
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Estado&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+                                                Estado
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Estado&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+                                            </th>
+                                            <th>
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Id_Grupo&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+                                                Grupo
+                                                <a href="<?= base_url() ?>Catalogos/colaborador/?order=Id_Grupo&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+                                            </th>
+                                            <th class="center-align" data-searchable="false" data-orderable="false">
+                                                Actions
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    ';                                 
+                                          
+                                    foreach ($consulta->result() as $row) {                                         
+                                        echo '
+                                        <tr>                                                                                        
+                                            <td>'. $row->Nombre.'</td>
+                                            <td>'. $row->Ap_Pat.'</td>
+                                            <td>'. $row->Ap_Mat.'</td>
+                                            <td>'. $row->Estado.'</td>';     
+                                                if (isset($grupo[$row->Id_Grupo])) {
+                                                echo '<td>'.$grupo[$row->Id_Grupo].'</td>';
+                                                } else {
+                                                echo '<td></td>';
+                                                }
+                                            $reload = "'".base_url()."Catalogos/delColaborador/".$row->Id_Colaborador."'";    
+                                            echo '    
+                                            <td class="center-align">
+                                                <div class="btn-group">
+                                                    <a href="'. base_url().'Catalogos/editColaborador/'.$row->Id_Colaborador.'" class="btn-flat btn-small waves-effect">
+                                                        <i class="material-icons">create</i>
+                                                    </a>
+                                                    
+                                                    <a href="#" onclick="if (confirm(&quot;Estas seguro que quieres borrarlo '.$row->Nombre.'?&quot;)) { window.location.href = '.$reload.' } event.returnValue = false; return false;" class="btn-flat btn-small waves-effect btnDelete">
+                                                        <i class="material-icons">delete</i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr> 
+                                        ';                                      
+                                    
+                                    }
+                                    echo '
+                                    </tbody>                                        
+                                </table>  
+                                ';                              
+                                echo $pagination;
+
+    }
+
 	public function colaborador(){        
         $config['base_url'] = base_url() . 'Catalogos/Colaborador/';
         $config['total_rows'] = $this->CatalogoModel->countColaborador();

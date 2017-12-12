@@ -29,6 +29,30 @@
 							<button class="btn-floating btn-large white tooltipped scrollToTop" data-tooltip="Scroll to top" data-position="top" data-delay="50">
 								<i class="large material-icons">keyboard_arrow_up</i>
 							</button>
+						</div>
+						<div class="row">
+							<div class="col s3"></div>
+							<div class="col s3">
+								<label style="color: black;">Nombre a Buscar:</label>
+								<input type="text" name="nombre" id="nombre">
+							</div>
+							<div class="col s3">
+								<br>
+								<button class="btn" id="buscar_colaborador"><i class="material-icons">search</i>Buscar</button>
+							</div>
+							<div class="col s3">
+								<div class="preloader-wrapper">
+								    <div class="spinner-layer spinner-red-only">
+								      <div class="circle-clipper left">
+								        <div class="circle"></div>
+								      </div><div class="gap-patch">
+								        <div class="circle"></div>
+								      </div><div class="circle-clipper right">
+								        <div class="circle"></div>
+								      </div>
+								    </div>
+								  </div>
+							</div>
 						</div>			
 						<div class="row">
 							<div class="col s12">
@@ -46,7 +70,8 @@
                                 if ($msg){
                                     echo $msg;
                                 }    
-                                ?>								
+                                ?>					
+                                <div id="contenido_colaborador">			
 								<table class="highlight">
 									<thead>
 										<tr>
@@ -118,7 +143,8 @@
 									?>
 									</tbody>										
 								</table>								
-                                <?= $pagination ?> 								
+                                <?= $pagination ?>
+                                </div> 								
 							</div>
 						</div>
 					</div>

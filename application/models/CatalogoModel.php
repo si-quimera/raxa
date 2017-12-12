@@ -451,6 +451,26 @@ class CatalogoModel extends CI_Model{
         return intval($number);
     }    
     
+    public function getAllColaboradorBusqueda($number_per_page, $nombre){
+        if (empty($_GET['page'])) {
+            $pageNo = 0;
+        }else{
+            $pageNo = $_GET['page'];
+        }
+        if (empty($_GET['order'])) {
+            $order = 'Id_Colaborador';
+        }else{
+            $order = $_GET['order'];
+        }
+        if (empty($_GET['by'])) {
+            $by = 'DESC';
+        }else{
+            $by = $_GET['by'];
+        }
+        $this->db->like('Nombre', $nombre,'both');       
+        return $this->db->get('Cat_Colaboradores', $number_per_page, $pageNo);
+    }
+
     public function getAllColaborador($number_per_page){
         if (empty($_GET['page'])) {
             $pageNo = 0;

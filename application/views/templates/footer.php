@@ -725,6 +725,23 @@
                         });
                 });
 
+                $("#buscar_colaborador").click(function(){
+                    var parametros = {
+                        "nombre" : $("#nombre").val()
+                    };
+                    $.ajax({
+                                data:  parametros,
+                                url:   '<?php echo base_url(); ?>Catalogos/contenido_busqueda_colaborador',
+                                type:  'post',
+                                beforeSend: function () {
+                                $(".preloader-wrapper").attr("class","preloader-wrapper active");
+                                },
+                                success:  function (response) {              
+                                  $("#contenido_colaborador").html(response);
+                                  $(".preloader-wrapper").attr("class","preloader-wrapper");
+                                }
+                        });
+                });
 
 			});	  					
 		</script>
