@@ -27,7 +27,7 @@ class AsignacionChipModel extends CI_Model{
 		$this->db->where('Id_Colaborador !=', $id);
 		$this->db->where('Id_Cat_Puesto', $id_puesto);
 		$this->db->where('Jefe_Inmediato', $id_jefe);
-        $query = $this->db->get('Cat_Colaboradores');            
+        $query = $this->db->get('Cat_Colaboradores');
         foreach ($query->result() as $row){
             $adjunto[$row->Id_Colaborador] = $row->Nombre . ' ' . $row->Ap_Pat . ' ' . $row->Ap_Mat;				
         }      
