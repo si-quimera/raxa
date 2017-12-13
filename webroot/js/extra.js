@@ -13,13 +13,97 @@
 	var path_username = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/genUsername/';
 	var path_password = 'http://' + $(location).attr('host') + '/'+ origen +'Catalogos/randomPassword/';
 	var path_perfil = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/getConfigPerfil/';
+	var path_mesa_seguimiento = 'http://' + $(location).attr('host') + '/'+ origen +'MesaSeguimiento/getConfigMesaSeguimiento/';
 	var path_perfil_save = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/savePerfil/';
+	var path_mesa_seguimiento_save = 'http://' + $(location).attr('host') + '/'+ origen +'MesaSeguimiento/saveMesaSeguimiento/';
 	var path_perfil_select = 'http://' + $(location).attr('host') + '/'+ origen +'Perfiles/loadSelectPerfil/';
+	var path_mesa_seguimiento_select = 'http://' + $(location).attr('host') + '/'+ origen +'MesaSeguimiento/loadSelectMesaSeguimiento/';
 	var path_ICCDID_colaborador = 'http://' + $(location).attr('host') + '/'+ origen +'AsignacionChip/ValidarColaborador/';
 	var path_on_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/OnBloqueo/';
 	var path_off_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/OffBloqueo/';	
 	var path_check_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/CheckBloqueo/';	
-	var path_update_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/UpdateBloqueo/';			
+	var path_update_bloqueo = 'http://' + $(location).attr('host') + '/'+ origen +'Seguimiento/UpdateBloqueo/';
+
+	$('#Id_MesaSeguimiento').on('change', function(event) {		
+		event.preventDefault(); 
+		
+		$('#search_to option').each(function(index, option) {
+			$(option).remove();
+		});		
+						
+		$("#preload").show();				
+		reDrawMesaSeguimientoSelect();		
+	});	
+
+	// Recarga contenido de la tabla
+	function reDrawMesaSeguimientoSelect(){ 
+		
+		$.ajax({
+			url:   path_mesa_seguimiento_select,
+			type:  'post',
+			beforeSend: function () {
+			},
+			success:  function (response){                     
+			  $("#search").html(response);			  
+				var parametros = {                    
+					'Id_MesaSeguimiento' : $("#Id_MesaSeguimiento").val()
+				};				
+			  
+				$.ajax({
+					data:  parametros,
+					url:   path_mesa_seguimiento,
+					type:  'post',
+					beforeSend: function () {				
+					},
+					success:  function (code) {
+						if (code!=undefined && code!="" && code.length!=0 && code.bandera != '0'){
+						   lugares = JSON.parse(code);
+							$.each(lugares, function (i, item) {
+								$("#search option[value='"+item.id_grupo+"']").remove();
+								$('#search_to').append($('<option>', {
+									value: item.id_grupo, text: item.Grupo
+								}));                                  						
+									
+							});                               
+						}	
+						//hide load
+						$("#preload").hide();
+					}
+				}); 			  		  
+			}
+		});						
+	}
+
+	$('#mesaseguimiento_save').click(function(event) {         
+		event.preventDefault();                       
+
+		$('#search_to option').prop('selected', true); // Select All  
+		
+		var parametros = {                    
+			'Id_MesaSeguimiento' : $("#Id_MesaSeguimiento").val(),
+			'grupo' : $("select#search_to").val()
+		};		
+		
+		if($("#Id_MesaSeguimiento").val() === "") {
+			var $toastContent = $('<span><i class="material-icons tiny">warning</i> Es necesario seleccionar un Colaborador. </span>');
+			Materialize.toast($toastContent, 5000, 'red');
+		}else{                            
+			$.ajax({
+				url:        path_mesa_seguimiento_save,
+				type:       'post',
+				data:       parametros,
+				success:    function(code){                                
+				   if(code == 'ok' ){                                   					   
+						var $toastContent = $('<span><i class="material-icons">mode_edit</i> Se guardo la configuración de la Mesa de Seguimiento con exito! </span>');
+						Materialize.toast($toastContent, 7000, 'green');
+				   }else{
+						var $toastContent = $('<span><i class="material-icons tiny">warning</i> Error al guardar las configuracón de la Mesa de Seguimiento. </span>');
+						Materialize.toast($toastContent, 5000, 'red');  					
+				   }
+				}
+			}); 
+		}                                                                                                       
+	});			
 	
 	$('.datepicker').pickadate({
 		selectMonths: true, // Creates a dropdown to control month
