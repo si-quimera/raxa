@@ -491,6 +491,15 @@ class CatalogoModel extends CI_Model{
 		$this->db->order_by($order, $by); 		
         return $this->db->get('Cat_Colaboradores', $number_per_page, $pageNo);
     }  	
+
+    public function getColaboradores(){
+        $grupo = array();
+        $query = $this->db->get('Cat_Colaboradores');            
+        foreach ($query->result() as $row){
+            $grupo[$row->Id_Colaborador] = $row->Nombre.' '.$row->Ap_Pat.' '.$row->Ap_Mat;    
+        }      
+        return $grupo;
+    }
 	
     public function getGrupo(){	
 		$grupo = array();

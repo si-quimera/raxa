@@ -1005,6 +1005,7 @@ class Catalogos extends CI_Controller {
         $data['consulta'] = $result;
         $data['pagination'] = $this->pagination->create_links();
 		$data['grupo'] = $this->CatalogoModel->getGrupo();
+        $data['colaboradores'] = $this->CatalogoModel->getColaboradores();
 		
         $this->load->view('templates/header.php');  
         $this->load->view('catalogo/colaborador.php', $data);

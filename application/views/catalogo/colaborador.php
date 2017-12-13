@@ -124,10 +124,118 @@
 												<td></td>
 											<?php
 												}
-												
 											?>
 											<td class="center-align">
 												<div class="btn-group">
+													<!-- Modal Trigger -->
+											        <a class="btn-flat btn-small waves-effect modal-trigger" href="#<?= $row->Id_Colaborador ?>">
+											        	<i class="material-icons">search</i>
+											        </a>
+											        <!-- Modal Structure -->
+											        <div id="<?= $row->Id_Colaborador ?>" class="modal">
+											        <div class="modal-content">
+											        <h4>Detalles Colaborador  </h4>
+											        <table class="striped">
+											        	<tbody>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Nombre:</label>&nbsp;<?= $row->Nombre ?> <?= $row->Ap_Pat ?> <?= $row->Ap_Mat ?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Estado:</label>&nbsp;<?= $row->Estado?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        				<?php
+																		if (isset($grupo[$row->Id_Grupo])) {
+																	?>
+																		<td class="center-align">
+																			<p><label>Grupo:</label>&nbsp;<?= $grupo[$row->Id_Grupo] ?></p>
+																		</td>
+																	<?php
+																		} else {
+																	?>
+																		<td></td>
+																	<?php
+																		}
+																	?>
+											        		</tr>
+											        		<tr>
+											        			<?php
+																		if (isset($colaboradores[$row->Jefe_Inmediato])) {
+																	?>
+																		<td class="center-align">
+																			<p><label>Jefe Inmediato:</label>&nbsp;<?= $colaboradores[$row->Jefe_Inmediato] ?></p>
+																		</td>
+																	<?php
+																		} else {
+																	?>
+																		<td></td>
+																	<?php
+																		}
+																	?>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Fecha de Nacimiento:</label>&nbsp;<?= $row->Fec_Nac?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Calle:</label>&nbsp;<?= $row->Calle?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Colonia:</label>&nbsp;<?= $row->Colonia?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Municipio:</label>&nbsp;<?= $row->Municipio?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Codigo Postal:</label>&nbsp;<?= $row->CP?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Estado:</label>&nbsp;<?= $row->Estado?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Pais:</label>&nbsp;<?= $row->Pais?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Telefono:</label>&nbsp;<?= $row->Tel?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Celular:</label>&nbsp;<?= $row->Cel?></p>
+											        			</td>
+											        		</tr>
+											        		<tr>
+											        			<td class="center-align">
+											        				<p><label>Correo:</label>&nbsp;<?= $row->email?></p>
+											        			</td>
+											        		</tr>
+											        	</tbody>
+											        </table>
+											   
+											        </div>
+											        <div class="modal-footer">
+											        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cerrar</a>
+											        </div>
+											        </div>
+
 													<a href="<?= base_url() ?>Catalogos/editColaborador/<?= $row->Id_Colaborador ?>" class="btn-flat btn-small waves-effect">
 														<i class="material-icons">create</i>
 													</a>
