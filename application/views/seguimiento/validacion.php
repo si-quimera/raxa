@@ -69,8 +69,8 @@
                                         break;
                                     }
                                 }
-
-                                if($bandera){
+                                $perfil_ahora = strtolower($usuario['perfil']->Descripcion);
+                                if($bandera || ($perfil_ahora == 'administrador') ){
                             ?>
                             <div class="row">
                                 <div class="input-field col s3">
