@@ -56,6 +56,22 @@
 								<i class="large material-icons">keyboard_arrow_up</i>
 							</button>
 						</div>
+                            <?php
+                                //Inicio validacion para que se muestre solo a los que pertenescan al grupo CDMX1
+                                $usuario = $this->session->userdata('usuario');
+                                $id_colaborador = $usuario["Id_Colaborador"];
+                                $this->load->model('RestAPIModel');
+                                $bandera = false;
+                                $datos_colaborador = $this->RestAPIModel->GetColaboradorId($id_colaborador);
+                                foreach ($datos_colaborador->result() as $key) {
+                                    if ($key->Id_Grupo == 1) {
+                                        $bandera = true;
+                                        break;
+                                    }
+                                }
+
+                                if($bandera){
+                            ?>
                             <div class="row">
                                 <div class="input-field col s3">
                                     <input type="text" name="buscar" id="buscar" />
@@ -80,8 +96,11 @@
                                 </div>
 
                             </div>
-
+                            
                             <div id="PortaValTableContainer" style="width: 100%"></div>
+                            <?php
+                                }
+                            ?>
 					</div>
 				</section>
 

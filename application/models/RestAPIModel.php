@@ -37,13 +37,14 @@ class RestAPIModel extends CI_Model{
         return $query->result();
     }
 
-
+    public function GetColaboradorId($id){
+        $this->db->where("Id_Colaborador",$id);
+        return $this->db->get("Grupos_Mesa_Seguimiento");
+    }
 
     public function GetValCal()
     {
-
-        $usuario = $this->session->userdata('usuario');
-
+        /*
         $perfil = strtolower($usuario['perfil']->Descripcion);
 
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
@@ -63,6 +64,7 @@ class RestAPIModel extends CI_Model{
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }
+        */
         $query = $this->db->get('Lineas_RAXA');
         return $query->result();
     }
@@ -80,10 +82,10 @@ class RestAPIModel extends CI_Model{
         $buscar = $this->input->post('buscar');
         $en = $this->input->post('en');
 
-        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
-        $this->db->limit($jtPageSize, $jtStartIndex);
-        $this->db->where('Id_Cat_Tipo_Producto', 378);
-        $this->db->where('Id_Cat_Fase_Portabilidad', 16);
+        //$this->db->order_by($jtSorting[0] , $jtSorting[1]);
+        //$this->db->limit($jtPageSize, $jtStartIndex);
+        //$this->db->where('Id_Cat_Tipo_Producto', 378);
+        //$this->db->where('Id_Cat_Fase_Portabilidad', 16);
         if( $perfil != 'administrador') {
             $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
         }
