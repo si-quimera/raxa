@@ -85,8 +85,16 @@
 												Descripcion
 												<a href="<?= base_url() ?>Perfiles/index/?order=Descripcion&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>																								
 											</th>
-											<th>Departamento</th>
-											<th>Empresa</th>											
+											<th>
+												<a href="<?= base_url() ?>Perfiles/index/?order=Id_Cat_Departamento&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Departamento
+												<a href="<?= base_url() ?>Perfiles/index/?order=Id_Cat_Departamento&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>
+											<th>
+												<a href="<?= base_url() ?>Perfiles/index/?order=Id_Cat_Empresa&amp;by=DESC"><i class="material-icons">arrow_drop_down</i></a>
+												Empresa
+												<a href="<?= base_url() ?>Perfiles/index/?order=Id_Cat_Empresa&amp;by=ASC"><i class="material-icons">arrow_drop_up</i></a>
+											</th>											
 											<th class="center-align" data-searchable="false" data-orderable="false">
 												Actions
 											</th>

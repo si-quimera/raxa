@@ -138,21 +138,21 @@
 											        <table class="striped">
 											        	<tbody>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Nombre:</label>&nbsp;<?= $row->Nombre ?> <?= $row->Ap_Pat ?> <?= $row->Ap_Mat ?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Nombre:&nbsp;<?= $row->Nombre ?> <?= $row->Ap_Pat ?> <?= $row->Ap_Mat ?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Estado:</label>&nbsp;<?= $row->Estado?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Estado:&nbsp;<?= $row->Estado?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
 											        				<?php
 																		if (isset($grupo[$row->Id_Grupo])) {
 																	?>
-																		<td class="center-align">
-																			<p><label>Grupo:</label>&nbsp;<?= $grupo[$row->Id_Grupo] ?></p>
+																		<td>
+																			<p style="font-size: 15px;color: black;margin-left: 200px;">Grupo:&nbsp;<?= $grupo[$row->Id_Grupo] ?></p>
 																		</td>
 																	<?php
 																		} else {
@@ -166,8 +166,8 @@
 											        			<?php
 																		if (isset($colaboradores[$row->Jefe_Inmediato])) {
 																	?>
-																		<td class="center-align">
-																			<p><label>Jefe Inmediato:</label>&nbsp;<?= $colaboradores[$row->Jefe_Inmediato] ?></p>
+																		<td>
+																			<p style="font-size: 15px;color: black;margin-left: 200px;">Jefe Inmediato:&nbsp;<?= $colaboradores[$row->Jefe_Inmediato] ?></p>
 																		</td>
 																	<?php
 																		} else {
@@ -178,53 +178,53 @@
 																	?>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Fecha de Nacimiento:</label>&nbsp;<?= $row->Fec_Nac?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Fecha de Nacimiento:&nbsp;<?= $row->Fec_Nac?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Calle:</label>&nbsp;<?= $row->Calle?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Calle:&nbsp;<?= $row->Calle?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Colonia:</label>&nbsp;<?= $row->Colonia?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Colonia:&nbsp;<?= $row->Colonia?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Municipio:</label>&nbsp;<?= $row->Municipio?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Municipio:&nbsp;<?= $row->Municipio?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Codigo Postal:</label>&nbsp;<?= $row->CP?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Codigo Postal:&nbsp;<?= $row->CP?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Estado:</label>&nbsp;<?= $row->Estado?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Estado:&nbsp;<?= $row->Estado?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Pais:</label>&nbsp;<?= $row->Pais?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Pais:&nbsp;<?= $row->Pais?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Telefono:</label>&nbsp;<?= $row->Tel?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Telefono:&nbsp;<?= $row->Tel?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Celular:</label>&nbsp;<?= $row->Cel?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Celular:&nbsp;<?= $row->Cel?></p>
 											        			</td>
 											        		</tr>
 											        		<tr>
-											        			<td class="center-align">
-											        				<p><label>Correo:</label>&nbsp;<?= $row->email?></p>
+											        			<td>
+											        				<p style="font-size: 15px;color: black;margin-left: 200px;">Correo:&nbsp;<?= $row->email?></p>
 											        			</td>
 											        		</tr>
 											        	</tbody>
