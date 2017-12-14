@@ -323,7 +323,7 @@
                     paging: true, //Enable paging
                     pageSize: 100, //Set page size (default: 10)
                     sorting: true, //Enable sorting
-                    defaultSorting: 'Num_Cliente DESC', //Set default sorting
+                    defaultSorting: 'Nom_Persona_Porta ASC', //Set default sorting
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
@@ -347,12 +347,6 @@
                                 }
                             }
                         },
-                        Id_Colaborador: {
-                            title: 'Ejecutivo',
-                            width: '20%',
-                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
-                            edit: true
-                        },
                         Nom_Persona_Porta: {
                             title: 'Cliente',
                             width: '20%',
@@ -364,6 +358,12 @@
                                     return '<input type="text" name="Nom_Persona_Porta" class="input-reset"  readonly style="width:200px" value="" />';
                                 }
                             }
+                        },
+                        Id_Colaborador: {
+                            title: 'Ejecutivo',
+                            width: '20%',
+                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Colaborador',
+                            edit: true
                         },
                         NIP_Portar: {
                             title: ' NIP ',
@@ -412,11 +412,6 @@
                             width: '5%',
                             edit: false
                         },
-                        Num_Tel_Temporal : {
-                            title: ' Num Provisional ',
-                            width: '5%',
-                            edit: false
-                        },
                         Id_Cat_Tipo_Producto : {
                             title: ' Tipo Producto ',
                             width: '5%',
@@ -427,12 +422,6 @@
                             title: ' Status Validación ',
                             width: '5%',
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/StatusPorta',
-                            edit: true
-                        },
-                        Id_Cat_Error_Portabilidad : {
-                            title: ' Error ',
-                            width: '5%',
-                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
                             edit: true
                         }
                     }

@@ -65,6 +65,8 @@ class RestAPIModel extends CI_Model{
             $this->db->like($en, $buscar);
         }
         */
+        $jtSorting = explode( " ", $this->input->get('jtSorting'));
+        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $query = $this->db->get('Lineas_RAXA');
         return $query->result();
     }
