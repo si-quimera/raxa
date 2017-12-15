@@ -41,7 +41,7 @@
                     <div class="col s12">
                         <div class="page-header">
                             <h1>
-                                <i class="material-icons"></i> BUZON
+                                <i class="material-icons">move_to_inbox</i> BUZON
                             </h1>
                         </div>
                     </div>

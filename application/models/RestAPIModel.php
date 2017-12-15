@@ -102,8 +102,8 @@ class RestAPIModel extends CI_Model{
             $this->db->like($en, $buscar);
         }
 
-        $this->db->where('Id_Cat_Tipo_Producto', 379);
-        $this->db->where('Id_Cat_Fase_Portabilidad !=', 17);
+        $this->db->where('Id_Cat_Tipo_Producto', 378);
+        $this->db->where('Id_Cat_Fase_Portabilidad =', 16);
 
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
@@ -131,7 +131,7 @@ class RestAPIModel extends CI_Model{
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 378);
-        $this->db->where('Id_Cat_Fase_Portabilidad', 0);
+        $this->db->where('Id_Cat_Fase_Portabilidad', 17);
         if( $perfil != 'administrador') {
             $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
         }

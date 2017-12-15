@@ -92,7 +92,7 @@
                                     <button type="submit" class="btn waves-effect" id="LoadRecordsVenButton">Buscar ...</button>
                                 </div>
                                 <div class="input-field col s3 right-align ">
-                                    <a href="<?= base_url() ?>Seguimiento/Cuarentena/" class="waves-effect btn yellow accent-4"><i class="material-icons left">lock</i>Cuarentena</a>
+                                    <a href="<?= base_url() ?>Seguimiento/Cuarentena/" class="waves-effect btn yellow accent-4"><i class="material-icons">move_to_inbox</i> BUZON</a>
                                 </div>
 
                             </div>
