@@ -77,10 +77,9 @@ class RestAPIModel extends CI_Model{
 
     public function GetAllActSim()
     {
+        /*
         $usuario = $this->session->userdata('usuario');
-
         $perfil = strtolower($usuario['perfil']->Descripcion);
-
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
@@ -95,9 +94,23 @@ class RestAPIModel extends CI_Model{
         if( $perfil != 'administrador') {
             $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
         }
+        */
+
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }
+
+        $this->db->where('Id_Cat_Tipo_Producto', 379);
+        $this->db->where('Id_Cat_Fase_Portabilidad !=', 17);
+
+        $jtSorting = explode( " ", $this->input->get('jtSorting'));
+        $jtStartIndex = $this->input->get('jtStartIndex');
+        $jtPageSize = $this->input->get('jtPageSize');
+
+        $this->db->order_by($jtSorting[0] , $jtSorting[1]);
+        
         $query = $this->db->get('Lineas_RAXA');
         return $query->result();
     }

@@ -102,7 +102,24 @@
                     recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSim',
-                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
+                        updateAction: function(postData) {
+                            return $.Deferred(function ($dfd) {
+                                $.ajax({
+                                    url: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim',
+                                    type: 'POST',
+                                    dataType: 'json',
+                                    data: postData,
+                                    success: function (data) {
+                                        $dfd.resolve(data);
+                                        window.location.reload();
+                                    },
+                                    error: function () {
+                                        $dfd.reject();
+                                    }
+                                });
+                            });
+                        }
+                        //updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
                     },
                     fields: {
                         Num_Cliente: {
@@ -126,13 +143,27 @@
                         NIP_Portar: {
                             title: ' NIP ',
                             width: '10%',
-                            edit: true
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="NIP_Portar" class="input-reset" readonly style="width:120px" value="' + data.record.Num_Cliente + '" />';
+                                } else {
+                                    return '<input type="text" name="NIP_Portar" class="input-reset"  readonly style="width:120px" value="" />';
+                                }
+                            }
                         },
                         Vigencia_NIP: {
                             title: 'Vigencia NIP',
                             width: '12%',
                             type: 'date',
-                            edit: true
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="Vigencia_NIP" class="input-reset" readonly style="width:120px" value="' + data.record.Vigencia_NIP + '" />';
+                                } else {
+                                    return '<input type="text" name="Vigencia_NIP" class="input-reset"  readonly style="width:120px" value="" />';
+                                }
+                            }
                         },
                         Id_Carrier: {
                             title: 'CARRIER',
@@ -143,7 +174,14 @@
                         ICCDID : {
                             title: ' ICCDID ',
                             width: '5%',
-                            edit: true
+                            edit: true,
+                            input: function (data) {
+                                if (data.record) {
+                                    return '<input type="text" name="ICCDID" class="input-reset" readonly style="width:120px" value="' + data.record.ICCDID + '" />';
+                                } else {
+                                    return '<input type="text" name="ICCDID" class="input-reset"  readonly style="width:120px" value="" />';
+                                }
+                            }
                         },
                         Fecha_Registro_Porta : {
                             title: ' Fecha Reg Porta',
@@ -170,11 +208,6 @@
                             width: '5%',
                             edit: false
                         },
-                        Num_Tel_Temporal : {
-                            title: ' Num Provisional ',
-                            width: '5%',
-                            edit: true
-                        },
                         Id_Cat_Tipo_Producto : {
                             title: ' Tipo Producto ',
                             width: '5%',
@@ -187,10 +220,9 @@
                             options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/StatusPorta',
                             edit: false
                         },
-                        Id_Cat_Error_Portabilidad : {
-                            title: ' Error ',
+                        Num_Tel_Temporal : {
+                            title: ' Num Provisional ',
                             width: '5%',
-                            options: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/Error',
                             edit: true
                         }
                     }

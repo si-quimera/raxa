@@ -14,7 +14,7 @@ class RestAPI extends CI_Controller{
     {
         if ($this->input->method() == 'post') {
             $result = $this->RestAPIModel->GetValCal();
-
+            
             //Return result to jTable
             $jTableResult = array();
             $jTableResult['Result'] = "OK";
@@ -83,15 +83,29 @@ class RestAPI extends CI_Controller{
     public function EditActSim()
     {
         if ($this->input->method() == 'post') {
-            $data = array(
-                'NIP_Portar'	    =>  $this->input->post('NIP_Portar'),
-                'Vigencia_NIP'	    =>  $this->input->post('Vigencia_NIP'),
-                'ICCDID'	        =>  $this->input->post('ICCDID'),
-                'Num_Tel_Temporal'	=>  $this->input->post('Num_Tel_Temporal'),
-                'Id_Cat_Error_Portabilidad'	=>  $this->input->post('Id_Cat_Error_Portabilidad'),
-            );
+
+            if ($this->input->post('Num_Tel_Temporal') == '') {
+                $data = array(
+                    'NIP_Portar'        =>  $this->input->post('NIP_Portar'),
+                    'Vigencia_NIP'      =>  $this->input->post('Vigencia_NIP'),
+                    'ICCDID'            =>  $this->input->post('ICCDID'),
+                    'Num_Tel_Temporal'  =>  null
+                );
 
             $result = $this->RestAPIModel->UpdateActSim($this->input->post('Num_Cliente'), $data);
+
+            } else {
+                $data = array(
+                    'NIP_Portar'        =>  $this->input->post('NIP_Portar'),
+                    'Vigencia_NIP'      =>  $this->input->post('Vigencia_NIP'),
+                    'ICCDID'            =>  $this->input->post('ICCDID'),
+                    'Num_Tel_Temporal'  =>  $this->input->post('Num_Tel_Temporal'),
+                    'Id_Cat_Fase_Portabilidad' => 17
+                );
+
+                $result = $this->RestAPIModel->UpdateActSim($this->input->post('Num_Cliente'), $data);
+            }
+            
             $jTableResult['Result'] = "OK";
             echo json_encode($jTableResult);
         }
