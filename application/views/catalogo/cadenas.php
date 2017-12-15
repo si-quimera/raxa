@@ -126,7 +126,7 @@
 																	<input name="Nombre" id="Nombre" type="text" value="" placeholder=" ">
 																	<label for="Nombre">Nombre</label>
 																	<input type="hidden" name="update_id" id="update_id" value="" />
-                                                                    
+
 																</div>																	
 																<div class="input-field col s6">
 																	<input name="String1" id="String1" type="text" value="" placeholder=" ">

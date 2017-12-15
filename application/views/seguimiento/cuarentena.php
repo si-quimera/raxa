@@ -41,7 +41,7 @@
                     <div class="col s12">
                         <div class="page-header">
                             <h1>
-                                <i class="material-icons">map</i> CUARENTENA
+                                <i class="material-icons"></i> BUZON
                             </h1>
                         </div>
                     </div>
