@@ -99,27 +99,17 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
-                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
+                    recordUpdated: function (event, data) { 
+                        if(data.record){
+                            $('#PortaTableContainer').jtable('deleteRecord', {
+                                key: data.record.Num_Cliente,
+                                clientOnly: true
+                            }); 
+                        }
+                    },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSim',
-                        updateAction: function(postData) {
-                            return $.Deferred(function ($dfd) {
-                                $.ajax({
-                                    url: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim',
-                                    type: 'POST',
-                                    dataType: 'json',
-                                    data: postData,
-                                    success: function (data) {
-                                        $dfd.resolve(data);
-                                        window.location.reload();
-                                    },
-                                    error: function () {
-                                        $dfd.reject();
-                                    }
-                                });
-                            });
-                        }
-                        //updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
+                        updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
                     },
                     fields: {
                         Num_Cliente: {
