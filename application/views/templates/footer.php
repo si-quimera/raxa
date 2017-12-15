@@ -241,7 +241,14 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
-                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
+                    recordUpdated: function (event, data) { 
+                        if(data.record){
+                            $('#PortaTableContainer').jtable('deleteRecord', {
+                                key: data.record.Num_Cliente,
+                                clientOnly: true
+                            }); 
+                        } 
+                    },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ActSimBen',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
@@ -349,7 +356,14 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
-                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
+                    recordUpdated: function (event, data) { 
+                        if(data.record){
+                            $('#PortaTableContainer').jtable('deleteRecord', {
+                                key: data.record.Num_Cliente,
+                                clientOnly: true
+                            }); 
+                        } 
+                    },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ValCal',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditValCal'
@@ -472,7 +486,14 @@
                     addRecordButton: false,
                     pageList: 'minimal',
                     columnResizable: true,
-                    recordUpdated: function (event, data) { $('#PortaCuaTableContainer').jtable('reload'); },
+                    recordUpdated: function (event, data) { 
+                        if(data.record){
+                            $('#PortaTableContainer').jtable('deleteRecord', {
+                                key: data.record.Num_Cliente,
+                                clientOnly: true
+                            }); 
+                        } 
+                    },
                     actions: {
                         listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/GenPorta',
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditGenPorta'
