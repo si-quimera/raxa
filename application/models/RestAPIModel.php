@@ -51,9 +51,6 @@ class RestAPIModel extends CI_Model{
         $jtStartIndex = $this->input->get('jtStartIndex');
         $jtPageSize = $this->input->get('jtPageSize');
 
-        $buscar = $this->input->post('buscar');
-        $en = $this->input->post('en');
-
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $this->db->limit($jtPageSize, $jtStartIndex);
         $this->db->where('Id_Cat_Tipo_Producto', 378);
@@ -61,10 +58,17 @@ class RestAPIModel extends CI_Model{
         if( $perfil != 'administrador'){
             $this->db->where('Id_Colaborador', $usuario['Id_Colaborador']);
         }
+        */
+        $buscar = $this->input->post('buscar');
+        $en = $this->input->post('en');
+
         if($buscar != "" && $en != ""){
             $this->db->like($en, $buscar);
         }
-        */
+
+        $this->db->where('Id_Cat_Tipo_Producto', 378);
+        $this->db->where('Id_Cat_Fase_Portabilidad', 15);
+        
         $jtSorting = explode( " ", $this->input->get('jtSorting'));
         $this->db->order_by($jtSorting[0] , $jtSorting[1]);
         $query = $this->db->get('Lineas_RAXA');
