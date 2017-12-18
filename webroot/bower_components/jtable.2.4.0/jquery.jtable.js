@@ -2397,6 +2397,25 @@ THE SOFTWARE.
                             }
                         }],
                 close: function () {
+                    //var origen = 'raxa/';
+                    var origen = '';
+                    var ruta = 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/reestablecer_status_registro' 
+
+                    var parametros = {
+                        "clave" : $("#numero_cliente").val()
+                    };
+
+                    $.ajax({
+                        data:  parametros,
+                        url:   ruta,
+                        type:  'post',
+                        beforeSend: function () {
+                        },
+                        success:  function (response) {              
+                        }
+                    });
+                    
+
                     var $editForm = self._$editDiv.find('form:first');
                     var $saveButton = self._$editDiv.parent().find('#EditDialogSaveButton');
                     self._trigger("formClosed", null, { form: $editForm, formType: 'edit', row: self._$editingRow });
@@ -2569,68 +2588,106 @@ THE SOFTWARE.
         _showEditForm: function ($tableRow) {
             var self = this;
             var record = $tableRow.data('record');
+            //var origen = 'raxa/';
+            var origen = '';
+            var url_envio = 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/cambiar_status_registro';
+            var url_validar = 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/validar_status_registro';
 
-            //Create edit form
-            var $editForm = $('<form id="jtable-edit-form" class="jtable-dialog-form jtable-edit-form"></form>');
+            //Bloquea campo que se este editando
+            var parametros = {
+                "clave" : record.Num_Cliente  
+            };
+            
+            $.ajax({
+                data:  parametros,
+                url:   url_validar,
+                type:  'post',
+                beforeSend: function () {
+                    
+                },
+                success:  function (response) {  
+                    if ($.trim(response) == 'bloqueado') {
+                        alert("Registro no disponible");
+                    }  else {
+                        var nuevo_numero = record.Num_Cliente;
+                        $("#numero_cliente").remove();
+                        $(".page-header").append('<input type="hidden" value="'+nuevo_numero+'" id="numero_cliente" />');
+                        $.ajax({
+                                data:  parametros,
+                                url:   url_envio,
+                                type:  'post',
+                                beforeSend: function () {
+                                },
+                                success:  function (response) {              
+                                }
+                        });
 
-            //Create input fields
-            for (var i = 0; i < self._fieldList.length; i++) {
+                        //Create edit form
+                        var $editForm = $('<form id="jtable-edit-form" class="jtable-dialog-form jtable-edit-form"></form>');
 
-                var fieldName = self._fieldList[i];
-                var field = self.options.fields[fieldName];
-                var fieldValue = record[fieldName];
+                        //Create input fields
+                        for (var i = 0; i < self._fieldList.length; i++) {
 
-                if (field.key == true) {
-                    if (field.edit != true) {
-                        //Create hidden field for key
-                        $editForm.append(self._createInputForHidden(fieldName, fieldValue));
-                        continue;
-                    } else {
-                        //Create a special hidden field for key (since key is be editable)
-                        $editForm.append(self._createInputForHidden('jtRecordKey', fieldValue));
+                            var fieldName = self._fieldList[i];
+                            var field = self.options.fields[fieldName];
+                            var fieldValue = record[fieldName];
+
+                            if (field.key == true) {
+                                if (field.edit != true) {
+                                    //Create hidden field for key
+                                    $editForm.append(self._createInputForHidden(fieldName, fieldValue));
+                                    continue;
+                                } else {
+                                    //Create a special hidden field for key (since key is be editable)
+                                    $editForm.append(self._createInputForHidden('jtRecordKey', fieldValue));
+                                }
+                            }
+
+                            //Do not create element for non-editable fields
+                            if (field.edit == false) {
+                                continue;
+                            }
+
+                            //Hidden field
+                            if (field.type == 'hidden') {
+                                $editForm.append(self._createInputForHidden(fieldName, fieldValue));
+                                continue;
+                            }
+
+                            //Create a container div for this input field and add to form
+                            var $fieldContainer = $('<div class="jtable-input-field-container"></div>').appendTo($editForm);
+
+                            //Create a label for input
+                            $fieldContainer.append(self._createInputLabelForRecordField(fieldName));
+
+                            //Create input element with it's current value
+                            var currentValue = self._getValueForRecordField(record, fieldName);
+                            $fieldContainer.append(
+                                self._createInputForRecordField({
+                                    fieldName: fieldName,
+                                    value: currentValue,
+                                    record: record,
+                                    formType: 'edit',
+                                    form: $editForm
+                                }));
+                        }
+                        
+                        self._makeCascadeDropDowns($editForm, record, 'edit');
+
+                        $editForm.submit(function () {
+                            self._onSaveClickedOnEditForm();
+                            return false;
+                        });
+
+                        //Open dialog
+                        self._$editingRow = $tableRow;
+                        self._$editDiv.append($editForm).dialog('open');
+                        self._trigger("formCreated", null, { form: $editForm, formType: 'edit', record: record, row: $tableRow });
+        
+
                     }
                 }
-
-                //Do not create element for non-editable fields
-                if (field.edit == false) {
-                    continue;
-                }
-
-                //Hidden field
-                if (field.type == 'hidden') {
-                    $editForm.append(self._createInputForHidden(fieldName, fieldValue));
-                    continue;
-                }
-
-                //Create a container div for this input field and add to form
-                var $fieldContainer = $('<div class="jtable-input-field-container"></div>').appendTo($editForm);
-
-                //Create a label for input
-                $fieldContainer.append(self._createInputLabelForRecordField(fieldName));
-
-                //Create input element with it's current value
-                var currentValue = self._getValueForRecordField(record, fieldName);
-                $fieldContainer.append(
-                    self._createInputForRecordField({
-                        fieldName: fieldName,
-                        value: currentValue,
-                        record: record,
-                        formType: 'edit',
-                        form: $editForm
-                    }));
-            }
-            
-            self._makeCascadeDropDowns($editForm, record, 'edit');
-
-            $editForm.submit(function () {
-                self._onSaveClickedOnEditForm();
-                return false;
             });
-
-            //Open dialog
-            self._$editingRow = $tableRow;
-            self._$editDiv.append($editForm).dialog('open');
-            self._trigger("formCreated", null, { form: $editForm, formType: 'edit', record: record, row: $tableRow });
         },
 
         /* Saves editing form to the server and updates the record on the table.
