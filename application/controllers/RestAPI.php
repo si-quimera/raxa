@@ -10,6 +10,35 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RestAPI extends CI_Controller{
 
+    public function validar_status_registro(){
+        if ($this->input->method() == 'post') {
+            $clave = $this->input->post("clave");
+            $result = $this->RestAPIModel->validar_status_registro($clave);    
+            foreach ($result->result() as $key) {
+                if ($key->bloqueo == 1) {
+                    echo 'bloqueado';
+                } else {
+                    echo "libre";
+                }
+                
+            }
+        }    
+    }
+
+    public function cambiar_status_registro(){
+        if ($this->input->method() == 'post') {
+            $clave = $this->input->post("clave");
+            $result = $this->RestAPIModel->cambiar_status_registro($clave);    
+        }
+    }
+
+    public function reestablecer_status_registro(){
+        if ($this->input->method() == 'post') {
+            $clave = $this->input->post("clave");
+            $result = $this->RestAPIModel->reestablecer_status_registro($clave);    
+        }   
+    }
+
     public function ValCal()
     {
         if ($this->input->method() == 'post') {

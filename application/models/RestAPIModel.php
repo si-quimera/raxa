@@ -10,6 +10,29 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class RestAPIModel extends CI_Model{
 
+    public function cambiar_status_registro($clave){
+        $data = array(
+               'bloqueo' => 1
+            );
+
+        $this->db->where('Num_Cliente', $clave);
+        return $this->db->update('Lineas_RAXA', $data); 
+    }
+
+    public function reestablecer_status_registro($clave){
+        $data = array(
+               'bloqueo' => 0
+            );
+
+        $this->db->where('Num_Cliente', $clave);
+        return $this->db->update('Lineas_RAXA', $data); 
+    }
+
+    public function validar_status_registro($clave){
+        $this->db->where('Num_Cliente',$clave);
+        return $this->db->get('Lineas_RAXA');
+    }
+
     public function GetCuaSim()
     {
 

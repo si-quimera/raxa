@@ -53,7 +53,7 @@
 
         <!-- Include jTable script file. -->
         <script src="<?= base_url(); ?>webroot/bower_components/jquery-ui-1.12.1/jquery-ui.min.js" type="text/javascript"></script>
-        <script src="<?= base_url(); ?>webroot/bower_components/jtable.2.4.0/jquery.jtable.min.js" type="text/javascript"></script>
+        <script src="<?= base_url(); ?>webroot/bower_components/jtable.2.4.0/jquery.jtable.js" type="text/javascript"></script>
 
 
   
