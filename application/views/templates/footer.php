@@ -112,6 +112,19 @@
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
                     },
                     fields: {
+                        bloqueo:{
+                            title: '',
+                            width: '10%',
+                            edit: false,
+                            display: function (data){
+                                if (data.record.bloqueo == 0) {
+                                    return '<div style="background-color:green;">&nbsp;</div>';
+                                } else {
+                                    return '<div style="background-color:red;">&nbsp;</div>'; 
+                                }
+                            }
+                        }
+                        ,
                         Num_Cliente: {
                             title: '# Cliente',
                             width: '12%',
@@ -254,6 +267,19 @@
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditActSim'
                     },
                     fields: {
+                        bloqueo:{
+                            title: '',
+                            width: '5%',
+                            edit: false,
+                            display: function (data){
+                                if (data.record.bloqueo == 0) {
+                                    return '<div style="background-color:green;">&nbsp;</div>';
+                                } else {
+                                    return '<div style="background-color:red;">&nbsp;</div>'; 
+                                }
+                            }
+                        }
+                        ,
                         Num_Cliente: {
                             title: '# Cliente',
                             width: '12%',
@@ -365,10 +391,24 @@
                         } 
                     },
                     actions: {
-                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ValCal',
+                        listAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/ValCal'
+                        ,
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditValCal'
                     },
                     fields: {
+                        bloqueo:{
+                            title: '',
+                            width: '5%',
+                            edit: false,
+                            display: function (data){
+                                if (data.record.bloqueo == 0) {
+                                    return '<div style="background-color:green;">&nbsp;</div>';
+                                } else {
+                                    return '<div style="background-color:red;">&nbsp;</div>'; 
+                                }
+                            }
+                        }
+                        ,
                         Num_Cliente: {
                             title: '# Cliente',
                             width: '12%',
@@ -499,6 +539,19 @@
                         updateAction: 'http://' + $(location).attr('host') + '/'+ origen + 'RestAPI/EditGenPorta'
                     },
                     fields: {
+                        bloqueo:{
+                            title: '',
+                            width: '5%',
+                            edit: false,
+                            display: function (data){
+                                if (data.record.bloqueo == 0) {
+                                    return '<div style="background-color:green;">&nbsp;</div>';
+                                } else {
+                                    return '<div style="background-color:red;">&nbsp;</div>'; 
+                                }
+                            }
+                        }
+                        ,
                         Num_Cliente: {
                             title: '# Cliente',
                             width: '12%',
@@ -738,7 +791,7 @@
                 $('#LoadRecordsCuaButton').click();
 
                 //Cuarentena Cal ---------
-                
+
                 $("#buscar_perfil").click(function(){
                     var parametros = {
                         "descripcion" : $("#descripcion").val()
@@ -774,6 +827,7 @@
                                 }
                         });
                 });
+
 
 			});	  					
 		</script>
