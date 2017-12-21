@@ -60,8 +60,8 @@
 		<script type="text/javascript">
 			$( document ).ready(function() {
 
-                //var origen = 'raxa/';
-                var origen = '';
+                var origen = 'raxa/';
+                //var origen = '';
 				
 				//Select con busqueda
 				$('#Id_Cat_Sec').select2();			
